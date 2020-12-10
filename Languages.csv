@@ -1,0 +1,1900 @@
+contribution_pk,description,family_pk,id,jsondata,latitude,longitude,macroarea,markup_description,name,nzrepresentation,pk,representation
+,,9,abar1238,{},6.5805,10.2267,Africa,,Mungbam,,1,180
+,,6,abau1245,{},-3.97222,141.324,Papunesia,,Abau,,2,88
+,,9,abee1242,{},5.59682,-4.38497,Africa,,Abé,,3,142
+,,99,abip1241,{},-29.0,-61.0,South America,,Abipon,,4,129
+,,37,abkh1244,{},43.056218,41.159115,Eurasia,,Abkhaz,,5,188
+,,56,abua1245,{},-3.461612,142.917031,Papunesia,,Abu' Arapesh,,6,170
+,,30,abui1241,{},-8.31058,124.588,Papunesia,,Abui,,7,101
+,,229,abun1252,{},-0.57073,132.416,Papunesia,,Abun,,8,195
+,,25,acha1250,{},4.38649,-72.2005,South America,,Achagua,,9,100
+,,90,ache1245,{},10.8827,30.3187,Africa,,Acheron,,10,120
+,,31,ache1246,{},-25.5865,-56.4697,South America,,Aché,,11,16
+,,42,achi1256,{},15.073,-90.3513,North America,,Achi,,12,164
+,,170,achu1247,{},41.0979,-121.191,North America,,Achumawi,,13,106
+,,58,acol1236,{},3.57738,32.5147,Africa,,Acoli,,14,178
+,,30,adan1251,{},-8.18958,124.448,Papunesia,,Adang,,15,184
+,,20,adny1235,{},-30.1451,138.671,Australia,,Adnyamathanha,,16,2
+,,1,adze1240,{},-6.39394,146.294,Papunesia,,Adzera,,17,160
+,,199,aeky1238,{},-5.88478,141.532,Papunesia,,Aekyom,,18,120
+,,7,afad1236,{},12.0551,14.6343,Africa,,Afade,,19,62
+,,7,afar1241,{},12.2281,41.8083,Africa,,Afar,,20,188
+,,20,aghu1254,{},-13.735,142.426,Australia,,Aghu Tharnggalu,,21,77
+,,36,aghu1255,{},-6.34674,140.043,Papunesia,,Aghu,,22,175
+,,18,aghw1237,{},40.374444,47.126667,Eurasia,,Aghwan,,23,147
+,,195,agob1244,{},-9.08521,142.532,Papunesia,,Agob-Ende-Kawam,,24,194
+,,65,agua1253,{},-5.30044,-77.9218,South America,,Aguaruna,,25,69
+,,1,agut1237,{},10.5328,119.655,Papunesia,,Agutaynen,,26,161
+,,33,aheu1239,{},17.7655,104.229,Eurasia,,Thavung,,27,192
+,,245,aika1237,{},-12.6695,-60.5353,South America,,Aikanã,,28,76
+,,140,ainu1240,{},43.633654,142.46167,Eurasia,,Hokkaido Ainu,,29,178
+,,8,aito1238,{},26.5145,92.3169,Eurasia,,Aiton,,30,102
+,,9,ajab1235,{},7.06634,1.64992,Africa,,Aja (Benin),,31,173
+,,158,ajas1235,{},8.58003,25.6122,Africa,,Aja (Sudan),,32,130
+,,1,ajie1238,{},-21.3029,165.468,Papunesia,,Ajië,,33,149
+,,25,ajyi1238,{},-9.82364,-74.61947,South America,,Ajyíninka Apurucayali,,34,79
+,,164,akab1249,{},12.3782,92.7818,Eurasia,,Akabea,,35,192
+,,164,akaj1239,{},13.1525,92.9504,Eurasia,,Akajeru,,36,97
+,,9,akan1250,{},6.34756,-1.33254,Africa,,Akan,,37,65
+,,1,akei1237,{},-15.6377,166.767,Papunesia,,Akei,,38,123
+,,23,akha1245,{},21.2309,100.964,Eurasia,,Akha,,39,162
+,,7,akka1240,{},33.1,44.1,Eurasia,,Akkadian,,40,167
+,,1,akla1241,{},11.5543,122.354,Papunesia,,Aklanon,,41,152
+,,9,akoo1248,{},4.9243,9.65522,Africa,,Akoose,,42,190
+,,31,akun1241,{},-12.8322,-60.9716,South America,,Akuntsu,,43,174
+,,22,alab1237,{},30.76738,-94.62848,North America,,Alabama,,44,177
+,,7,alab1254,{},7.39014,38.1732,Africa,,Alaba-K'abeena,,45,192
+,,19,alac1244,{},17.25,-98.58,North America,,Alacatlatzala Mixtec,,46,154
+,,7,alag1248,{},-4.64148,35.7231,Africa,,Alagwa,,47,174
+,,6,alam1246,{},-4.66307,143.316,Papunesia,,Alamblak,,48,98
+,,126,aleu1260,{},52.1228,-174.29,North America,,Aleut,,49,192
+,,308,alse1251,{},44.408,-123.94,North America,,Alsea-Yaquina,,50,149
+,,20,alya1239,{},-21.0427,136.835,Australia,,Alyawarr,,51,79
+,,55,amah1246,{},-10.2012,-72.3208,South America,,Amahuaca,,52,153
+,,122,amam1246,{},-7.9,146.92,Papunesia,,Amam,,53,175
+,,172,amap1240,{},-4.20192,141.658,Papunesia,,Ama (Papua New Guinea),,54,163
+,,1,amar1272,{},-5.55778,148.68,Papunesia,,Amara,,55,148
+,,131,amar1274,{},-12.4931,-70.5533,South America,,Amarakaeri,,56,154
+,,94,amas1236,{},12.0993,29.4332,Africa,,Ama (Sudan),,57,166
+,,1,ambo1250,{},-3.71342,128.184,Papunesia,,Ambonese Malay,,58,185
+,,61,ambu1247,{},-3.7801,143.059,Papunesia,,Ambulas,,59,91
+,,7,amha1245,{},11.708182,39.543456,Africa,,Amharic,,60,102
+,,117,amii1238,{},-13.5573,130.04,Australia,,Ami,,61,174
+,,23,amri1238,{},26.024,91.482,Eurasia,,Amri Karbi,,62,150
+,,28,anci1242,{},39.8155,21.9129,Eurasia,,Ancient Greek,,63,195
+,,7,anci1244,{},31.7761,35.1725,Eurasia,,Ancient Hebrew,,64,182
+,,236,ando1256,{},-0.53751,-72.0869,South America,,Andoque,,65,48
+,,1,anei1239,{},-20.1864,169.825,Papunesia,,Aneityum,,66,180
+,,214,anem1249,{},-5.54836,148.993,Papunesia,,Anem,,67,91
+,,24,anfi1235,{},8.568,34.647,Africa,,Anfillo,,68,108
+,,23,anga1288,{},25.6841,93.8668,Eurasia,,Angami Naga,,69,180
+,,15,ango1257,{},6.54198,-71.9212,South America,,Angosturas Tunebo,,70,136
+,,109,anin1240,{},-13.99904,136.6415,Australia,,Anindilyakwa,,71,99
+,,1,anta1255,{},-13.2164,49.2402,Africa,,Antankarana Malagasy,,72,102
+,,58,anua1242,{},7.57714,34.0267,Africa,,Anuak,,73,71
+,,1,anut1237,{},-11.61,169.85,Papunesia,,Anuta,,74,153
+,,23,anuu1241,{},21.5,93.05,Eurasia,,Anu-Hkongso,,75,190
+,,23,aona1235,{},26.3241,94.3824,Eurasia,,Ao Naga,,76,185
+,,8,aoua1234,{},26.8,105.85,Eurasia,,A'ou,,77,187
+,,23,apat1240,{},27.1933,93.7284,Eurasia,,Apatani,,78,170
+,,32,apin1244,{},-6.10774,-47.6315,South America,,Apinayé,,79,181
+,,1,apma1240,{},-15.8559,168.189,Papunesia,,Apma,,80,194
+,,283,apma1241,{},-4.35147,144.085,Papunesia,,Ap Ma,,81,126
+,,25,apol1242,{},-14.83,-68.66,South America,,Apolista,,82,14
+,,25,apur1254,{},-8.21692,-66.7714,South America,,Apurinã,,83,150
+,,20,arab1267,{},-28.705,135.449,Australia,,Arabana,,84,74
+,,1,arak1252,{},-15.632997,166.952542,Papunesia,,Araki,,85,194
+,,115,aram1253,{},-8.29593,141.445,Papunesia,,Arammba,,86,92
+,,81,arap1274,{},43.3879,-108.81,North America,,Arapaho,,87,189
+,,25,araw1276,{},5.64295,-56.9243,South America,,Lokono,,88,134
+,,7,arbo1245,{},4.92183,36.7986,Africa,,Arbore,,89,171
+,,18,arch1244,{},42.3239,46.8267,Eurasia,,Archi,,90,148
+,,1,area1240,{},-9.20699,161.158,Papunesia,,'Are'are,,91,195
+,,7,argo1244,{},10.6596,39.756,Africa,,Argobba,,92,184
+,,15,arhu1242,{},10.7018,-73.6363,South America,,Arhuaco,,93,153
+,,1,arib1241,{},-6.72266,146.991,Papunesia,,Aribwatsa,,94,121
+,,9,arig1246,{},7.56324,5.89556,Africa,,Arigidi,,95,142
+,,32,arik1265,{},-12.4878,-62.7261,South America,,Arikapú,,96,79
+,,1,arop1242,{},-3.06984,142.12,Papunesia,,Arop-Sissano,,97,164
+,,1,arop1243,{},-5.31671,147.103,Papunesia,,Arop-Lokep,,98,161
+,,1,aros1241,{},-10.2441,161.432,Papunesia,,Arosi,,99,141
+,,1,arta1239,{},16.4185,121.656,Papunesia,,Arta,,100,184
+,,25,asha1243,{},-11.9311,-73.9073,South America,,Asháninka,,101,91
+,,12,asoa1238,{},2.26818,26.7198,Africa,,Asoa,,102,96
+,,35,assi1247,{},49.2923,-106.068,North America,,Assiniboine,,103,185
+,,33,asur1254,{},21.5721,83.4562,Eurasia,,Asuri,,104,149
+,,224,atak1252,{},30.9121,-93.0827,North America,,Atakapa,,105,149
+,,20,atam1239,{},-11.0018,142.273,Australia,,Atampaya,,106,86
+,,1,atay1247,{},24.5209,121.388,Papunesia,,Atayal,,107,129
+,,23,athp1241,{},26.8794,87.3296,Eurasia,,Athpariya,,108,182
+,,1,atii1237,{},11.1539,122.512,Papunesia,,Ati,,109,115
+,,23,aton1241,{},25.346508,90.658722,Eurasia,,Atong (India),,110,194
+,,1,aulu1238,{},-16.3579,167.697,Papunesia,,Aulua,,111,160
+,,56,auuu1241,{},-3.53277,142.105,Papunesia,,Au,,112,159
+,,36,auye1238,{},-3.43705,136.096,Papunesia,,Auye,,113,181
+,,9,avat1244,{},6.8688,0.41314,Africa,,Avatime,,114,130
+,,12,avok1242,{},4.38639,29.9379,Africa,,Avokaya,,115,122
+,,20,awab1243,{},-33.12847,151.43555,Australia,,Awabakal,,116,76
+,,26,awac1239,{},1.21652,-78.3401,South America,,Awa-Cuaiquer,,117,157
+,,28,awad1243,{},27.5907,82.4663,Eurasia,,Awadhi,,118,163
+,,36,awap1236,{},-6.65534,145.714,Papunesia,,Awa (Papua New Guinea),,119,136
+,,36,awar1248,{},-6.16986,146.372,Papunesia,,Awara,,120,136
+,,154,awar1249,{},-4.13554,144.836,Papunesia,,Awar,,121,165
+,,31,awet1244,{},-12.381944,-53.391944,South America,,Awetí,,122,161
+,,7,awji1241,{},29.2341,21.1819,Africa,,Awjilah,,123,145
+,,6,awtu1239,{},-3.53129,141.928,Papunesia,,Awtuw,,124,136
+,,23,axiy1235,{},24.6009,103.713,Eurasia,,Axi Yi,,125,166
+,,82,ayac1239,{},-13.84714,-74.32246,South America,,Ayacucho Quechua,,126,71
+,,1,ayiw1239,{},-10.282595,166.328715,Papunesia,,Äiwoo,,127,172
+,,9,baba1266,{},5.97863,10.2869,Africa,,Babanki,,128,159
+,,1,baba1267,{},1.75414,103.076,Eurasia,,Baba Malay,,129,191
+,,1,baba1268,{},-7.22281,157.149,Papunesia,,Babatana,,130,139
+,,68,babi1235,{},55.0997,-126.41,North America,,Witsuwit'en-Babine,,131,170
+,,9,bafu1246,{},6.14153,10.1194,Africa,,Bafut,,132,190
+,,9,baga1272,{},10.4793,-14.4756,Africa,,Baga Sitemu,,133,140
+,,9,baga1273,{},10.1286,-13.947,Africa,,Baga Koga,,134,104
+,,12,bagi1246,{},11.52392,14.769495,Africa,,Bagirmi,,135,167
+,,18,bagv1239,{},42.3966,46.1041,Eurasia,,Bagvalal,,136,170
+,,7,baha1259,{},26.223615,50.580811,Eurasia,,Baharna Arabic,,137,147
+,,28,baha1260,{},25.032149,-77.390587,North America,,Bahamas Creole English,,138,103
+,,23,bahi1252,{},27.3323,86.3949,Eurasia,,Bahing,,139,161
+,,23,baim1244,{},33.1001,103.952,Eurasia,,Baima,,140,193
+,,9,baka1272,{},2.16013,13.7804,Africa,,Baka (Cameroon),,141,148
+,,12,baka1274,{},4.65943,29.59,Africa,,Baka (Sudan),,142,137
+,,1,baki1244,{},-16.7096,168.165,Papunesia,,Baki,,143,152
+,,1,bala1311,{},6.011614,121.686646,Papunesia,,Balangingi,,144,153
+,,1,bala1315,{},-0.86809,123.289,Papunesia,,Balantak,,145,178
+,,1,bala1316,{},-20.25,164.2,Papunesia,,Balade,,146,152
+,,1,bali1278,{},-8.35714,115.075,Papunesia,,Balinese,,147,155
+,,9,balo1261,{},0.93777,18.1266,Africa,,Loi-Likila,,148,113
+,,1,balu1257,{},-2.5604,147.282,Papunesia,,Paluai,,149,193
+,,124,bamb1262,{},9.82554,34.6522,Africa,,Bambassi,,150,99
+,,9,bamb1266,{},6.10821,10.2233,Africa,,Bambili-Bambui,,151,32
+,,76,bamb1269,{},12.9,-7.65,Africa,,Bambara,,152,104
+,,9,bamu1253,{},5.49017,10.8477,Africa,,Bamun,,153,159
+,,9,bamw1238,{},2.16773,19.1644,Africa,,Bamwe,,154,100
+,,9,band1340,{},12.5258,-16.4245,Africa,,Bandial,,155,83
+,,9,bang1354,{},-0.87437,17.227,Africa,,Bangi,,156,148
+,,223,bang1363,{},14.8116,-3.77092,Africa,,Bangime,,157,127
+,,23,bang1369,{},27.95,93.15,Eurasia,,Bangru,,158,151
+,,25,bani1255,{},2.17859,-67.7704,South America,,Baniwa do Icana,,159,85
+,,1,bann1247,{},-6.23061,155.128,Papunesia,,Bannoni,,160,72
+,,23,bant1281,{},27.12147,87.04738,Eurasia,,Bantawa,,161,180
+,,23,bara1357,{},28.3768,85.0584,Eurasia,,Baraamu,,162,171
+,,9,bara1361,{},3.34642,26.861,Africa,,Barambu,,163,128
+,,21,bara1380,{},0.02193,-70.808,South America,,Barasana-Eduria,,164,78
+,,66,bard1255,{},-16.6274,122.906,Australia,,Bardi,,165,94
+,,25,bare1276,{},1.91649,-66.828,South America,,Baré,,166,98
+,,7,bare1279,{},10.970124,17.911727,Africa,,Barain,,167,124
+,,36,barg1252,{},-4.8723,145.756,Papunesia,,Bargam,,168,153
+,,1,bari1286,{},-5.5087,148.666,Papunesia,,Bariai,,169,176
+,,1,baro1253,{},-3.47672,152.193,Papunesia,,Barok,,170,165
+,,9,basa1282,{},8.03159,7.06183,Africa,,Basa (Nigeria),,171,115
+,,84,bash1264,{},53.5967,56.5594,Eurasia,,Bashkir,,172,162
+,,311,basq1248,{},43.2787,-1.31622,Eurasia,,Basque,,173,188
+,,1,bata1293,{},2.12787,98.2517,Papunesia,,Batak Karo,,174,103
+,,7,bath1248,{},12.188285,12.360552,Africa,,Batha,,175,168
+,,18,bats1242,{},42.1806,45.344,Eurasia,,Bats,,176,171
+,,25,baur1253,{},-13.1278,-64.1838,South America,,Baure,,177,166
+,,208,bauz1241,{},-2.44717,137.629,Papunesia,,Bauzi,,178,93
+,,23,bawm1236,{},22.4405233333,92.92553,Eurasia,,Bawm Chin,,179,162
+,,1,bayb1234,{},10.6956,124.8086,Papunesia,,Baybayanon,,180,150
+,,9,bayo1255,{},12.6881,-16.3947,Africa,,Kugere-Kuxinge,,181,58
+,,9,bebe1248,{},4.78874,12.824,Africa,,Bebele,,182,184
+,,7,beel1236,{},10.1609,10.4204,Africa,,Beele,,183,52
+,,9,beem1239,{},-3.95895,14.1,Africa,,Beembe,,184,144
+,,7,beja1238,{},17.2436,36.6666,Africa,,Beja,,185,121
+,,9,bekw1241,{},6.73737,8.86489,Africa,,Bekwarra,,186,157
+,,58,bela1256,{},6.6503,27.8232,Africa,,Belanda Bor,,187,76
+,,1,bela1260,{},4.96207,114.933,Papunesia,,Lemeting,,188,92
+,,23,belh1239,{},26.9972,87.2783,Eurasia,,Belhariya,,189,166
+,,12,beli1257,{},6.40428,29.7954,Africa,,Beli (Sudan),,190,133
+,,28,beli1260,{},17.3941,-88.6281,North America,,Belize Kriol English,,191,93
+,,107,bell1243,{},52.3448,-126.689,North America,,Bella Coola,,192,191
+,,9,belu1239,{},1.314698,28.933744,Africa,,Belueli,,193,73
+,,9,bemb1257,{},-10.6122,29.2993,Africa,,Bemba (Zambia),,194,183
+,,9,bena1262,{},-9.26671,35.0364,Africa,,Bena (Tanzania),,195,93
+,,24,benc1235,{},7.04682,35.7673,Africa,,Bench,,196,82
+,,125,bent1238,{},14.78,-2.94,Africa,,Ben Tey Dogon,,197,170
+,,28,berb1259,{},5.3829,-58.0002,South America,,Berbice Creole Dutch,,198,170
+,,79,berj1234,{},70.6687,130.914,,,Berjozovka,,199,164
+,,259,bert1248,{},10.6474,34.7042,Africa,,Berta,,200,119
+,,1,beta1252,{},-6.21174,107.022,Papunesia,,Betawi,,201,170
+,,237,beto1236,{},7.223906,-71.420238,South America,,Betoi-Jirara,,202,130
+,,18,bezh1248,{},42.1206,46.0332,Eurasia,,Bezhta,,203,158
+,,28,bhoj1244,{},26.458455,84.817115,Eurasia,,Bhojpuri,,204,171
+,,9,biaf1240,{},11.467,-15.1347,Africa,,Biafada,,205,123
+,,1,biak1248,{},-0.9523,135.879,Papunesia,,Biak,,206,100
+,,8,biao1253,{},23.656,113.391,Eurasia,,Shidong Biao,,207,175
+,,69,biao1254,{},25.5309,111.344,Eurasia,,Biao-Jiao Mien,,208,191
+,,69,biao1256,{},24.6451,113.469,Eurasia,,Biao Mon,,209,189
+,,9,bidy1244,{},11.1097,-16.1497,Africa,,Kanyaki-Kagbaaga-Kajoko Bidyogo,,210,138
+,,1,bier1244,{},-16.6663,168.154,Papunesia,,Bierebo,,211,186
+,,1,bign1238,{},-16.0903,167.239,Papunesia,,Big Nambas,,212,181
+,,1,biha1246,{},12.483333,108.016667,Eurasia,,Bih,,213,182
+,,9,bila1255,{},1.16839,28.7626,Africa,,Bila,,214,134
+,,20,bili1250,{},-16.868771,130.533991,Australia,,Bilinarra,,215,167
+,,7,bili1260,{},15.7833,38.3917,Africa,,Bilin,,216,157
+,,261,bilu1245,{},-7.92388,156.663,Papunesia,,Bilua,,217,102
+,,36,bimi1240,{},-5.38732,142.04,Papunesia,,Bimin,,218,172
+,,36,bina1277,{},-8.37433,147.884,Papunesia,,Binandere,,219,151
+,,181,bine1240,{},-9.08879,142.893,Papunesia,,Bine,,220,88
+,,9,bini1246,{},6.40701,5.70426,Africa,,Bini,,221,177
+,,289,bira1253,{},5.29807,37.025,Africa,,Ongota,,222,163
+,,20,biri1256,{},-20.1494,146.67,Australia,,Biri,,223,70
+,,12,birr1240,{},5.3328,27.0842,Africa,,Birri,,224,120
+,,28,bisl1239,{},-15.4,166.89,Papunesia,,Bislama,,225,185
+,,23,bisu1244,{},20.8542,99.9862,Eurasia,,Bisu,,226,187
+,,176,biwa1243,{},-4.39429,143.873,Papunesia,,Biwat,,227,153
+,,33,blan1242,{},22.0092,99.7405,Eurasia,,Blang,,228,159
+,,33,bodo1267,{},18.3857,82.771,Eurasia,,Bodo Gadaba,,229,140
+,,23,bodo1269,{},26.1,92.0,Eurasia,,Bodo-Mech,,230,167
+,,7,boht1238,{},41.459,45.084,Eurasia,,Gardabani Bohtan Neo-Aramaic,,231,166
+,,9,bolg1251,{},10.9025,18.8076,Africa,,Bolgo,,232,80
+,,9,bolo1262,{},0.83463,18.4555,Africa,,Boloki,,233,144
+,,9,bomb1262,{},2.40195,18.7841,Africa,,Bomboma,,234,119
+,,9,bomk1234,{},9.27518,-11.59696,Africa,,Bom-Kim,,235,140
+,,50,bona1250,{},35.6972,102.995,Eurasia,,Bonan,,236,167
+,,33,bond1245,{},19.1512,83.8141,Eurasia,,Bondo,,237,151
+,,9,bong1284,{},0.37063,16.6079,Africa,,Bongili,,238,110
+,,12,bong1285,{},7.4145,27.9918,Africa,,Bongo,,239,157
+,,187,bora1263,{},-2.000259,-72.257066,South America,,Bora,,240,82
+,,7,bora1271,{},1.05676,37.882,Africa,,Borana-Arsi-Guji Oromo,,241,78
+,,15,bord1248,{},7.92993,-77.1664,South America,,Border Kuna,,242,162
+,,23,bori1243,{},27.62812,94.3538,Eurasia,,Bori-Karko,,243,152
+,,24,boro1277,{},10.6596,35.345,Africa,,Boro (Ethiopia),,244,176
+,,78,boro1282,{},-16.6029,-55.2004,South America,,Bororo,,245,184
+,,15,boru1252,{},8.88093,-83.2124,North America,,Boruca,,246,114
+,,9,boun1243,{},8.46011,-2.74627,Africa,,Bouna Kulango,,247,179
+,,36,boun1245,{},-5.8626,144.086,Papunesia,,Bo-Ung,,248,145
+,,8,bouy1240,{},24.8484,106.187,Eurasia,,Bouyei,,249,95
+,,49,brah1256,{},29.04,66.56,Eurasia,,Brahui,,250,146
+,,15,brib1243,{},9.39794,-83.0539,North America,,Bribri,,251,160
+,,18,budu1248,{},41.2272,48.3353,Eurasia,,Budukh,,252,158
+,,7,budu1265,{},13.0692,14.4492,Africa,,Buduma,,253,137
+,,33,buga1247,{},23.6124,104.963,Eurasia,,Bugan,,254,190
+,,1,bugh1239,{},-8.47948,159.802,Papunesia,,Bughotu,,255,131
+,,15,bugl1243,{},8.57695,-81.25648,North America,,Buglere,,256,157
+,,23,bugu1246,{},27.1929556,92.4713002,Eurasia,,Bugun,,257,101
+,,23,bujh1238,{},28.0084,84.5068,Eurasia,,Bujhyal,,258,179
+,,56,buki1249,{},-3.47169,143.111,Papunesia,,Bukiyip,,259,91
+,,9,buku1249,{},0.68043,34.7719,Africa,,Bukusu,,260,52
+,,20,bula1255,{},-21.02656922,138.1566659,Australia,,Bularnu,,261,70
+,,9,bull1247,{},9.0,-13.16,Africa,,Bullom So,,262,165
+,,159,buna1275,{},-17.8297,125.631,Australia,,Bunaba,,263,63
+,,30,buna1278,{},-9.13618,125.216,Papunesia,,Bunak,,264,96
+,,28,bund1253,{},24.8982,78.9542,Eurasia,,Bundeli,,265,172
+,,1,bunu1267,{},23.4116,121.025,Papunesia,,Bunun,,266,74
+,,17,bura1267,{},-12.3061,134.365,Australia,,Burarra,,267,88
+,,7,bura1292,{},10.4822,12.3007,Africa,,Bura-Pabir,,268,147
+,,7,bure1242,{},10.4603,10.4554,Africa,,Bure,,269,124
+,,7,burj1242,{},4.44624,38.4646,Africa,,Burji,,270,187
+,,307,burm1264,{},-2.47582,138.203,Papunesia,,Burmeso,,271,65
+,,228,buru1296,{},36.2161,74.8236,Eurasia,,Burushaski,,272,157
+,,1,buru1303,{},-3.43957,126.632,Papunesia,,Buru (Indonesia),,273,102
+,,7,buru1320,{},-5.21369,35.963,Africa,,Burunge,,274,180
+,,76,busa1253,{},9.91074,4.39929,Africa,,Busa,,275,171
+,,9,bush1247,{},-4.69463,21.4556,Africa,,Bushoong,,276,184
+,,102,buta1242,{},-4.471696,152.245674,Papunesia,,Butam,,277,76
+,,7,buwa1243,{},10.6151,13.8838,Africa,,Buwal,,278,191
+,,1,bwat1240,{},-21.3777,165.076,Papunesia,,Bwatoo,,279,188
+,,1,caac1237,{},-20.4114,164.578,Papunesia,,Caac,,280,151
+,,15,cabe1245,{},9.67031,-83.4102,North America,,Cabécar,,281,147
+,,136,cacu1241,{},0.88778,-69.5659,South America,,Kakua,,282,66
+,,4,cahu1264,{},33.5324,-116.691,North America,,Cahuilla,,283,189
+,,7,cakf1236,{},9.00924,9.16071,Africa,,Cakfem-Mushere-Jibyal,,284,173
+,,23,caml1239,{},27.3371,86.7612,Eurasia,,Camling,,285,170
+,,265,cams1241,{},1.14537,-76.8931,South America,,Camsá,,286,124
+,,32,cane1242,{},-6.10712,-45.1299,South America,,Canela-Krahô,,287,173
+,,231,cani1243,{},-14.3058,-64.944455,South America,,Canichana,,288,50
+,,8,caom1238,{},26.2236,109.547,Eurasia,,Cao Miao,,289,183
+,,33,carn1240,{},9.18853,92.7671,Eurasia,,Car Nicobarese,,290,187
+,,1,caro1242,{},15.205,145.765,Papunesia,,Carolinian,,291,154
+,,55,cavi1250,{},-13.3544,-66.6277,South America,,Cavineña,,292,151
+,,295,cayu1262,{},-13.2482,-65.4822,South America,,Cayubaba,,293,131
+,,1,cebu1242,{},8.38799,124.367,Papunesia,,Cebuano,,294,86
+,,1,cemu1238,{},-20.8489,165.13,Papunesia,,Cemuhî,,295,180
+,,28,cent1972,{},35.6539,45.8077,Eurasia,,Central Kurdish,,296,14
+,,33,cent1989,{},12.0515,105.015,Eurasia,,Central Khmer,,297,177
+,,33,cent1990,{},7.94812,93.3921,Eurasia,,Central Nicobarese,,298,169
+,,33,cent1992,{},12.6313,107.301,Eurasia,,Central Mnong,,299,190
+,,23,cent2004,{},26.1666,99.7052,Eurasia,,Central Bai,,300,163
+,,110,cent2050,{},11.8,13.13,Africa,,Central Kanuri,,301,173
+,,1,cent2058,{},-15.0784,168.135,Papunesia,,Central Maewo,,302,110
+,,1,cent2090,{},10.6519,119.338,Papunesia,,Central Tagbanwa,,303,166
+,,3,cent2126,{},26.14854,127.7816,Eurasia,,Central Okinawan,,304,150
+,,126,cent2127,{},60.3062,-161.486,North America,,Central Alaskan Yupik,,305,194
+,,163,cent2140,{},38.0812,-120.257,North America,,Central Sierra Miwok,,306,167
+,,88,cent2142,{},-17.0,-68.5,South America,,Central Aymara,,307,148
+,,15,cent2150,{},6.8867,-72.097,South America,,Central Tunebo,,308,157
+,,33,cent2314,{},12.608611,102.270556,Eurasia,,Central Chong,,309,186
+,,26,chac1249,{},0.71489,-79.0508,South America,,Cha'palaa,,310,91
+,,55,chac1251,{},-12.133,-66.7164,South America,,Chácobo,,311,176
+,,7,chad1249,{},14.67,13.5,Africa,,Chadian Arabic,,312,146
+,,9,chak1271,{},9.83446,-1.90181,Africa,,Chakali,,313,191
+,,7,chal1275,{},37.0972,43.5027,Eurasia,,Chaldean Neo-Aramaic,,314,181
+,,18,cham1309,{},42.5024,45.995,Eurasia,,Chamalal,,315,159
+,,1,cham1312,{},13.438011,144.74474,Papunesia,,Chamorro,,316,188
+,,72,cham1315,{},-20.5899,-58.2005,South America,,Chamacoco,,317,143
+,,25,cham1318,{},-5.1149,-75.6778,South America,,Chamicuro,,318,54
+,,24,char1269,{},6.63946,36.4192,Africa,,Chara,,319,149
+,,18,chec1245,{},43.5,45.5,Eurasia,,Chechen,,320,168
+,,4,chem1251,{},35.356093,-116.438436,North America,,Chemehuevi,,321,47
+,,23,chep1245,{},27.7206,84.9017,Eurasia,,Chepang,,322,163
+,,138,cher1273,{},35.4664,-83.163,North America,,Cherokee,,323,184
+,,23,chhi1245,{},26.961,87.1899,Eurasia,,Chintang,,324,151
+,,15,chib1270,{},6.24999,-74.1666,South America,,Chibcha,,325,146
+,,9,chig1238,{},-1.04387,29.9122,Africa,,Chiga,,326,95
+,,68,chil1280,{},51.98952,-123.24458,North America,,Chilcotin,,327,184
+,,297,chim1301,{},41.0,-123.0,North America,,Chimariko,,328,141
+,,15,chim1309,{},10.1902,-74.2559,South America,,Chimila,,329,134
+,,9,chim1312,{},1.111787,44.026991,Africa,,Chimwiini,,330,81
+,,174,chin1286,{},45.1729,-119.166,North America,,Clatsop-Shoalwater Chinook,,331,164
+,,81,chip1241,{},47.347,-94.2738,North America,,Chippewa,,332,171
+,,68,chip1261,{},58.98,-104.44,North America,,Chipewyan,,333,193
+,,222,chiq1248,{},-16.769554,-61.817795,South America,,Lomeriano-Ignaciano Chiquitano,,334,166
+,,23,chir1283,{},25.4643,94.4072,Eurasia,,Chiru,,335,170
+,,270,chit1248,{},30.3386,-90.9123,North America,,Chitimacha,,336,167
+,,23,choc1275,{},27.46961,91.21954,Eurasia,,Chocangacakha,,337,124
+,,22,choc1276,{},32.25,-88.5,North America,,Choctaw,,338,190
+,,64,chol1284,{},-9.23129,-75.9621,South America,,Cholón,,339,181
+,,23,chot1239,{},24.3722,94.2408,Eurasia,,Chothe,,340,178
+,,33,chra1242,{},10.8021,107.293,Eurasia,,Chrau,,341,166
+,,42,chuj1250,{},15.8399,-91.76,North America,,Chuj,,342,171
+,,196,chuk1273,{},68.6436,170.045,Eurasia,,Chukchi,,343,195
+,,1,chuu1238,{},7.346993,151.598607,Papunesia,,Chuukese,,344,132
+,,84,chuv1255,{},55.487,47.163,Eurasia,,Chuvash,,345,193
+,,9,chuw1238,{},-17.3428,37.1231,Africa,,Chuwabu,,346,180
+,,9,cici1237,{},11.0417,5.54073,Africa,,Cicipu,,347,172
+,,1,cire1240,{},-6.74533,108.538,Papunesia,,Cirebon Javanese,,348,139
+,,1,cjin1234,{},-6.277146,106.848088,Papunesia,,Colloquial Jakarta Indonesian,,349,168
+,,4,clas1250,{},19.72,-96.97,North America,,Classical Nahuatl,,350,185
+,,290,coah1252,{},28.2589,-97.89,North America,,Coahuilteco,,351,129
+,,19,coat1243,{},16.1463,-96.7683,North America,,Coatlán Zapotec,,352,166
+,,31,coca1259,{},-4.5,-74.0,South America,,Cocama-Cocamilla,,353,87
+,,40,coch1272,{},29.04,-114.077,North America,,Cochimi,,354,89
+,,1,coco1260,{},-12.193342,96.833679,Papunesia,,Cocos Islands Malay,,355,87
+,,252,cofa1242,{},0.276675,-77.0643,South America,,Cofán,,356,137
+,,15,cogu1240,{},10.9485,-73.8043,South America,,Cogui,,357,139
+,,26,colo1256,{},-0.21181,-79.2347,South America,,Tsafiki,,358,144
+,,4,coma1245,{},34.0,-101.0,North America,,Comanche,,359,57
+,,9,cong1236,{},-7.2692,27.4196,Africa,,Congo Swahili,,360,111
+,,185,coos1249,{},43.4413,-124.16,North America,,Hanis,,361,176
+,,19,copa1237,{},17.1541,-97.9826,North America,,Copala Triqui,,362,168
+,,7,copt1239,{},29.472,31.2053,Africa,,Coptic,,363,178
+,,9,cori1240,{},9.59,8.06,Africa,,Cori,,364,139
+,,14,coyu1235,{},20.5447,-97.6852,North America,,Coyutla Totonac,,365,138
+,,22,cree1270,{},31.0,-87.5,North America,,Creek,,366,185
+,,84,crim1257,{},45.0,34.08,Eurasia,,Crimean Tatar,,367,179
+,,9,cros1244,{},6.16926,8.23592,Africa,,Cross River Mbembe,,368,164
+,,35,crow1244,{},45.368,-107.874,North America,,Crow,,369,192
+,,21,cube1242,{},1.32382,-70.1939,South America,,Cubeo,,370,77
+,,132,culi1244,{},-8.55268,-70.6648,South America,,Culina,,371,179
+,,4,cupe1243,{},33.3148,-116.515,North America,,Cupeño,,372,53
+,,25,curr1243,{},0.69618,-67.5028,South America,,Curripaco,,373,101
+,,82,cusc1236,{},-14.0853,-71.7663,South America,,Cusco Quechua,,374,167
+,,85,cuti1242,{},-6.45399,-68.7678,South America,,Kanamarí do Juruá-Japurá-Xeruã-Itaquaí-Jutaí,,375,153
+,,7,cypr1248,{},35.1674,33.0943,Eurasia,,Cypriot Arabic,,376,142
+,,28,czec1258,{},49.873398,15.10437,Eurasia,,Czech,,377,195
+,,23,daai1236,{},20.7347,93.7853,Eurasia,,Daai Chin,,378,183
+,,7,daas1238,{},4.58879,35.9888,Africa,,Daasanach,,379,191
+,,211,dadi1250,{},-6.65765,144.511,Papunesia,,Dadibi,,380,164
+,,9,dagb1246,{},9.64745,-0.43227,Africa,,Dagbani,,381,177
+,,90,dagi1241,{},10.583,29.9404,Africa,,Dagik,,382,167
+,,7,daha1245,{},-2.1843,40.37,Africa,,Dahalo,,383,46
+,,1,daka1243,{},-16.2696,168.013,Papunesia,,Dakaka,,384,187
+,,1,damp1237,{},0.70234,120.219,Papunesia,,Dampelas,,385,159
+,,33,dana1252,{},20.4957,96.998,Eurasia,,Danau,,386,179
+,,49,dand1238,{},18.7475,81.3598,Eurasia,,Dandami Maria,,387,161
+,,28,dara1250,{},27.8623,84.1357,Eurasia,,Darai,,388,178
+,,151,dard1243,{},12.1187,18.7996,Africa,,Dar Daju Daju,,389,93
+,,18,darg1241,{},42.4257,47.4388,Eurasia,,North-Central Dargwa,,390,146
+,,20,darl1243,{},-32.7021,142.695,Australia,,Paakantyi,,391,54
+,,50,daur1238,{},48.0,124.0,Eurasia,,Dagur,,392,148
+,,24,dawr1236,{},6.95,37.0,Africa,,Dawro,,393,156
+,,63,daww1239,{},-0.1177,-67.2934,South America,,Dâw,,394,91
+,,110,daza1242,{},15.7358,15.8517,Africa,,Dazaga,,395,180
+,,23,dech1234,{},26.91,98.94,,,Dechang,,396,192
+,,27,defa1248,{},4.58451,7.50186,Africa,,Defaka,,397,75
+,,9,dege1246,{},4.73373,6.80991,Africa,,Degema,,398,189
+,,1,dehu1237,{},-20.8892,167.229,Papunesia,,Dehu,,399,150
+,,52,dera1245,{},-3.52309,140.947,Papunesia,,Dera (Indonesia),,400,93
+,,7,dera1248,{},10.072,12.0256,Africa,,Dera (Nigeria),,401,177
+,,21,desa1247,{},0.58157,-69.4955,South America,,Desano,,402,80
+,,20,dhar1247,{},-24.0601,114.847,Australia,,Dhargari,,403,89
+,,20,dhar1248,{},-23.307,150.593,Australia,,Dharumbal,,404,74
+,,23,dhim1246,{},26.6283,88.3798,Eurasia,,Dhimal,,405,185
+,,18,dido1241,{},42.2646,45.8096,Eurasia,,Tsez,,406,170
+,,20,dier1241,{},-28.1667,138.0,Australia,,Dieri,,407,74
+,,23,diga1241,{},28.4993,96.8803,Eurasia,,Tawra,,408,178
+,,23,dima1251,{},25.4198,93.1806,Eurasia,,Dimasa,,409,187
+,,53,dime1235,{},6.20951,36.3329,Africa,,Dime,,410,52
+,,9,diri1252,{},-18.1681,20.6678,Africa,,Diriku,,411,137
+,,29,dizi1235,{},6.1405,35.5763,Africa,,Dizin,,412,57
+,,48,djam1255,{},-15.0558,130.06,Australia,,Jaminjung-Ngaliwurru,,413,184
+,,20,djam1256,{},-12.021,135.59,Australia,,Djambarrpuyngu,,414,91
+,,20,djap1238,{},-12.879764,136.417978,Australia,,Djapu,,415,69
+,,17,djee1236,{},-12.0133,134.097,Australia,,Djeebbana,,416,182
+,,32,djeo1235,{},-12.038,-64.6694,South America,,Djeoromitxí,,417,107
+,,48,djin1251,{},-17.165,133.659,Australia,,Jingulu,,418,74
+,,20,djin1253,{},-12.462,134.82,Australia,,Djinang,,419,75
+,,28,doma1260,{},36.3258,74.7984,Eurasia,,Domaaki,,420,144
+,,36,domm1246,{},-6.03737,144.895,Papunesia,,Dom,,421,179
+,,50,dong1285,{},35.5808,103.558,Eurasia,,Dongxiang,,422,165
+,,209,doro1266,{},-9.56687,147.986,Papunesia,,Doromu-Koki,,423,167
+,,9,dual1243,{},4.10208,9.61877,Africa,,Duala,,424,138
+,,1,dumb1241,{},-22.0947,166.531,Papunesia,,Dumbea,,425,174
+,,23,dumi1241,{},27.45849,86.75699,Eurasia,,Dumi,,426,166
+,,278,duna1248,{},-5.41439,142.475,Papunesia,,Duna,,427,91
+,,1,dupa1235,{},17.3748,122.188,Papunesia,,Dupaninan Agta,,428,163
+,,23,dura1244,{},28.173,84.435,Eurasia,,Dura,,429,171
+,,28,dutc1256,{},52.0,5.0,Eurasia,,Dutch,,430,100
+,,20,duun1241,{},-26.248,151.868,Australia,,Duungidjawu,,431,87
+,,20,dyan1250,{},-30.8469,152.602,Australia,,Dyangadi,,432,190
+,,20,dyir1250,{},-17.4516,145.544,Australia,,Dyirbal,,433,90
+,,69,dzao1238,{},24.9754,112.326,Eurasia,,Dzao Min,,434,193
+,,23,dzon1239,{},27.410786,89.581604,Eurasia,,Dzongkha,,435,175
+,,33,east2330,{},19.0136,98.7613,Eurasia,,Eastern Lawa,,436,194
+,,23,east2342,{},19.8939,98.3359,Eurasia,,Eastern Kayah,,437,190
+,,20,east2379,{},-23.3583,135.046,Australia,,Eastern Arrernte,,438,93
+,,1,east2440,{},0.07337,127.423,Papunesia,,East Makian,,439,95
+,,1,east2443,{},-15.3523,167.89,Papunesia,,East Ambae,,440,182
+,,1,east2447,{},-14.278717,-178.137222,Papunesia,,East Futuna,,441,187
+,,36,east2516,{},-6.32989,143.931,Papunesia,,East Kewa,,442,179
+,,112,east2545,{},38.5647,-122.586,North America,,Eastern Pomo,,443,163
+,,1,east2563,{},11.2853,108.49,Eurasia,,Eastern Cham,,444,92
+,,7,east2690,{},29.6742,33.6113,Africa,,Eastern Egyptian Bedawi Arabic,,445,147
+,,23,east2773,{},27.576985,86.033964,Eurasia,,Eastern Newari,,446,190
+,,9,egaa1242,{},5.56081,-5.41732,Africa,,Ega,,447,125
+,,7,egyp1253,{},31.0,31.0,Africa,,Egyptian Arabic,,448,166
+,,36,eipo1242,{},-4.33691,140.045,Papunesia,,Eipomek,,449,184
+,,36,ekar1243,{},-3.88974,136.018,Papunesia,,Ekari,,450,151
+,,9,elem1253,{},4.72964,7.267,Africa,,Eleme,,451,137
+,,7,elmo1238,{},2.79312,36.7619,Africa,,El Molo,,452,171
+,,4,elna1235,{},22.4099,-104.467,North America,,El Nayar Cora,,453,162
+,,1,emae1237,{},-17.052,168.399,Papunesia,,Emae,,454,156
+,,9,emai1242,{},7.09089,5.84494,Africa,,Emai,,455,193
+,,11,embe1260,{},7.52721,-76.7476,South America,,Emberá-Catío,,456,164
+,,11,embe1262,{},4.8791,-76.0749,South America,,Emberá-Chamí,,457,157
+,,16,enap1235,{},6.95035,-65.8483,South America,,Panare,,458,145
+,,25,enaw1238,{},-12.4302,-58.9802,South America,,Enawené-Nawé,,459,3
+,,11,epen1239,{},4.25877,-77.3566,South America,,Epena,,460,155
+,,9,esan1238,{},6.25685,6.33917,Africa,,Esan,,461,123
+,,101,esee1247,{},-9.09451,148.376,Papunesia,,Ese,,462,75
+,,253,esse1238,{},36.5473,-121.867,North America,,Esselen,,463,111
+,,13,esto1258,{},58.55,25.82,Eurasia,,Estonian,,464,195
+,,9,eton1253,{},4.21045,11.3935,Africa,,Eton-Mengisa,,465,107
+,,271,etru1241,{},41.9,12.4833,Eurasia,,Etruscan,,466,130
+,,4,eude1234,{},28.5,-110.0,North America,,Eudeve,,467,153
+,,79,even1259,{},61.972,94.689,Eurasia,,Evenki,,468,169
+,,79,even1260,{},70.6687,130.914,Eurasia,,Even,,469,141
+,,9,ewee1241,{},6.46061,0.814975,Africa,,Ewe,,470,162
+,,68,eyak1241,{},60.4232,-144.762,North America,,Eyak,,471,174
+,,36,fait1240,{},-5.59947,145.298,Papunesia,,Kulsab,,472,126
+,,23,fala1243,{},23.7892833333,92.3254633333,Eurasia,,Falam Chin,,473,143
+,,9,fare1241,{},11.0918,-0.81109,Africa,,Farefare,,474,175
+,,28,faro1244,{},62.0732,-6.88497,Eurasia,,Faroese,,475,194
+,,206,fass1245,{},-3.10868,141.64,Papunesia,,Momu-Fas,,476,144
+,,310,fasu1242,{},-6.62687,143.284,Papunesia,,Fasu,,477,120
+,,1,fiji1243,{},-18.0,178.33,Papunesia,,Fijian,,478,187
+,,14,filo1235,{},20.1415,-97.5931,North America,,Filomeno Mata Totonac,,479,144
+,,95,finn1310,{},60.661,25.0677,Eurasia,,Finnish Sign Language,,480,14
+,,13,finn1318,{},64.7628,25.5577,Eurasia,,Finnish,,481,195
+,,9,fipa1238,{},-7.88963,31.3442,Africa,,Fipa,,482,120
+,,173,foii1241,{},-6.47258,143.495,Papunesia,,Foi,,483,118
+,,9,fonn1241,{},7.15484,1.66495,Africa,,Fon,,484,189
+,,36,fore1270,{},-6.64473,145.5065,Papunesia,,Fore,,485,99
+,,111,fran1266,{},17.3654,-93.3633,North America,,Francisco León Zoque,,486,161
+,,256,fuln1247,{},-9.02591,-37.1402,South America,,Fulniô,,487,177
+,,180,furr1244,{},12.0455,23.6401,Africa,,Fur,,488,182
+,,1,futu1245,{},-19.5303,170.215,Papunesia,,Futuna-Aniwa,,489,193
+,,122,fuyu1242,{},-8.6371,147.312,Papunesia,,Fuyug,,490,180
+,,9,gaaa1244,{},5.65488,-0.18598,Africa,,Ga,,491,133
+,,9,gaaa1245,{},8.4809,11.9603,Africa,,Gaa,,492,79
+,,200,gaam1241,{},11.4674,33.9797,Africa,,Gaam,,493,83
+,,7,gaan1243,{},10.2955,12.6479,Africa,,Ga'anda,,494,140
+,,9,gade1242,{},8.71139,7.49869,Africa,,Gade,,495,178
+,,84,gaga1249,{},44.5988,28.0277,Eurasia,,Gagauz,,496,188
+,,240,gaga1251,{},-12.5176,132.643,Australia,,Gaagudju,,497,170
+,,23,gahr1239,{},32.2168,77.9596,Eurasia,,Bunan,,498,195
+,,7,gala1264,{},10.1258,10.2542,Africa,,Galambu,,499,79
+,,74,gale1259,{},2.31461,128.44,Papunesia,,Galela,,500,145
+,,16,gali1262,{},5.83772,-56.8323,South America,,Galibi Carib,,501,173
+,,23,galo1242,{},27.9805586,94.6884956,Eurasia,,Galo,,502,179
+,,10,gamb1251,{},-14.29546,126.27131,Australia,,Gambera,,503,136
+,,24,gamo1243,{},6.27645,37.23808,Africa,,Gamo,,504,183
+,,20,gana1278,{},38.58,146.5,Australia,,Ganai,,505,53
+,,9,gand1255,{},0.66884,32.15153,Africa,,Ganda,,506,148
+,,23,gang1266,{},24.5113,94.1681,Eurasia,,Gangte,,507,184
+,,57,gang1267,{},-17.5446,139.426,Australia,,Ganggalida,,508,94
+,,36,gant1244,{},-5.28113,144.771,Papunesia,,Gants,,509,164
+,,1,gapa1238,{},-9.73317,149.854,Papunesia,,Gapapaiwa,,510,155
+,,121,gara1269,{},-17.4504,137.72014,Australia,,Garrwa,,511,94
+,,25,gari1256,{},15.3529,-86.9091,North America,,Garifuna,,512,80
+,,23,garo1247,{},25.2954,90.462,Eurasia,,Garo,,513,164
+,,33,gata1239,{},18.6076,82.984,Eurasia,,Gata',,514,156
+,,1,gayo1244,{},4.3733,97.3456,Papunesia,,Gayo,,515,193
+,,9,gbay1278,{},5.57378,21.9707,Africa,,Gbayi,,516,58
+,,158,gbay1288,{},8.43391,25.5173,Africa,,Gbaya (Sudan),,517,134
+,,23,geba1237,{},19.4991,96.9492,Eurasia,,Geba Karen,,518,193
+,,1,geda1237,{},-5.18175,145.781,Papunesia,,Gedaged,,519,152
+,,1,gela1263,{},-9.04587,160.186,Papunesia,,Gela,,520,179
+,,9,geme1244,{},8.48359,20.6611,Africa,,Geme,,521,6
+,,7,geru1240,{},10.4775,9.78484,Africa,,Geruma,,522,66
+,,7,ghad1239,{},30.1168,10.0165,Africa,,Ghadames,,523,162
+,,1,ghan1242,{},-8.02035,156.552,Papunesia,,Ghanongga,,524,166
+,,1,ghar1239,{},-9.4791,159.917,Papunesia,,Ghari,,525,151
+,,28,gheg1238,{},42.317,21.3837,Eurasia,,Gheg Albanian,,526,188
+,,18,ghod1238,{},42.7428,46.2252,Eurasia,,Godoberi,,527,165
+,,7,ghom1257,{},34.7979,-4.6696,Africa,,Ghomara,,528,159
+,,7,gida1247,{},9.874715,14.07845,Africa,,Gidar,,529,80
+,,1,gilb1244,{},-1.34,176.44,Papunesia,,Gilbertese,,530,171
+,,188,gily1242,{},52.59,140.681,Eurasia,,Amur Nivkh,,531,183
+,,36,gira1247,{},-5.35342,145.423,Papunesia,,Girawa,,532,169
+,,181,gizr1240,{},-9.183,142.804,Papunesia,,Gizrra,,533,93
+,,7,glav1244,{},11.1334,13.8652,Africa,,Glavda,,534,149
+,,9,gobu1238,{},5.01201,20.0194,Africa,,Gobu,,535,141
+,,7,goem1240,{},8.74455,9.72453,Africa,,Goemai,,536,94
+,,24,gofa1235,{},6.57645,37.05,Africa,,Gofa,,537,169
+,,96,gogo1265,{},-8.08527,142.874,Papunesia,,Gogodala,,538,166
+,,9,gola1255,{},7.06193,-10.8138,Africa,,Gola,,539,150
+,,36,goli1247,{},-6.2249,144.8505,Papunesia,,Golin,,540,88
+,,159,goon1238,{},-18.4073,126.351,Australia,,Gooniyandi,,541,99
+,,7,goro1270,{},-4.23575,35.7996,Africa,,Gorowa,,542,13
+,,101,gras1249,{},-9.51218,147.437,Papunesia,,Grass Koiari,,543,95
+,,81,gros1243,{},48.4834,-108.738,North America,,Gros Ventre,,544,161
+,,175,guah1255,{},5.81736,-68.9839,South America,,Guahibo,,545,79
+,,26,guam1248,{},2.55849,-76.582,South America,,Guambiano,,546,126
+,,23,guan1266,{},31.5655,101.928,Eurasia,,Khroskyabs,,547,191
+,,21,guan1269,{},1.07554,-69.5705,South America,,Kotiria,,548,82
+,,25,guan1270,{},-19.1667,-54.0333,South America,,Kinikinao,,549,22
+,,25,guar1293,{},1.80835,-66.922505,South America,,Baniva de Maroa,,550,101
+,,225,guat1253,{},-17.8696,-57.2897,South America,,Guató,,551,127
+,,9,gube1234,{},12.56,-17.19,Africa,,Gubeeher-Gufangor-Gubelor,,552,180
+,,7,gude1246,{},10.2138,13.403,Africa,,Gude,,553,176
+,,20,gugu1253,{},-18.4921,144.46,Australia,,Gugu Badhun,,554,75
+,,20,gugu1255,{},-14.9424,144.831,Australia,,Guugu Yimidhirr,,555,85
+,,36,guhu1244,{},-7.99922,147.228,Papunesia,,Guhu-Samane,,556,167
+,,7,gulf1241,{},30.17,47.5,Eurasia,,Gulf Arabic,,557,154
+,,105,gumu1244,{},11.05,35.93,Africa,,Northern Gumuz,,558,160
+,,20,gung1248,{},-25.6896,148.604,Australia,,Gungabula,,559,57
+,,109,gunw1252,{},-12.3398,133.358,Australia,,Bininj Kun-Wok,,560,191
+,,20,guny1241,{},-27.0642,145.862,Australia,,Gunya,,561,81
+,,28,gura1251,{},36.8377,44.4956,Eurasia,,Gurani,,562,128
+,,20,gure1255,{},-25.3893,151.175,Australia,,Gureng Gureng,,563,2
+,,294,guri1248,{},-3.5718,141.597,Papunesia,,Guriaso,,564,24
+,,76,guro1248,{},7.34954,-6.31154,Africa,,Guro,,565,131
+,,23,guru1261,{},27.41687,86.28988,Eurasia,,Gurung,,566,174
+,,7,guru1271,{},9.87332,10.162,Africa,,Guruntum-Mbaaru,,567,181
+,,10,guwi1238,{},-15.1,126.5,Australia,,Guwidj,,568,137
+,,9,haaa1252,{},-3.77873,30.4894,Africa,,Ha,,569,187
+,,7,hadi1240,{},7.57377,37.7577,Africa,,Hadiyya,,570,189
+,,288,hadz1240,{},-3.83115,35.0458,Africa,,Hadza,,571,190
+,,2,haio1238,{},-19.7637,17.0299,Africa,,Hai//om-Akhoe,,572,35
+,,28,hait1244,{},18.795135,-72.136115,North America,,Haitian,,573,180
+,,23,haka1240,{},22.8735,92.8208,Eurasia,,Haka Chin,,574,170
+,,23,hakk1236,{},25.0,116.0,Eurasia,,Hakka Chinese,,575,143
+,,50,halh1238,{},48.324,106.289,Eurasia,,Halh Mongolian,,576,181
+,,1,hali1244,{},-5.26603,154.662,Papunesia,,Halia,,577,172
+,,53,hame1242,{},5.06515,36.5176,Africa,,Hamer-Banna,,578,173
+,,61,hang1263,{},-3.90364,142.849,Papunesia,,Hanga Hundi,,579,161
+,,1,hano1246,{},-15.5432,168.167,Papunesia,,Hano,,580,183
+,,80,haru1245,{},-5.09522,144.3375,Papunesia,,Haruai,,581,178
+,,7,hass1238,{},18.29,-14.11,Africa,,Hassaniyya,,582,142
+,,204,hata1243,{},-1.13531,134.037,Papunesia,,Hatam,,583,96
+,,7,haus1257,{},11.1513,8.7804,Africa,,Hausa,,584,91
+,,40,hava1248,{},35.6302,-113.385,North America,,Havasupai-Walapai-Yavapai,,585,165
+,,1,hawa1245,{},19.6297,-155.43,Papunesia,,Hawaiian,,586,181
+,,7,hdii1240,{},10.942,13.6881,Africa,,Hdi,,587,98
+,,7,hebr1245,{},31.1056,35.0179,Eurasia,,Modern Hebrew,,588,167
+,,9,here1253,{},-21.0231,20.5655,Africa,,Herero,,589,187
+,,7,hert1241,{},37.373,42.5192,Eurasia,,Hertevin,,590,64
+,,35,hida1246,{},47.7534,-102.528,North America,,Hidatsa,,591,177
+,,111,high1276,{},18.198,-94.9109,North America,,Highland Popoluca,,592,186
+,,1,hili1240,{},10.4018,122.974,Papunesia,,Hiligaynon,,593,80
+,,18,hinu1240,{},42.4502,45.8064,Eurasia,,Hinuq,,594,99
+,,16,hixk1239,{},-0.16265,-58.80153,South America,,Hixkaryána,,595,162
+,,8,hlai1239,{},18.8062,109.459,Eurasia,,Hlai,,596,100
+,,75,hoaa1235,{},-23.93447,24.69828,Africa,,Amkoe,,597,193
+,,1,hoav1238,{},-8.19679,157.595,Papunesia,,Hoava,,598,176
+,,9,holo1240,{},-5.37545,28.3274,Africa,,Holoholo,,599,144
+,,9,hone1235,{},9.79715,10.9206,Africa,,Hõne,,600,177
+,,33,hooo1248,{},23.9596,87.1188,Eurasia,,Ho,,601,149
+,,124,hozo1236,{},9.38875,34.60448,Africa,,Hozo,,602,87
+,,248,hrus1242,{},27.27,92.63,Eurasia,,Hruso,,603,89
+,,23,hual1240,{},26.91,98.94,Eurasia,,Central Lisu,,604,192
+,,42,huas1242,{},21.6153,-98.5028,North America,,Huastec,,605,176
+,,7,huba1236,{},10.3544,13.139,Africa,,Huba,,606,151
+,,4,huic1243,{},21.954,-104.062,North America,,Huichol,,607,179
+,,7,hula1244,{},31.9111,43.4865,Eurasia,,Hulaulá,,608,182
+,,36,huli1244,{},-5.97212,142.963,Papunesia,,Huli,,609,131
+,,44,humb1243,{},15.2948,-1.69301,Africa,,Humburi Senni Songhay,,610,167
+,,18,hunz1247,{},42.0808,46.1369,Eurasia,,Hunzib,,611,170
+,,63,hupd1244,{},0.58622,-69.8359,South America,,Hup,,612,158
+,,191,hurr1240,{},40.7339,43.3154,Eurasia,,Hurrian,,613,125
+,,33,huuu1240,{},22.0163,100.881,Eurasia,,Hu,,614,176
+,,9,hyam1245,{},9.57832,7.95163,Africa,,Hyam,,615,93
+,,1,iaai1238,{},-20.6301,166.59,Papunesia,,Iaai,,616,178
+,,61,iatm1242,{},-4.30064,143.316,Papunesia,,Iatmul,,617,191
+,,1,iban1264,{},2.09041,112.934,Papunesia,,Iban,,618,188
+,,1,ibat1238,{},18.9398,121.909,Papunesia,,Ibatan,,619,176
+,,9,ibib1240,{},5.15279,7.86688,Africa,,Ibibio,,620,140
+,,18,icar1234,{},41.977226,47.565486,,,Icari,,621,165
+,,28,icel1247,{},63.4837,-19.0212,Eurasia,,Icelandic,,622,185
+,,1,idaa1241,{},5.29059,118.515,Papunesia,,Ida'an,,623,93
+,,195,idii1243,{},-8.75976,142.301,Papunesia,,Idi-Taeme,,624,185
+,,9,idom1241,{},7.19139,7.71261,Africa,,Idoma,,625,144
+,,25,igna1246,{},-15.1188,-65.3993,South America,,Ignaciano,,626,91
+,,141,ikkk1242,{},3.61407,34.2507,Africa,,Ik,,627,167
+,,9,ilaa1246,{},-15.60807,26.45548,Africa,,Ila,,628,124
+,,1,ilok1237,{},15.9361,120.993,Papunesia,,Iloko,,629,94
+,,134,imon1245,{},-3.31228,141.171,Papunesia,,Imonda,,630,91
+,,25,inap1243,{},-12.4653,-69.3083,South America,,Iñapari,,631,97
+,,1,indo1316,{},-7.33458,109.716,Papunesia,,Indonesian,,632,96
+,,143,ines1240,{},34.6169,-120.08,North America,,Ineseño,,633,173
+,,82,inga1252,{},1.00313,-76.8606,South America,,Colombian Inga,,634,74
+,,18,ingu1240,{},43.11,45.03,Eurasia,,Ingush,,635,166
+,,178,iqui1243,{},-3.31233,-73.97046,South America,,Iquito,,636,116
+,,3,irab1238,{},24.831088,125.18956,Eurasia,,Irabu-Jima,,637,159
+,,7,iraq1241,{},-4.19948,35.2939,Africa,,Iraqw,,638,116
+,,1,irar1238,{},-2.94438,133.586,Papunesia,,Irarutu,,639,184
+,,28,iris1253,{},53.2186,-7.61509,Eurasia,,Irish,,640,189
+,,87,isir1237,{},-1.88775,138.595,Papunesia,,Isirawa,,641,159
+,,25,isla1278,{},15.364795,-61.342957,North America,,Island Carib,,642,85
+,,4,isth1241,{},18.2513,-94.6647,North America,,Isthmus-Pajapan Nahuatl,,643,133
+,,4,isth1242,{},18.2,-94.7547,North America,,Isthmus-Mecayapan Nahuatl,,644,123
+,,216,iton1250,{},-12.80431,-64.35748,South America,,Itonama,,645,170
+,,42,itza1241,{},17.0269,-89.8734,North America,,Itzá,,646,188
+,,69,iumi1238,{},20.83,101.17,Eurasia,,Iu Mien,,647,165
+,,54,iwai1244,{},-11.3379,132.453,Australia,,Iwaidja,,648,66
+,,6,iwam1256,{},-4.27346,141.817,Papunesia,,Iwam,,649,105
+,,36,iyoo1238,{},-5.84161,146.092,Papunesia,,Iyo,,650,154
+,,33,jahh1242,{},3.67619,102.291,Eurasia,,Jah Hut,,651,146
+,,132,jama1261,{},-7.62223,-66.5662,South America,,Madi,,652,170
+,,28,jama1262,{},18.13,-77.2612,North America,,Jamaican Creole English,,653,157
+,,125,jams1239,{},14.1794,-2.57999,Africa,,Jamsay Dogon,,654,169
+,,95,japa1238,{},36.0221,139.079,Eurasia,,Japanese Sign Language,,655,13
+,,23,japh1234,{},32.1,102.36,Eurasia,,Japhug,,656,185
+,,88,jaqa1244,{},-12.741939,-75.809231,South America,,Jaqaru,,657,150
+,,20,jaru1254,{},-18.3288,128.262,Australia,,Jaru,,658,60
+,,1,java1254,{},-7.001,109.287,Papunesia,,Javanese,,659,84
+,,33,jede1239,{},5.3,101.75,Papunesia,,Jedek,,660,112
+,,33,jeha1242,{},5.63695,101.541,Eurasia,,Jehai,,661,163
+,,33,jehh1245,{},15.2351,107.753,Eurasia,,Jeh,,662,145
+,,23,jeru1240,{},27.1741,86.2547,Eurasia,,Jerung,,663,145
+,,9,jiba1237,{},9.26508,11.5099,Africa,,Jiba,,664,119
+,,7,jina1244,{},11.3555,14.9611,Africa,,Jina,,665,161
+,,9,jita1239,{},-1.62681,33.9141,Africa,,Jita,,666,75
+,,9,jjuu1238,{},9.83116,7.97167,Africa,,Jju,,667,85
+,,33,juan1238,{},21.2606,85.5845,Eurasia,,Juang,,668,150
+,,75,juho1239,{},-19.688,20.7673,Africa,,South-Eastern Ju,,669,57
+,,9,juku1254,{},7.20236,10.2576,Africa,,Jukun Takum,,670,187
+,,12,jurm1239,{},6.03321,29.974,Africa,,Jur Modo,,671,159
+,,37,kaba1278,{},43.5082,43.3918,Eurasia,,Kabardian,,672,174
+,,12,kaba1281,{},7.64972,16.7344,Africa,,Kaba,,673,166
+,,7,kaby1243,{},36.4103,4.76137,Africa,,Kabyle,,674,65
+,,23,kach1280,{},25.4634,97.3278,Eurasia,,Southern Jinghpaw,,675,172
+,,24,kach1284,{},6.3971,37.9291,Africa,,Kachama-Ganjule-Haro,,676,188
+,,24,kafa1242,{},7.34022,36.1718,Africa,,Kafa,,677,167
+,,9,kagf1238,{},11.5319,4.8387,Africa,,Ut-Main,,678,87
+,,9,kagu1239,{},-6.38204,37.0534,Africa,,Kagulu,,679,186
+,,23,kaik1246,{},28.853,83.1384,Eurasia,,Kaike,,680,184
+,,32,kain1272,{},-27.7671,-52.5394,South America,,Kaingang,,681,39
+,,1,kair1263,{},-3.34608,143.558,Papunesia,,Kairiru,,682,73
+,,284,kaki1249,{},-7.9946,145.816,Papunesia,,Kaki Ae,,683,138
+,,20,kala1377,{},-10.6748,142.196,Australia,,Kala Lagaw Ya,,684,98
+,,9,kala1384,{},-21.2887,27.401,Africa,,Kalanga,,685,164
+,,126,kala1399,{},69.3761,-52.864,North America,,Kalaallisut,,686,182
+,,60,kala1400,{},44.9861,-123.925,North America,,Central Kalapuya,,687,139
+,,20,kalk1246,{},-21.0,139.5,Australia,,Kalkutung,,688,69
+,,50,kalm1243,{},46.566667,45.316667,Eurasia,,Oirad-Kalmyk-Darkhat,,689,165
+,,201,kalu1248,{},-6.45932,142.788,Papunesia,,Kaluli,,690,96
+,,56,kama1367,{},-3.8503,143.842,Papunesia,,Kamasau,,691,94
+,,36,kama1370,{},-6.25829,145.728,Papunesia,,Kamano,,692,116
+,,9,kamb1297,{},-1.60827,37.9532,Africa,,Kamba (Kenya),,693,173
+,,7,kamb1316,{},7.37582,37.9088,Africa,,Kambaata,,694,132
+,,9,kamm1249,{},8.305,11.05611111,Africa,,Kam,,695,103
+,,36,kamo1255,{},-4.30433,135.883,Papunesia,,Kamoro,,696,94
+,,199,kamu1260,{},-7.28798,142.639,Papunesia,,Kamula,,697,185
+,,106,kana1288,{},-10.1658,149.751,Papunesia,,Kanasi,,698,92
+,,1,kand1301,{},-4.3652,152.781,Papunesia,,Kandas,,699,31
+,,36,kani1286,{},-6.38841,145.556,Papunesia,,Kanite,,700,149
+,,1,kapi1249,{},1.039166,154.797223,Papunesia,,Kapingamarangi,,701,72
+,,42,kaqc1270,{},14.4662,-90.9881,North America,,Kaqchikel,,702,183
+,,20,kara1476,{},-18.6771,122.334,Australia,,Karadjeri,,703,79
+,,12,kara1482,{},9.99526,22.9947,Africa,,Kara (Central African Republic),,704,149
+,,1,kara1486,{},-2.81957,151.111,Papunesia,,Kara (Papua New Guinea),,705,177
+,,177,kara1499,{},-3.47037,132.678,Papunesia,,Kalamang,,706,99
+,,23,karb1241,{},25.7317,93.0462,Eurasia,,Hills Karbi,,707,157
+,,9,kare1338,{},7.05641,15.2207,Africa,,Kare (Central African Republic),,708,158
+,,273,kari1254,{},-7.434628,-40.487275,South America,,Kariri,,709,177
+,,9,kari1306,{},5.03525,25.7491,Africa,,Kari,,710,76
+,,31,kari1311,{},-9.37937,-64.1522,South America,,Karitiâna,,711,74
+,,83,kark1258,{},-3.74954,141.098,Papunesia,,Karkar-Yuri,,712,132
+,,1,karn1252,{},-5.74133,147.917,Papunesia,,Karnai,,713,142
+,,251,karo1304,{},41.8228,-123.315,North America,,Karok,,714,164
+,,28,kash1277,{},34.166825,74.330455,Eurasia,,Kashmiri,,715,184
+,,68,kask1239,{},61.9942,-132.412,North America,,Kaska,,716,137
+,,1,katb1237,{},-16.2701,167.484,Papunesia,,Avava,,717,183
+,,23,kats1235,{},24.6,102.4,Eurasia,,Katso,,718,186
+,,85,katu1276,{},-6.45399,-68.7678,,,Katukína do Biá-Ipixuna,,719,153
+,,1,kaul1240,{},-6.08192,149.696,Papunesia,,Kaulong,,720,90
+,,20,kaur1267,{},-34.34966141,138.4800794,Australia,,Kaurna,,721,56
+,,263,kaur1271,{},-3.39188,140.14,Papunesia,,Kaure-Narau,,722,60
+,,4,kawa1283,{},36.0538,-118.679,North America,,Kawaiisu,,723,41
+,,57,kaya1319,{},-17.0695,139.489,Australia,,Kayardild,,724,96
+,,84,kaza1248,{},41.8729,65.7709,Eurasia,,Kazakh,,725,176
+,,1,keda1252,{},-8.23039,123.77,Papunesia,,Kedang,,726,162
+,,41,keig1242,{},11.2064,29.3889,Africa,,Keiga,,727,150
+,,9,kele1255,{},0.36906,24.3098,Africa,,Kele-Foma,,728,129
+,,1,kele1258,{},-2.09163,147.064,Papunesia,,Kele (Papua New Guinea),,729,150
+,,30,kelo1247,{},-8.40688,124.429,Papunesia,,Klon,,730,91
+,,9,keme1240,{},6.69577,10.4984,Africa,,Kemezung,,731,135
+,,12,keng1240,{},11.6816,18.1464,Africa,,Kenga,,732,124
+,,33,kens1248,{},5.98085,101.026,Eurasia,,Kensiu,,733,164
+,,59,kenu1236,{},21.2837,31.8992,Africa,,Kenuzi-Dongola,,734,193
+,,9,kera1248,{},12.3652,-16.6857,Africa,,Keerak,,735,129
+,,7,kera1255,{},9.88165,15.1419,Africa,,Kera,,736,178
+,,1,keri1250,{},-1.93668,101.403,Papunesia,,Kerinci,,737,127
+,,36,kesa1244,{},-5.76797,145.58,Papunesia,,Kesawai,,738,188
+,,184,kett1243,{},63.7551,87.5466,Eurasia,,Ket,,739,183
+,,84,khak1248,{},50.7393,107.169,Eurasia,,Khakas,,740,170
+,,23,khal1275,{},27.3912,87.5053,Eurasia,,Khaling,,741,170
+,,23,kham1282,{},31.9313,91.7062,Eurasia,,Khams Tibetan,,742,184
+,,23,khan1277,{},25.73633,94.247299,Eurasia,,Southern Tangkhul Naga,,743,165
+,,9,khan1278,{},4.70908,7.44363,Africa,,Khana,,744,187
+,,33,khar1287,{},22.3571,84.3922,Eurasia,,Kharia,,745,172
+,,23,khar1288,{},25.2738,94.0503,Eurasia,,Kharam Naga,,746,173
+,,33,khas1269,{},24.977,91.9998,Eurasia,,Khasi,,747,180
+,,23,khez1235,{},25.7078,94.3114,Eurasia,,Khezha Naga,,748,172
+,,18,khin1240,{},41.1801,48.0571,Eurasia,,Khinalugh,,749,153
+,,33,khmu1256,{},20.2463,101.671,Eurasia,,Khmu,,750,167
+,,18,khva1239,{},42.2743,45.9977,Eurasia,,Khwarshi-Inkhoqwari,,751,169
+,,42,kich1262,{},14.5278,-91.1696,North America,,K'iche',,752,180
+,,9,kiku1240,{},-0.29005,36.719,Africa,,Kikuyu,,753,160
+,,79,kile1243,{},47.585,132.48,Eurasia,,Kilen,,754,188
+,,1,kili1267,{},-8.72574,151.072,Papunesia,,Kilivila,,755,187
+,,1,kima1244,{},6.61982,116.96,Papunesia,,Kimaragang,,756,88
+,,116,kima1246,{},-8.01899,138.355,Papunesia,,Kimaama,,757,92
+,,69,kimm1245,{},22.9856,105.024,Eurasia,,Kim Mun,,758,189
+,,9,kimm1246,{},9.79442,15.8936,Africa,,Kim,,759,127
+,,23,kinn1249,{},31.3688,78.3148,Eurasia,,Kinnauri,,760,188
+,,198,kiow1266,{},34.9403,-98.9042,North America,,Kiowa,,761,177
+,,58,kips1239,{},-0.35774,35.258532,Africa,,Kipsigis,,762,156
+,,235,klam1254,{},42.5861,-121.704,North America,,Klamath-Modoc,,763,164
+,,36,kobo1249,{},-5.16446,144.46,Papunesia,,Kobon,,764,96
+,,33,koho1244,{},11.6444,108.057,Eurasia,,Koho,,765,182
+,,23,koir1240,{},25.2857,94.2141,Eurasia,,Koireng,,766,155
+,,101,koit1244,{},-9.36877,147.079,Papunesia,,Koitabu,,767,168
+,,20,koka1244,{},-29.94,135.55,Australia,,Kokata,,768,75
+,,1,koko1269,{},-8.16481,159.191,Papunesia,,Kokota,,769,190
+,,9,kolb1240,{},8.26797,13.2707,Africa,,Kolbila,,770,178
+,,9,kolc1235,{},3.65994,12.8574,Africa,,Kol (Cameroon),,771,170
+,,281,kolp1236,{},-5.21042,151.583,Papunesia,,Kol (Papua New Guinea),,772,94
+,,36,komb1274,{},-5.54543,139.902,Papunesia,,Kombai,,773,183
+,,9,komo1260,{},-0.76333,26.7144,Africa,,Komo (Democratic Republic of Congo),,774,135
+,,108,kona1242,{},-5.66011,142.069,Papunesia,,Konai,,775,188
+,,28,konk1267,{},19.2414,73.9166,Eurasia,,Maharashtrian Konkani,,776,180
+,,7,kons1243,{},5.39111,37.53,Africa,,Konso,,777,87
+,,23,kony1248,{},26.6823,95.0598,Eurasia,,Konyak Naga,,778,175
+,,9,konz1239,{},0.32395,29.8696,Africa,,Konzo,,779,133
+,,9,koon1244,{},-5.57722,14.4771,Africa,,South-Central Kikongo,,780,149
+,,24,koor1239,{},5.80545,37.8679,Africa,,Koorete,,781,175
+,,36,kora1294,{},-9.07,149.267,Papunesia,,Korafe-Yegha,,782,96
+,,182,kore1280,{},37.5,128.0,Eurasia,,Korean,,783,185
+,,21,kore1283,{},0.92316,-75.3475,South America,,Koreguaje,,784,81
+,,33,kork1243,{},21.8358,77.5541,Eurasia,,Korku,,785,133
+,,9,koro1298,{},14.046,-1.96187,Africa,,Koromfé,,786,191
+,,36,koro1312,{},-5.26952,140.047,Papunesia,,Korowai,,787,96
+,,39,koro1313,{},-6.39399,155.742,Papunesia,,Koromira,,788,127
+,,36,kosa1249,{},-4.06603,139.645,Papunesia,,Kosarek Yale,,789,169
+,,1,kosr1238,{},5.31,162.98,Papunesia,,Kosraean,,790,188
+,,9,koti1238,{},-16.4823,39.7602,Africa,,Koti,,791,182
+,,36,kova1243,{},-5.61712,147.862,Papunesia,,Kovai,,792,89
+,,1,kove1237,{},-5.58623,149.63,Papunesia,,Kove,,793,180
+,,44,koyr1240,{},16.192,-3.73962,Africa,,Koyra Chiini Songhay,,794,168
+,,44,koyr1242,{},16.9634,-0.55187,Africa,,Koyraboro Senni Songhai,,795,167
+,,7,koys1242,{},36.0451,44.6365,Eurasia,,Koy Sanjaq Jewish Neo-Aramaic,,796,169
+,,32,kren1239,{},-18.9988,-41.2299,South America,,Krenak,,797,111
+,,89,kris1246,{},-2.80084,141.303,Papunesia,,I'saka,,798,101
+,,41,kron1241,{},10.514,30.003,Africa,,Krongo,,799,75
+,,18,kryt1240,{},41.1811,48.1846,Eurasia,,Kryz,,800,165
+,,1,kuan1248,{},-4.30986,152.114,Papunesia,,Kuanua,,801,174
+,,49,kuii1252,{},19.2043,83.5859,Eurasia,,Kui (India),,802,113
+,,20,kuku1273,{},-16.0036,145.188,Australia,,Kuku-Yalanji,,803,84
+,,20,kuku1280,{},-14.0756,141.724,Australia,,Kuku-Uwanh,,804,155
+,,1,kulo1237,{},23.7562,120.976,Papunesia,,Kulon-Pazeh,,805,141
+,,23,kulu1253,{},27.1606,87.5717,Eurasia,,Kulung (Nepal),,806,169
+,,1,kuma1276,{},-20.4035,164.193,Papunesia,,Nêlêmwa-Nixumwak,,807,189
+,,36,kuma1280,{},-5.90586,144.977,Papunesia,,Kuman,,808,153
+,,20,kumb1268,{},-29.8189,152.913,Australia,,Kumbainggar,,809,84
+,,28,kumz1235,{},26.1602,56.4202,Eurasia,,Kumzari,,810,171
+,,269,kuna1268,{},14.5879,37.5292,Africa,,Kunama,,811,164
+,,109,kunb1251,{},-11.9133,133.723,Australia,,Kunbarlang,,812,190
+,,287,kung1259,{},-12.7,130.881,Australia,,Kungarakany,,813,85
+,,122,kuni1267,{},-8.09371,146.908,Papunesia,,Kunimaipa,,814,171
+,,20,kunj1245,{},-16.6807,143.53,Australia,,Kunjen,,815,69
+,,219,kunz1244,{},-23.0,-69.0,South America,,Kunza,,816,72
+,,250,kuot1243,{},-3.06952,151.537,Papunesia,,Kuot,,817,174
+,,20,kurr1243,{},-22.2134,117.51,Australia,,Kurrama,,818,64
+,,23,kurt1248,{},27.5365,90.9822,Eurasia,,Kurtokha,,819,98
+,,49,kuru1302,{},24.4644,86.4657,Eurasia,,Kurukh,,820,141
+,,1,kusa1251,{},-8.04056,157.463,Papunesia,,Kusaghe-Njela,,821,177
+,,262,kusu1250,{},28.33,82.6,Eurasia,,Kusunda,,822,173
+,,9,kute1248,{},7.07479,10.0916,Africa,,Kutep,,823,163
+,,303,kute1249,{},48.7892,-115.065,North America,,Kutenai,,824,132
+,,49,kuvi1243,{},18.8832,83.7552,Eurasia,,Kuvi,,825,103
+,,33,kuyy1240,{},14.6698,104.911,Eurasia,,Kuy,,826,174
+,,1,kwai1243,{},-8.93744,160.965,Papunesia,,Kwaio,,827,191
+,,168,kwam1249,{},9.50836,34.2457,Africa,,Gwama,,828,171
+,,1,kwam1252,{},-19.5954,169.442,Papunesia,,Kwamera,,829,176
+,,1,kwar1239,{},-8.75779,160.804,Papunesia,,Kwara'ae,,830,186
+,,298,kwaz1243,{},-11.6667,-61.1833,South America,,Kwaza,,831,158
+,,77,kweg1241,{},5.40416,36.1702,Africa,,Kwegu,,832,162
+,,10,kwin1241,{},-14.2515,126.562,Australia,,Kwini,,833,140
+,,6,kwom1262,{},-4.08721,142.664,Papunesia,,Kwoma,,834,174
+,,23,kyer1238,{},28.2922,85.4257,Eurasia,,Kyerung,,835,184
+,,239,laal1242,{},10.0063,17.6143,Africa,,Laal,,836,154
+,,1,labe1239,{},-4.46971,152.678,Papunesia,,Label,,837,70
+,,1,labo1244,{},-16.4291,167.442,Papunesia,,Ninde,,838,122
+,,1,labu1249,{},5.51924,117.507,Papunesia,,Labuk-Kinabatangan Kadazan,,839,104
+,,58,labw1238,{},2.699942,33.657947,Africa,,Labwor,,840,173
+,,221,lafo1243,{},10.3357,30.7331,Africa,,Lafofa,,841,68
+,,7,lagw1237,{},11.5592,14.9884,Africa,,Lagwan,,842,164
+,,23,lahu1253,{},21.2701,100.214,Eurasia,,Lahu,,843,175
+,,18,lakk1252,{},42.1328,47.0809,Eurasia,,Lak,,844,158
+,,7,lama1288,{},11.0243,13.7362,Africa,,Lamang,,845,143
+,,1,lame1260,{},-16.6098,168.171,Papunesia,,Lamenu,,846,126
+,,23,lamk1238,{},24.1523,94.2706,Eurasia,,Lamkang,,847,175
+,,1,lamo1244,{},-5.87071,149.321,Papunesia,,Lamogai,,848,135
+,,9,land1256,{},10.8753,-14.0895,Africa,,Landoma,,849,139
+,,9,lang1320,{},-4.71413,35.9517,Africa,,Langi,,850,174
+,,58,lang1324,{},2.13867,33.0553,Africa,,Lango (Uganda),,851,90
+,,8,laoo1244,{},19.0,102.46,Eurasia,,Lao,,852,99
+,,230,lara1258,{},-12.4111,130.922,Australia,,Laragia,,853,108
+,,57,lard1243,{},-16.56152,139.4343,Australia,,Lardil,,854,94
+,,28,lati1261,{},41.9026,12.4502,Eurasia,,Latin,,855,195
+,,1,lauu1247,{},-8.51018,160.872,Papunesia,,Lau,,856,141
+,,33,lave1249,{},14.5994,107.008,Eurasia,,Brao,,857,122
+,,285,lavu1241,{},-9.05569,159.119,Papunesia,,Lavukaleve,,858,181
+,,147,lazz1240,{},41.5004,41.9096,Eurasia,,Laz,,859,171
+,,296,leco1242,{},-15.0092,-67.8818,South America,,Leco,,860,164
+,,1,lele1267,{},-17.6042,168.202,Papunesia,,Lelepa,,861,149
+,,1,lele1270,{},-2.04783,147.207,Papunesia,,Lele (Papua New Guinea),,862,167
+,,7,lele1276,{},9.158,15.81149,Africa,,Lele (Chad),,863,164
+,,36,lemb1266,{},-4.99504,143.891,Papunesia,,Lembena,,864,175
+,,1,leme1238,{},-13.739697,167.420676,Papunesia,,Lemerig,,865,164
+,,1,lena1238,{},-19.4763,169.261,Papunesia,,Lenakel,,866,195
+,,12,lend1245,{},2.1898,30.6794,Africa,,Lendu,,867,159
+,,1,leng1259,{},-9.56425,160.42,Papunesia,,Lengo,,868,172
+,,169,leng1262,{},-22.6559,-58.9053,South America,,Lengua,,869,135
+,,23,lepc1244,{},27.0869,88.5726,Eurasia,,Lepcha,,870,176
+,,12,lese1243,{},1.3,29.3,Africa,,Lese,,871,150
+,,1,leti1246,{},-8.19808,127.674,Papunesia,,Leti (Indonesia),,872,172
+,,1,lewo1242,{},-16.7612,168.334,Papunesia,,Lewo,,873,173
+,,23,lian1251,{},25.16,93.542,Eurasia,,Liangmai Naga,,874,133
+,,9,libi1244,{},1.97729,18.8886,Africa,,Libinza,,875,135
+,,7,liby1240,{},22.0032,15.0014,Africa,,Libyan Arabic,,876,167
+,,1,lihi1237,{},-3.18895,152.606,Papunesia,,Lihir,,877,143
+,,9,liji1238,{},8.52193,8.35562,Africa,,Lijili,,878,180
+,,9,lika1243,{},2.13777,27.6088,Africa,,Liko,,879,165
+,,9,liki1240,{},1.75106,19.0222,Africa,,Balobo,,880,99
+,,107,lill1248,{},50.7272,-122.04,North America,,Lillooet,,881,190
+,,23,limb1266,{},27.2703,87.8859,Eurasia,,Limbu,,882,140
+,,28,limo1249,{},9.957414,-83.0905,North America,,Limonese Creole,,883,143
+,,9,ling1263,{},-4.409174,15.28532,Africa,,Kinshasa Lingala,,884,75
+,,1,ling1265,{},-16.1986,167.499,Papunesia,,Neverver,,885,157
+,,23,lipo1242,{},25.226,101.302,Eurasia,,Lipo,,886,192
+,,7,lish1245,{},36.213298,44.065281,Eurasia,,Lishanid Noshan,,887,177
+,,9,lito1235,{},2.69,19.24,Africa,,Litoka,,888,97
+,,1,litz1237,{},-16.1331,167.415,Papunesia,,Naman,,889,185
+,,9,loba1239,{},2.04881,18.3667,Africa,,Lobala,,890,98
+,,12,logo1259,{},3.32608,29.8866,Africa,,Logo,,891,172
+,,9,loka1252,{},5.91483,8.0933,Africa,,Lokaa,,892,161
+,,76,loma1260,{},7.91585,-9.69906,Africa,,Loma (Liberia),,893,90
+,,23,long1374,{},31.5392,103.384,Eurasia,,Longxi Qiang,,894,193
+,,1,long1395,{},-9.75258,160.663,Papunesia,,Longgu,,895,151
+,,1,loni1238,{},-2.06124,147.35,Papunesia,,Loniu,,896,185
+,,1,lonw1238,{},-16.2286,168.016,Papunesia,,Lonwolwol,,897,126
+,,1,lote1237,{},-5.954,150.911,Papunesia,,Lote,,898,178
+,,23,loth1237,{},26.01396,94.04355,Eurasia,,Lotha Naga,,899,160
+,,81,loup1243,{},42.364,-72.731,North America,,Loup A,,900,132
+,,1,louu1245,{},-2.38659,147.346,Papunesia,,Lou,,901,176
+,,107,lowe1427,{},46.7736,-124.004,North America,,Lower Chehalis,,902,148
+,,133,lowl1260,{},15.9497,-95.6876,North America,,Lowland Oaxaca Chontal,,903,173
+,,4,lowl1265,{},27.4623,-107.854,North America,,Lowland Tarahumara,,904,164
+,,9,lozi1239,{},-17.7052,24.7398,Africa,,Lozi,,905,137
+,,9,luch1239,{},-14.0648,22.2437,Africa,,Luchazi,,906,136
+,,12,lugb1240,{},3.02245,30.8642,Africa,,Lugbara,,907,165
+,,9,lugu1238,{},-6.86828,37.5557,Africa,,Luguru,,908,177
+,,4,luis1253,{},33.3184,-116.939,North America,,Luiseno-Juaneño,,909,53
+,,280,lule1238,{},-25.221839,-61.887818,South America,,Lule,,910,146
+,,13,lule1254,{},67.2759,17.8057,Eurasia,,Lule Saami,,911,162
+,,90,lumu1239,{},10.8308,30.253,Africa,,Lumun,,912,187
+,,9,lund1266,{},-11.1793,23.8662,Africa,,Lunda,,913,150
+,,58,luok1236,{},-0.93296,34.4896,Africa,,Luo (Kenya and Tanzania),,914,185
+,,9,luse1252,{},0.16988,18.3991,Africa,,Lusengo,,915,131
+,,23,lush1249,{},22.6138,92.6247,Eurasia,,Mizo,,916,182
+,,1,lusi1240,{},-5.55033,149.148,Papunesia,,Lusi,,917,144
+,,9,maas1239,{},11.1324,-3.64763,Africa,,Maasina Fulfulde,,918,133
+,,9,maba1270,{},2.11942,20.8759,Africa,,Mabaale,,919,118
+,,157,maba1277,{},12.89147,20.8889,Africa,,Maba (Chad),,920,172
+,,175,maca1259,{},6.34582,-71.2671,South America,,Macaguán,,921,52
+,,25,mach1267,{},-12.1291,-72.5017,South America,,Machiguenga,,922,97
+,,194,maco1239,{},4.5621,-66.5813,South America,,Maco,,923,163
+,,16,macu1259,{},4.31861,-60.2209,South America,,Macushi,,924,77
+,,21,macu1260,{},-0.14459,-70.0749,South America,,Macuna,,925,75
+,,1,mada1285,{},-3.34342,151.967,Papunesia,,Madak,,926,176
+,,12,madi1260,{},3.62499,31.8471,Africa,,Ma'di,,927,187
+,,190,madn1237,{},-13.9479,130.6,Australia,,Madngele,,928,152
+,,1,maee1241,{},-15.9914,167.288,Papunesia,,Tirax,,929,188
+,,1,mafe1237,{},-15.4316,167.241,Papunesia,,Mafea,,930,134
+,,28,maga1260,{},25.0915,85.3335,Eurasia,,Magahi,,931,136
+,,36,maia1253,{},-4.55066,145.239,Papunesia,,Maiani,,932,79
+,,36,maia1254,{},-4.50212,145.096,Papunesia,,Maia,,933,80
+,,260,maib1239,{},-1.3679,132.591,Papunesia,,Maybrat-Karon,,934,174
+,,135,mail1248,{},-10.3657,149.521,Papunesia,,Mailu,,935,185
+,,25,maip1246,{},4.8,-67.5,South America,,Maipure,,936,87
+,,1,mais1250,{},-9.22853,148.731,Papunesia,,Maisin,,937,98
+,,28,mait1250,{},26.3817,86.2211,Eurasia,,Maithili,,938,180
+,,77,maja1242,{},7.71,34.97,Africa,,Majang,,939,163
+,,1,maka1311,{},-5.65551,119.838,Papunesia,,Makasar,,940,86
+,,8,makc1235,{},25.5946,107.726,Eurasia,,Mak (China),,941,171
+,,9,makh1264,{},-14.8509,38.8052,Africa,,Makhuwa,,942,168
+,,9,makw1236,{},-10.4673,40.0274,Africa,,Makwe,,943,86
+,,15,mala1522,{},10.9286,-73.4056,South America,,Malayo,,944,161
+,,24,male1284,{},5.91975,36.9892,Africa,,Male (Ethiopia),,945,182
+,,1,male1289,{},-5.61613,148.445,Papunesia,,Maleu-Kilenge,,946,154
+,,15,male1297,{},10.7485,-84.7318,North America,,Maléku Jaíka,,947,188
+,,7,malg1251,{},11.77,13.61,Africa,,Malgwa,,948,171
+,,123,mali1284,{},-4.71826,152.214,Papunesia,,Mali,,949,102
+,,19,mali1285,{},17.2122,-98.6322,North America,,Malinaltepec Me'phaa,,950,160
+,,1,malo1243,{},-15.6835,167.16,Papunesia,,Tamambo,,951,190
+,,7,malt1254,{},35.8884,14.4508,Eurasia,,Maltese,,952,173
+,,1,malu1245,{},-15.9813,167.208,Papunesia,,Malua Bay,,953,173
+,,9,mamb1294,{},9.6121,14.0013,Africa,,Mambai,,954,168
+,,42,mamm1241,{},14.8034,-91.7231,North America,,Mam,,955,179
+,,12,mamv1243,{},2.68167,28.9862,Africa,,Mamvu,,956,157
+,,23,mana1288,{},28.6416,84.0515,Eurasia,,Manange,,957,191
+,,1,mana1295,{},-4.07921,145.033,Papunesia,,Manam,,958,175
+,,61,mana1298,{},-4.19082,142.862,Papunesia,,Manambu,,959,194
+,,79,manc1252,{},47.3122,126.557,Eurasia,,Manchu,,960,177
+,,23,mand1415,{},40.0209,116.228,Eurasia,,Mandarin Chinese,,961,195
+,,9,mand1423,{},-10.3991,34.7424,Africa,,Manda-Matumba,,962,84
+,,76,mand1436,{},12.8165233333,-15.6539466667,Africa,,Mandinka,,963,137
+,,93,mang1381,{},-14.8,138.5,Australia,,Mangarrayi,,964,192
+,,12,mang1394,{},2.5511,27.0712,Africa,,Mangbetu,,965,154
+,,1,mang1401,{},-23.1095,-134.97,Papunesia,,Mangareva,,966,173
+,,1,mang1403,{},-5.89752,150.68,Papunesia,,Mangseng,,967,165
+,,155,mani1235,{},-1.49611,133.95,Papunesia,,Sougb,,968,122
+,,76,mann1248,{},7.04616,-8.86405,Africa,,Mann,,969,124
+,,204,mans1260,{},-0.915054,134.011116,Papunesia,,Mansim,,970,71
+,,8,maon1241,{},25.0169,108.024,Eurasia,,Maonan,,971,94
+,,1,maor1246,{},-38.2881,176.541,Papunesia,,Maori,,972,191
+,,43,mapu1245,{},-38.7392,-71.277,South America,,Mapudungun,,973,73
+,,16,maqu1238,{},4.70705,-64.3877,South America,,Maquiritari,,974,69
+,,28,mara1378,{},17.9344,76.6665,Eurasia,,Marathi,,975,190
+,,23,mara1382,{},22.1138,93.0387,Eurasia,,Mara Chin,,976,160
+,,93,mara1385,{},-14.7927,134.865,Australia,,Marra,,977,94
+,,117,mara1386,{},-13.6754,130.12,Australia,,Maranunggu,,978,173
+,,47,mara1396,{},14.087,21.6408,Africa,,Mararit,,979,92
+,,1,mara1399,{},-16.0695,167.33,Papunesia,,Maragus,,980,174
+,,20,marg1253,{},-26.789,144.892,Australia,,Margany,,981,84
+,,7,marg1265,{},10.93854,13.0521,Africa,,Marghi Central,,982,184
+,,49,mari1414,{},19.7875,79.9144,Eurasia,,Maria (India),,983,119
+,,117,mari1424,{},-13.8818,130.237,Australia,,Marithiel,,984,151
+,,1,mari1426,{},-14.970047,168.057941,Papunesia,,Sunwadia,,985,167
+,,40,mari1440,{},33.5123,-111.749,North America,,Maricopa,,986,175
+,,1,mars1254,{},8.72,167.73,Papunesia,,Marshallese,,987,152
+,,20,mart1255,{},-20.9294,116.607,Australia,,Martuthunira,,988,184
+,,58,masa1300,{},-3.1419,36.4573,Africa,,Masai,,989,73
+,,7,masa1322,{},10.0606,15.4748,Africa,,Masana,,990,188
+,,1,masb1238,{},12.21453,123.63579,Papunesia,,Masbatenyo,,991,172
+,,25,mash1270,{},-11.4745,-70.7953,South America,,Mashco Piro,,992,91
+,,1,mask1242,{},-16.5073,167.818,Papunesia,,Maskelynes,,993,157
+,,1,mato1252,{},-5.91639,146.859,Papunesia,,Mato,,994,169
+,,55,mats1244,{},-5.73914,-72.6281,South America,,Matsés,,995,71
+,,9,matu1259,{},-8.53734,39.0409,Africa,,Matumbi,,996,134
+,,54,maun1240,{},-11.66,133.376,Australia,,Mawng,,997,194
+,,36,mauw1238,{},-4.52416,145.394,Papunesia,,Mauwake,,998,92
+,,32,maxa1247,{},-16.9402,-40.7891,South America,,Maxakalí,,999,181
+,,51,maya1285,{},14.1259,-84.3439,North America,,Mayangna,,1000,150
+,,20,mayk1239,{},-20.4352,140.481,Australia,,Maykulan,,1001,80
+,,9,mayo1261,{},2.79827,27.8282,Africa,,Mayogo,,1002,168
+,,7,maza1304,{},10.175,13.6873,Africa,,Mazagway,,1003,182
+,,9,mbal1255,{},-17.578884,16.027517,Africa,,Mbalanhu,,1004,100
+,,7,mbar1260,{},10.91,15.54,Africa,,Mbara (Chad),,1005,157
+,,12,mbay1241,{},8.23066,15.7328,Africa,,Mbay,,1006,173
+,,9,mbol1247,{},-0.57181,24.0443,Africa,,Mbole,,1007,89
+,,9,mbug1242,{},-3.75763,35.8133,Africa,,Mbugwe,,1008,117
+,,1,mbul1263,{},-5.66965,148.041,Papunesia,,Mbula,,1009,183
+,,31,mbya1239,{},-26.0188,-52.711,South America,,Mbyá Guaraní,,1010,161
+,,77,meen1242,{},6.63207,35.6255,Africa,,Me'en,,1011,167
+,,6,mehe1243,{},-3.70927,142.498,Papunesia,,Mehek,,1012,165
+,,25,mehi1240,{},-12.5364,-53.521,South America,,Mehináku,,1013,4
+,,1,mele1250,{},-17.6841,168.275,Papunesia,,Mele-Fila,,1014,115
+,,24,melo1242,{},6.53916,36.811,Africa,,Melo,,1015,163
+,,36,melp1238,{},-5.62644,144.34,Papunesia,,Melpa,,1016,166
+,,76,mend1266,{},7.90935,-10.9926,Africa,,Mende (Sierra Leone),,1017,82
+,,6,mend1268,{},-3.67233,142.683,Papunesia,,Mende (Papua New Guinea),,1018,87
+,,1,meng1267,{},-5.47036,151.373,Papunesia,,Mengen,,1019,98
+,,91,meny1245,{},-7.17425,146.071,Papunesia,,Menya,,1020,96
+,,1,mera1242,{},-4.97468,151.528,Papunesia,,Meramera,,1021,54
+,,1,mere1242,{},-15.2839,166.905,Papunesia,,Merei,,1022,183
+,,181,meri1244,{},-9.59575,143.773,Papunesia,,Meriam,,1023,97
+,,68,mesc1238,{},33.1291,-105.566,North America,,Mescalero-Chiricahua Apache,,1024,89
+,,9,meta1238,{},5.88942,9.87416,Africa,,Meta',,1025,159
+,,155,meya1236,{},-1.18016,133.618,Papunesia,,Meyah,,1026,96
+,,81,miam1252,{},40.0,-90.0,North America,,Miami,,1027,120
+,,36,mian1256,{},-4.70881,141.523,Papunesia,,Mian,,1028,100
+,,1,midd1327,{},-6.88249,146.399126,Papunesia,,Middle Watut,,1029,140
+,,20,midd1357,{},-29.042737,152.780249,Australia,,Middle Clarence Bandjalang,,1030,96
+,,59,mido1240,{},14.789,27.2236,Africa,,Midob,,1031,55
+,,9,mids1243,{},5.87893,22.4666,Africa,,Mid-Southern Banda,,1032,121
+,,7,miga1249,{},12.2367,18.9614,Africa,,Migaama,,1033,104
+,,23,miju1243,{},28.4732,97.0444,Eurasia,,Kman,,1034,192
+,,81,mikm1235,{},45.9941,-65.5766,North America,,Mi'kmaq,,1035,179
+,,23,mila1245,{},28.5539908,95.186127,Eurasia,,Milang,,1036,193
+,,207,mill1237,{},-31.79729,-67.569581,South America,,Millcayac,,1037,122
+,,1,mina1268,{},-0.896,100.44,Papunesia,,Minangkabau,,1038,164
+,,7,mina1276,{},10.38053,13.84054,Africa,,Mina (Cameroon),,1039,185
+,,1,mini1251,{},-4.31803,152.005,Papunesia,,Minigir,,1040,178
+,,86,mini1256,{},-1.54535,-73.1107,South America,,Minica Huitoto,,1041,77
+,,23,minn1241,{},24.5,118.17,Eurasia,,Min Nan Chinese,,1042,176
+,,73,miri1266,{},-16.3596,128.889,Australia,,Miriwung,,1043,142
+,,51,misk1235,{},15.1576,-84.2942,North America,,Mískito,,1044,159
+,,10,miwa1242,{},-14.3484,126.921,Australia,,Miwa,,1045,138
+,,3,miya1259,{},24.7564,125.363,Eurasia,,Miyako,,1046,138
+,,7,miya1266,{},10.9234,9.71505,Africa,,Miya,,1047,187
+,,7,mlah1239,{},37.0311,41.2209,Eurasia,,Mlahsô,,1048,117
+,,9,mmen1238,{},6.43213,10.2541,Africa,,Mmen,,1049,10
+,,42,moch1257,{},15.4538,-92.1734,North America,,Mocho,,1050,163
+,,279,moch1259,{},-8.01667,-79.0,South America,,Mochica,,1051,139
+,,99,moco1246,{},-28.097,-60.4145,South America,,Mocoví,,1052,169
+,,28,mode1248,{},38.36,23.13,Eurasia,,Modern Greek,,1053,195
+,,50,mogh1245,{},34.2504,62.2802,Eurasia,,Mogholi,,1054,138
+,,138,moha1258,{},43.72,-74.66836,North America,,Mohawk,,1055,127
+,,98,moii1235,{},-0.96532,131.52,Papunesia,,Moi (Indonesia),,1056,125
+,,1,moki1238,{},6.65651,159.776,Papunesia,,Mokilese,,1057,171
+,,267,mola1238,{},44.556,-122.857,North America,,Molale,,1058,174
+,,7,molo1266,{},10.7933,14.2521,Africa,,Moloko,,1059,109
+,,79,moma1245,{},70.6687,130.914,,,Moma Even,,1060,146
+,,9,mong1338,{},-1.54228,20.4259,Africa,,Mongo,,1061,124
+,,19,moni1237,{},13.5343,-85.1746,North America,,Mangue,,1062,84
+,,33,monn1252,{},15.49394,98.122465,Eurasia,,Mon,,1063,89
+,,1,mono1273,{},-7.05102,155.76,Papunesia,,Mono-Alu,,1064,104
+,,4,mono1275,{},37.1935,-119.347,North America,,Mono (USA),,1065,54
+,,81,mont1268,{},49.0533,-68.7376,North America,,Montagnais,,1066,120
+,,9,monz1249,{},3.19008,18.5129,Africa,,Monzombo,,1067,119
+,,42,mopa1243,{},16.3533,-89.0673,North America,,Mopán Maya,,1068,166
+,,1,mori1268,{},-2.56016,121.37,Papunesia,,Mori Bawah,,1069,88
+,,114,moro1285,{},10.9194,30.2138,Africa,,Moro,,1070,77
+,,1,mort1237,{},5.50735,153.710778,Papunesia,,Mortlockese,,1071,141
+,,299,mose1249,{},-14.64448,-67.83756,South America,,Mosetén-Chimané,,1072,179
+,,58,mosi1247,{},-5.43471,37.1869,Africa,,Akie,,1073,167
+,,1,mota1237,{},-13.835361,167.690924,Papunesia,,Mota,,1074,109
+,,1,motl1237,{},-13.655015,167.706277,Papunesia,,Mwotlap,,1075,195
+,,1,mouk1239,{},-5.71155,149.158,Papunesia,,Mouk-Aria,,1076,139
+,,101,moun1252,{},-9.06973,147.384,Papunesia,,Mountain Koiali,,1077,168
+,,241,movi1243,{},-13.8115,-65.6348,South America,,Movima,,1078,167
+,,23,moyo1238,{},24.4793,94.3421,Eurasia,,Moyon,,1079,167
+,,7,mpad1242,{},12.561391,14.446893,Africa,,Mpade,,1080,187
+,,23,mpii1239,{},18.1717,100.21,Eurasia,,Mpi,,1081,174
+,,286,mpur1239,{},-0.7489,133.166,Papunesia,,Mpur,,1082,185
+,,1,mual1241,{},0.31083,111.077,Papunesia,,Mualang,,1083,189
+,,1,mudu1242,{},-4.69751,149.489,Papunesia,,Muduapa,,1084,187
+,,156,mull1237,{},-13.427,130.664,Australia,,Mullukmulluk,,1085,169
+,,1,muna1247,{},-5.40419,122.541,Papunesia,,Muna,,1086,99
+,,23,munc1235,{},20.289,94.3929,Eurasia,,Mün Chin,,1087,186
+,,33,mund1320,{},23.03,85.85,Eurasia,,Mundari,,1088,153
+,,9,mund1325,{},9.83195,14.4751,Africa,,Mundang,,1089,187
+,,9,mund1328,{},6.59969,10.2704,Africa,,Mundabli,,1090,184
+,,31,mund1330,{},-8.41095,-57.691,South America,,Mundurukú,,1091,161
+,,10,munu1238,{},-14.700834,126.754387,Australia,,Munumburru,,1092,137
+,,77,murl1244,{},6.69756,33.988,Africa,,Murle,,1093,175
+,,120,murr1258,{},-14.74852,129.70152,Australia,,Murriny Patha,,1094,97
+,,20,muru1266,{},-28.9618,146.546,Australia,,Muruwari,,1095,66
+,,36,musa1266,{},-5.37407,145.197,Papunesia,,Aisi,,1096,158
+,,7,musg1254,{},10.8439,15.1065,Africa,,Musgu,,1097,118
+,,1,muss1246,{},-1.44105,149.624,Papunesia,,Mussau-Emira,,1098,90
+,,7,mwag1236,{},9.47205,8.96522,Africa,,Mwaghavul,,1099,192
+,,76,mwan1250,{},7.87533,-5.94577,Africa,,Mwan,,1100,136
+,,39,naas1242,{},-6.46022,155.632,Papunesia,,Naasioi,,1101,54
+,,36,naba1256,{},-6.42709,146.966,Papunesia,,Nabak,,1102,82
+,,63,nade1244,{},-1.24449,-66.3068,South America,,Nadëb,,1103,78
+,,1,naka1262,{},-5.59931,150.888,Papunesia,,Nakanai,,1104,174
+,,36,nalc1240,{},-4.26068,139.883,Papunesia,,Nalca,,1105,107
+,,1,nali1244,{},-2.94411,151.332,Papunesia,,Nalik,,1106,174
+,,1,nalo1235,{},-10.8,165.8,Papunesia,,Nalögo,,1107,33
+,,2,nama1264,{},-25.0747,17.9767,Africa,,Nama (Namibia),,1108,90
+,,115,nama1266,{},-8.66403,141.706,Papunesia,,Nama (Papua New Guinea),,1109,56
+,,1,nama1268,{},-16.8979,168.569,Papunesia,,Namakura,,1110,120
+,,115,namb1293,{},-8.74501,141.931,Papunesia,,Nambo,,1111,182
+,,6,nami1256,{},-3.85538,141.788,Papunesia,,Namia,,1112,83
+,,23,namu1246,{},28.5909,101.898,Eurasia,,Namuyi,,1113,175
+,,79,nana1257,{},48.4343,134.797,Eurasia,,Nanai,,1114,195
+,,58,nand1266,{},0.793737,35.408478,Africa,,Nandi,,1115,155
+,,1,nang1262,{},-10.7441,165.887,Papunesia,,Nanggu,,1116,162
+,,25,nant1250,{},-12.1018,-72.3507,South America,,Nanti,,1117,101
+,,306,nara1262,{},15.3251,37.499,Africa,,Nara,,1118,132
+,,20,narr1259,{},-36.2301,140.158,Australia,,Narrinyeri,,1119,72
+,,20,naru1238,{},-34.69,137.535,Australia,,Narungga,,1120,49
+,,266,natc1249,{},31.75,-91.33,North America,,Natchez,,1121,108
+,,9,nati1243,{},10.7176,-5.19517,Africa,,Natioro,,1122,51
+,,1,nati1244,{},-16.468709,167.496054,Papunesia,,Nati,,1123,127
+,,1,natu1246,{},-10.6771,165.835,Papunesia,,Natügu,,1124,98
+,,1,naur1243,{},-0.52957,166.922,Papunesia,,Nauru,,1125,173
+,,68,nava1243,{},36.2106,-110.082,North America,,Navajo,,1126,186
+,,9,nawu1242,{},8.45116,0.04947,Africa,,Nawuri,,1127,182
+,,9,ncan1245,{},6.50696,10.5312,Africa,,Ncane,,1128,131
+,,9,ndam1239,{},-8.40485,36.0271,Africa,,Ndamba,,1129,182
+,,7,ndam1251,{},9.79369,17.326,Africa,,Ndam,,1130,41
+,,9,nden1248,{},-7.54628,38.958,Africa,,Ndengereko,,1131,88
+,,9,ndob1238,{},1.32539,18.6151,Africa,,Ndobo,,1132,89
+,,9,ndog1248,{},7.73028,27.5588,Africa,,Ndogo,,1133,177
+,,116,ndom1245,{},-7.93553,138.019,Papunesia,,Ndom,,1134,74
+,,9,ndun1249,{},2.3886,21.5755,Africa,,Ndunga,,1135,127
+,,1,nege1240,{},2.66503,102.291,Eurasia,,Negeri Sembilan Malay,,1136,139
+,,79,negi1245,{},52.9658,139.206,Eurasia,,Negidal,,1137,160
+,,36,nend1239,{},-5.04271,144.886,Papunesia,,Nend,,1138,169
+,,13,nene1249,{},66.1775,71.0234,Eurasia,,Tundra Nenets,,1139,190
+,,1,neng1238,{},-21.5305,167.964,Papunesia,,Nengone,,1140,169
+,,115,nenn1238,{},-8.62183,142.032,Papunesia,,Nen,,1141,195
+,,1,nese1235,{},-15.952608,167.222769,Papunesia,,Nese,,1142,191
+,,23,newa1246,{},27.2614,84.9577,Eurasia,,Kathmandu Valley Newari,,1143,179
+,,183,nezp1238,{},46.3073,-116.408,North America,,Nez Perce,,1144,176
+,,20,ngaa1240,{},-25.7514,127.602,Australia,,Ngaanyatjarra,,1145,83
+,,15,ngab1239,{},8.8251,-82.3911,North America,,Ngäbere,,1146,162
+,,109,ngal1292,{},-13.9783,133.936,Australia,,Ngalkbun,,1147,188
+,,9,ngal1296,{},6.63187,24.61853,Africa,,Ngala-Santandrea,,1148,55
+,,12,ngam1268,{},8.57051,15.414,Africa,,Ngambay,,1149,156
+,,109,ngan1295,{},-12.8448,134.649,Australia,,Ngandi,,1150,95
+,,48,ngar1283,{},-17.42,134.73,Australia,,Ngarnka,,1151,162
+,,10,ngar1284,{},-16.4006,126.433,Australia,,Ngarinyin,,1152,145
+,,10,ngar1285,{},-15.700055,127.452018,Australia,,Ngarnawu,,1153,137
+,,7,ngas1240,{},9.32042,9.46146,Africa,,Ngas,,1154,177
+,,9,ngba1285,{},2.98887,18.994,Africa,,Ngbaka Minagende,,1155,168
+,,33,ngeq1245,{},15.6211,106.877,Eurasia,,Kriang-Khlor,,1156,134
+,,36,ngge1241,{},-3.62735,139.011,Papunesia,,Nggem,,1157,99
+,,12,ngit1239,{},1.30455,30.2242,Africa,,Ngiti,,1158,179
+,,9,ngom1268,{},1.45357,20.14148,Africa,,Ngombe (Democratic Republic of Congo),,1159,127
+,,1,ngul1236,{},8.45,137.34,Papunesia,,Nguluwan,,1160,56
+,,20,ngur1261,{},-29.2411,143.216,Australia,,Ngura,,1161,39
+,,20,nhan1238,{},-27.42523643,114.2680442,Australia,,Nhanda,,1162,63
+,,31,nhen1239,{},1.04503,-66.9646,South America,,Nhengatu,,1163,75
+,,1,nias1242,{},0.90691,97.4961,Papunesia,,Nias,,1164,98
+,,28,nica1252,{},12.4402,-83.7386,North America,,Nicaragua Creole English,,1165,157
+,,9,nige1253,{},10.9972,11.1188,Africa,,Hausa States Fulfulde,,1166,136
+,,212,niha1238,{},21.1886,76.3318,Eurasia,,Nihali,,1167,164
+,,9,nila1242,{},-4.50002,34.3068,Africa,,Nilamba,,1168,161
+,,130,nina1238,{},4.03894,-62.7801,South America,,Ninam,,1169,65
+,,23,ning1281,{},26.91,98.94,,,Ninglang,,1170,192
+,,193,nisg1240,{},55.199,-129.192,North America,,Nisga'a,,1171,162
+,,1,niua1240,{},-15.6014,-175.64,Papunesia,,Niuafo'ou,,1172,182
+,,1,niue1239,{},-19.06,-169.86,Papunesia,,Niuean,,1173,137
+,,103,niva1238,{},-22.8557,-61.7606,South America,,Nivaclé,,1174,190
+,,9,njan1240,{},6.41,11.51,Africa,,Njanga,,1175,193
+,,9,nkon1248,{},7.20316,0.3209,Africa,,Nkonya,,1176,128
+,,27,nkor1239,{},4.57641,7.45802,Africa,,Nkoroo,,1177,54
+,,23,noct1238,{},27.152,95.3903,Eurasia,,Nocte Naga,,1178,195
+,,1,noku1237,{},-14.8974,166.603,Papunesia,,Nokuku,,1179,156
+,,25,noma1263,{},-11.5349,-74.4371,South America,,Nomatsiguenga,,1180,96
+,,86,nonu1241,{},-1.25,-72.5,South America,,Nonuya,,1181,54
+,,9,noon1242,{},14.792,-16.9205,Africa,,Noon,,1182,188
+,,9,noon1243,{},6.37256,10.5707,Africa,,Noone,,1183,172
+,,13,nort2671,{},68.725,22.1113,Eurasia,,North Saami,,1184,167
+,,33,nort2684,{},14.4674,103.863,Eurasia,,Northern Khmer,,1185,191
+,,84,nort2690,{},40.886,69.211,Eurasia,,Northern Uzbek,,1186,193
+,,84,nort2697,{},40.9777,46.4737,Eurasia,,North Azerbaijani,,1187,188
+,,49,nort2699,{},20.1022,78.4934,Eurasia,,Northwestern Kolami,,1188,89
+,,23,nort2722,{},32.2766,103.192,Eurasia,,Northern Qiang,,1189,187
+,,23,nort2723,{},28.6626,101.305,Eurasia,,Northern Pumi,,1190,178
+,,23,nort2724,{},26.925,99.656,Eurasia,,Northern Bai,,1191,118
+,,23,nort2732,{},29.3016,109.759,Eurasia,,Northern Tujia,,1192,192
+,,205,nort2745,{},70.498,157.853,Eurasia,,Northern Yukaghir,,1193,191
+,,9,nort2774,{},3.56357,21.85251,Africa,,Northern Ngbandi,,1194,159
+,,9,nort2775,{},5.9503,15.2569,Africa,,Northwest Gbaya,,1195,135
+,,9,nort2795,{},-20.2513,27.4096,Africa,,Zimbabwean Ndebele,,1196,96
+,,1,nort2836,{},-17.5774,168.375,Papunesia,,North Efate,,1197,93
+,,1,nort2839,{},-16.1741,168.14,Papunesia,,North Ambrym,,1198,175
+,,1,nort2845,{},-8.89412,-140.108,Papunesia,,North Marquesan,,1199,178
+,,1,nort2847,{},-19.3733,169.303,Papunesia,,North Tanna,,1200,128
+,,5,nort2930,{},-7.39215,144.667,Papunesia,,Northeast Kiwai,,1201,173
+,,146,nort2938,{},54.004532,-132.079257,North America,,Northern Haida,,1202,179
+,,68,nort2942,{},63.2671,-123.641,North America,,North Slavey,,1203,194
+,,153,nort2951,{},39.6721,-121.368,North America,,Northwest Maidu,,1204,142
+,,153,nort2952,{},40.4102,-120.645,North America,,Northeast Maidu,,1205,161
+,,4,nort2954,{},40.0799,-119.536,North America,,Northern Paiute,,1206,55
+,,4,nort2957,{},20.1356,-97.9814,North America,,Northern Puebla Nahuatl,,1207,153
+,,81,nort2961,{},51.6192,-87.7862,North America,,Northwestern Ojibwa,,1208,189
+,,11,nort2972,{},7.12761,-77.574,South America,,Northern Emberá,,1209,165
+,,82,nort2980,{},-11.2132,-75.8128,South America,,North Junín Quechua,,1210,175
+,,7,nort3047,{},10.6755,14.219,Africa,,North Giziga,,1211,176
+,,7,nort3139,{},34.1709,36.0468,Eurasia,,North Levantine Arabic,,1212,163
+,,23,nort3298,{},26.91,98.94,,,Northern Lisu,,1213,192
+,,1,nots1237,{},-3.0557,151.661,Papunesia,,Notsi,,1214,147
+,,7,nubi1253,{},-0.183215,34.7552,Africa,,Nubi,,1215,168
+,,28,nucl1235,{},40.0,45.0,Eurasia,,Eastern Armenian,,1216,190
+,,9,nucl1240,{},8.90347,11.71545,Africa,,Mumuye,,1217,170
+,,84,nucl1301,{},39.8667,32.8667,Eurasia,,Turkish,,1218,195
+,,23,nucl1310,{},20.7926,93.9665,Eurasia,,Burmese,,1219,190
+,,97,nucl1327,{},-12.4294,131.845,Australia,,Limilngan,,1220,168
+,,9,nucl1347,{},15.2534,-15.383,Africa,,Wolof,,1221,134
+,,9,nucl1417,{},4.62705,7.23441,Africa,,Igbo,,1222,189
+,,34,nucl1452,{},-8.27141,138.773,Papunesia,,Mombum,,1223,73
+,,150,nucl1454,{},-1.77196,136.263,Papunesia,,Yawa,,1224,105
+,,46,nucl1458,{},-4.2717,144.95,Papunesia,,Monumbo,,1225,161
+,,1,nucl1460,{},-7.0,113.0,Papunesia,,Madurese,,1226,91
+,,1,nucl1487,{},-18.134562,177.538969,Papunesia,,Nuclear Western Fijian,,1227,194
+,,192,nucl1593,{},-3.50718,141.488,Papunesia,,Kwomtari,,1228,175
+,,203,nucl1594,{},-3.4511,134.071,Papunesia,,Mairasi,,1229,84
+,,87,nucl1595,{},-2.2137,138.486,Papunesia,,Kwerba,,1230,132
+,,113,nucl1622,{},-8.15651,140.009,Papunesia,,Marind,,1231,194
+,,101,nucl1630,{},-9.46246,147.899,Papunesia,,Barai,,1232,168
+,,104,nucl1632,{},-2.6013,140.512,Papunesia,,Sentani,,1233,143
+,,71,nucl1633,{},-2.5803,140.179,Papunesia,,Nimboran,,1234,171
+,,3,nucl1643,{},35.0,135.0,Eurasia,,Japanese,,1235,195
+,,7,nucl1706,{},31.3443,48.8128,Eurasia,,Mandaic,,1236,159
+,,58,nuer1246,{},8.13911,32.3829,Africa,,Nuer,,1237,158
+,,36,nukn1238,{},-6.0177,146.969,Papunesia,,Nukna,,1238,183
+,,1,nuku1260,{},3.84,154.975,Papunesia,,Nukuoro,,1239,120
+,,23,nung1282,{},27.2887,98.7333,Eurasia,,Nung (Myanmar),,1240,170
+,,9,nupe1254,{},9.18404,5.40031,Africa,,Nupe-Nupe-Tako,,1241,161
+,,129,nuuc1236,{},49.67,-126.67,North America,,Nuu-chah-nulth,,1242,151
+,,152,nuuu1241,{},-29.7054,19.0841,Africa,,N||ng,,1243,160
+,,33,nyah1250,{},15.8909,101.515,Eurasia,,Nyahkur,,1244,192
+,,9,nyak1260,{},-9.71018,33.7763,Africa,,Nyakyusa-Ngonde,,1245,153
+,,1,nyal1254,{},-19.72,163.66,Papunesia,,Belep,,1246,180
+,,7,nyam1285,{},9.18024,10.83652,Africa,,Nyam,,1247,160
+,,20,nyan1301,{},-20.6271,121.391,Australia,,Nyangumarta,,1248,79
+,,9,nyan1307,{},-0.46364,30.548,Africa,,Nyankole,,1249,185
+,,9,nyat1246,{},-5.12263,34.6657,Africa,,Nyaturu,,1250,158
+,,20,nyaw1247,{},-18.8743,146.216,Australia,,Nyawaygi,,1251,92
+,,66,nyig1240,{},-17.9594,124.348,Australia,,Nyigina,,1252,128
+,,23,nyis1236,{},27.278263,93.675529,Eurasia,,Nyishi-Hill Miri,,1253,146
+,,9,nyor1246,{},0.95294,31.3493,Africa,,Nyoro,,1254,180
+,,66,nyul1247,{},-16.9129,122.851,Australia,,Nyulnyul,,1255,60
+,,20,nyun1247,{},-33.1199,118.151,Australia,,Nyunga,,1256,9
+,,9,nzad1234,{},-4.102208,20.194462,Africa,,Nzadi,,1257,102
+,,9,nzak1246,{},7.66745,15.6675,Africa,,Nzakambay,,1258,135
+,,9,nzak1247,{},4.79567,22.8254,Africa,,Nzakara,,1259,130
+,,62,obok1239,{},-2.88029,137.924,Papunesia,,Obokuitai,,1260,157
+,,19,ocot1244,{},16.8258,-96.7263,North America,,Ocotlán Zapotec,,1261,97
+,,32,ofay1240,{},-22.278,-53.7227,South America,,Ofayé,,1262,160
+,,3,ogam1239,{},24.915887,125.307663,Eurasia,,Ogami,,1263,167
+,,3,okin1246,{},27.3738,128.619,Eurasia,,Oki-No-Erabu,,1264,161
+,,9,okoe1238,{},7.53908,6.15725,Africa,,Oko-Eni-Osayen,,1265,102
+,,36,oksa1245,{},-5.20797,142.177,Papunesia,,Oksapmin,,1266,184
+,,28,olde1238,{},51.06,-1.31,Eurasia,,Old English (ca. 450-1100),,1267,191
+,,33,oldk1249,{},13.4125,103.866667,Eurasia,,Old Khmer,,1268,147
+,,1,oldm1243,{},-0.648259,103.353479,Papunesia,,Old Malay,,1269,119
+,,56,oloo1241,{},-3.2929,142.131,Papunesia,,Olo,,1270,178
+,,111,olut1240,{},17.8937,-94.8863,North America,,Oluta Popoluca,,1271,180
+,,35,omah1247,{},42.0944,-96.5295,North America,,Omaha-Ponca,,1272,81
+,,101,omie1241,{},-9.03136,148.107,Papunesia,,Ömie,,1273,156
+,,12,omii1238,{},3.2542,30.5385,Africa,,Omi,,1274,18
+,,119,onaa1245,{},-54.0,-68.5,South America,,Selk'nam,,1275,153
+,,171,onge1236,{},10.6926,92.4707,Eurasia,,Önge,,1276,46
+,,138,onon1246,{},42.92,-76.12,North America,,Onondaga,,1277,191
+,,1,onto1237,{},-5.49029,159.701,Papunesia,,Luangiua,,1278,156
+,,28,oriy1255,{},21.0,85.0,Eurasia,,Odia,,1279,193
+,,7,orma1241,{},-1.79489,39.60749,Africa,,Orma,,1280,127
+,,79,oroc1248,{},50.3235,137.851,Eurasia,,Oroch,,1281,162
+,,1,oroh1237,{},-9.7386,161.513,Papunesia,,Oroha,,1282,118
+,,79,orok1265,{},49.3639,143.128,Eurasia,,Orok,,1283,151
+,,70,orok1267,{},-7.81309,145.34,Papunesia,,Orokolo,,1284,181
+,,36,orok1269,{},-8.79019,148.09,Papunesia,,Orokaiva,,1285,171
+,,1,orow1242,{},-21.6269,165.473,Papunesia,,Orowe,,1286,160
+,,145,orya1242,{},-2.76483,139.89,Papunesia,,Orya,,1287,91
+,,114,otor1240,{},11.1187,30.573,Africa,,Otoro,,1288,88
+,,81,otta1242,{},44.5988,-83.226,North America,,Ottawa,,1289,191
+,,1,owaa1237,{},-10.82553,162.30467,Papunesia,,Owa,,1290,161
+,,7,paaa1242,{},11.0175,9.30091,Africa,,Pa'a,,1291,183
+,,1,paam1238,{},-16.47548,168.23693,Papunesia,,Paama,,1292,117
+,,9,paas1238,{},10.2004,-1.8048,Africa,,Paasaal,,1293,186
+,,33,paco1243,{},16.3353,107.094,Eurasia,,Pacoh,,1294,188
+,,242,paez1247,{},2.61516,-76.31254,South America,,Páez,,1295,50
+,,9,pagi1243,{},3.15636,22.1212,Africa,,Pagibete,,1296,170
+,,74,pagu1249,{},1.2134,127.78,Papunesia,,Pagu,,1297,155
+,,69,pahn1237,{},22.8049,105.165,Eurasia,,Pa-Hng,,1298,195
+,,1,paiw1248,{},22.3271,120.806,Papunesia,,Paiwan,,1299,91
+,,1,pala1344,{},7.34138,134.476678,Papunesia,,Palauan,,1300,184
+,,25,pali1279,{},3.63993,-51.6246,South America,,Palikúr,,1301,97
+,,9,pamb1243,{},3.739,26.61,Africa,,Pambia,,1302,132
+,,1,pamo1252,{},-1.62663,121.268,Papunesia,,Pamona,,1303,148
+,,4,pana1305,{},36.0007,-117.901,North America,,Panamint,,1304,46
+,,28,panj1256,{},30.0368,75.6702,Eurasia,,Eastern Panjabi,,1305,195
+,,20,pany1241,{},-22.7816,118.723,Australia,,Panytyima,,1306,77
+,,14,papa1238,{},20.5671,-97.2554,North America,,Papantla Totonac,,1307,128
+,,1,papa1265,{},-5.92283,155.289,Papunesia,,Papapana,,1308,188
+,,1,papi1254,{},-2.06222,147.417,Papunesia,,Papitalai,,1309,139
+,,1,papu1250,{},-2.53482,139.651,Papunesia,,Papuan Malay,,1310,191
+,,33,para1301,{},22.8658,99.375,Eurasia,,South Wa,,1311,185
+,,23,para1302,{},26.2072,95.1618,Eurasia,,Para Naga,,1312,159
+,,31,para1311,{},-25.60551,-57.08816,South America,,Paraguayan Guaraní,,1313,66
+,,25,para1316,{},10.8427,-71.8399,South America,,Paraujano,,1314,60
+,,33,pare1266,{},19.075,83.9723,Eurasia,,Gorum-Parenga,,1315,144
+,,25,pare1272,{},-14.5929,-57.4059,South America,,Parecís,,1316,146
+,,1,patp1243,{},-3.74711,152.493,Papunesia,,Patpatar,,1317,187
+,,23,patt1248,{},32.6963,76.5966,Eurasia,,Pattani,,1318,172
+,,25,paun1241,{},-16.770833,-61.454167,South America,,Paunaka,,1319,99
+,,227,pawa1255,{},-6.88021,145.081,Papunesia,,Pawaia,,1320,110
+,,149,pawn1254,{},36.2862,-96.8937,North America,,Pawnee,,1321,156
+,,36,payn1244,{},-4.94303,144.879,Papunesia,,Manat,,1322,161
+,,15,pech1241,{},15.8033,-85.558,North America,,Pech,,1323,142
+,,9,peer1241,{},7.82186,12.2518,Africa,,Peere,,1324,147
+,,217,pele1245,{},-5.58045,151.05,Papunesia,,Pele-Ata,,1325,51
+,,16,pemo1248,{},4.97031,-61.4033,South America,,Pemon,,1326,58
+,,1,pend1242,{},-0.11396,119.862,Papunesia,,Pendau,,1327,185
+,,1,penr1237,{},-9.082238,-157.922908,Papunesia,,Māngarongaro,,1328,117
+,,50,peri1253,{},42.4208,110.157,Eurasia,,Peripheral Mongolian,,1329,129
+,,8,phak1238,{},27.8197,95.8131,Eurasia,,Phake,,1330,101
+,,7,phoe1239,{},34.12,35.65,Africa,,Phoenician,,1331,153
+,,23,phom1236,{},26.4715,94.7476,Eurasia,,Phom Naga,,1332,158
+,,25,piap1246,{},4.37718,-68.5953,South America,,Piapoco,,1333,84
+,,28,piji1239,{},-9.567,160.137,Papunesia,,Pijin,,1334,154
+,,99,pila1245,{},-25.0058,-60.1537,South America,,Pilagá,,1335,183
+,,1,pile1238,{},-10.173335,166.247188,Papunesia,,Vaeakau-Taumako,,1336,184
+,,4,pima1248,{},28.654,-108.326,North America,,Pima Bajo,,1337,163
+,,80,pina1252,{},-5.12624,144.137,Papunesia,,Pinai-Hagahai,,1338,162
+,,1,ping1243,{},6.20743,160.711,Papunesia,,Pingelapese,,1339,152
+,,20,pint1250,{},-23.2963,130.643,Australia,,Pintupi-Luritja,,1340,40
+,,4,pipi1250,{},13.8931,-89.443,North America,,Pipil,,1341,167
+,,13,pite1240,{},66.4011,17.4261,Eurasia,,Pite Saami,,1342,168
+,,20,pitt1247,{},-22.7952,139.983,Australia,,Pitta Pitta,,1343,78
+,,81,plai1258,{},51.2437,-110.463,North America,,Plains Cree,,1344,174
+,,1,plat1254,{},-19.5907,47.1211,Africa,,Plateau Malagasy,,1345,91
+,,33,pnar1238,{},24.8237,92.2628,Eurasia,,Pnar,,1346,183
+,,1,pohn1238,{},6.87212,158.223,Papunesia,,Pohnpeian,,1347,182
+,,58,poko1263,{},1.57023,35.2318,Africa,,Pökoot,,1348,153
+,,28,poli1260,{},51.8439,18.6255,Eurasia,,Polish,,1349,195
+,,42,popt1235,{},15.6609,-91.6633,North America,,Popti',,1350,188
+,,1,port1285,{},-16.4952,167.78,Papunesia,,Port Sandwich,,1351,174
+,,49,pott1240,{},18.5968,82.7586,Eurasia,,Pottangi Ollar Gadaba,,1352,86
+,,28,pras1239,{},35.1731,70.8004,Eurasia,,Prasuni,,1353,87
+,,7,psik1239,{},10.677,13.569,Africa,,Psikye,,1354,154
+,,238,puel1244,{},-42.223,-68.666,South America,,Puelche,,1355,128
+,,304,puin1248,{},3.92974,-67.6886,South America,,Puinave,,1356,54
+,,1,puka1242,{},-10.91,-165.83,Papunesia,,Pukapuka,,1357,154
+,,9,pula1262,{},12.1826,-12.7338,Africa,,Pular,,1358,134
+,,9,pula1263,{},13.8694,-13.4482,Africa,,Pulaar,,1359,131
+,,1,pulu1242,{},7.35695,149.2005,Papunesia,,Puluwatese,,1360,166
+,,23,puma1239,{},27.0774,86.838,Eurasia,,Puma,,1361,171
+,,7,puni1241,{},36.527295,10.356444,Africa,,Punic,,1362,153
+,,249,puqu1242,{},-15.8992,-69.9611,South America,,Puquina,,1363,118
+,,243,pura1257,{},-7.59133,145.036,Papunesia,,Purari,,1364,158
+,,167,pure1242,{},19.2467,-101.631,North America,,Purepecha,,1365,182
+,,23,puri1258,{},34.3386,76.0127,Eurasia,,Purik-Sham-Nubra,,1366,189
+,,23,puxi1242,{},32.225,102.63,Eurasia,,Puxi,,1367,192
+,,1,puyu1239,{},22.643,120.996,Papunesia,,Puyuma,,1368,99
+,,42,qanj1241,{},15.6846,-91.3043,North America,,Q'anjob'al,,1369,176
+,,123,qaqe1238,{},-4.45258,151.702,Papunesia,,Qaqet,,1370,55
+,,8,qaua1234,{},26.155438,106.16455,Eurasia,,Central Gelao-Qau,,1371,99
+,,7,qima1242,{},12.8119,37.0542,Africa,,Qimant,,1372,166
+,,35,quap1242,{},36.9471,-94.6634,North America,,Quapaw,,1373,154
+,,19,quer1236,{},20.1396,-100.115,North America,,Querétaro Otomi,,1374,185
+,,161,quil1240,{},47.9106,-124.603,North America,,Quileute,,1375,165
+,,19,quio1240,{},17.5621,-96.602,North America,,Quiotepec Chinantec,,1376,182
+,,23,rabh1238,{},25.8248,91.1689,Eurasia,,Rabha,,1377,177
+,,1,rade1240,{},12.979,108.41,Eurasia,,Rade,,1378,167
+,,23,raji1240,{},28.6151,81.577,Eurasia,,Raji,,1379,153
+,,15,rama1270,{},11.5007,-83.8571,North America,,Rama,,1380,145
+,,1,ramo1244,{},-4.17306,152.451,Papunesia,,Ramoaaina,,1381,54
+,,1,rapa1244,{},-27.113,-109.342,Papunesia,,Rapanui,,1382,163
+,,1,rapa1245,{},-27.6304,-144.338,Papunesia,,Old Rapa,,1383,193
+,,179,rapo1238,{},-5.78724,154.834,Papunesia,,Rapoisi,,1384,101
+,,1,raro1241,{},-21.23,-159.78,Papunesia,,Southern Cook Island Maori,,1385,173
+,,1,rata1244,{},1.07592,124.858,Papunesia,,Ratahan,,1386,166
+,,23,raut1239,{},28.9518,81.1617,Eurasia,,Raute,,1387,133
+,,36,rawa1267,{},-5.83155,145.937,Papunesia,,Rawa,,1388,90
+,,7,rend1243,{},2.27065,37.3608,Africa,,Rendille,,1389,43
+,,33,reng1252,{},14.6066,107.859,Eurasia,,Rengao,,1390,172
+,,1,renn1242,{},-11.6237,160.265,Papunesia,,Rennell-Bellona,,1391,166
+,,1,rere1240,{},-16.2934,167.651,Papunesia,,Rerep,,1392,147
+,,25,resi1247,{},-2.48139,-71.3578,South America,,Resígaro,,1393,83
+,,116,rian1263,{},-7.50746,138.484,Papunesia,,Riantana,,1394,112
+,,32,rikb1245,{},-11.1887,-58.1942,South America,,Rikbaktsa,,1395,149
+,,20,rita1239,{},-13.4559,135.259,Australia,,Ritarungo,,1396,93
+,,23,rong1264,{},30.528,79.567,Eurasia,,Rongpo,,1397,185
+,,23,rong1266,{},25.098,93.7869,Eurasia,,Rongmei Naga,,1398,163
+,,7,ronn1241,{},9.3,9.02,Africa,,Ron,,1399,169
+,,179,roto1249,{},-5.94339,155.154,Papunesia,,Rotokas,,1400,179
+,,1,rotu1241,{},-12.5008,177.066,Papunesia,,Rotuman,,1401,163
+,,1,rovi1238,{},-8.20493,157.408,Papunesia,,Roviana,,1402,161
+,,33,ruch1235,{},21.6176,98.0915,Eurasia,,Ruching Palaung,,1403,186
+,,33,ruma1248,{},23.6404,97.3172,Eurasia,,Rumai Palaung,,1404,183
+,,67,rumu1243,{},-7.17149,144.179,Papunesia,,Rumu,,1405,73
+,,157,rung1258,{},9.7154,20.9945,Africa,,Runga,,1406,178
+,,28,russ1263,{},59.0,50.0,Eurasia,,Russian,,1407,192
+,,50,russ1264,{},50.8533,105.564,Eurasia,,Russia Buriat,,1408,175
+,,18,rutu1240,{},41.6187,47.3244,Eurasia,,Rutul,,1409,143
+,,1,saaa1240,{},-9.60258,161.467,Papunesia,,Sa'a,,1410,145
+,,1,saaa1241,{},-15.9534,168.228,Papunesia,,Sa,,1411,160
+,,1,saar1237,{},23.2632,120.711,Papunesia,,Saaroa,,1412,192
+,,1,saba1263,{},4.64808,117.024,Papunesia,,Brunei-Sabah Malay,,1413,182
+,,165,saba1268,{},-12.9857,-60.335,South America,,Sabanê,,1414,170
+,,1,sabu1255,{},-10.5522,121.847,Papunesia,,Hawu,,1415,172
+,,1,saka1289,{},-15.0757,167.051,Papunesia,,Wanohe,,1416,188
+,,31,saki1248,{},-13.054,-62.0927,South America,,Mekens,,1417,139
+,,277,sali1253,{},37.6646,-121.718,North America,,Salinan,,1418,141
+,,36,salt1242,{},-6.26519,145.021,Papunesia,,Salt-Yui,,1419,85
+,,9,samb1305,{},8.19236,11.7366,Africa,,Samba Leko,,1420,172
+,,9,samb1311,{},8.06905,11.7077,Africa,,Samba Daka,,1421,158
+,,108,samo1303,{},-6.15496,142.195,Papunesia,,Samo,,1422,44
+,,1,samo1305,{},-13.92,-171.83,Papunesia,,Samoan,,1423,193
+,,7,sana1295,{},15.6552,44.8412,Eurasia,,Sanaani Arabic,,1424,163
+,,28,sana1297,{},12.55352,-81.70425,South America,,San Andres Creole English,,1425,168
+,,15,sanb1242,{},9.15686,-78.3075,South America,,San Blas Kuna,,1426,162
+,,233,sand1273,{},-5.26918,35.4808,Africa,,Sandawe,,1427,76
+,,189,sand1278,{},16.3514,-94.7001,North America,,San Dionisio del Mar Huave,,1428,184
+,,23,sang1321,{},25.8581,94.6279,Eurasia,,Sangtam Naga,,1429,140
+,,9,sang1330,{},-8.4,33.9,Africa,,Sangu (Tanzania),,1430,88
+,,19,sanm1301,{},18.74,-97.5936,North America,,San Marcos Tlalcoyalco Popoloca,,1431,141
+,,33,sant1410,{},25.0317,87.8185,Eurasia,,Santali,,1432,153
+,,19,sant1436,{},16.7003,-97.9484,North America,,Santa María Zacatepec Mixtec,,1433,160
+,,130,sanu1240,{},4.5,-64.5,South America,,Sanumá,,1434,69
+,,1,sapo1253,{},-5.64103,154.732,Papunesia,,Saposa,,1435,145
+,,33,sapu1248,{},15.3692,106.843,Eurasia,,Sapuan,,1436,152
+,,12,sara1321,{},9.39388,19.2566,Africa,,Sara Kaba Náà,,1437,155
+,,25,sara1331,{},-11.9423,-65.3945,South America,,Saraveca,,1438,19
+,,28,sara1340,{},4.54729,-54.0238,South America,,Saramaccan,,1439,185
+,,1,sasa1249,{},-8.58349,116.284,Papunesia,,Sasak,,1440,162
+,,1,sata1237,{},7.36084,147.038,Papunesia,,Satawalese,,1441,140
+,,36,sauk1252,{},-6.31958,146.759,Papunesia,,Ma Manda,,1442,181
+,,49,saur1249,{},24.8124,87.6432,Eurasia,,Sauria Paharia,,1443,181
+,,293,savo1255,{},-9.12853,159.814,Papunesia,,Savosavo,,1444,185
+,,7,saya1246,{},9.69441,9.71748,Africa,,Saya,,1445,121
+,,4,seco1242,{},35.7653,-110.535,,,Second Mesa,,1446,184
+,,1,seim1238,{},-1.2666667,144.25,Papunesia,,Seimat,,1447,192
+,,1,seke1241,{},-15.8839,168.197,Papunesia,,Seke (Vanuatu),,1448,175
+,,9,sekp1241,{},7.16751,0.5886,Africa,,Sekpele,,1449,94
+,,9,sele1249,{},7.17462,0.42458,Africa,,Selee,,1450,128
+,,36,sele1250,{},-6.03532,147.234,Papunesia,,Selepet,,1451,102
+,,33,sema1265,{},4.1217,102.816,Eurasia,,Semaq Beri,,1452,181
+,,33,sema1266,{},4.13257,101.477,Eurasia,,Semai,,1453,134
+,,33,seme1247,{},2.82799,102.806,Eurasia,,Semelai,,1454,195
+,,138,sene1264,{},42.56,-77.53,North America,,Seneca,,1455,174
+,,1,seng1281,{},-6.16474,149.784,Papunesia,,Sengseng,,1456,100
+,,282,seri1257,{},28.9877,-112.384,North America,,Seri,,1457,182
+,,4,serr1255,{},33.9479,-116.772,North America,,Serrano,,1458,53
+,,81,seve1240,{},53.9092,-89.9331,North America,,Severn Ojibwa,,1459,177
+,,23,sgaw1245,{},17.9872,97.7126,Eurasia,,S'gaw Karen,,1460,161
+,,301,shab1252,{},7.64407,35.223,Africa,,Shabo,,1461,189
+,,9,sham1280,{},-4.8,38.29,Africa,,Shambala,,1462,118
+,,197,shas1239,{},41.7587,-122.738,North America,,Shasta,,1463,144
+,,81,shaw1249,{},40.0,-83.0,North America,,Shawnee,,1464,169
+,,69,shee1238,{},23.0399,114.814,Eurasia,,She,,1465,162
+,,29,shek1245,{},7.05022,35.2826,Africa,,Sheko,,1466,92
+,,23,sher1257,{},27.0035,92.5799,Eurasia,,Sherdukpen,,1467,77
+,,9,sher1258,{},7.77585,-12.7405,Africa,,Sherbro,,1468,118
+,,58,shil1265,{},9.85472,31.7926,Africa,,Shilluk,,1469,182
+,,55,ship1254,{},-7.17105,-74.8219,South America,,Shipibo-Conibo,,1470,162
+,,23,shix1238,{},28.3895,100.4,Eurasia,,Shixing,,1471,182
+,,9,shon1251,{},-17.20849,29.75725,Africa,,Shona,,1472,182
+,,84,shor1247,{},52.3261,88.4344,Eurasia,,Shor,,1473,175
+,,4,shos1248,{},41.0,-116.0,North America,,Shoshoni,,1474,192
+,,65,shua1257,{},-3.45136,-78.1892,South America,,Shuar,,1475,147
+,,33,shwe1236,{},23.6729,97.7972,Eurasia,,Shwe Palaung,,1476,163
+,,291,siam1242,{},10.998,-4.92143,Africa,,Siamou,,1477,134
+,,1,siar1238,{},-4.62059,152.892,Papunesia,,Siar-Lak,,1478,87
+,,186,siaw1243,{},-4.05312,141.42,Papunesia,,Siawi,,1479,124
+,,23,sich1238,{},28.1947,102.121,Eurasia,,Sichuan Yi,,1480,192
+,,9,sici1249,{},11.1789,-5.28932,Africa,,Sìcìté Sénoufo,,1481,140
+,,7,sida1246,{},6.74176,38.3729,Africa,,Sidamo,,1482,104
+,,1,siee1239,{},-18.8181,169.166,Papunesia,,Sie,,1483,167
+,,4,sier1248,{},18.45,-96.9,North America,,Sierra Negra Nahuatl,,1484,145
+,,1,sika1261,{},-8.378194,162.72952,Papunesia,,Sikaiana,,1485,173
+,,81,siks1238,{},49.0669,-113.109,North America,,Siksika,,1486,162
+,,36,sile1255,{},-4.98243,145.225,Papunesia,,Sirva,,1487,157
+,,1,simb1256,{},-8.26947,156.541,Papunesia,,Simbo,,1488,95
+,,76,sini1242,{},13.7206,-0.78772,Africa,,Sininkere,,1489,125
+,,21,sion1247,{},0.31733,-76.0237,South America,,Siona-Tetete,,1490,66
+,,1,sioo1240,{},-5.96037,147.353,Papunesia,,Sio,,1491,175
+,,31,siri1273,{},-15.5298,-63.9688,South America,,Sirionó,,1492,169
+,,21,siri1274,{},0.436515,-70.184,South America,,Siriano,,1493,122
+,,36,siro1249,{},-5.52893,145.994,Papunesia,,Siroi,,1494,98
+,,18,sirz1237,{},42.171599,47.332115,Eurasia,,Amuzgu-Shiri,,1495,172
+,,1,sisi1250,{},-7.0,156.83,Papunesia,,Sisiqa,,1496,71
+,,23,situ1238,{},31.590536,102.660664,Eurasia,,Situ,,1497,185
+,,274,sius1254,{},42.5111,-124.379,North America,,Siuslaw,,1498,164
+,,39,siwa1245,{},-6.6429,155.452,Papunesia,,Siwai,,1499,93
+,,7,siwi1239,{},29.200415,25.519627,Africa,,Siwi,,1500,168
+,,9,siwu1238,{},7.23811,0.44362,Africa,,Siwu,,1501,87
+,,23,siyi1240,{},23.8192,93.6884,Eurasia,,Sizang Chin,,1502,134
+,,13,skol1241,{},68.8326,29.7204,Eurasia,,Skolt Saami,,1503,99
+,,9,soga1242,{},0.40456,33.3942,Africa,,Soga,,1504,181
+,,9,soli1239,{},-15.5213,28.7934,Africa,,Soli,,1505,101
+,,7,soma1255,{},4.778704,45.152856,Africa,,Somali,,1506,97
+,,76,soni1259,{},13.1273,-11.7178,Africa,,Soninke,,1507,127
+,,1,sons1242,{},5.328596,132.221282,Papunesia,,Sonsorol,,1508,181
+,,33,sooo1254,{},16.9081,105.001,Eurasia,,Sô,,1509,176
+,,141,sooo1256,{},2.58367,34.7595,Africa,,Soo,,1510,82
+,,33,sora1254,{},19.1213,84.19,Eurasia,,Sora,,1511,144
+,,49,sout1549,{},19.6908,78.5936,Eurasia,,Southeastern Kolami,,1512,76
+,,13,sout2674,{},62.8801,13.7006,Eurasia,,South Saami,,1513,165
+,,23,sout2715,{},28.106,84.8511,Eurasia,,Southern Ghale,,1514,115
+,,23,sout2730,{},25.519,100.289,Eurasia,,Southern Bai,,1515,163
+,,8,sout2741,{},25.8874,109.222,Eurasia,,Southern Dong,,1516,96
+,,9,sout2782,{},9.51408,13.6164,Africa,,South Fali,,1517,177
+,,9,sout2797,{},10.877,-4.65678,Africa,,Southern Toussian,,1518,92
+,,9,sout2807,{},-28.78,27.89,Africa,,Southern Sotho,,1519,184
+,,9,sout2826,{},4.47607,-7.56872,Africa,,Southern Grebo,,1520,85
+,,1,sout2856,{},-17.7006,168.377,Papunesia,,South Efate,,1521,188
+,,1,sout2857,{},-16.5116,167.477,Papunesia,,Nahavaq,,1522,180
+,,1,sout2859,{},-16.2975,168.211,Papunesia,,Southeast Ambrym,,1523,124
+,,1,sout2869,{},-19.57953,169.35603,Papunesia,,Southwest Tanna,,1524,166
+,,1,sout2918,{},4.755836,119.483887,Papunesia,,Southern Sama,,1525,159
+,,5,sout2949,{},-8.64889,143.244,Papunesia,,Southern Kiwai,,1526,89
+,,3,sout2954,{},28.1955,129.285,Eurasia,,Southern Amami-Oshima,,1527,162
+,,146,sout2956,{},53.2616,-132.008,North America,,Southern Haida,,1528,191
+,,68,sout2959,{},59.8794,-117.047,North America,,South Slavey,,1529,194
+,,4,sout2969,{},37.0,-114.0,North America,,Southern Paiute,,1530,50
+,,163,sout2985,{},38.2363,-120.507,North America,,Southern Sierra Miwok,,1531,166
+,,165,sout2994,{},-14.3707,-59.5187,South America,,Southern Nambikuára,,1532,186
+,,105,sout3236,{},9.98,35.51,Africa,,Southern Gumuz,,1533,161
+,,1,sril1245,{},6.91603,79.864,Eurasia,,Sri Lanka Malay,,1534,185
+,,28,stan1293,{},53.0,-1.0,Eurasia,,English,,1535,68
+,,7,stan1318,{},27.9625,43.8525,Eurasia,,Standard Arabic,,1536,168
+,,45,suab1238,{},-2.07971,132.157,Papunesia,,Suabo,,1537,101
+,,7,suda1237,{},5.654,28.774,Africa,,Sudanese Creole Arabic,,1538,151
+,,1,sude1239,{},-11.5229,153.488,Papunesia,,Sudest,,1539,159
+,,36,suen1241,{},-7.76339,147.534,Papunesia,,Suena,,1540,94
+,,9,suku1259,{},-5.76495,17.7736,Africa,,Suku,,1541,134
+,,9,suku1261,{},-3.16082,32.8765,Africa,,Sukuma,,1542,127
+,,7,suku1272,{},10.8933,13.6437,Africa,,Sukur,,1543,102
+,,232,sulk1246,{},-5.03471,151.891,Papunesia,,Sulka,,1544,93
+,,247,sume1241,{},31.3,45.6667,Eurasia,,Sumerian,,1545,167
+,,1,sund1252,{},-6.89708,107.106,Papunesia,,Sundanese,,1546,170
+,,23,sunw1242,{},27.5201,86.2476,Eurasia,,Sunwar,,1547,174
+,,9,supy1237,{},11.632,-5.87709,Africa,,Supyire Senoufo,,1548,195
+,,1,surs1246,{},-3.99078,152.768,Papunesia,,Sursurunga,,1549,159
+,,31,suru1262,{},-11.0989,-61.2818,South America,,Suruí,,1550,23
+,,76,susu1250,{},10.4046,-13.3628,Africa,,Susu,,1551,96
+,,9,swah1253,{},-8.25605,37.624,Africa,,Swahili,,1552,178
+,,28,swed1254,{},59.800634,17.389526,Eurasia,,Swedish,,1553,137
+,,74,taba1263,{},1.46563,127.633,Papunesia,,Tabaru,,1554,185
+,,292,tabo1241,{},-8.09387,143.305,Papunesia,,Tabo,,1555,162
+,,9,tafi1243,{},6.79522,0.39875,Africa,,Tafi,,1556,93
+,,1,taga1270,{},14.06,121.747,Papunesia,,Tagalog,,1557,99
+,,23,tagi1241,{},27.986064,94.221711,Eurasia,,Tagin,,1558,96
+,,139,tago1246,{},12.0346,30.9306,Africa,,Tagoi,,1559,107
+,,9,tagw1240,{},8.67053,-5.17372,Africa,,Tagwana Senoufo,,1560,115
+,,7,taha1241,{},22.5908,8.73169,Africa,,Tahaggart Tamahaq,,1561,176
+,,1,tahi1242,{},-17.6485,-149.45,Papunesia,,Tahitian,,1562,188
+,,244,taia1239,{},-4.05047,144.506,Papunesia,,Taiap,,1563,151
+,,91,tain1253,{},-7.40306,145.682,Papunesia,,Tainae,,1564,90
+,,25,tain1254,{},18.2836,-66.8042,North America,,Taino,,1565,4
+,,1,taji1246,{},-0.31553,120.01,Papunesia,,Tajio,,1566,184
+,,1,taki1248,{},-4.69057,145.975,Papunesia,,Takia,,1567,93
+,,1,taku1257,{},-4.773094,157.032085,Papunesia,,Takuu,,1568,168
+,,1,tali1259,{},-9.76764,160.231,Papunesia,,Talise,,1569,142
+,,47,tama1331,{},14.332,21.9951,Africa,,Tama (Chad),,1570,139
+,,7,tama1365,{},14.2038,-2.41269,Africa,,Tamasheq,,1571,186
+,,1,tane1237,{},-11.68,166.97,Papunesia,,Tanema,,1572,154
+,,23,tang1334,{},38.894904,102.246464,Eurasia,,Tangut,,1573,151
+,,23,tang1336,{},25.0489,94.3567,Eurasia,,East-Central Tangkhul Naga,,1574,170
+,,1,tang1347,{},-15.5643,166.958,Papunesia,,Movono,,1575,159
+,,1,tang1348,{},-4.08824,153.611,Papunesia,,Tangga,,1576,140
+,,23,tang1373,{},35.803799,103.54273,Eurasia,,Tangwang,,1577,150
+,,23,tang1377,{},28.95,94.98,Eurasia,,Tangam,,1578,179
+,,21,tani1257,{},-0.59023,-70.3853,South America,,Tanimuca-Retuarã,,1579,80
+,,23,tara1313,{},24.4003,94.1703,Eurasia,,Tarao,,1580,166
+,,25,tari1256,{},0.440205,-68.9042,South America,,Tariana,,1581,161
+,,7,tari1263,{},34.916974,-3.430616,Africa,,Tarifiyt-Beni-Iznasen-Eastern Middle Atlas Berber,,1582,151
+,,1,taro1264,{},23.9032,121.358,Papunesia,,Seediq,,1583,78
+,,84,tata1255,{},55.0,50.0,Eurasia,,Tatar,,1584,176
+,,102,taul1251,{},-4.44425,152.095,Papunesia,,Taulil,,1585,188
+,,268,taus1253,{},-3.22497,-75.5603,South America,,Taushiro,,1586,150
+,,36,tauy1241,{},-5.74255,145.366,Papunesia,,Tauya,,1587,94
+,,1,tawa1275,{},-10.3115,150.644,Papunesia,,Tawala,,1588,96
+,,7,tawa1286,{},13.9878,4.47692,Africa,,Tawallammat Tamajaq,,1589,127
+,,7,taya1257,{},16.9232,7.6743,Africa,,Tayart Tamajeq,,1590,161
+,,1,tean1237,{},-11.6752,166.868,Papunesia,,Teanu,,1591,147
+,,110,teda1241,{},18.0426,14.7717,Africa,,Tedaga,,1592,160
+,,139,tega1236,{},11.9523,31.1112,Africa,,Tegali,,1593,82
+,,119,tehu1242,{},-47.5796,-68.3235,South America,,Tehuelche,,1594,181
+,,30,teiw1235,{},-8.37662,124.174,Papunesia,,Teiwa,,1595,32
+,,42,tekt1235,{},15.4599,-92.1136,North America,,Tektiteko,,1596,170
+,,36,tele1256,{},-5.07444,141.731,Papunesia,,Telefol,,1597,100
+,,49,telu1262,{},16.4529,78.7024,Eurasia,,Telugu,,1598,127
+,,9,temb1272,{},2.0246,20.36849,Africa,,Motembo-Kunda-Buja,,1599,105
+,,33,temi1246,{},4.974,101.438,Eurasia,,Temiar,,1600,164
+,,125,tene1248,{},14.0675,-3.37158,Africa,,Tengou-Togo Dogon,,1601,163
+,,77,tenn1246,{},4.91107,32.6307,Africa,,Tennet,,1602,158
+,,1,teop1238,{},-5.67474,154.971,Papunesia,,Teop,,1603,149
+,,7,tera1251,{},11.0376,11.80953,Africa,,Tera,,1604,152
+,,39,tere1278,{},-6.70051,155.745,Papunesia,,Terei,,1605,60
+,,25,tere1279,{},-20.6614,-56.0329,South America,,Terena-Kinikinao-Chane,,1606,85
+,,15,teri1250,{},9.067,-82.9631,North America,,Teribe,,1607,163
+,,1,term1237,{},-10.7326,123.169,Papunesia,,Termanu,,1608,172
+,,74,tern1247,{},0.80562,127.333,Papunesia,,Ternate,,1609,190
+,,1,tetu1245,{},-9.11217,125.528,Papunesia,,Tetum,,1610,88
+,,23,thad1238,{},24.096,93.722,Eurasia,,Thado Chin,,1611,184
+,,8,thai1261,{},14.192,100.671,Eurasia,,Thai,,1612,101
+,,23,than1259,{},28.7554,85.7657,Eurasia,,Thangmi,,1613,177
+,,1,thao1240,{},23.8333,120.93,Papunesia,,Thao,,1614,170
+,,9,thar1283,{},-0.13221,38.073,Africa,,Tharaka,,1615,101
+,,20,thay1249,{},-14.8159,142.034,Australia,,Thayore,,1616,99
+,,4,thir1234,{},35.7653,-110.535,,,Third Mesa,,1617,184
+,,23,thul1246,{},27.5389,87.6063,Eurasia,,Thulung,,1618,175
+,,20,thur1254,{},-34.634,150.721,Australia,,Thurawal,,1619,34
+,,92,ticu1245,{},-3.66289,-69.8723,South America,,Ticuna,,1620,46
+,,74,tido1248,{},0.02461,127.746,Papunesia,,Tidore,,1621,98
+,,9,tief1242,{},10.7184,-4.52619,Africa,,Tiefo-Daramandugu,,1622,178
+,,9,tief1244,{},10.85,-4.45,Africa,,Tiefo-Nyafogo-Numudara,,1623,186
+,,9,tien1242,{},-2.84694,16.4765,Africa,,Tiene,,1624,126
+,,1,tiga1245,{},-2.70951,150.893,Papunesia,,Tigak,,1625,171
+,,9,tigo1236,{},6.983995,10.70849,Africa,,Tigon Mbembe,,1626,173
+,,9,tika1246,{},5.87004,11.6104,Africa,,Tikar,,1627,192
+,,1,tiko1237,{},-12.2766,168.822,Papunesia,,Tikopia,,1628,159
+,,23,tilu1238,{},27.2203,86.4694,Eurasia,,Tilung,,1629,101
+,,38,tima1241,{},11.7176,29.1632,Africa,,Tima,,1630,61
+,,9,timn1235,{},8.90294,-12.3331,Africa,,Timne,,1631,166
+,,114,tira1254,{},11.0963,30.8092,Africa,,Tira,,1632,77
+,,1,tiri1258,{},-21.8147,165.792,Papunesia,,Tiri-Mea,,1633,188
+,,1,tita1241,{},-2.18168,146.888,Papunesia,,Titan,,1634,173
+,,9,tivv1240,{},6.88039,9.26287,Africa,,Tiv,,1635,110
+,,272,tiwi1244,{},-11.6308,130.949,Australia,,Tiwi,,1636,102
+,,1,toab1237,{},-8.39233,160.619,Papunesia,,To'abaita,,1637,193
+,,70,toar1246,{},-8.07231,146.206,Papunesia,,Toaripi,,1638,186
+,,74,tobe1252,{},1.0946,128.154,Papunesia,,Tobelo,,1639,173
+,,49,toda1252,{},11.4184,77.0168,Eurasia,,Toda,,1640,139
+,,4,toho1245,{},31.7973,-111.995,North America,,Tohono O'odham,,1641,185
+,,42,tojo1241,{},16.2572,-91.7825,North America,,Tojolabal,,1642,195
+,,1,toke1240,{},-9.227642,-171.780833,Papunesia,,Tokelau,,1643,178
+,,28,tokp1240,{},-9.41971,147.303,Papunesia,,Tok Pisin,,1644,184
+,,160,toll1241,{},14.6686,-87.0372,North America,,Tol,,1645,138
+,,1,tolo1255,{},-15.1569,166.772,Papunesia,,Tolomako,,1646,120
+,,76,toma1245,{},8.20383,-9.23439,Africa,,Toma,,1647,136
+,,125,tomm1242,{},14.756,-3.28,Africa,,Tommo So Dogon,,1648,167
+,,44,tond1249,{},15.262989,-2.816163,Africa,,Tondi Songway Kiini,,1649,172
+,,1,tong1325,{},-21.17,-175.25,Papunesia,,Tonga (Tonga Islands),,1650,173
+,,4,tong1329,{},34.1,-118.11,North America,,Tongva,,1651,39
+,,254,tonk1249,{},30.25,-96.75,North America,,Tonkawa,,1652,156
+,,1,tora1259,{},-6.19922,155.496,Papunesia,,Torau,,1653,119
+,,28,torr1261,{},-11.066,142.692,Australia,,Torres Strait Creole,,1654,190
+,,23,toto1302,{},26.67,88.975,Eurasia,,Toto,,1655,155
+,,220,touo1238,{},-8.58405,157.296,Papunesia,,Touo,,1656,109
+,,25,trin1274,{},-15.3331,-65.4096,South America,,Trinitario,,1657,146
+,,300,trum1247,{},-11.8119,-53.5717,South America,,Trumai,,1658,172
+,,7,tsam1247,{},5.3097,36.9139,Africa,,Tsamai,,1659,184
+,,1,tsat1238,{},18.3192,109.336,Eurasia,,Tsat,,1660,183
+,,23,tsha1245,{},27.3694,91.7741,Eurasia,,Tshangla,,1661,173
+,,9,tsis1238,{},10.2882,5.11073,Africa,,Salka-Tsishingini,,1662,164
+,,2,tsix1234,{},-19.180953,23.998153,Africa,,Ts'ixa,,1663,193
+,,9,tson1249,{},-23.5754,31.8105,Africa,,Tsonga,,1664,185
+,,1,tsou1248,{},23.216,120.787,Papunesia,,Tsou,,1665,99
+,,9,tswa1253,{},-24.368,24.7587,Africa,,Tswana,,1666,178
+,,9,tswa1255,{},-22.9891,32.4287,Africa,,Tswa,,1667,162
+,,21,tuca1252,{},0.579755,-69.5763,South America,,Tucano,,1668,80
+,,58,tuge1241,{},0.66573,35.8499,Africa,,Tugen,,1669,126
+,,9,tula1252,{},9.84629,11.52551,Africa,,Tula,,1670,167
+,,142,tule1245,{},36.05354,-118.768616,North America,,Tule-Kaweah Yokuts,,1671,172
+,,9,tumu1242,{},10.63451,-1.79707,Africa,,Tumulung Sisaala,,1672,95
+,,9,tune1261,{},4.75,10.67,Africa,,Tunen,,1673,98
+,,1,tung1290,{},-2.52188,150.198,Papunesia,,Tungag,,1674,178
+,,305,tuni1252,{},30.9888,-92.5403,North America,,Tunica,,1675,162
+,,7,tunn1238,{},1.06167,43.6847,Africa,,Tunni,,1676,184
+,,31,tupi1273,{},-22.807778,-42.106389,South America,,Tupinambá,,1677,163
+,,84,turk1303,{},34.4224,50.3222,Eurasia,,Turkic Khalaj,,1678,171
+,,84,turk1304,{},37.0872,59.1757,Eurasia,,Turkmen,,1679,181
+,,58,turk1308,{},4.30688,35.7101,Africa,,Turkana,,1680,99
+,,1,tutu1241,{},-15.580667,167.268889,Papunesia,,Tutuba,,1681,184
+,,50,tuuu1240,{},36.8177,102.117,Eurasia,,Tu,,1682,179
+,,1,tuva1244,{},-8.520813,179.198088,Papunesia,,Tuvalu,,1683,179
+,,84,tuvi1240,{},51.7,94.36667,Eurasia,,Tuvinian,,1684,154
+,,1,tuwa1243,{},16.6646,121.113,Papunesia,,Tuwali Ifugao,,1685,192
+,,9,tuwu1238,{},7.31095,0.38008,Africa,,Tuwuli,,1686,191
+,,107,twan1247,{},47.7419,-121.765,North America,,Twana,,1687,87
+,,37,ubyk1235,{},43.67,39.67,Eurasia,,Ubykh,,1688,172
+,,79,udih1248,{},46.6309,135.678,Eurasia,,Udihe,,1689,194
+,,18,udii1243,{},40.9,47.7236,Eurasia,,Udi,,1690,147
+,,168,uduk1239,{},9.16012,34.2293,Africa,,Uduk,,1691,135
+,,7,ugar1238,{},35.6,35.78,Eurasia,,Ugaritic,,1692,168
+,,1,ughe1237,{},-8.45725,157.341,Papunesia,,Ughele,,1693,182
+,,9,ukaa1243,{},7.59722,6.03933,Africa,,Ukaan,,1694,46
+,,28,ukra1253,{},49.796,29.945,Eurasia,,Ukrainian,,1695,172
+,,79,ulch1241,{},51.8521,140.29,Eurasia,,Ulch,,1696,164
+,,1,ulit1238,{},9.961388,139.603611,Papunesia,,Ulithian,,1697,177
+,,51,ulwa1239,{},12.932292,-83.581467,North America,,Ulwa,,1698,161
+,,106,uman1240,{},-9.89671,149.658,Papunesia,,Umanakaina,,1699,99
+,,309,umbu1235,{},-12.9325,131.825,Australia,,Umbugarla,,1700,126
+,,9,umbu1257,{},-12.4763,14.4148,Africa,,Umbundu,,1701,153
+,,36,umbu1258,{},-5.9513,143.97,Papunesia,,Umbu-Ungu,,1702,165
+,,13,umes1235,{},64.6383,18.646,Eurasia,,Ume Saami,,1703,183
+,,10,umii1236,{},-16.615461,124.079216,Australia,,Umiida,,1704,135
+,,78,umot1240,{},-15.5929,-57.4192,South America,,Umotína,,1705,73
+,,36,unaa1239,{},-4.69676,140.1,Papunesia,,Una,,1706,85
+,,1,unea1237,{},-4.89383,149.141,Papunesia,,Uneapa,,1707,87
+,,10,ungg1243,{},-15.65,124.67,Australia,,Unggumi,,1708,135
+,,10,ungg1244,{},-16.91,124.156,Australia,,Unggaranggu,,1709,135
+,,1,unua1237,{},-16.2638,167.599,Papunesia,,Unua,,1710,192
+,,14,uppe1275,{},20.236,-97.81,North America,,Upper Necaxa Totonac,,1711,176
+,,107,uppe1439,{},46.7981,-123.169,North America,,Upper Chehalis,,1712,164
+,,23,uraa1244,{},27.466667,90.9,Eurasia,,Ura,,1713,187
+,,275,urar1246,{},-4.44006,-75.4211,South America,,Urarina,,1714,169
+,,1,urav1235,{},-18.6747,169.084,Papunesia,,Ura (Vanuatu),,1715,169
+,,56,urim1252,{},-3.58018,142.653,Papunesia,,Urim,,1716,185
+,,1,urip1239,{},-16.00951,167.34643,Papunesia,,Uripiv-Wala-Rano-Atchin,,1717,188
+,,210,urni1239,{},-13.4766,133.023,Australia,,Urningangg,,1718,159
+,,1,urua1242,{},-6.23314,155.573,Papunesia,,Uruava,,1719,124
+,,148,uruu1244,{},-16.72547,-68.97119,South America,,Uru,,1720,169
+,,36,usan1239,{},-4.84265,145.362,Papunesia,,Usan,,1721,100
+,,4,utee1244,{},38.0,-109.0,North America,,Ute,,1722,51
+,,1,vano1237,{},-11.6107,166.7984,Papunesia,,Lovono,,1723,154
+,,13,veps1250,{},60.3353,34.7865,Eurasia,,Veps,,1724,187
+,,1,vera1241,{},-13.892528,167.428701,Papunesia,,Vera'a,,1725,193
+,,9,viem1243,{},10.8429,-3.84128,Africa,,Viemo,,1726,151
+,,33,viet1252,{},20.681188,105.774071,Eurasia,,Vietnamese,,1727,140
+,,1,vinm1237,{},-16.2253,167.427,Papunesia,,Neve'ei,,1728,143
+,,13,voti1245,{},59.3802,28.6235,Eurasia,,Votic,,1729,169
+,,1,vure1239,{},-13.905677,167.451412,Papunesia,,Vurës,,1730,194
+,,264,wadj1254,{},-12.8596,130.737,Australia,,Wadjiginy,,1731,141
+,,20,waga1260,{},-20.329,137.623,Australia,,Wagaya,,1732,55
+,,258,wage1238,{},-13.8627,131.893,Australia,,Wageman,,1733,175
+,,16,waim1253,{},-0.61832,-60.4259,South America,,Waimiri-Atroari,,1734,127
+,,16,waiw1244,{},1.50881,-59.1417,South America,,Waiwai,,1735,178
+,,20,waja1257,{},-28.1761,117.153,Australia,,Wajarri,,1736,79
+,,9,waja1259,{},9.91175,11.7206,Africa,,Waja,,1737,133
+,,1,wala1266,{},-8.81936,160.741,Papunesia,,Wala,,1738,150
+,,1,wall1257,{},-13.2903,-176.207,Papunesia,,East Uvean,,1739,189
+,,20,walm1241,{},-19.7229,126.113,Australia,,Walmajarri,,1740,63
+,,23,wamb1257,{},27.14808,86.47646,Eurasia,,Wambule,,1741,189
+,,48,wamb1258,{},-17.496,135.683,Australia,,Wambayan,,1742,103
+,,36,wamb1259,{},-5.44334,140.48,Papunesia,,Wambon,,1743,94
+,,7,wand1278,{},11.3169,13.8996,Africa,,Wandala,,1744,188
+,,20,wang1291,{},-30.6481,146.18,Australia,,Ngiyambaa,,1745,80
+,,20,wanm1242,{},-22.7078,122.325,Australia,,Wanman,,1746,60
+,,76,wann1242,{},7.88773,-5.82092,Africa,,Wan,,1747,71
+,,213,waor1240,{},-1.12312,-76.683,South America,,Waorani,,1748,29
+,,25,wapi1253,{},2.58744,-59.8021,South America,,Wapishana,,1749,87
+,,127,wapp1239,{},38.25,-122.5,North America,,Wappo,,1750,177
+,,9,wara1292,{},10.7283,-5.37515,Africa,,Samue,,1751,65
+,,115,wara1294,{},-8.64917,141.52,Papunesia,,Anta-Komnzo-Wára-Wérè-Kémä,,1752,192
+,,255,wara1303,{},7.50851,-59.3528,South America,,Warao,,1753,185
+,,137,ward1246,{},-15.4155,132.604,Australia,,Wardaman,,1754,164
+,,25,ware1255,{},1.668177,-67.317297,South America,,Warekena Velha,,1755,131
+,,202,wari1268,{},-10.69948,-64.56152,South America,,Wari',,1756,184
+,,20,warl1254,{},-20.1008,131.05,Australia,,Warlpiri,,1757,97
+,,20,warl1255,{},-18.949,133.862,Australia,,Warlmanpa,,1758,41
+,,20,warl1256,{},-22.2909,138.738,Australia,,Warluwara,,1759,95
+,,20,warr1255,{},-18.5468,146.179,Australia,,Warrgamay,,1760,90
+,,66,warr1258,{},-17.0965,123.971,Australia,,Warrwa,,1761,137
+,,20,waru1264,{},-18.2496,144.37,Australia,,Warrongo,,1762,75
+,,20,waru1265,{},-20.6479,134.375,Australia,,Warumungu,,1763,71
+,,226,wash1253,{},38.8184,-119.64,North America,,Washo,,1764,152
+,,36,wask1241,{},-4.57978,145.979,Papunesia,,Waskia,,1765,86
+,,20,wath1238,{},-37.68777565,144.1013148,Australia,,Wathawurrung,,1766,66
+,,25,waur1244,{},-13.296,-53.6971,South America,,Waurá,,1767,86
+,,9,wawa1246,{},6.68974,11.7802,Africa,,Wawa,,1768,188
+,,1,waya1268,{},-17.294682,177.123396,Papunesia,,Waya (Western Fijian),,1769,195
+,,23,wayu1241,{},27.3047,86.1227,Eurasia,,Wayu,,1770,183
+,,25,wayu1243,{},11.395566,-72.199791,South America,,Wayuu,,1771,93
+,,122,weri1253,{},-7.71834,146.914,Papunesia,,Weri,,1772,166
+,,28,west2369,{},32.9,53.3,Eurasia,,Western Farsi,,1773,183
+,,28,west2386,{},30.0948,75.3474,Eurasia,,Western Panjabi,,1774,150
+,,13,west2392,{},56.22,46.569,Eurasia,,Western Mari,,1775,154
+,,33,west2396,{},19.8678,99.2057,Eurasia,,Western Lawa,,1776,190
+,,23,west2415,{},28.0239,85.0563,Eurasia,,Western Tamang,,1777,169
+,,23,west2418,{},28.2462,83.511,Eurasia,,Western Magar,,1778,195
+,,69,west2430,{},28.33,109.67,Eurasia,,Western Xiangxi Miao,,1779,181
+,,9,west2458,{},6.81435,24.1012,Africa,,West Central Banda,,1780,72
+,,9,west2466,{},10.6298,-4.76482,Africa,,Western Karaboro,,1781,185
+,,1,west2516,{},-20.4145,166.589,Papunesia,,West Uvean,,1782,189
+,,36,west2594,{},-3.77127,138.217,Papunesia,,Western Dani,,1783,188
+,,36,west2599,{},-6.32097,143.73,Papunesia,,West Kewa,,1784,103
+,,74,west2600,{},0.45332,127.63,Papunesia,,West Makian,,1785,151
+,,68,west2615,{},33.8574,-110.123,North America,,Western Apache,,1786,164
+,,126,west2618,{},64.3486,-96.148,North America,,Western Canadian Inuktitut,,1787,116
+,,128,west2632,{},34.9733,-107.517,North America,,Western Keres,,1788,161
+,,42,west2635,{},15.5932,-91.8421,North America,,Akateko,,1789,178
+,,7,west2763,{},33.8162,36.484,Eurasia,,Western Neo-Aramaic,,1790,149
+,,4,west2778,{},22.6,-104.9,North America,,Western Durango Nahuatl,,1791,131
+,,1,whit1269,{},-19.5019,169.381,Papunesia,,Whitesands,,1792,167
+,,20,wikm1247,{},-13.98051,141.81611,Australia,,Wik-Mungkan,,1793,134
+,,10,wila1240,{},-14.9105,126.6,Australia,,Wilawila,,1794,136
+,,10,winj1235,{},-15.355178,124.539184,Australia,,Winjarumi,,1795,127
+,,144,wint1259,{},39.7176,-122.445,North America,,Wintu,,1796,159
+,,20,wira1262,{},-34.0742,145.994,Australia,,Wiradhuri,,1797,16
+,,20,wira1265,{},-32.0,134.0,Australia,,Wirangu,,1798,78
+,,246,wiru1244,{},-6.35863,144.214,Papunesia,,Wiru,,1799,180
+,,1,woii1237,{},-1.62746,135.484,Papunesia,,Woi,,1800,191
+,,20,woiw1237,{},-37.64264501,145.5879962,Australia,,Woiwurrung-Thagungwurrung,,1801,49
+,,24,wola1242,{},6.32668,37.7537,Africa,,Wolaytta,,1802,193
+,,7,wola1253,{},8.23,38.14,Africa,,Wolane,,1803,165
+,,1,wole1240,{},7.37957,143.916,Papunesia,,Woleaian,,1804,145
+,,10,woly1239,{},-15.557223,126.22155,Australia,,Wolyamidi,,1805,137
+,,81,wood1236,{},57.0,-99.0,North America,,Woods Cree,,1806,162
+,,10,worr1237,{},-15.612781,124.881218,Australia,,Worrorra,,1807,151
+,,11,woun1238,{},8.5,-78.0,South America,,Woun Meu,,1808,147
+,,23,wuch1236,{},29.8621,119.682,Eurasia,,Wu Chinese,,1809,193
+,,10,wuna1249,{},-14.8347,125.72,Australia,,Wunambal,,1810,143
+,,10,wurl1240,{},-16.15,127.52,Australia,,Wurla,,1811,137
+,,23,wusa1235,{},25.7707,102.367,Eurasia,,Wusa Nasu,,1812,192
+,,23,wutu1241,{},35.269,101.957,Eurasia,,Wutunhua,,1813,195
+,,1,wuvu1239,{},-1.73938,142.851,Papunesia,,Wuvulu-Aua,,1814,151
+,,138,wyan1247,{},44.33,-77.5,North America,,Huron-Wyandot,,1815,111
+,,7,xamt1239,{},12.4479,38.8352,Africa,,Xamtanga,,1816,189
+,,1,xara1244,{},-21.7034,165.996,Papunesia,,Xârâcùù,,1817,189
+,,32,xava1240,{},-14.3017,-52.4367,South America,,Xavánte,,1818,163
+,,100,xinc1242,{},14.083301,-90.380259,North America,,Xinca-Chiquimulilla,,1819,162
+,,100,xinc1243,{},14.194497,-89.790974,North America,,Xinca-Yupiltepeque,,1820,154
+,,100,xinc1246,{},14.069981,-90.416651,North America,,Xinca-Guazacapan,,1821,161
+,,100,xink1235,{},14.341898,-90.256519,North America,,Xinka-Jumaytepeque,,1822,150
+,,23,xish1235,{},24.8709,100.711,Eurasia,,Xishanba Lalo,,1823,173
+,,32,xokl1240,{},-26.9217,-49.5886,South America,,Xokleng,,1824,150
+,,7,yaak1241,{},0.46863,37.1008,Africa,,Yaaku,,1825,177
+,,1,yabe1254,{},-6.67052,147.81,Papunesia,,Yabem,,1826,95
+,,3,yaey1239,{},24.3401,123.801,Eurasia,,Yaeyama,,1827,155
+,,36,yaga1260,{},-6.32432,145.388,Papunesia,,Yagaria,,1828,83
+,,118,yagu1244,{},-3.42913,-72.2186,South America,,Yagua,,1829,63
+,,9,yaka1272,{},3.6515,17.2713,Africa,,Yaka (Central African Republic),,1830,140
+,,1,yaka1277,{},6.531023,122.021729,Papunesia,,Yakan,,1831,178
+,,23,yakk1236,{},27.3714,87.9306,Eurasia,,Yakkha,,1832,160
+,,84,yaku1245,{},61.6974,133.98,Eurasia,,Sakha,,1833,190
+,,20,yala1262,{},-21.731,139.511,Australia,,Yalarnnga,,1834,54
+,,257,yale1246,{},-3.79762,141.566,Papunesia,,Yale,,1835,173
+,,276,yama1264,{},-55.2748,-68.2648,South America,,Yámana,,1836,136
+,,23,yamp1242,{},27.6322,87.0441,Eurasia,,Yamphu,,1837,140
+,,20,yand1253,{},-28.4744,140.583,Australia,,Yandruwandha,,1838,70
+,,25,yane1238,{},-10.5454,-75.315,South America,,Yanesha',,1839,88
+,,20,yank1247,{},-26.4064,133.577,Australia,,Yankunytjatjara,,1840,79
+,,130,yano1261,{},1.67967,-64.8781,South America,,Yanomamö,,1841,172
+,,130,yano1262,{},2.48999,-62.8522,South America,,Yanomám,,1842,77
+,,20,yany1243,{},-15.7621,136.055,Australia,,Yanyuwa,,1843,90
+,,76,yaou1238,{},6.95282,-5.57851,Africa,,Yaouré,,1844,71
+,,1,yape1248,{},9.55811,138.125,Papunesia,,Yapese,,1845,170
+,,56,yapu1240,{},-3.47256,142.436,Papunesia,,Yeri,,1846,163
+,,4,yaqu1251,{},29.9446,-110.681,North America,,Yaqui,,1847,162
+,,162,yare1248,{},-9.50651,148.605,Papunesia,,Yareba,,1848,159
+,,166,yaul1241,{},-4.39912,143.993,Papunesia,,Ulwa (Papua New Guinea),,1849,188
+,,36,yaum1237,{},-6.08274,146.841,Papunesia,,Yau (Morobe Province),,1850,181
+,,25,yavi1244,{},2.800281,-68.084219,South America,,Yavitero,,1851,91
+,,25,yawa1261,{},-12.5104,-53.4236,South America,,Yawalapití,,1852,58
+,,66,yawu1244,{},-18.004,122.693,Australia,,Yawuru,,1853,12
+,,20,yayg1236,{},-29.686722970453,153.18784362556,Australia,,Yaygir,,1854,154
+,,14,yecu1235,{},20.1765,-96.8741,North America,,Yecuatla Totonac,,1855,172
+,,215,yele1255,{},-11.3796,154.127,Papunesia,,Yele,,1856,101
+,,24,yems1235,{},7.79821,37.4412,Africa,,Yemsa,,1857,182
+,,6,yess1239,{},-4.15721,142.574,Papunesia,,Yessan-Mayo,,1858,92
+,,9,yeyi1239,{},-18.9178,23.6088,Africa,,Yeyi,,1859,101
+,,20,yidi1250,{},-17.1332,145.876,Australia,,Yidiñ,,1860,156
+,,154,yima1243,{},-4.71731,143.572,Papunesia,,Yimas,,1861,100
+,,20,yind1247,{},-21.5379,117.001,Australia,,Yindjibarndi,,1862,79
+,,20,yind1248,{},-19.24252,137.5894,Australia,,Yindjilandji,,1863,47
+,,25,yine1238,{},-11.1086,-73.3087,South America,,Yine,,1864,55
+,,20,ying1247,{},-25.4446,115.58,Australia,,Yinggarda,,1865,77
+,,142,yoku1256,{},36.3167,-119.721,North America,,Northern Yokuts,,1866,173
+,,3,yona1241,{},24.45,122.991,Eurasia,,Yonaguni,,1867,164
+,,23,yong1270,{},27.8,100.9,Eurasia,,Narua,,1868,160
+,,8,yong1276,{},23.1,108.15,Eurasia,,Yongbei Zhuang,,1869,102
+,,36,yong1280,{},-6.42956,141.213,Papunesia,,Yonggom,,1870,177
+,,20,yort1237,{},-35.9,145.01,Australia,,Yorta Yorta,,1871,65
+,,69,youn1235,{},25.7638,110.474,Eurasia,,Younuo Bunu,,1872,194
+,,42,yuca1254,{},18.7757,-88.9567,North America,,Yucatec Maya,,1873,189
+,,234,yuch1247,{},35.75,-86.75,North America,,Yuchi,,1874,175
+,,25,yucu1253,{},-0.76075,-71.0033,South America,,Yucuna,,1875,93
+,,23,yuec1235,{},23.0,113.0,Eurasia,,Yue Chinese,,1876,181
+,,127,yuki1243,{},39.8389,-123.296,North America,,Northern Yukian,,1877,175
+,,16,yukp1241,{},9.67534,-73.0557,South America,,Yukpa,,1878,106
+,,20,yulp1239,{},-18.923519,122.370316,Australia,,Yulparija,,1879,74
+,,12,yulu1243,{},8.04124,23.6166,Africa,,Yulu,,1880,148
+,,31,yuqu1240,{},-16.7875,-64.9438,South America,,Yuqui,,1881,153
+,,218,yura1255,{},-16.7479,-65.1224,South America,,Yuracaré,,1882,177
+,,81,yuro1248,{},41.3262,-123.824,North America,,Yurok,,1883,153
+,,20,yuwa1242,{},-29.758184,147.923684,Australia,,Yuwaalaraay,,1884,83
+,,1,zaba1237,{},-7.74311,158.753,Papunesia,,Zabana,,1885,163
+,,4,zaca1241,{},20.0581,-97.8974,North America,,Zacatlán-Ahuacatlán-Tepetzintla Nahuatl,,1886,164
+,,110,zagh1240,{},17.4842,23.4626,Africa,,Beria,,1887,183
+,,23,zaiw1241,{},24.1726,98.3643,Eurasia,,Zaiwa,,1888,174
+,,23,zakh1243,{},28.129,97.022,Eurasia,,Zakhring,,1889,111
+,,9,zand1248,{},4.62047,26.7157,Africa,,Zande,,1890,109
+,,19,zani1235,{},16.6804,-97.2876,North America,,Zaniza Zapotec,,1891,162
+,,178,zapa1253,{},-1.99871,-76.364,South America,,Záparo,,1892,144
+,,44,zarm1239,{},12.8554,2.41173,Africa,,Zarma-Kaado,,1893,190
+,,23,zaye1235,{},20.16,96.908,Eurasia,,Lahta-Zayein Karen,,1894,193
+,,24,zays1235,{},5.83747,37.3409,Africa,,Zayse-Zergulla,,1895,171
+,,23,zeme1240,{},25.3499,93.6463,Eurasia,,Zeme Naga,,1896,163
+,,7,zulg1242,{},10.827,14.0578,Africa,,Zulgo-Gemzek,,1897,133
+,,9,zulu1248,{},-28.9,30.2,Africa,,Zulu,,1898,43
+,,302,zuni1245,{},35.0056,-108.782,North America,,Zuni,,1899,156

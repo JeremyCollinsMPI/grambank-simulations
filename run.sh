@@ -1,0 +1,1 @@
+docker run -it --rm --name grambank -v $PWD:/src jeremycollinsmpi/grambank /bin/bash
