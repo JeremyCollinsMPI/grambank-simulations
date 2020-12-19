@@ -195,17 +195,17 @@ def readTreeFromFile(fileName):
 	tree = eval(file)
 	return tree
 
-def find_glottocode(node_name):
+def find_glottocode(node):
   '''
   example:
     'Itutang-Inapang [inap1241][mzu]-l-':1
   
   '''
-  
+  node_name = findNodeNameWithoutStructure(node)
   glottocode = node_name.split('[')[1].split(']')[0]
   return glottocode
 
-def label_nodes_that_do_not_have_descendents_in_a_list(tree, list_of_languages):
-  '''
-  
-  '''
+# def label_nodes_that_do_not_have_descendents_in_a_list(tree, list_of_languages):
+#   '''
+#   
+#   '''
