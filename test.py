@@ -227,7 +227,7 @@ def test9():
   how do you select random branches?
   you select the parent node, since that also has the branch length information.
   
-  so it is simply selecting a non-terminal node.
+  so it is simply selecting a non-terminal node [actually it could also be a terminal node?]
   
   you want to choose some donor nodes; you then find their donees;
   so you're making a dictionary of donors as keys and donees as values. or a list of lists.
@@ -293,6 +293,8 @@ def test9():
     
     you also want to make a list called donees.  this can be done with make_donees(contact_events).
   
+  
+  
   '''
 
 
@@ -300,7 +302,18 @@ def test9():
   trees = open('trees.txt').readlines()
   trees = make_trees()
   locations = get_locations(trees)
-  print(locations)
+  nodes_to_tree_dictionary = make_nodes_to_tree_dictionary(trees)
+  reconstructed_locations_dictionary = make_reconstructed_locations_dictionary(trees, locations, nodes_to_tree_dictionary)
+  time_depths_dictionary = make_time_depths_dictionary(trees)
+  parent_dictionary = make_parent_dictionary(trees)
+  contemporary_neighbour_dictionary = make_contemporary_neighbour_dictionary(trees, reconstructed_locations_dictionary, time_depths_dictionary, parent_dictionary)
+  potential_donors = make_potential_donors(reconstructed_locations_dictionary, time_depths_dictionary)
+  contact_events, donees = make_contact_events(potential_donors, contemporary_neighbour_dictionary, time_depths_dictionary)
+  print(contact_events)
+  print(donees)
+  
+
+
 #   reconstructed_locations_dictionary = make_reconstructed_locations_dictionary(trees, locations)
 #   time_depths_dictionary = make_time_depths_dictionary(trees)
 #   contemporary_neighbours_dictionary = make_contemporary_neighbour_dictionary(trees, reconstructed_locations_dictionary, time_depths_dictionary)

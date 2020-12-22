@@ -9,6 +9,18 @@ import json
 
 dir = os.listdir('.')
 
+def find_parent(node, parent_dictionary):
+  try:
+    parent = parent_dictionary[node]
+    return parent
+  except:
+    return None
+
+def prepare_node_name(node):
+  '''used to be findNodeName, will now just return node'''
+  return node
+#   return findNodeName(node)
+
 def make_trees():
   trees = open('trees.txt','r').readlines()
   for i in range(len(trees)):
@@ -19,18 +31,14 @@ def make_trees():
   return trees
 
 def make_nodes_to_tree_dictionary(trees):
-  '''
-  dictionary with node names as keys and an index as value; the index can be used to find the tree
-  for 
-  '''
-  
   if 'nodes_to_tree_dictionary.json' in dir:
     return json.load(open('nodes_to_tree_dictionary.json', 'r'))
   nodes_to_tree_dictionary = {}
   for i in range(len(trees)):
-    for key in tree[i].keys():
-      node_name = findNodeNameWithoutStructure(key)
-      nodes_to_tree_dictionary[node_name] == i
+    tree = trees[i]
+    for key in tree.keys():
+      node_name = prepare_node_name(key)
+      nodes_to_tree_dictionary[node_name] = i
   json.dump(nodes_to_tree_dictionary, open('nodes_to_tree_dictionary.json', 'w'), indent=4)
   return nodes_to_tree_dictionary
 
@@ -70,16 +78,38 @@ def get_locations(trees):
     for key in tree.keys():
       print(key)
       glottocode = find_glottocode(key)
+      nodename = prepare_node_name(key)
       if glottocode in df.index:
         lat = df['latitude'][glottocode]
         long = df['longitude'][glottocode]
         if not lat == None and not long == None:
-          locations[key] = {'lat': lat, 'long': long}
-          print(locations[key])
+          locations[nodename] = {'lat': lat, 'long': long}
   json.dump(locations, open('locations.json', 'w'), indent=4)
   return locations
+
+def process_longs_part_1(longs):
+  '''
+  any long below -30 should be transformed.
   
-def make_reconstructed_locations_dictionary(trees, locations):
+  '''
+
+  for i in range(len(longs)):
+    long = longs[i]
+    if long < -30:
+      long = 360 - long
+      longs[i] = long
+  return longs
+
+def process_longs_part_2(long):
+  '''
+  transform the long back
+  '''
+  if long > 180:
+    long = (180 - (long - 180)) * -1
+  return long
+  
+    
+def make_reconstructed_locations_dictionary(trees, locations, nodes_to_tree_dictionary):
 
   '''
   this uses locations at the tips;
@@ -164,103 +194,300 @@ def make_reconstructed_locations_dictionary(trees, locations):
   
   reconstructed_locations_dictionary = {}
   nodes_to_check = []
-  for tree in trees.keys():
-    glottocode = find_glottocode(key)
-    nodename = key 
-    reconstructed_locations_dictionary[nodename] = None
-    try:
-      location = locations[glottocode]
-      reconstructed_locations_dictionary[nodename] = location
-      nodes_to_check.append(nodename)
+  for tree in trees:
+    for key in tree.keys():
+      nodename = prepare_node_name(key) 
+      reconstructed_locations_dictionary[nodename] = None
+      try:
+        location = locations[nodename]
+        reconstructed_locations_dictionary[nodename] = location
+        nodes_to_check.append(nodename)
         # location should be a dictionary of lat and long
-    except:
-      pass
+      except:
+        pass
   done = False
+  print('***')
+  print(nodes_to_check)
   while not done:
     node = nodes_to_check[0]
+#     print('node', node)
     nodename = node
     tree_index = nodes_to_tree_dictionary[nodename]
     tree = trees[tree_index]
     try:
       parent = findParent(tree, nodename)
       children = findChildren(parent)
+#       print('children: ', children)
       siblings = [x for x in children if not x == node]
       children_locations = []
-      try:
-        for child in children:
-          children_locations.append(locations[child])
-      except:
-        pass
-      average_lat = np.mean([child_location['lat'] for child_location in children_locations])
-      average_long = np.mean([child_location['long'] for child_location in children_locations])
+
+      for child in children:
+        try:
+          children_locations.append(locations[prepare_node_name(child)])
+        except:
+          pass
+      lats = [child_location['lat'] for child_location in children_locations]
+      longs = [child_location['long'] for child_location in children_locations]
+
+      '''
+      also need to process the longitudes;
+      you need to make anything negative into something + 180.
+      
+      '''
+      
+      longs = process_longs_part_1(longs)
+      
+      
+      average_lat = np.mean(lats)
+      average_long = np.mean(longs)
+      average_long = process_longs_part_2(average_long)
       for sibling in siblings:
         reconstructed_locations_dictionary[sibling] = locations[sibling]
       reconstructed_locations_dictionary[parent] = {'lat': average_lat, 'long': average_long}
       nodes_to_check.remove(nodes_to_check[0])
       for sibling in siblings:
         nodes_to_check.remove(sibling)
+#         print('removing sibling ', sibling)
       nodes_to_check.append(parent)
+#       print('removing parent ', parent)
     except:
       pass
+#     print(node)
     nodes_to_check.remove(node)
     if len(nodes_to_check) == 0:
       done = True      
   json.dump(reconstructed_locations_dictionary, open('reconstructed_locations_dictionary.json', 'w'), indent=4)
   return reconstructed_locations_dictionary
 
+
+def add_node_to_time_depths_dictionary(node, time_depths_dictionary, current_time_depth):
+  time_depths_dictionary[node] = current_time_depth
+  children = findChildren(node)
+  for child in children:
+    branch_length = findBranchLength(child)
+    new_time_depth = current_time_depth + branch_length
+    add_node_to_time_depths_dictionary(child, time_depths_dictionary, new_time_depth)
+  return time_depths_dictionary
   
-# def make_time_depths_dictionary(trees):
-#   if 'time_depths_dictionary.json' in dir:
-#     return json.load(open('time_depths_dictionary.json', 'r'))
-#   
-#   json.dump(time_depths_dictionary, open('time_depths_dictionary.json', 'w'), indent=4)
-#   return time_depths_dictionary
-#   
-# def make_contemporary_neighbour_dictionary(trees, reconstructed_locations_dictionary, time_depths_dictionary):
-#   ...
-#   '''
-#    you randomly select branches from the trees.  you also need to select a random time along that branch
-#   you then use the parent's value, and you assign it to a neighbouring node that is younger than the time that you have selected
-#   
-#   so it would be good if the contemporary nodes dictionary also has the time depth 
-#   '''
-#   if 'contemporary_neighbour_dictionary.json' in dir:
-#     return json.load(open('contemporary_neighbour_dictionary.json', 'r'))
-#   
-#   json.dump(contemporary_neighbour_dictionary, open('contemporary_neighbour_dictionary.json', 'w'), indent=4)
-#   return contemporary_neighbour_dictionary
-#  
-# 
-# 
-# def make_potential_donors(trees):
-#   ...
-#   '''
-#   array of node names and an array of probabilities.
-#   could return this as a dictionary, with keys 'node_names' and 'probabilities'
-#   '''
-#   
-#   if 'potential_donors.json' in dir:
-#     return json.load(open('potential_donors.json', 'r'))
-#   
-#   json.dump(potential_donors, open('potential_donors.json', 'w'), indent=4)
-#   return potential_donors
-# 
-#   
-# 
-# 
-# def make_contact_events(potential_donors, contemporary_neighbour_dictionary, ...):
-#   '''
-#   an array of dictionaries. this doesn't need to be stored since it is generated in each simulation
-#   '''
-#   contact_events = None
-#   return contact_events  
-# 
-# def make_donees(contact_events):
-#   '''
-#   probably just an array.  
-#   '''
-#   donees = None
-#   return donees
+  
+def make_time_depths_dictionary(trees):
+  if 'time_depths_dictionary.json' in dir:
+    return json.load(open('time_depths_dictionary.json', 'r'))
+  '''
+  for tree in trees, you have to take the tips;
+  maybe just assume the roots of the trees are roughly equally old.  
+  so they all start at 0.  then the more branch lengths you need to get to a node, the later the date.
+  
+  
+  in this case it is easiest to use the full node description, since it uses branch lengths and is easier to handle
+  when finding the children.
+  '''
+  
+  time_depths_dictionary = {}
+  for tree in trees:
+    root = findRoot(tree)
+    root_time_depth = 0
+    time_depths_dictionary = add_node_to_time_depths_dictionary(root, time_depths_dictionary, root_time_depth)
+  json.dump(time_depths_dictionary, open('time_depths_dictionary.json', 'w'), indent=4)
+  return time_depths_dictionary
+
+def make_parent_dictionary(trees):
+  if 'parent_dictionary.json' in dir:
+    return json.load(open('parent_dictionary.json', 'r'))
+  parent_dictionary = {}
+  for tree in trees:
+    for key in tree.keys():
+      children = findChildren(key)
+      for child in children:
+        parent_dictionary[child] = key
+  json.dump(parent_dictionary, open('parent_dictionary.json', 'w'), indent=4)
+  return parent_dictionary
+
+
+
+'''
+haversine(lon1, lat1, lon2, lat2)
+'''
+def neighbouring(A, B, reconstructed_locations_dictionary, distance_threshold=500, lat_limit=10, long_limit=10):
+  A_location = reconstructed_locations_dictionary[A]
+  B_location = reconstructed_locations_dictionary[B]
+  if A_location == None or B_location == None:
+    return False
+  A_lat = A_location['lat']
+  A_long = A_location['long']
+  B_lat = B_location['lat']
+  B_long = B_location['long']
+  if abs(A_lat - B_lat) < lat_limit and abs(A_long-B_long) < long_limit:
+    distance = haversine(A_long, A_lat, B_long, B_lat)
+    if distance < distance_threshold:
+      return True
+    else:  
+      return False
+  else:
+    return False
+
+def is_eldest_node_younger_than_A(B, A, tree, time_depths_dictionary, A_time_depth ,B_time_depth, parent_dictionary):
+  B_parent = find_parent(B, parent_dictionary)
+  B_parent_time_depth = time_depths_dictionary[B_parent]
+  if B_time_depth >= A_time_depth and B_parent_time_depth < A_time_depth:
+    return True
+  return False
+
+def correct_time_depth(A, B, tree, time_depths_dictionary, A_time_depth, parent_dictionary):
+  B_time_depth = time_depths_dictionary[B]
+  A_parent = find_parent(A, parent_dictionary)
+  if A_parent == None:
+    A_parent_time_depth = 0
+  else:
+    A_parent_time_depth = time_depths_dictionary[A_parent]
+  if B_time_depth < A_parent_time_depth:
+    return False
+  if B_time_depth >= A_parent_time_depth and B_time_depth <= A_time_depth:
+    return True
+  if is_eldest_node_younger_than_A(B, A, tree, time_depths_dictionary, A_time_depth, B_time_depth, parent_dictionary):
+    return True
+  return False
+
+def find_contemporary_neighbours(node_A, trees, reconstructed_locations_dictionary, time_depths_dictionary, parent_dictionary):
+  '''
+  list of nodes as keys and time depths as values
+  
+  what do you do if the node is the root of the tree?
+  
+  you can just set parent time depth to 0.
+  
+  
+  '''
+  contemporary_neighbours = []
+  for i in range(len(trees)):
+    tree = trees[i]
+    for node_B in tree.keys():
+      if not node_A == node_B:
+        A_time_depth = time_depths_dictionary[node_A]
+        if correct_time_depth(node_A, node_B, tree, time_depths_dictionary, A_time_depth, parent_dictionary):
+          if neighbouring(node_A, node_B, reconstructed_locations_dictionary):
+#           print('yes')
+#           print(node_A)
+#           print(node_B)
+            time_depth = time_depths_dictionary[node_B]
+            contemporary_neighbours.append({node_B: time_depth})
+  return contemporary_neighbours
+
+def make_contemporary_neighbour_dictionary(trees, reconstructed_locations_dictionary, time_depths_dictionary, parent_dictionary):
+
+  '''
+   you randomly select branches from the trees.  you also need to select a random time along that branch
+  you then use the parent's value, and you assign it to a neighbouring node that is younger than the time that you have selected
+  
+  so it would be good if the contemporary nodes dictionary also has the time depth 
+  
+  the idea is to find the neighbours of each node;
+  but you also need to take into account time depth;
+  anything younger than your time depth (i.e. date is greater)
+  but how much younger can it be?
+  needs to be older than your children.
+  
+  
+  need to rethink this.
+  it is actually the branch length between the parent and the node that you are considering.
+  the contact event then happens from the parent node to some other node, with a probability
+  which is affected by the branch length.
+  you need to look up contemporary neighbours of the parent node.
+  so it can't be older than the current node. younger than the parent but not younger than the child.
+  so actually it is not as simple as finding 'contemporary neighbours' of a node;
+  you're looking for neighbours of a branch.
+  
+  so for a node in a tree, contemporary neighbours are defined as:
+  the geographically neigbouring nodes of the PARENT of the node;
+  if the node's time depth > time depth of the parent and < time depth of the node.
+  
+  
+  no, this is not correct.
+  
+  you also need to take into account B's child I think.
+  
+  it is any neighbouring node between the time depth of the parent and the time depth of 
+  the node; but also the eldest geographically neighbouring
+  nodes which are younger than the node.
+  
+  you also want to include the time depth of these neighbouring nodes, in case.
+  
+  
+  so the structure should be { node : list}.  the list will be of memebers {nodename: time depth}.
+  
+  
+  '''
+  if 'contemporary_neighbour_dictionary.json' in dir:
+    return json.load(open('contemporary_neighbour_dictionary.json', 'r'))
+  contemporary_neighbour_dictionary = {}
+  for i in range(len(trees)):
+    print(i)
+    tree = trees[i]
+    for node in tree.keys():
+#       print(node)
+      contemporary_neighbours = find_contemporary_neighbours(node, trees, reconstructed_locations_dictionary, time_depths_dictionary, parent_dictionary)
+      contemporary_neighbour_dictionary[node] = contemporary_neighbours  
+#       print(contemporary_neighbours)
+  json.dump(contemporary_neighbour_dictionary, open('contemporary_neighbour_dictionary.json', 'w'), indent=4)
+  return contemporary_neighbour_dictionary
+ 
+
+
+def make_potential_donors(reconstructed_locations_dictionary, time_depths_dictionary):
+  if 'potential_donors.json' in dir:
+    return json.load(open('potential_donors.json', 'r')) 
+  potential_donors = {'node_names': [], 'probabilities': [], 'time_depths': []}
+  node_names = []
+  branch_lengths = []
+  time_depths = []
+  for item in reconstructed_locations_dictionary.items():
+    if not item[1] == None:
+      node_names.append(item[0])
+      branch_length = findBranchLength(item[0]) 
+      branch_lengths.append(float(branch_length))
+      time_depths.append(time_depths_dictionary[item[0]])
+  together = zip(node_names, branch_lengths, time_depths)
+  together_sorted = sorted(together, key = lambda x:x[2])
+  potential_donors['node_names'] = [x[0] for x in together_sorted]
+  potential_donors['branch_lengths'] = [x[1] for x in together_sorted]
+  potential_donors['time_depths'] = [x[2] for x in together_sorted]
+  json.dump(potential_donors, open('potential_donors.json', 'w'), indent=4)
+  return potential_donors
+
+def make_contact_events(potential_donors, contemporary_neighbour_dictionary, time_depths_dictionary, rate_per_branch_length=0.01):
+  '''
+  an array of dictionaries. this doesn't need to be stored since it is generated in each simulation
+  contact_event['donor'] and contact_event['donee']. 
+  for doing the contact simulation, you need to have the list of donees;
+  you have copies of trees;
+  you assign features to them excluding the donees;
+  then you find the first donee, assign it the value from the donor;
+  to do that you find the donor's name, look up the tree, then tree[donor name] is the value.  
+  find the donee name, look up its tree, then tree[donee name] = value.  
+  the contact events need to be sorted at the end;
+  sorted by what?  by time depth of the donor.
+  '''
+  probabilities = np.array(potential_donors['branch_lengths']) * rate_per_branch_length
+  sample = np.random.random(len(probabilities))
+  sample = np.where(sample < probabilities)[0]
+  donors = np.array(potential_donors['node_names'])[sample]
+  donor_time_depths = np.array(potential_donors['time_depths'])[sample]
+  contact_events = []
+  donees = []
+  for i in range(len(donors)):
+    donor = donors[i]
+    donor_time_depth = donor_time_depths[i]  
+    potential_donees = contemporary_neighbour_dictionary[donor]
+    if len(potential_donees) == 0:
+      print('No neighbours')
+      continue
+    print(potential_donees)
+    print(donor)
+    donee = np.random.choice(potential_donees, 1)[0]
+    donees.append(donee)
+    contact_events.append({'donor': {donor: donor_time_depth}, 'donee': donee})
+  return contact_events, donees
+
 
 def make_node_value(parent_value, branch_length, substitution_matrix, states):
   matrix = fractional_matrix_power(np.array(substitution_matrix), branch_length)
@@ -306,7 +533,6 @@ def make_one_hot(state, states):
   result[index] = 1.0
   return result
   
-
 def get_values_for_tree(tree, substitution_matrix, states, base_frequencies, list_of_languages):
   tree = simulate_data(tree, substitution_matrix, states, base_frequencies)
   if not list_of_languages == None:
