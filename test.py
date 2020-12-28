@@ -307,13 +307,344 @@ def test9():
   time_depths_dictionary = make_time_depths_dictionary(trees)
   parent_dictionary = make_parent_dictionary(trees)
   contemporary_neighbour_dictionary = make_contemporary_neighbour_dictionary(trees, reconstructed_locations_dictionary, time_depths_dictionary, parent_dictionary)
-  potential_donors = make_potential_donors(reconstructed_locations_dictionary, time_depths_dictionary)
-  contact_events, donees = make_contact_events(potential_donors, contemporary_neighbour_dictionary, time_depths_dictionary)
+  potential_donors = make_potential_donors(reconstructed_locations_dictionary, time_depths_dictionary, contemporary_neighbour_dictionary)
+  contact_events, donees = make_contact_events(potential_donors, contemporary_neighbour_dictionary, time_depths_dictionary, rate_per_branch_length_per_pair=0.01)
   print(contact_events)
+  print('*******')
   print(donees)
   
+def test10():
+  trees = make_trees()
+  list_of_languages = get_languages_in_grambank()  
+  substitution_matrix = [[0.95, 0.05], [0.05, 0.95]]
+  states = ['0', '1']
+  base_frequencies = {'0': 1, '1': 0}
+  simulated_feature_array = contact_simulation(trees, list_of_languages, substitution_matrix, states, base_frequencies, rate_per_branch_length_per_pair=0.01, number_of_simulations=10) 
+  print(np.shape(simulated_feature_array))
+
+def test11():
+  trees = make_trees()
+  list_of_languages = get_languages_in_grambank()  
+  number_of_samples = 200
+  number_of_simulations = 10
+  rate_per_branch_length_per_pair = 0.01 
+  if not 'simulated_feature_array.npy' in os.listdir('.'):
+    substitution_matrix = [[0.95, 0.05], [0.05, 0.95]]
+    states = ['0', '1']
+    base_frequencies = {'0': 1, '1': 0}
+    simulated_feature_array = contact_simulation_writing_to_file('simulated_feature_array.npy', trees, list_of_languages, substitution_matrix, states, base_frequencies, rate_per_branch_length_per_pair=rate_per_branch_length_per_pair, number_of_simulations=number_of_simulations) 
+    number_of_languages = np.shape(simulated_feature_array)[1]
+    na_array_1 = np.ones([1, number_of_samples, 1])
+    na_array_2 = np.ones([1, 1, number_of_languages])
+  else:
+    simulated_feature_array = np.load('simulated_feature_array.npy')
+    number_of_languages = np.shape(simulated_feature_array)[1]
+    na_array_1 = np.ones([1, number_of_samples, 1])
+    na_array_2 = np.ones([1, 1, number_of_languages])
+  print(np.shape(simulated_feature_array))
+  sample = np.random.choice(np.arange(0, np.shape(simulated_feature_array)[1]), number_of_samples, replace=False)
+  input = make_input(simulated_feature_array)
+  output = make_output(simulated_feature_array, sample)
+  model = Model(number_of_simulations, number_of_samples, number_of_languages)
+  model.train(input, output, na_array_1, na_array_2)
+
+def test12():
+  trees = make_trees()
+  list_of_languages = get_languages_in_grambank()  
+  number_of_samples = 200
+  number_of_simulations = 30
+  rate_per_branch_length_per_pair = 0.01 
+  if not 'simulated_feature_array_training_001.npy' in os.listdir('.'):
+    substitution_matrix = [[0.95, 0.05], [0.05, 0.95]]
+    states = ['0', '1']
+    base_frequencies = {'0': 1, '1': 0}
+    simulated_feature_array = contact_simulation_writing_to_file('simulated_feature_array_training_001.npy', trees, list_of_languages, substitution_matrix, states, base_frequencies, rate_per_branch_length_per_pair=rate_per_branch_length_per_pair, number_of_simulations=number_of_simulations) 
+    number_of_languages = np.shape(simulated_feature_array)[1]
+    na_array_1 = np.ones([1, number_of_samples, 1])
+    na_array_2 = np.ones([1, 1, number_of_languages])
+  else:
+    simulated_feature_array = np.load('simulated_feature_array_training_001.npy')
+    number_of_languages = np.shape(simulated_feature_array)[1]
+    na_array_1 = np.ones([1, number_of_samples, 1])
+    na_array_2 = np.ones([1, 1, number_of_languages])
+  if not 'simulated_feature_array_test_001.npy' in os.listdir('.'):
+    substitution_matrix = [[0.95, 0.05], [0.05, 0.95]]
+    states = ['0', '1']
+    base_frequencies = {'0': 1, '1': 0}
+    test_001 = contact_simulation_writing_to_file('simulated_feature_array_test_001.npy', trees, list_of_languages, substitution_matrix, states, base_frequencies, rate_per_branch_length_per_pair=0.01, number_of_simulations=number_of_simulations) 
+  else:
+    test_001 = np.load('simulated_feature_array_test_001.npy')
+  if not 'simulated_feature_array_test_002.npy' in os.listdir('.'):
+    substitution_matrix = [[0.95, 0.05], [0.05, 0.95]]
+    states = ['0', '1']
+    base_frequencies = {'0': 1, '1': 0}
+    test_002 = contact_simulation_writing_to_file('simulated_feature_array_test_002.npy', trees, list_of_languages, substitution_matrix, states, base_frequencies, rate_per_branch_length_per_pair=0.02, number_of_simulations=number_of_simulations) 
+  else:
+    test_002 = np.load('simulated_feature_array_test_002.npy')
+  if not 'simulated_feature_array_training_002.npy' in os.listdir('.'):
+    substitution_matrix = [[0.95, 0.05], [0.05, 0.95]]
+    states = ['0', '1']
+    base_frequencies = {'0': 1, '1': 0}
+    training_002 = contact_simulation_writing_to_file('simulated_feature_array_training_002.npy', trees, list_of_languages, substitution_matrix, states, base_frequencies, rate_per_branch_length_per_pair=0.02, number_of_simulations=number_of_simulations) 
+  else:
+    training_002 = np.load('simulated_feature_array_training_002.npy')
+  sample = np.random.choice(np.arange(0, np.shape(simulated_feature_array)[1]), number_of_samples, replace=False)
+  input = make_input(simulated_feature_array)
+  output = make_output(simulated_feature_array, sample)
+  model = Model(number_of_simulations, number_of_samples, number_of_languages)
+  model.train(input, output, na_array_1, na_array_2)
+  test_input = make_input(test_001)
+  test_output = make_output(test_001, sample)
+  test_001_001_loss = model.show_loss(test_input, test_output, na_array_1, na_array_2)
+  test_input = make_input(test_002)
+  test_output = make_output(test_002, sample)
+  test_001_002_loss = model.show_loss(test_input, test_output, na_array_1, na_array_2)
+  input = make_input(training_002)
+  output = make_output(training_002, sample)
+  model.train(input, output, na_array_1, na_array_2)
+  test_input = make_input(test_001)
+  test_output = make_output(test_001, sample)
+  test_002_001_loss = model.show_loss(test_input, test_output, na_array_1, na_array_2)
+  test_input = make_input(test_002)
+  test_output = make_output(test_002, sample)
+  test_002_002_loss = model.show_loss(test_input, test_output, na_array_1, na_array_2)
+  print('001 001 ', test_001_001_loss)
+  print('001 002 ', test_001_002_loss)
+  print('002 001 ', test_002_001_loss)
+  print('002 002 ', test_002_002_loss)
+
+def test13():
+  trees = make_trees()
+  list_of_languages = get_languages_in_grambank()  
+  number_of_samples = 600
+  number_of_simulations = 30
+  rate_per_branch_length_per_pair = 0.01 
+  rate2 = 0.3
+  if not 'simulated_feature_array_training_001.npy' in os.listdir('.'):
+    substitution_matrix = [[0.95, 0.05], [0.05, 0.95]]
+    states = ['0', '1']
+    base_frequencies = {'0': 1, '1': 0}
+    simulated_feature_array = contact_simulation_writing_to_file('simulated_feature_array_training_001.npy', trees, list_of_languages, substitution_matrix, states, base_frequencies, rate_per_branch_length_per_pair=rate_per_branch_length_per_pair, number_of_simulations=number_of_simulations) 
+    number_of_languages = np.shape(simulated_feature_array)[1]
+    na_array_1 = np.ones([1, number_of_samples, 1])
+    na_array_2 = np.ones([1, 1, number_of_languages])
+  else:
+    simulated_feature_array = np.load('simulated_feature_array_training_001.npy')
+    number_of_languages = np.shape(simulated_feature_array)[1]
+    na_array_1 = np.ones([1, number_of_samples, 1])
+    na_array_2 = np.ones([1, 1, number_of_languages])
+  if not 'simulated_feature_array_test_001.npy' in os.listdir('.'):
+    substitution_matrix = [[0.95, 0.05], [0.05, 0.95]]
+    states = ['0', '1']
+    base_frequencies = {'0': 1, '1': 0}
+    test_001 = contact_simulation_writing_to_file('simulated_feature_array_test_001.npy', trees, list_of_languages, substitution_matrix, states, base_frequencies, rate_per_branch_length_per_pair=0.01, number_of_simulations=number_of_simulations) 
+  else:
+    test_001 = np.load('simulated_feature_array_test_001.npy')
+  if not 'simulated_feature_array_test_010.npy' in os.listdir('.'):
+    substitution_matrix = [[0.95, 0.05], [0.05, 0.95]]
+    states = ['0', '1']
+    base_frequencies = {'0': 1, '1': 0}
+    test_002 = contact_simulation_writing_to_file('simulated_feature_array_test_010.npy', trees, list_of_languages, substitution_matrix, states, base_frequencies, rate_per_branch_length_per_pair=rate2, number_of_simulations=number_of_simulations) 
+  else:
+    test_002 = np.load('simulated_feature_array_test_010.npy')
+  if not 'simulated_feature_array_training_010.npy' in os.listdir('.'):
+    substitution_matrix = [[0.95, 0.05], [0.05, 0.95]]
+    states = ['0', '1']
+    base_frequencies = {'0': 1, '1': 0}
+    training_002 = contact_simulation_writing_to_file('simulated_feature_array_training_010.npy', trees, list_of_languages, substitution_matrix, states, base_frequencies, rate_per_branch_length_per_pair=rate2, number_of_simulations=number_of_simulations) 
+  else:
+    training_002 = np.load('simulated_feature_array_training_010.npy')
+  sample = np.random.choice(np.arange(0, np.shape(simulated_feature_array)[1]), number_of_samples, replace=False)
+  input = make_input(simulated_feature_array)
+  output = make_output(simulated_feature_array, sample)
+  model = Model(number_of_simulations, number_of_samples, number_of_languages)
+  model.train(input, output, na_array_1, na_array_2)
+  test_input = make_input(test_001)
+  test_output = make_output(test_001, sample)
+  test_001_001_loss = model.show_loss(test_input, test_output, na_array_1, na_array_2)
+  test_input = make_input(test_002)
+  test_output = make_output(test_002, sample)
+  test_001_002_loss = model.show_loss(test_input, test_output, na_array_1, na_array_2)
+  input = make_input(training_002)
+  output = make_output(training_002, sample)
+  model.train(input, output, na_array_1, na_array_2)
+  test_input = make_input(test_001)
+  test_output = make_output(test_001, sample)
+  test_002_001_loss = model.show_loss(test_input, test_output, na_array_1, na_array_2)
+  test_input = make_input(test_002)
+  test_output = make_output(test_002, sample)
+  test_002_002_loss = model.show_loss(test_input, test_output, na_array_1, na_array_2)
+  print('001 001 ', test_001_001_loss)
+  print('001 010 ', test_001_002_loss)
+  print('010 001 ', test_002_001_loss)
+  print('010 010 ', test_002_002_loss)
+
+def test14():
+  trees = make_trees()
+  list_of_languages = get_languages_in_grambank()  
+  number_of_samples = 600
+  number_of_simulations = 1
+  rate1 = 0
+  rate2 = 0.3
+  substitution_matrix = [[0.95, 0.05], [0.05, 0.95]]
+  states = ['0', '1']
+  base_frequencies = {'0': 1, '1': 0}
+  contact_simulation_writing_to_file('simulated_feature_array_test_001.npy', trees, list_of_languages, substitution_matrix, states, base_frequencies, rate_per_branch_length_per_pair=rate1, number_of_simulations=number_of_simulations)
+
+def test15():
+  trees = make_trees()
+  list_of_languages = get_languages_in_grambank()  
+  number_of_samples = 900
+  number_of_simulations = 60
+  test_number_of_simulations = 10
+  rate1 = 0.01 
+  rate2 = 0.3
+  substitution_matrix = [[0.95, 0.05], [0.05, 0.95]]
+  states = ['0', '1']
+  base_frequencies = {'0': 0.5, '1': 0.5}
+
+  if not 'simulated_feature_array_training_001.npy' in os.listdir('.'):
+    simulated_feature_array = contact_simulation_writing_to_file('simulated_feature_array_training_001.npy', trees, list_of_languages, substitution_matrix, states, base_frequencies, rate_per_branch_length_per_pair=rate1, number_of_simulations=number_of_simulations) 
+    number_of_languages = np.shape(simulated_feature_array)[1]
+    na_array_1 = np.ones([1, number_of_samples, 1])
+    na_array_2 = np.ones([1, 1, number_of_languages])
+  else:
+    simulated_feature_array = np.load('simulated_feature_array_training_001.npy')
+    number_of_languages = np.shape(simulated_feature_array)[1]
+    na_array_1 = np.ones([1, number_of_samples, 1])
+    na_array_2 = np.ones([1, 1, number_of_languages])
+  if not 'simulated_feature_array_test_001.npy' in os.listdir('.'):
+    test_001 = contact_simulation_writing_to_file('simulated_feature_array_test_001.npy', trees, list_of_languages, substitution_matrix, states, base_frequencies, rate_per_branch_length_per_pair=rate1, number_of_simulations=test_number_of_simulations) 
+  else:
+    test_001 = np.load('simulated_feature_array_test_001.npy')
+  if not 'simulated_feature_array_test_002.npy' in os.listdir('.'):
+    test_002 = contact_simulation_writing_to_file('simulated_feature_array_test_002.npy', trees, list_of_languages, substitution_matrix, states, base_frequencies, rate_per_branch_length_per_pair=rate2, number_of_simulations=test_number_of_simulations) 
+  else:
+    test_002 = np.load('simulated_feature_array_test_002.npy')
+  if not 'simulated_feature_array_training_002.npy' in os.listdir('.'):
+    training_002 = contact_simulation_writing_to_file('simulated_feature_array_training_002.npy', trees, list_of_languages, substitution_matrix, states, base_frequencies, rate_per_branch_length_per_pair=rate2, number_of_simulations=number_of_simulations) 
+  else:
+    training_002 = np.load('simulated_feature_array_training_002.npy')
+  sample = np.random.choice(np.arange(0, np.shape(simulated_feature_array)[1]), number_of_samples, replace=False)
+  training_001 = simulated_feature_array
+  input = make_input(training_001)
+  output = make_output(training_001, sample)
+  model = Model(number_of_simulations, number_of_samples, number_of_languages)
+  model.train(input, output, na_array_1, na_array_2)
+  weights = model.show_weights()
+  np.save('weights.npy', weights)
+  test_input = make_input(test_001)
+  test_output = make_output(test_001, sample)
+  test_001_001_loss = model.show_loss(test_input, test_output, na_array_1, na_array_2)
+  
+  test_input = make_input(test_002)
+  test_output = make_output(test_002, sample)
+  test_001_002_loss = model.show_loss(test_input, test_output, na_array_1, na_array_2)
+  input = make_input(training_002)
+  output = make_output(training_002, sample)
+  model.train(input, output, na_array_1, na_array_2)
+  test_input = make_input(test_001)
+  test_output = make_output(test_001, sample)
+  test_002_001_loss = model.show_loss(test_input, test_output, na_array_1, na_array_2)
+  test_input = make_input(test_002)
+  test_output = make_output(test_002, sample)
+  test_002_002_loss = model.show_loss(test_input, test_output, na_array_1, na_array_2)
+  print('001 001 ', test_001_001_loss)
+  print('001 002 ', test_001_002_loss)
+  print('002 001 ', test_002_001_loss)
+  print('002 002 ', test_002_002_loss)
 
 
+# test16():
+  '''
+  need a new pipeline.
+  the easiest would be to prepare the average of the closest relatives and the average of 
+  neighbours within 500 km.
+  you have a layer of values for closest relatives, a layer for neighbours, and the intercept.
+  
+  another way would be to prepare an array of genealogical relatedness for the samples,
+  and geographical distance.
+  
+  
+  so the work flow should be;
+  you still produce the simulated feature array.
+  you have samples, which is an array of indeces.
+  you then want to make an array of shape (samples, languages)
+  this array is an array of genealogical distances of each member of the sample to each of the input languages.
+  
+  call this function 
+  make_genealogical_distances_array(trees, samples, 
+  
+  how would i design this workflow from scratch?
+  
+  you have the simulation, where you assign values.  then what?
+  
+  you have the list of tips that are in the simulation.
+  you sample from this list to make the sample of languages.
+  
+  you have a dictionary which is already prepared, which is the genealogical relationships between tips in the list of languages.
+  you also have a dictionary of distances.
+  
+  so you can query these dictionaries when making the genealogical distance and geographical distance arrays.
+  
+  you make an array using trees and the language list; this is the values for the languages for that simulation.
+  you make an array using trees and the sample list; this is the value for the sample.
+  you append these arrays to input and output respectively.
+  
+  you also make the genealogical distance array, which are only needed once and can be broadcast.
+  you have the language list and the sample list; for each language, for each member of the sample, you find
+  the genealogical distance.  you end up with an array of shape (languages, samples)
+  do the same for geographical distance.
+  
+  'unrelated' is one possible value for geographical distance.
+  
+  you need to change these arrays into one hot vectors next.  
+  so it is turned from (languages, samples) to (languages, samples, number of bins)
+  you can do all of this in numpy.
+  
+  then the model loads the input array of shape (None, 1, languages),
+
+
+  weights was previously of shape (1, samples, languages)
+  and you then multiplied element-wise by the input.  
+  
+  
+  in the new method,
+  you have input of (None, 1, languages),
+  then you are trying to make a multiplier of shape (1, samples, languages)
+  you make this by using the relatedness array which is of shape (1, samples, languages, number of bins),
+  multiplied element-wise by relatedness-weights which are of shape (1,1,1,number of bins),
+  then you reduce sum along the last axis, making
+  (1, samples, languages).
+  the same applies to the geographical distances array.
+
+  
+  you multiply this by the input to make
+  relatedness_values of shape (None, samples, languages)
+  geographical_distance_values of shape (None, samples, languages),
+  and the intercept of shape [1]
+
+  you have relateness probability a and distance probability b
+  
+  1 - (1-a)(1-b) is the probability of having a shared value between two languages,
+  if you think of a and b as the probability of having a shared value due to relatedness and due to contact respectively
+  
+  then 1 - that * intercept.
+  
+  
+  
+
+  
+  
+  
+  '''
+
+
+#   contact_simulation_writing_to_file('simulated_feature_array_test_002.npy', trees, list_of_languages, substitution_matrix, states, base_frequencies, rate_per_branch_length_per_pair=rate2, number_of_simulations=number_of_simulations)
+#   array = np.load('simulated_feature_array_test_001.npy')
+#   print(np.sum(array))
+#   array = np.load('simulated_feature_array_test_002.npy')
+#   print(np.sum(array))
 #   reconstructed_locations_dictionary = make_reconstructed_locations_dictionary(trees, locations)
 #   time_depths_dictionary = make_time_depths_dictionary(trees)
 #   contemporary_neighbours_dictionary = make_contemporary_neighbour_dictionary(trees, reconstructed_locations_dictionary, time_depths_dictionary)
@@ -334,7 +665,7 @@ def test9():
 
 
 
-test9()
+test15()
 
 
 

@@ -433,28 +433,31 @@ def make_contemporary_neighbour_dictionary(trees, reconstructed_locations_dictio
  
 
 
-def make_potential_donors(reconstructed_locations_dictionary, time_depths_dictionary):
+def make_potential_donors(reconstructed_locations_dictionary, time_depths_dictionary, contemporary_neighbour_dictionary):
   if 'potential_donors.json' in dir:
     return json.load(open('potential_donors.json', 'r')) 
   potential_donors = {'node_names': [], 'probabilities': [], 'time_depths': []}
   node_names = []
   branch_lengths = []
   time_depths = []
+  number_of_neighbours = []
   for item in reconstructed_locations_dictionary.items():
     if not item[1] == None:
       node_names.append(item[0])
       branch_length = findBranchLength(item[0]) 
       branch_lengths.append(float(branch_length))
       time_depths.append(time_depths_dictionary[item[0]])
-  together = zip(node_names, branch_lengths, time_depths)
+      number_of_neighbours.append(float(len(contemporary_neighbour_dictionary[item[0]])))
+  together = zip(node_names, branch_lengths, time_depths, number_of_neighbours)
   together_sorted = sorted(together, key = lambda x:x[2])
   potential_donors['node_names'] = [x[0] for x in together_sorted]
   potential_donors['branch_lengths'] = [x[1] for x in together_sorted]
   potential_donors['time_depths'] = [x[2] for x in together_sorted]
+  potential_donors['number_of_neighbours'] = [x[3] for x in together_sorted]
   json.dump(potential_donors, open('potential_donors.json', 'w'), indent=4)
   return potential_donors
 
-def make_contact_events(potential_donors, contemporary_neighbour_dictionary, time_depths_dictionary, rate_per_branch_length=0.01):
+def make_contact_events(potential_donors, contemporary_neighbour_dictionary, time_depths_dictionary, rate_per_branch_length_per_pair):
   '''
   an array of dictionaries. this doesn't need to be stored since it is generated in each simulation
   contact_event['donor'] and contact_event['donee']. 
@@ -466,26 +469,68 @@ def make_contact_events(potential_donors, contemporary_neighbour_dictionary, tim
   find the donee name, look up its tree, then tree[donee name] = value.  
   the contact events need to be sorted at the end;
   sorted by what?  by time depth of the donor.
+  
+  actually this needs to be redone.
+  you may want to sample proportional to branch length but also number of neighbours.
+  
+  so you have now rate_per_branch_length_per_pair
+  
+  you need to select the donee with a certain probability too.
+  so you find the donor;
+  then make a random list of length number of neighbours for that node;
+  if any is above the probability for that node, then you have that index using where.
+  look up its neighbours and with that index return the donee.
+  
+  the contact event needs to have a time.  then the contact events need to be sorted by time.
+  time is sampled from the beginning time depth of the lineage to the end time depth.
+  currently it just uses a single value for 'time depth'.
+  the beginning time depth is defined as 0 for a root, and 0 + its branch length.
+  
+  the beginning time depth is given in time depths dictionary, and the end time depth is beginning time depth + branch length
+  
+  
+  
   '''
-  probabilities = np.array(potential_donors['branch_lengths']) * rate_per_branch_length
-  sample = np.random.random(len(probabilities))
-  sample = np.where(sample < probabilities)[0]
-  donors = np.array(potential_donors['node_names'])[sample]
-  donor_time_depths = np.array(potential_donors['time_depths'])[sample]
+  
   contact_events = []
-  donees = []
-  for i in range(len(donors)):
-    donor = donors[i]
-    donor_time_depth = donor_time_depths[i]  
-    potential_donees = contemporary_neighbour_dictionary[donor]
-    if len(potential_donees) == 0:
-      print('No neighbours')
-      continue
-    print(potential_donees)
-    print(donor)
-    donee = np.random.choice(potential_donees, 1)[0]
-    donees.append(donee)
-    contact_events.append({'donor': {donor: donor_time_depth}, 'donee': donee})
+  donees = {}
+  donors = {}
+  together = zip(potential_donors['node_names'], potential_donors['branch_lengths'], potential_donors['time_depths'], potential_donors['number_of_neighbours'])
+  for item in together:
+    donor = item[0]
+    branch_length = item[1]
+    number_of_neighbours = int(item[3])
+    donor_time_depth = item[2]
+    
+    beginning_time_depth = donor_time_depth
+    end_time_depth = beginning_time_depth + branch_length
+    event_time = np.random.random()
+    event_time = branch_length * event_time
+    event_time = event_time + beginning_time_depth
+    
+    
+    probability = rate_per_branch_length_per_pair * branch_length
+    sample = np.random.random(number_of_neighbours)
+#     print(sample)
+    sample = np.where(sample < probability)[0]
+#     print(sample)
+    if len(sample) > 0:    
+      donees_to_add = np.array(contemporary_neighbour_dictionary[donor])[sample]
+#       print('***')
+#       print(donees_to_add)
+#       print(donees)
+#       donees = np.concatenate((donees, donees_to_add))
+      for donee in donees_to_add:
+        contact_events.append({'donor': {donor: donor_time_depth}, 'donee': donee, 'event_time': event_time})
+        donees.update(donee)
+  contact_events = sorted(contact_events, key = lambda x: x['event_time'])
+  donees = {}
+  donors = {}
+  for contact_event in contact_events:
+    donors.update(contact_event['donor'])
+    donee = list(contact_event['donee'].keys())[0]
+    if not donee in donors:
+      donees.update(contact_event['donee'])
   return contact_events, donees
 
 
@@ -517,21 +562,120 @@ def assign_feature(tree, node, parent_value, substitution_matrix, states, base_f
       tree[node] = node_value
   else:
     tree[node] = given_value
+    node_value = given_value
   for child in children:
     if not child in to_exclude:
       tree = assign_feature(tree, child, node_value, substitution_matrix, states, base_frequencies)
   return tree
 
+
+'''
+contact simulation:
+
+you have the trees
+you produce the donees
+for each tree, you assign feature to the root, excluding the donees
+then you go through each contact event; you then assign the given feature to 
+the donee in the donee's tree, excluding the other donees
+you remove that donee (it's always donees[0]).  continue until there are no donees
+left.
+some details that are unresolved:
+how do you deal with one donee for multiple contact events?  you would assign the feature
+to the donee, but that would not be the end of it.  you have to wait
+until you are sure that it is not the donee of another contact event.
+i think another way of doing it though is that you could just re-assign the feature for that
+node, if that happens.  no harm with assigning the features twice.
+one complication is that the donee node will be in the list to_exclude in the function assign_feature.
+but since that only affects the children of that node, that should not be a problem.
+
+
+so now need to sketch the functions
+
+trees, contact events and donees as input, as well as whatever dictionaries you need.
+
+for i in range(len(trees)):
+  tree = trees[i]
+  root = findRoot(tree)
+  trees[i] = assign_feature(...tree, ...)
+
+for contact_event in contact_events:
+  donor = contact_event['donor'].keys()[0]
+  donee = contact_events['donee'].keys()[0]
+  donor_tree_index = nodes_to_tree_dictionary[donor]
+  donee_tree_index = nodes_to_tree_dictionary[donee]
+  donor_value = trees[donor_tree_index][donor]
+  trees[donee_tree_index][donee] = assign_feature(....to_exclude=donees, given_value = donor_value)
+  donees.pop(0)
+  
+then what?
+you have the trees;
+you now need to make into an array.  this could be done by a separate function.
+that could be produce_simulated_feature_array.
+so you could also still use get_values_for_tree, run over the trees.
+except now, get_values_for_tree will only get the values.
+there will be a separate function for contact_simulation, with whatever arguments that needs.
+trees = contact_simulation(trees, ...)
+within that function, you load the dictionaries.
+  
+  
+the idea of donees is to have a list of ones to exclude, to save time.
+but you should only exclude a donee if it is not a donor earlier than it is a donee
+
+
+
+
+
+
+'''
+def contact_simulation(trees, list_of_languages, substitution_matrix, states, base_frequencies, rate_per_branch_length_per_pair, number_of_simulations=1):
+  locations = get_locations(trees)
+  nodes_to_tree_dictionary = make_nodes_to_tree_dictionary(trees)
+  reconstructed_locations_dictionary = make_reconstructed_locations_dictionary(trees, locations, nodes_to_tree_dictionary)
+  time_depths_dictionary = make_time_depths_dictionary(trees)
+  parent_dictionary = make_parent_dictionary(trees)
+  contemporary_neighbour_dictionary = make_contemporary_neighbour_dictionary(trees, reconstructed_locations_dictionary, time_depths_dictionary, parent_dictionary)
+  potential_donors = make_potential_donors(reconstructed_locations_dictionary, time_depths_dictionary, contemporary_neighbour_dictionary)
+  '''
+  first want to make sure that the trees have some UNASSIGNED or None values for each node.
+  or just use a copy of the trees. but it might be slow.
+  '''
+  simulated_feature_array = []
+  for i in range(number_of_simulations):
+    array = []
+    contact_events, donees = make_contact_events(potential_donors, contemporary_neighbour_dictionary, time_depths_dictionary, rate_per_branch_length_per_pair)
+#     json.dump(contact_events, open('contact_events.json', 'w'), indent=4)
+    for i in range(len(trees)):
+      tree = trees[i]
+      root = findRoot(tree)
+      trees[i] = assign_feature(tree, root, parent_value=None, substitution_matrix=substitution_matrix, states=states, base_frequencies=base_frequencies, to_exclude=donees, given_value=None)
+    for contact_event in contact_events:
+      donor = list(contact_event['donor'].keys())[0]
+      donee = list(contact_event['donee'].keys())[0]
+      donor_tree_index = nodes_to_tree_dictionary[donor]
+      donee_tree_index = nodes_to_tree_dictionary[donee]
+      donor_value = trees[donor_tree_index][donor]
+      trees[donee_tree_index] = assign_feature(trees[donee_tree_index], donee, parent_value=None, substitution_matrix=substitution_matrix, states=states, base_frequencies=base_frequencies, to_exclude=donees, given_value=donor_value)
+      if donee in donees:
+        del donees[donee]  
+    if not list_of_languages == None:
+      for tree in trees:
+        keys = tree.keys()
+        sorted_keys = sorted(keys)
+        result = [float(tree[key]) for key in sorted_keys if find_glottocode(findNodeNameWithoutStructure(key)) in list_of_languages]
+        array = array + result
+#     json.dump(trees, open('trees_results.json', 'w'), indent=4)
+    simulated_feature_array = simulated_feature_array + [array]
+  return simulated_feature_array
+  
+def contact_simulation_writing_to_file(filename, trees, list_of_languages, substitution_matrix, states, base_frequencies, rate_per_branch_length_per_pair, number_of_simulations=1):
+  simulated_feature_array = contact_simulation(trees, list_of_languages, substitution_matrix, states, base_frequencies, rate_per_branch_length_per_pair, number_of_simulations)
+  np.save(filename, simulated_feature_array)
+  return simulated_feature_array
+
 def simulate_data(tree, substitution_matrix, states, base_frequencies):
   root = findRoot(tree)
   tree = assign_feature(tree, root, parent_value=None, substitution_matrix=substitution_matrix, states=states, base_frequencies=base_frequencies)
   return tree
-
-def make_one_hot(state, states):
-  index = states.index(state)
-  result = rep(0.0, len(states))
-  result[index] = 1.0
-  return result
   
 def get_values_for_tree(tree, substitution_matrix, states, base_frequencies, list_of_languages):
   tree = simulate_data(tree, substitution_matrix, states, base_frequencies)

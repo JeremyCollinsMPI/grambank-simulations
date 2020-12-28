@@ -10,6 +10,40 @@ class Model():
   learn_rate = 0.01
 
   def __init__(self, number_of_simulations, number_of_samples, number_of_languages):
+
+    '''
+    what is the structure supposed to be?
+    
+    you have the input, which is shape [None, 1, languages]
+    
+    you have a weight for each member of the sample for each member in languages
+    
+    so something like [1, samples, languages]
+    
+    so then multiplying element wise gives
+    
+    [None, samples, languages]
+    
+    you then need to reduce it; or do you?
+    you are simply comparing the prediction for each pair after adding the intercept.
+    
+    so the final output should be of shape
+    
+    [None, samples, languages]
+    
+    in practice the shape of actual is [None, samples, 1] and it can be broadcast I think
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    '''
+
+
     self.sess = tf.Session()
 
     self.input = tf.placeholder(tf.float32, [None, 1, number_of_languages])
@@ -19,7 +53,7 @@ class Model():
     self.output = tf.placeholder(tf.float32, [None, number_of_samples, 1])
 #     self.output_2 = tf.broadcast_to(self.output, [number_of_simulations, number_of_samples, number_of_languages])
   
-    self.weights = tf.get_variable(name='weights', dtype = tf.float32, shape = [1, 1, number_of_languages],  initializer=tf.truncated_normal_initializer(mean=0.5, stddev=0.01))
+    self.weights = tf.get_variable(name='weights', dtype = tf.float32, shape = [1, number_of_samples, number_of_languages],  initializer=tf.truncated_normal_initializer(mean=0.5, stddev=0.01))
     self.intercept = tf.get_variable(name='intercept', dtype = tf.float32, shape = [1],  initializer=tf.truncated_normal_initializer(mean=0.5, stddev=0.01))
     
     self.prediction = (self.input * self.weights) + (self.intercept * (1 - self.weights))
@@ -35,7 +69,6 @@ class Model():
     self.total_loss = tf.reduce_mean(self.loss) * -1.0
 
   def train(self, input_array, output_array, na_array_1, na_array_2, steps=200):
-    learn_rate = 0.001
     self.train_step = tf.train.AdamOptimizer(self.learn_rate).minimize(self.total_loss) 
     self.clip_op_1 = tf.assign(self.weights, tf.clip_by_value(self.weights, 0, 0.99))
     self.clip_op_2 = tf.assign(self.intercept, tf.clip_by_value(self.intercept, 0.01, 0.99))
@@ -54,7 +87,8 @@ class Model():
     
   def show_loss(self, input_array, output_array, na_array_1, na_array_2):
     self.feed = {self.input: input_array, self.output: output_array, self.na_array_1: na_array_1, self.na_array_2: na_array_2}
-    loss = self.sess.run(self.total_loss, feed_dict=self.feed)
+#     loss = self.sess.run(self.total_loss, feed_dict=self.feed)
+    loss = self.sess.run(tf.reduce_mean(tf.reduce_mean(self.loss, axis=2), axis=1), feed_dict=self.feed)
     print(loss)
     return loss
 
@@ -62,6 +96,11 @@ class Model():
     intercept = self.sess.run(self.intercept)
     print('Intercept: ', intercept)
     return intercept
+  
+  def show_weights(self):
+    weights = self.sess.run(self.weights)
+    print('Weights: ', weights)
+    return weights
 
 class Autoencoder:  
   learn_rate = 0.01
