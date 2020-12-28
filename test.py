@@ -555,7 +555,29 @@ def test15():
   print('002 002 ', test_002_002_loss)
 
 
-# test16():
+def test_two_models(borrowing_rate_1, borrowing_rate_2):
+  trees = make_trees()
+  list_of_languages = get_languages_in_grambank()  
+  number_of_samples = 900
+  number_of_simulations = 10
+  test_number_of_simulations = 10
+  rate1 = borrowing_rate_1
+  rate2 = borrowing_rate_2
+  substitution_matrix = [[0.95, 0.05], [0.05, 0.95]]
+  states = ['0', '1']
+  base_frequencies = {'0': 0.5, '1': 0.5}
+  training_inputs = {}
+  if not 'training_input_' + str(rate_1).replace('.', '_') + '.npy' in os.listdir('.'):
+    training_inputs[str(rate_1)] = contact_simulation
+    ''' etc. ''' 
+
+def test16():
+  rate1 = 0.01
+  rate2 = 0.1
+#   test_two_models(rate1, rate2)
+
+
+
   '''
   need a new pipeline.
   the easiest would be to prepare the average of the closest relatives and the average of 
@@ -632,13 +654,17 @@ def test15():
   then 1 - that * intercept.
   
   
-  
+  besides that, I would like the pipeline to make it easy to store training and test data, without having to write out the steps
+  make a function along the lines of 
+  test_two_models(borrowing_rate_1, borrowing_rate_2).
+  you could make this as a test function.
 
   
   
   
   '''
 
+test16()
 
 #   contact_simulation_writing_to_file('simulated_feature_array_test_002.npy', trees, list_of_languages, substitution_matrix, states, base_frequencies, rate_per_branch_length_per_pair=rate2, number_of_simulations=number_of_simulations)
 #   array = np.load('simulated_feature_array_test_001.npy')
@@ -665,7 +691,7 @@ def test15():
 
 
 
-test15()
+
 
 
 
