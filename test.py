@@ -559,22 +559,55 @@ def test_two_models(borrowing_rate_1, borrowing_rate_2):
   trees = make_trees()
   list_of_languages = get_languages_in_grambank()  
   number_of_samples = 900
-  number_of_simulations = 10
-  test_number_of_simulations = 10
+  sample = np.random.choice(np.array(list_of_languages), number_of_samples, replace=False)
+  number_of_simulations = 1
   rate1 = borrowing_rate_1
   rate2 = borrowing_rate_2
   substitution_matrix = [[0.95, 0.05], [0.05, 0.95]]
   states = ['0', '1']
-  base_frequencies = {'0': 0.5, '1': 0.5}
-  training_inputs = {}
-  if not 'training_input_' + str(rate_1).replace('.', '_') + '.npy' in os.listdir('.'):
-    training_inputs[str(rate_1)] = contact_simulation
-    ''' etc. ''' 
+  base_frequencies = {'0': 1, '1': 0}
+#   input_array, output_array = make_input_and_output_arrays(trees, list_of_languages, sample, substitution_matrix, states, base_frequencies, rate1, number_of_simulations)
+#   print(np.shape(input_array))
+  locations = get_locations(trees)
+  nodes_to_tree_dictionary = make_nodes_to_tree_dictionary(trees)
+  reconstructed_locations_dictionary = make_reconstructed_locations_dictionary(trees, locations, nodes_to_tree_dictionary)
+#   time_depths_dictionary = make_time_depths_dictionary(trees)
+#   parent_dictionary = make_parent_dictionary(trees)
+#   contemporary_neighbour_dictionary = make_contemporary_neighbour_dictionary(trees, reconstructed_locations_dictionary, time_depths_dictionary, parent_dictionary)
+#   potential_donors = make_potential_donors(reconstructed_locations_dictionary, time_depths_dictionary, contemporary_neighbour_dictionary)
+#   trees = contact_simulation(trees, substitution_matrix, states, base_frequencies, rate1, locations, nodes_to_tree_dictionary, reconstructed_locations_dictionary, time_depths_dictionary, parent_dictionary, contemporary_neighbour_dictionary, potential_donors)  
+#   value_dictionary = make_value_dictionary(trees, list_of_languages)
+#   print(value_dictionary)
+#   for item in sample:
+#     print(value_dictionary[item])
+
+#   training_inputs = {}
+#   if not 'training_input_' + str(rate_1).replace('.', '_') + '.npy' in os.listdir('.'):
+#     training_inputs[str(rate_1)] = contact_simulation
+#     ''' etc. ''' 
+
 
 def test16():
   rate1 = 0.01
+  trees = make_trees()
+  list_of_languages = get_languages_in_grambank()  
+  substitution_matrix = [[0.95, 0.05], [0.05, 0.95]]
+  states = ['0', '1']
+  base_frequencies = {'0': 1, '1': 0}
+  locations = get_locations(trees)
+  nodes_to_tree_dictionary = make_nodes_to_tree_dictionary(trees)
+  reconstructed_locations_dictionary = make_reconstructed_locations_dictionary(trees, locations, nodes_to_tree_dictionary)
+  time_depths_dictionary = make_time_depths_dictionary(trees)
+  parent_dictionary = make_parent_dictionary(trees)
+  contemporary_neighbour_dictionary = make_contemporary_neighbour_dictionary(trees, reconstructed_locations_dictionary, time_depths_dictionary, parent_dictionary)
+  potential_donors = make_potential_donors(reconstructed_locations_dictionary, time_depths_dictionary, contemporary_neighbour_dictionary)
+  trees = contact_simulation(trees, substitution_matrix, states, base_frequencies, rate1, locations, nodes_to_tree_dictionary, reconstructed_locations_dictionary, time_depths_dictionary, parent_dictionary, contemporary_neighbour_dictionary, potential_donors)  
+  json.dump(trees, open('tree_result.json', 'w'), indent=4)
+
+def test17():
+  rate1 = 0.01
   rate2 = 0.1
-#   test_two_models(rate1, rate2)
+  test_two_models(rate1, rate2)
 
 
 
@@ -664,7 +697,7 @@ def test16():
   
   '''
 
-test16()
+test17()
 
 #   contact_simulation_writing_to_file('simulated_feature_array_test_002.npy', trees, list_of_languages, substitution_matrix, states, base_frequencies, rate_per_branch_length_per_pair=rate2, number_of_simulations=number_of_simulations)
 #   array = np.load('simulated_feature_array_test_001.npy')
