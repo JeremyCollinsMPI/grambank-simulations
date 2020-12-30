@@ -48,7 +48,6 @@ def get_locations(trees):
   locations = {}
   for tree in trees:
     for key in tree.keys():
-      print(key)
       glottocode = find_glottocode(key)
       nodename = prepare_node_name(key)
       if glottocode in df.index:
@@ -60,24 +59,10 @@ def get_locations(trees):
         if glottocode in df2.index:
           lat = df2['latitude'][glottocode]
           long = df2['longitude'][glottocode]
-          print(lat)
-          print(long)
           if not np.isnan(lat) and not np.isnan(long): 
             locations[nodename] = {'lat': lat, 'long': long}
   json.dump(locations, open('locations.json', 'w'), indent=4)
   return locations
-
-
-'''
-    "'Arapaho [arap1274][arp]-l-':1": {
-        "lat": 43.3879,
-        "long": -108.81
-    },
-    "'Gros Ventre [gros1243][ats]-l-':1": {
-        "lat": 48.4834,
-        "long": -108.738
-    },
-'''
 
 def process_longs_part_1(longs):
   for i in range(len(longs)):
@@ -142,7 +127,6 @@ def make_reconstructed_locations_dictionary(trees, locations, nodes_to_tree_dict
       except:
         pass    
   for i in range(len(trees)):
-    print(i)
     tree = trees[i]
     reconstruct_locations_for_all_nodes(tree, reconstructed_locations_dictionary, locations)
   json.dump(reconstructed_locations_dictionary, open('reconstructed_locations_dictionary.json', 'w'), indent=4)
@@ -251,7 +235,6 @@ def find_contemporary_neighbours(node_A, trees, reconstructed_locations_dictiona
         if correct_time_depth(node_A, node_B, tree, time_depths_dictionary, A_time_depth, parent_dictionary):
           if neighbouring(node_A, node_B, reconstructed_locations_dictionary):
             time_depth = time_depths_dictionary[node_B]
-            print(time_depth)
             contemporary_neighbours.append({node_B: time_depth})
   return contemporary_neighbours
 
@@ -260,7 +243,6 @@ def make_contemporary_neighbour_dictionary(trees, reconstructed_locations_dictio
     return json.load(open('contemporary_neighbour_dictionary.json', 'r'))
   contemporary_neighbour_dictionary = {}
   for i in range(len(trees)):
-    print(i)
     tree = trees[i]
     for node in tree.keys():
       contemporary_neighbours = find_contemporary_neighbours(node, trees, reconstructed_locations_dictionary, time_depths_dictionary, parent_dictionary)
@@ -368,9 +350,6 @@ def contact_simulation(trees, substitution_matrix, states, base_frequencies, rat
     donor_tree_index = nodes_to_tree_dictionary[donor]
     donee_tree_index = nodes_to_tree_dictionary[donee]
     donor_value = trees[donor_tree_index][donor]
-    print('*****')
-    print(donor)
-    print(trees[donor_tree_index])
     if donor in donees:
       print('matey')
     trees[donee_tree_index] = assign_feature(trees[donee_tree_index], donee, parent_value=None, substitution_matrix=substitution_matrix, states=states, base_frequencies=base_frequencies, to_exclude=donees, given_value=donor_value)
