@@ -44,6 +44,7 @@ def get_locations(trees):
   if 'locations.json' in dir:
     return json.load(open('locations.json', 'r'))  
   df = pd.read_csv('Languages.csv', index_col='id')
+  df2 = pd.read_csv('languages_and_dialects_geo.csv', index_col='glottocode')
   locations = {}
   for tree in trees:
     for key in tree.keys():
@@ -55,74 +56,42 @@ def get_locations(trees):
         long = df['longitude'][glottocode]
         if not lat == None and not long == None:
           locations[nodename] = {'lat': lat, 'long': long}
+      else:
+        if glottocode in df2.index:
+          lat = df2['latitude'][glottocode]
+          long = df2['longitude'][glottocode]
+          print(lat)
+          print(long)
+          if not np.isnan(lat) and not np.isnan(long): 
+            locations[nodename] = {'lat': lat, 'long': long}
   json.dump(locations, open('locations.json', 'w'), indent=4)
   return locations
+
+
+'''
+    "'Arapaho [arap1274][arp]-l-':1": {
+        "lat": 43.3879,
+        "long": -108.81
+    },
+    "'Gros Ventre [gros1243][ats]-l-':1": {
+        "lat": 48.4834,
+        "long": -108.738
+    },
+'''
 
 def process_longs_part_1(longs):
   for i in range(len(longs)):
     long = longs[i]
     if long < -30:
-      long = 360 - long
+      long = long + 360
       longs[i] = long
   return longs
 
 def process_longs_part_2(long):
   if long > 180:
-    long = (180 - (long - 180)) * -1
+    long = long - 360
   return long
     
-# def make_reconstructed_locations_dictionary(trees, locations, nodes_to_tree_dictionary):
-#   if 'reconstructed_locations_dictionary.json' in dir:
-#     return json.load(open('reconstructed_locations_dictionary.json', 'r'))  
-#   reconstructed_locations_dictionary = {}
-#   nodes_to_check = []
-#   for tree in trees:
-#     for key in tree.keys():
-#       nodename = prepare_node_name(key) 
-#       reconstructed_locations_dictionary[nodename] = None
-#       try:
-#         location = locations[nodename]
-#         reconstructed_locations_dictionary[nodename] = location
-#         nodes_to_check.append(nodename)
-#       except:
-#         pass
-#   done = False
-#   while not done:   
-#     node = nodes_to_check[0]
-#     print(node)
-#     nodename = node
-#     tree_index = nodes_to_tree_dictionary[nodename]
-#     tree = trees[tree_index]
-#     try:
-#       parent = findParent(tree, nodename)
-#       children = findChildren(parent)
-#       siblings = [x for x in children if not x == node]
-#       children_locations = []
-#       for child in children:
-#         location = reconstructed_locations_dictionary[prepare_node_name(child)]
-#         if not location == None:
-#           children_locations.append(location)
-#       lats = [child_location['lat'] for child_location in children_locations]
-#       longs = [child_location['long'] for child_location in children_locations]
-#       longs = process_longs_part_1(longs)
-#       average_lat = np.mean(lats)
-#       average_long = np.mean(longs)
-#       average_long = process_longs_part_2(average_long)
-# #       for sibling in siblings:
-# #         reconstructed_locations_dictionary[sibling] = locations[sibling]
-#       reconstructed_locations_dictionary[parent] = {'lat': average_lat, 'long': average_long}
-#       nodes_to_check.remove(nodes_to_check[0])
-# #       for sibling in siblings:
-# #         nodes_to_check.remove(sibling)
-#       nodes_to_check.append(parent)
-#     except:
-#       nodes_to_check.remove(node)
-#     if len(nodes_to_check) == 0:
-#       done = True      
-#   json.dump(reconstructed_locations_dictionary, open('reconstructed_locations_dictionary.json', 'w'), indent=4)
-#   return reconstructed_locations_dictionary
-
-
 def reconstruct_location_for_node(tree, node, reconstructed_locations_dictionary, locations):
   children = findChildren(node)
   for child in children:
@@ -236,31 +205,53 @@ def is_eldest_node_younger_than_A(B, A, tree, time_depths_dictionary, A_time_dep
     return True
   return False
 
-def correct_time_depth(A, B, tree, time_depths_dictionary, A_time_depth, parent_dictionary):
-  B_time_depth = time_depths_dictionary[B]
-  A_parent = find_parent(A, parent_dictionary)
-  if A_parent == None:
-    A_parent_time_depth = 0
+def overlapping_range(min1, max1, min2, max2):
+  if min2 <= max1 and min2 >= min1:
+    return True
   else:
-    A_parent_time_depth = time_depths_dictionary[A_parent]
-  if B_time_depth < A_parent_time_depth:
     return False
-  if B_time_depth >= A_parent_time_depth and B_time_depth <= A_time_depth:
+
+def correct_time_depth(A, B, tree, time_depths_dictionary, A_time_depth, parent_dictionary):
+  A_beginning_time_depth = A_time_depth
+  A_branch_length = findBranchLength(A)
+  A_end_time_depth = A_beginning_time_depth + A_branch_length
+  try:
+    B_parent = parent_dictionary[B]
+    B_parent_beginning_time_depth = time_depths_dictionary[B_parent]
+    B_parent_branch_length = findBranchLength(B_parent)
+    B_parent_end_time_depth = B_parent_beginning_time_depth + B_parent_branch_length
+  except:
+    B_parent_beginning_time_depth = 0
+    B_parent_end_time_depth = 0 
+  if overlapping_range(A_beginning_time_depth, A_end_time_depth, B_parent_beginning_time_depth, B_parent_end_time_depth):
     return True
-  if is_eldest_node_younger_than_A(B, A, tree, time_depths_dictionary, A_time_depth, B_time_depth, parent_dictionary):
-    return True
-  return False
+  else:
+    return False
+
+def is_not_parent_or_child(A, B, parent_dictionary):
+  try:
+    if parent_dictionary[A] == B:
+      return False
+  except:
+    pass
+  try:
+    if parent_dictionary[B] == A:
+      return False
+  except:
+    pass
+  return True
 
 def find_contemporary_neighbours(node_A, trees, reconstructed_locations_dictionary, time_depths_dictionary, parent_dictionary):
   contemporary_neighbours = []
   for i in range(len(trees)):
     tree = trees[i]
     for node_B in tree.keys():
-      if not node_A == node_B:
+      if not node_A == node_B and is_not_parent_or_child(node_A, node_B, parent_dictionary):
         A_time_depth = time_depths_dictionary[node_A]
         if correct_time_depth(node_A, node_B, tree, time_depths_dictionary, A_time_depth, parent_dictionary):
           if neighbouring(node_A, node_B, reconstructed_locations_dictionary):
             time_depth = time_depths_dictionary[node_B]
+            print(time_depth)
             contemporary_neighbours.append({node_B: time_depth})
   return contemporary_neighbours
 
@@ -269,6 +260,7 @@ def make_contemporary_neighbour_dictionary(trees, reconstructed_locations_dictio
     return json.load(open('contemporary_neighbour_dictionary.json', 'r'))
   contemporary_neighbour_dictionary = {}
   for i in range(len(trees)):
+    print(i)
     tree = trees[i]
     for node in tree.keys():
       contemporary_neighbours = find_contemporary_neighbours(node, trees, reconstructed_locations_dictionary, time_depths_dictionary, parent_dictionary)
@@ -279,7 +271,7 @@ def make_contemporary_neighbour_dictionary(trees, reconstructed_locations_dictio
 def make_potential_donors(reconstructed_locations_dictionary, time_depths_dictionary, contemporary_neighbour_dictionary):
   if 'potential_donors.json' in dir:
     return json.load(open('potential_donors.json', 'r')) 
-  potential_donors = {'node_names': [], 'probabilities': [], 'time_depths': []}
+  potential_donors = {'node_names': [], 'time_depths': []}
   node_names = []
   branch_lengths = []
   time_depths = []
@@ -363,16 +355,24 @@ def assign_feature(tree, node, parent_value, substitution_matrix, states, base_f
 
 def contact_simulation(trees, substitution_matrix, states, base_frequencies, rate_per_branch_length_per_pair, locations, nodes_to_tree_dictionary, reconstructed_locations_dictionary, time_depths_dictionary, parent_dictionary, contemporary_neighbour_dictionary, potential_donors):
   contact_events, donees = make_contact_events(potential_donors, contemporary_neighbour_dictionary, time_depths_dictionary, rate_per_branch_length_per_pair)
+  json.dump(contact_events, open('contact_events.json', 'w'), indent=4)
+  json.dump(donees, open('donees.json', 'w'), indent=4)
   for i in range(len(trees)):
     tree = trees[i]
     root = findRoot(tree)
     trees[i] = assign_feature(tree, root, parent_value=None, substitution_matrix=substitution_matrix, states=states, base_frequencies=base_frequencies, to_exclude=donees, given_value=None)
+  
   for contact_event in contact_events:
     donor = list(contact_event['donor'].keys())[0]
     donee = list(contact_event['donee'].keys())[0]
     donor_tree_index = nodes_to_tree_dictionary[donor]
     donee_tree_index = nodes_to_tree_dictionary[donee]
     donor_value = trees[donor_tree_index][donor]
+    print('*****')
+    print(donor)
+    print(trees[donor_tree_index])
+    if donor in donees:
+      print('matey')
     trees[donee_tree_index] = assign_feature(trees[donee_tree_index], donee, parent_value=None, substitution_matrix=substitution_matrix, states=states, base_frequencies=base_frequencies, to_exclude=donees, given_value=donor_value)
     if donee in donees:
       del donees[donee]  
