@@ -373,12 +373,14 @@ def make_input_array(value_dictionary):
   sorted_keys = sorted(value_dictionary.keys())
   for key in sorted_keys:
     result.append(value_dictionary[key])
-  return result
+  return np.array([result])
 
 def make_output_array(value_dictionary, sample):
   result = []
   for item in sample:
     result.append(value_dictionary[item])
+  result = np.array(result)
+  result = np.reshape(result, (np.shape(result)[0], 1))
   return result
 
 def make_input_and_output_arrays(trees, list_of_languages, sample, substitution_matrix, states, base_frequencies, rate_per_branch_length_per_pair, number_of_simulations):

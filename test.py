@@ -578,6 +578,14 @@ def test_two_models(borrowing_rate_1, borrowing_rate_2):
   trees = contact_simulation(trees, substitution_matrix, states, base_frequencies, rate1, locations, nodes_to_tree_dictionary, reconstructed_locations_dictionary, time_depths_dictionary, parent_dictionary, contemporary_neighbour_dictionary, potential_donors)  
   value_dictionary = make_value_dictionary(trees, list_of_languages)
   print(value_dictionary)
+  input_array = make_input_array(value_dictionary)
+  print(np.shape(input_array))
+  output_array = make_output_array(value_dictionary, sample)
+  print(np.shape(output_array))
+  
+
+
+
 #   for item in sample:
 #     print(value_dictionary[item])
 
