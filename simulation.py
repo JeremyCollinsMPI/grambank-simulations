@@ -402,7 +402,38 @@ def make_input_and_output_arrays(trees, list_of_languages, sample, substitution_
     output_array.append(to_append_to_output_array)
   return input_array, output_array
 
+def make_relatedness_pairs_dictionary(list_of_languages, trees, parent_dictionary):
+  f = 'relatedness_pairs_dictionary.json'
+  if f in dir:
+    return json.load(open(f, 'r'))
+  relatedness_pairs_dictionary = {}
+  for item_1 in list_of_languages:
+    relatedness_pairs_dictionary[item_1] = {}
+    for item_2 in list_of_languages:
+      relatedness_pairs_dictionary[item_1][item_2] = 'unrelated'
+  for i in range(len(trees)):
+    tree = trees[i]
+    print(i)
+    for node_1 in tree:
+      glottocode_1 = find_glottocode(findNodeNameWithoutStructure(node_1))
+      if glottocode_1 in list_of_languages:
+        for node_2 in tree:
+          glottocode_2 = find_glottocode(findNodeNameWithoutStructure(node_2)) 
+          if glottocode_2 in list_of_languages:     
+            phyletic_distance = find_phyletic_distance(node_1, node_2, parent_dictionary)
+            relatedness_pairs_dictionary[glottocode_1][glottocode_2] = phyletic_distance
+  json.dump(relatedness_pairs_dictionary, open(f, 'w'), indent=4)
+  return relatedness_pairs_dictionary
 
+def make_distance_pairs_dictionary(list_of_languages):
+  '''
+  for each tree, for each node a, for each tree, for each node b,
+  find the distance
+  
+  only do it for ones in list_of_languages
+  
+  load it if it exists
+  '''
 
 
   '''

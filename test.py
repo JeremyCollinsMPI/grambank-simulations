@@ -566,22 +566,23 @@ def test_two_models(borrowing_rate_1, borrowing_rate_2):
   substitution_matrix = [[0.95, 0.05], [0.05, 0.95]]
   states = ['0', '1']
   base_frequencies = {'0': 1, '1': 0}
-#   input_array, output_array = make_input_and_output_arrays(trees, list_of_languages, sample, substitution_matrix, states, base_frequencies, rate1, number_of_simulations)
-#   print(np.shape(input_array))
-  locations = get_locations(trees)
-  nodes_to_tree_dictionary = make_nodes_to_tree_dictionary(trees)
-  reconstructed_locations_dictionary = make_reconstructed_locations_dictionary(trees, locations, nodes_to_tree_dictionary)
-  time_depths_dictionary = make_time_depths_dictionary(trees)
-  parent_dictionary = make_parent_dictionary(trees)
-  contemporary_neighbour_dictionary = make_contemporary_neighbour_dictionary(trees, reconstructed_locations_dictionary, time_depths_dictionary, parent_dictionary)
-  potential_donors = make_potential_donors(reconstructed_locations_dictionary, time_depths_dictionary, contemporary_neighbour_dictionary)
-  trees = contact_simulation(trees, substitution_matrix, states, base_frequencies, rate1, locations, nodes_to_tree_dictionary, reconstructed_locations_dictionary, time_depths_dictionary, parent_dictionary, contemporary_neighbour_dictionary, potential_donors)  
-  value_dictionary = make_value_dictionary(trees, list_of_languages)
-  print(value_dictionary)
-  input_array = make_input_array(value_dictionary)
+  input_array, output_array = make_input_and_output_arrays(trees, list_of_languages, sample, substitution_matrix, states, base_frequencies, rate1, number_of_simulations)
   print(np.shape(input_array))
-  output_array = make_output_array(value_dictionary, sample)
   print(np.shape(output_array))
+#   locations = get_locations(trees)
+#   nodes_to_tree_dictionary = make_nodes_to_tree_dictionary(trees)
+#   reconstructed_locations_dictionary = make_reconstructed_locations_dictionary(trees, locations, nodes_to_tree_dictionary)
+#   time_depths_dictionary = make_time_depths_dictionary(trees)
+#   parent_dictionary = make_parent_dictionary(trees)
+#   contemporary_neighbour_dictionary = make_contemporary_neighbour_dictionary(trees, reconstructed_locations_dictionary, time_depths_dictionary, parent_dictionary)
+#   potential_donors = make_potential_donors(reconstructed_locations_dictionary, time_depths_dictionary, contemporary_neighbour_dictionary)
+#   trees = contact_simulation(trees, substitution_matrix, states, base_frequencies, rate1, locations, nodes_to_tree_dictionary, reconstructed_locations_dictionary, time_depths_dictionary, parent_dictionary, contemporary_neighbour_dictionary, potential_donors)  
+#   value_dictionary = make_value_dictionary(trees, list_of_languages)
+#   print(value_dictionary)
+#   input_array = make_input_array(value_dictionary)
+#   print(np.shape(input_array))
+#   output_array = make_output_array(value_dictionary, sample)
+#   print(np.shape(output_array))
   
 
 
@@ -617,9 +618,32 @@ def test17():
   rate2 = 0.1
   test_two_models(rate1, rate2)
 
+def test18():
+  trees = make_trees()
+  list_of_languages = get_languages_in_grambank()  
+  make_relatedness_pairs_dictionary(list_of_languages, trees)
+
+def test19():
+  trees = make_trees()
+  parent_dictionary = make_parent_dictionary(trees)
+  node_1 = "'Central Western Macedonian [cent2341]':1"
+  node_2 = "'Banat Bulgarian [bana1308]':1"
+  x = find_phyletic_distance(node_1, node_2, parent_dictionary)
+  print(x)
+
+def test20():
+  trees = make_trees()
+  list_of_languages = get_languages_in_grambank()  
+  parent_dictionary = make_parent_dictionary(trees)
+  make_relatedness_pairs_dictionary(list_of_languages, trees, parent_dictionary)
 
 
-  '''
+test20()
+
+
+
+
+'''
   need a new pipeline.
   the easiest would be to prepare the average of the closest relatives and the average of 
   neighbours within 500 km.
@@ -703,9 +727,9 @@ def test17():
   
   
   
-  '''
+'''
 
-test17()
+
 
 #   contact_simulation_writing_to_file('simulated_feature_array_test_002.npy', trees, list_of_languages, substitution_matrix, states, base_frequencies, rate_per_branch_length_per_pair=rate2, number_of_simulations=number_of_simulations)
 #   array = np.load('simulated_feature_array_test_001.npy')

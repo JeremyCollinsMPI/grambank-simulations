@@ -205,6 +205,57 @@ def find_glottocode(node):
   glottocode = node_name.split('[')[1].split(']')[0]
   return glottocode
 
+def is_a_descendent(node_2, node_1):
+  if node_2 in node_1:
+    return True
+  else:
+    return False
+
+def find_most_recent_common_ancestor(node_1, node_2, parent_dictionary):
+  current_ancestor = node_1
+  if is_a_descendent(node_2, current_ancestor):
+    return current_ancestor
+  if is_a_descendent(node_1, node_2):
+    return node_2
+  done = False
+  while not done:
+#     try:
+#     print(current_ancestor)
+#     print('here1')
+    current_ancestor = parent_dictionary[current_ancestor]
+#     except:
+#       print('This should not happen')
+#       return current_ancestor
+    if is_a_descendent(node_2, current_ancestor):
+      done = True
+      return current_ancestor
+    
+def find_distance_from_ancestor_to_node(ancestor, node, parent_dictionary):
+  distance = 0
+  done = False
+  current_ancestor = node
+  if current_ancestor == ancestor:
+    return 0
+  while not done:
+#     try:
+    current_ancestor = parent_dictionary[current_ancestor]
+#     except:
+#       print('here2')
+#       print(current_ancestor)
+#       print('This should not happen')
+#       return distance
+    distance = distance + findBranchLength(current_ancestor)
+    if current_ancestor == ancestor:
+      return distance
+
+def find_phyletic_distance(node_1, node_2, parent_dictionary):
+  ancestor = find_most_recent_common_ancestor(node_1, node_2, parent_dictionary)
+#   print(ancestor)
+  distance_1 = find_distance_from_ancestor_to_node(ancestor, node_1, parent_dictionary)
+  distance_2 = find_distance_from_ancestor_to_node(ancestor, node_2, parent_dictionary)
+  return distance_1 + distance_2
+
+
 # def label_nodes_that_do_not_have_descendents_in_a_list(tree, list_of_languages):
 #   '''
 #   
