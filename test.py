@@ -636,7 +636,7 @@ def test20():
   list_of_languages = get_languages_in_grambank()  
   parent_dictionary = make_parent_dictionary(trees)
   make_relatedness_pairs_dictionary(list_of_languages, trees, parent_dictionary)
-
+  make_distance_pairs_dictionary(list_of_languages)
 
 test20()
 

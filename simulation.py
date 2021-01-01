@@ -425,15 +425,37 @@ def make_relatedness_pairs_dictionary(list_of_languages, trees, parent_dictionar
   json.dump(relatedness_pairs_dictionary, open(f, 'w'), indent=4)
   return relatedness_pairs_dictionary
 
+def find_distance(language_1, language_2, df1, df2):
+  long_1 = df1['Longitude'][language_1]
+  lat_1 = df1['Latitude'][language_1]
+  long_2 = df1['Longitude'][language_2]
+  lat_2 = df1['Latitude'][language_2]
+  if np.isnan(long_1):
+    long_1 = df2['longitude'][language_1]
+    lat_1 = df2['latitude'][language_1]
+  if np.isnan(long_2):
+    long_2 = df2['longitude'][language_2]
+    lat_2 = df2['latitude'][language_2]
+  return haversine(long_1, lat_1, long_2, lat_2)
+
 def make_distance_pairs_dictionary(list_of_languages):
-  '''
-  for each tree, for each node a, for each tree, for each node b,
-  find the distance
-  
-  only do it for ones in list_of_languages
-  
-  load it if it exists
-  '''
+  f = 'distance_pairs_dictionary.json'
+  if f in dir:
+    return json.load(open(f, 'r'))
+  df1 = pd.read_csv('languages.txt', index_col='ID')
+  df2 = pd.read_csv('languages_and_dialects_geo.csv', index_col='glottocode') 
+  distance_pairs_dictionary = {}
+  for language_1 in list_of_languages:
+    print(language_1)
+    distance_pairs_dictionary[language_1] = {}
+    for language_2 in list_of_languages:
+      try:
+        distance_pairs_dictionary[language_1][language_2] = find_distance(language_1, language_2, df1, df2)
+      except:
+        distance_pairs_dictionary[language_1][language_2] = 'unknown'
+  json.dump(distance_pairs_dictionary, open(f, 'w'), indent=4)
+  return distance_pairs_dictionary
+
 
 
   '''
