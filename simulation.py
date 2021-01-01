@@ -485,15 +485,29 @@ def make_distance_array(list_of_languages, sample, distance_pairs_dictionary):
   result = np.array(result)
   return result
 
+def make_one_hot(input, number_of_bins):
+  input_shape = np.shape(input)
+  a = np.ndarray.flatten(input)
+  b = np.zeros((a.size, number_of_bins))
+  b[np.arange(a.size),a] = 1
+  output_shape = input_shape + (number_of_bins,)
+  return np.reshape(b, output_shape)
+
 def preprocess_relatedness_array(relatedness_array, number_of_relatedness_bins):
   maximum = np.nanmax(relatedness_array) 
   bins = np.linspace(0, maximum, number_of_relatedness_bins)
-  return np.digitize(relatedness_array, bins)
+  x = np.digitize(relatedness_array, bins)
+  x = x - 1
+  y = make_one_hot(x, number_of_relatedness_bins)
+  return y
 
 def preprocess_distance_array(distance_array, number_of_distance_bins):
   maximum = np.nanmax(distance_array)
   bins = np.linspace(0, maximum, number_of_distance_bins)
-  return np.digitize(distance_array, bins)
+  x = np.digitize(distance_array, bins)
+  x = x - 1
+  y = make_one_hot(x, number_of_distance_bins)
+  return y
     
 def make_all_arrays(trees, list_of_languages, sample, substitution_matrix, states, base_frequencies, rate_per_branch_length_per_pair, number_of_simulations):  
   input_array, output_array = make_input_and_output_arrays(trees, list_of_languages, sample, substitution_matrix, states, base_frequencies, rate_per_branch_length_per_pair, number_of_simulations)
@@ -514,249 +528,6 @@ def make_all_arrays(trees, list_of_languages, sample, substitution_matrix, state
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-'''
-contact simulation:
-
-you have the trees
-you produce the donees
-for each tree, you assign feature to the root, excluding the donees
-then you go through each contact event; you then assign the given feature to 
-the donee in the donee's tree, excluding the other donees
-you remove that donee (it's always donees[0]).  continue until there are no donees
-left.
-some details that are unresolved:
-how do you deal with one donee for multiple contact events?  you would assign the feature
-to the donee, but that would not be the end of it.  you have to wait
-until you are sure that it is not the donee of another contact event.
-i think another way of doing it though is that you could just re-assign the feature for that
-node, if that happens.  no harm with assigning the features twice.
-one complication is that the donee node will be in the list to_exclude in the function assign_feature.
-but since that only affects the children of that node, that should not be a problem.
-
-
-so now need to sketch the functions
-
-trees, contact events and donees as input, as well as whatever dictionaries you need.
-
-for i in range(len(trees)):
-  tree = trees[i]
-  root = findRoot(tree)
-  trees[i] = assign_feature(...tree, ...)
-
-for contact_event in contact_events:
-  donor = contact_event['donor'].keys()[0]
-  donee = contact_events['donee'].keys()[0]
-  donor_tree_index = nodes_to_tree_dictionary[donor]
-  donee_tree_index = nodes_to_tree_dictionary[donee]
-  donor_value = trees[donor_tree_index][donor]
-  trees[donee_tree_index][donee] = assign_feature(....to_exclude=donees, given_value = donor_value)
-  donees.pop(0)
-  
-then what?
-you have the trees;
-you now need to make into an array.  this could be done by a separate function.
-that could be produce_simulated_feature_array.
-so you could also still use get_values_for_tree, run over the trees.
-except now, get_values_for_tree will only get the values.
-there will be a separate function for contact_simulation, with whatever arguments that needs.
-trees = contact_simulation(trees, ...)
-within that function, you load the dictionaries.
-  
-  
-the idea of donees is to have a list of ones to exclude, to save time.
-but you should only exclude a donee if it is not a donor earlier than it is a donee
-
-
-
-
-
-
-'''
-
-
-
-
-
-
-
-
-
-
-# def contact_simulation(trees, list_of_languages, substitution_matrix, states, base_frequencies, rate_per_branch_length_per_pair, number_of_simulations=1):
-#   locations = get_locations(trees)
-#   nodes_to_tree_dictionary = make_nodes_to_tree_dictionary(trees)
-#   reconstructed_locations_dictionary = make_reconstructed_locations_dictionary(trees, locations, nodes_to_tree_dictionary)
-#   time_depths_dictionary = make_time_depths_dictionary(trees)
-#   parent_dictionary = make_parent_dictionary(trees)
-#   contemporary_neighbour_dictionary = make_contemporary_neighbour_dictionary(trees, reconstructed_locations_dictionary, time_depths_dictionary, parent_dictionary)
-#   potential_donors = make_potential_donors(reconstructed_locations_dictionary, time_depths_dictionary, contemporary_neighbour_dictionary)
-#   '''
-#   first want to make sure that the trees have some UNASSIGNED or None values for each node.
-#   or just use a copy of the trees. but it might be slow.
-#   '''
-#   input_array = []
-#   output_array = []
-#   for i in range(number_of_simulations):
-#     array = []
-#     contact_events, donees = make_contact_events(potential_donors, contemporary_neighbour_dictionary, time_depths_dictionary, rate_per_branch_length_per_pair)
-# #     json.dump(contact_events, open('contact_events.json', 'w'), indent=4)
-#     for i in range(len(trees)):
-#       tree = trees[i]
-#       root = findRoot(tree)
-#       trees[i] = assign_feature(tree, root, parent_value=None, substitution_matrix=substitution_matrix, states=states, base_frequencies=base_frequencies, to_exclude=donees, given_value=None)
-#     for contact_event in contact_events:
-#       donor = list(contact_event['donor'].keys())[0]
-#       donee = list(contact_event['donee'].keys())[0]
-#       donor_tree_index = nodes_to_tree_dictionary[donor]
-#       donee_tree_index = nodes_to_tree_dictionary[donee]
-#       donor_value = trees[donor_tree_index][donor]
-#       trees[donee_tree_index] = assign_feature(trees[donee_tree_index], donee, parent_value=None, substitution_matrix=substitution_matrix, states=states, base_frequencies=base_frequencies, to_exclude=donees, given_value=donor_value)
-#       if donee in donees:
-#         del donees[donee]  
-#     to_append_to_input_array = make_input_array(trees)
-#     to_append_to_output_array = make_output_array(trees)
-#     
-#     
-#     
-#     if not list_of_languages == None:
-#       for tree in trees:
-#         keys = tree.keys()
-#         sorted_keys = sorted(keys)
-#         result = [float(tree[key]) for key in sorted_keys if find_glottocode(findNodeNameWithoutStructure(key)) in list_of_languages]
-#         array = array + result
-# #     json.dump(trees, open('trees_results.json', 'w'), indent=4)
-#     simulated_feature_array = simulated_feature_array + [array]
-#   return simulated_feature_array
-#   
-# 
-# 
-# 
-# 
-# 
-# 
-# 
-# 
-# 
-# 
-# 
-# def contact_simulation_writing_to_file(filename, trees, list_of_languages, substitution_matrix, states, base_frequencies, rate_per_branch_length_per_pair, number_of_simulations=1):
-#   simulated_feature_array = contact_simulation(trees, list_of_languages, substitution_matrix, states, base_frequencies, rate_per_branch_length_per_pair, number_of_simulations)
-#   np.save(filename, simulated_feature_array)
-#   return simulated_feature_array
-# 
-# def simulate_data(tree, substitution_matrix, states, base_frequencies):
-#   root = findRoot(tree)
-#   tree = assign_feature(tree, root, parent_value=None, substitution_matrix=substitution_matrix, states=states, base_frequencies=base_frequencies)
-#   return tree
-#   
-# def get_values_for_tree(tree, substitution_matrix, states, base_frequencies, list_of_languages):
-#   tree = simulate_data(tree, substitution_matrix, states, base_frequencies)
-#   if not list_of_languages == None:
-#     keys = tree.keys()
-#     sorted_keys = sorted(keys)
-#     result = [float(tree[key]) for key in sorted_keys if find_glottocode(findNodeNameWithoutStructure(key)) in list_of_languages]
-#   else:
-#     tips = findTips(tree)
-#     sorted_tips = sorted(tips)
-#     result = [float(tree[tip]) for tip in sorted_tips]
-#   return result
-# 
-# def produce_simulated_feature_array(trees, substitution_matrix, states, base_frequencies, number_of_simulations=1, list_of_languages=None):
-#   final_array = []
-#   print('Producing simulated data')
-#   for i in range(number_of_simulations):
-#     print('Iteration ', i)
-#     array = []
-#     for tree in trees:
-#       values = get_values_for_tree(tree, substitution_matrix, states, base_frequencies, list_of_languages)
-#       array = array + values
-#     final_array.append(array)
-#   final_array = np.array(final_array)
-#   return final_array
-# 
-# def produce_simulated_feature_array_and_write_to_file(filename, trees, substitution_matrix, states, base_frequencies, number_of_simulations=1, list_of_languages=None):
-#   array = produce_simulated_feature_array(trees, substitution_matrix, states, base_frequencies, number_of_simulations, list_of_languages)
-#   np.save(filename, array)
-# 
-# def produce_simulated_feature_array_threaded(trees, substitution_matrix, states, base_frequencies, number_of_simulations=1, list_of_languages=None, number_of_threads=1):
-#   simulations_per_thread = int(number_of_simulations / number_of_threads)
-#   threads = {}
-#   for i in range(number_of_threads):
-#     filename = 'result_' + str(i) + '.npy'
-#     threads[str(i)] = multiprocessing.Process(target=produce_simulated_feature_array_and_write_to_file, args=(filename, trees, substitution_matrix, states, base_frequencies, simulations_per_thread, list_of_languages))
-#     threads[str(i)].start()
-#   for i in range(number_of_threads):  
-#     threads[str(i)].join()
-#   result = np.load('result_0.npy')
-#   for i in range(1, number_of_threads):
-#     result = np.concatenate([result, np.load('result_' + str(i) + '.npy')])
-#   return result
-# 
-# 
-# 
-# 
-# def make_input(simulated_feature_array):
-#   '''
-#   you want an array of shape simulations, size of sample, languages-1
-#   
-#   it would so far be of shape [simulations, languages]
-#   
-#   the idea is that for each language in the sample, you have the other languages
-#   
-#   samples is an array of indices
-#   
-#   so you are taking slices of the array
-#   
-#   
-#   e.g. sfa[0][0] would be language 0 in simulation 0
-#   you want sfa[0][0:1600] but without sample[0]
-#   then you want sfa[1][0:1600] without sample[0]
-#   
-#   you could of course just have all languages.  
-#   so make something of shape simulations, size of sample, languages
-#   
-#   so actually just return something of shape simulations, 1, languages.
-#   then tf can broadcast it
-#   
-#   actually will be of shape [1, 1, languages]
-#   
-#   
-#   
-#   '''
-# 
-#   return np.reshape(simulated_feature_array, [np.shape(simulated_feature_array)[0], 1, np.shape(simulated_feature_array)[1]])
-# 
-# def make_output(simulated_feature_array, samples):
-#   '''making something of shape [simulations, samples, 1]
-#   so you need to slice sfa by the indices in samples
-#   
-#   '''  
-#   result = np.take(simulated_feature_array, samples, axis=1)
-#   number_of_samples = len(samples)
-#   number_of_simulations = np.shape(simulated_feature_array)[0]
-#   result = np.reshape(result, [number_of_simulations, number_of_samples, 1])
-#   return result
-  
-  
   
 
 

@@ -678,9 +678,8 @@ def test23():
   np.save('input_array.npy', input_array)
   np.save('output_array.npy', output_array)
   np.save('relatedness_array.npy', relatedness_array)
-  np.save( 'distance_array.npy', distance_array)
+  np.save('distance_array.npy', distance_array)
 
-  
 test23()
 
 
