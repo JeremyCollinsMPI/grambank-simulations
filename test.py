@@ -638,7 +638,18 @@ def test20():
   make_relatedness_pairs_dictionary(list_of_languages, trees, parent_dictionary)
   make_distance_pairs_dictionary(list_of_languages)
 
-test20()
+def test21():
+  trees = make_trees()
+  list_of_languages = get_languages_in_grambank()  
+  number_of_samples = 900
+  sample = np.random.choice(np.array(list_of_languages), number_of_samples, replace=False)
+  parent_dictionary = make_parent_dictionary(trees)
+  relatedness_pairs_dictionary = make_relatedness_pairs_dictionary(list_of_languages, trees, parent_dictionary)
+  relatedness_array = make_relatedness_array(list_of_languages, sample, relatedness_pairs_dictionary)
+  print(np.shape(relatedness_array))
+  distance_array = make_distance_array(list_of_languages, sample, relatedness_pairs_dictionary)
+  print(np.shape(distance_array))
+test21()
 
 
 

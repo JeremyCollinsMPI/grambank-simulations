@@ -456,6 +456,52 @@ def make_distance_pairs_dictionary(list_of_languages):
   json.dump(distance_pairs_dictionary, open(f, 'w'), indent=4)
   return distance_pairs_dictionary
 
+  
+
+
+  '''
+  
+  what is the relatedness array?
+  
+  
+  since you have an input of each language and output of each member of the sample,
+  you want an array of how related each language is to each member of the sample
+  
+  so you need list of languages, sample, rel.pairs dicrt
+  
+  shape should be (1, samples, languages, number of bins) apparently.
+  in this function, it will be of shape (1, samples, languages)
+  
+  
+  
+  '''
+
+
+
+
+def make_relatedness_array(list_of_languages, sample, relatedness_pairs_dictionary):
+  result = []
+  for item1 in sample:
+    temp = []
+    for item2 in list_of_languages:
+      relatedness = relatedness_pairs_dictionary[item1][item2]
+      temp.append(relatedness)
+    result.append(temp)
+  result = [result]
+  result = np.array(result)
+  return result
+
+def make_distance_array(list_of_languages, sample, distance_pairs_dictionary):
+  result = []
+  for item1 in sample:
+    temp = []
+    for item2 in list_of_languages:
+      distance = distance_pairs_dictionary[item1][item2]
+      temp.append(distance)
+    result.append(temp)
+  result = [result]
+  result = np.array(result)
+  return result
 
 
   '''
@@ -478,20 +524,6 @@ preprocess_distance_array(distance_array, number_of_distance_bins)
 
 
 
-
-def find_relatedness(language_1, language_2, trees):
-   .....
-   
-def find_distance(language_1, language_2, ...
-
-
-def make_relatedness_pairs_dictionary(list_of_languages, trees):
-  for language_1 in list_of_languages:
-    for language_2 in list_of_languages:
-      relatedness = find_relatedness(language_1, language_2, trees)
-
-def make_distance_pairs_dictionary(list_of_languages, ...)
-...
 
 def make_relatedness_array(list_of_languages, sample, relatedness_pairs_dictionary):
   result = []
