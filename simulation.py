@@ -456,29 +456,6 @@ def make_distance_pairs_dictionary(list_of_languages):
   json.dump(distance_pairs_dictionary, open(f, 'w'), indent=4)
   return distance_pairs_dictionary
 
-  
-
-
-  '''
-  
-  what is the relatedness array?
-  
-  
-  since you have an input of each language and output of each member of the sample,
-  you want an array of how related each language is to each member of the sample
-  
-  so you need list of languages, sample, rel.pairs dicrt
-  
-  shape should be (1, samples, languages, number of bins) apparently.
-  in this function, it will be of shape (1, samples, languages)
-  
-  
-  
-  '''
-
-
-
-
 def make_relatedness_array(list_of_languages, sample, relatedness_pairs_dictionary):
   result = []
   for item1 in sample:
@@ -503,70 +480,30 @@ def make_distance_array(list_of_languages, sample, distance_pairs_dictionary):
   result = np.array(result)
   return result
 
-
+def preprocess_relatedness_array(relatedness_array, number_of_relatedness_bins)
+  return relatedness_array
   '''
-what else is needed?
-
-you need the relatedness arrays
-
-relatedness_pairs_dictionary
-
-distance_pairs_dictionary
-
-you are then making an array of shape (samples, languages)
-then another function for preprocessing it for the model,
-which turns it into (1, samples, languages, number of bins)
-
-preprocess_relatedness_array(relatedness_array, number_of_relatedness_bins)
-
-preprocess_distance_array(distance_array, number_of_distance_bins)
-
-
-
-
-
-def make_relatedness_array(list_of_languages, sample, relatedness_pairs_dictionary):
-  result = []
-  for item1 in sample:
-    temp = []
-    for item2 in list_of_languages:
-      relatedness = relatedness_pairs_dictionary[item1][item2]
-      temp.append(relatedness)
-    result.append(temp)
-  return result
-
-def make_distance_array(list_of_languages, sample, distance_pairs_dictionary):
-  result = []
-  for item1 in sample:
-    temp = []
-    for item2 in list_of_languages:
-      distance = distance_pairs_dictionary[item1][item2]
-      temp.append(distance)
-    result.append(temp)
-  return result
-
-def preprocess_relatedness_array(relatedness_array, number_of_bins):
-
-
-def preprocess_distance_array(distance_array, number_of_bins):
-
   
-then you need a main function to prepare all of the arrays
-
-e.g.
-
-def make_all_arrays(trees, list_of_languages, sample, substitution_matrix, states, base_frequencies, rate_per_branch_length_per_pair, number_of_simulations)
-make input and output arrays
-make relatedness and distance arrays
-
-then model loads all of those in the training function
-
-
-
-
-
   '''
 
+def preprocess_distance_array(distance_array, number_of_distance_bins):
+  return distance_array
+  '''
+  '''
+  
+  
+def make_all_arrays(trees, list_of_languages, sample, substitution_matrix, states, base_frequencies, rate_per_branch_length_per_pair, number_of_simulations):  
+  input_array, output_array = make_input_and_output_arrays(trees, list_of_languages, sample, substitution_matrix, states, base_frequencies, rate_per_branch_length_per_pair, number_of_simulations)
+  parent_dictionary = make_parent_dictionary(trees)
+  relatedness_pairs_dictionary = make_relatedness_pairs_dictionary(list_of_languages, trees, parent_dictionary)
+  distance_pairs_dictionary = make_distance_pairs_dictionary(list_of_languages)
+  relatedness_array = make_relatedness_array(list_of_languages, sample, relatedness_pairs_dictionary)
+  distance_array = make_distance_array(list_of_languages, sample, distance_pairs_dictionary)
+  number_of_relatedness_bins = 10
+  number_of_distance_bins = 10
+  relatedness_array = preprocess_relatedness_array(relatedness_array, number_of_relatedness_bins)
+  distance_array = preprocess_distance_array(distance_array, number_of_distance_bins)
+  return input_array, output_array, relatedness_array, distance_array
 
 
 
