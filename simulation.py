@@ -480,7 +480,7 @@ def make_distance_array(list_of_languages, sample, distance_pairs_dictionary):
   result = np.array(result)
   return result
 
-def preprocess_relatedness_array(relatedness_array, number_of_relatedness_bins)
+def preprocess_relatedness_array(relatedness_array, number_of_relatedness_bins):
   return relatedness_array
   '''
   
