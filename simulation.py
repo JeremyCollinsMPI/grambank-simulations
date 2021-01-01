@@ -462,7 +462,10 @@ def make_relatedness_array(list_of_languages, sample, relatedness_pairs_dictiona
     temp = []
     for item2 in list_of_languages:
       relatedness = relatedness_pairs_dictionary[item1][item2]
-      temp.append(relatedness)
+      if relatedness == 'unrelated': 
+        temp.append(np.nan)
+      else:
+        temp.append(relatedness)
     result.append(temp)
   result = [result]
   result = np.array(result)
@@ -474,6 +477,8 @@ def make_distance_array(list_of_languages, sample, distance_pairs_dictionary):
     temp = []
     for item2 in list_of_languages:
       distance = distance_pairs_dictionary[item1][item2]
+      if distance == 'unknown':
+        distance = np.nan
       temp.append(distance)
     result.append(temp)
   result = [result]
@@ -481,17 +486,15 @@ def make_distance_array(list_of_languages, sample, distance_pairs_dictionary):
   return result
 
 def preprocess_relatedness_array(relatedness_array, number_of_relatedness_bins):
-  return relatedness_array
-  '''
-  
-  '''
+  maximum = np.nanmax(relatedness_array) 
+  bins = np.linspace(0, maximum, number_of_relatedness_bins)
+  return np.digitize(relatedness_array, bins)
 
 def preprocess_distance_array(distance_array, number_of_distance_bins):
-  return distance_array
-  '''
-  '''
-  
-  
+  maximum = np.nanmax(distance_array)
+  bins = np.linspace(0, maximum, number_of_distance_bins)
+  return np.digitize(distance_array, bins)
+    
 def make_all_arrays(trees, list_of_languages, sample, substitution_matrix, states, base_frequencies, rate_per_branch_length_per_pair, number_of_simulations):  
   input_array, output_array = make_input_and_output_arrays(trees, list_of_languages, sample, substitution_matrix, states, base_frequencies, rate_per_branch_length_per_pair, number_of_simulations)
   parent_dictionary = make_parent_dictionary(trees)

@@ -651,7 +651,7 @@ def test21():
   print(np.shape(distance_array))
 
 def test22():
-  trees = make_trees()
+  trees = make_trees() 
   list_of_languages = get_languages_in_grambank()  
   number_of_samples = 900
   sample = np.random.choice(np.array(list_of_languages), number_of_samples, replace=False)
@@ -665,7 +665,23 @@ def test22():
   np.save('relatedness_array.npy', relatedness_array)
   np.save( 'distance_array.npy', distance_array)
 
-test22()
+def test23():
+  trees = make_trees() 
+  list_of_languages = get_languages_in_grambank()  
+  number_of_samples = 900
+  sample = np.random.choice(np.array(list_of_languages), number_of_samples, replace=False)
+  substitution_matrix = [[0.95, 0.05], [0.05, 0.95]]
+  states = ['0', '1']
+  base_frequencies = {'0': 1, '1': 0}
+  rate1 = 0.01
+  input_array, output_array, relatedness_array, distance_array = make_all_arrays(trees, list_of_languages, sample, substitution_matrix, states, base_frequencies, rate_per_branch_length_per_pair=rate1, number_of_simulations=1)
+  np.save('input_array.npy', input_array)
+  np.save('output_array.npy', output_array)
+  np.save('relatedness_array.npy', relatedness_array)
+  np.save( 'distance_array.npy', distance_array)
+
+  
+test23()
 
 
 
