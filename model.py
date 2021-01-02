@@ -14,15 +14,15 @@ class Model():
     self.sess = tf.Session()
     self.input = tf.placeholder(tf.float32, [None, 1, number_of_languages])  
     self.output = tf.placeholder(tf.float32, [None, number_of_samples, 1])
-    self.relatedness_array = tf.placeholder(tf.float32, [1, number_of_samples, number_of_languages, number_of_relatedness_bins]
-    self.distance_array = tf.placeholder(tf.float32, [1, number_of_samples, number_of_languages, number_of_distance_bins]
+    self.relatedness_array = tf.placeholder(tf.float32, [1, number_of_samples, number_of_languages, number_of_relatedness_bins])
+    self.distance_array = tf.placeholder(tf.float32, [1, number_of_samples, number_of_languages, number_of_distance_bins])
         
     self.relatedness_weights = tf.get_variable(name='relatedness_weights', dtype=tf.float32, shape=[1, number_of_relatedness_bins], initializer=tf.truncated_normal_initializer(mean=0.5, stddev=0.01))
     self.distance_weights = tf.get_variable(name='distance_weights', dtype=tf.float32, shape=[1, number_of_distance_bins], initializer=tf.truncated_normal_initializer(mean=0.5, stddev=0.01))
     self.intercept = tf.get_variable(name='intercept', dtype = tf.float32, shape = [1],  initializer=tf.truncated_normal_initializer(mean=0.5, stddev=0.01))
  
-    self.r_1 = tf.reshape(self.relatedness_weights, [1, 1, 1, number_of_relatedness_bins)
-    self.d_1 = tf.reshape(self.distance_weights, [1, 1, 1, number_of_distance_bins)
+    self.r_1 = tf.reshape(self.relatedness_weights, [1, 1, 1, number_of_relatedness_bins])
+    self.d_1 = tf.reshape(self.distance_weights, [1, 1, 1, number_of_distance_bins])
     
     self.r_2 = self.relatedness_array * self.r_1
     self.d_2 = self.distance_array * self.d_1
@@ -33,7 +33,7 @@ class Model():
     self.r_final = self.r_3
     self.d_final = self.d_3
     
-    self.relatedness_or_contact_prediction = 1.0 - ((1.0 - self.r_final) * (1.0 - self.d_final) * self.input)
+    self.relatedness_or_contact_prediction = (1.0 - ((1.0 - self.r_final) * (1.0 - self.d_final))) * self.input
     self.intercept_prediction = (1.0 - self.r_final) * (1.0 - self.d_final) * self.intercept
 
     self.prediction = self.relatedness_or_contact_prediction + self.intercept_prediction
@@ -61,6 +61,7 @@ class Model():
     for i in range(steps):  
       print("After %d iterations:" % i)
       print(self.sess.run(self.total_loss, feed_dict=self.feed))
+      print(self.sess.run(self.distance_weights))
       self.sess.run(self.train_step, feed_dict = self.feed)
       self.sess.run(self.clip_op_1)
       self.sess.run(self.clip_op_2)

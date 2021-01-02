@@ -495,29 +495,27 @@ def make_one_hot(input, number_of_bins):
 
 def preprocess_relatedness_array(relatedness_array, number_of_relatedness_bins):
   maximum = np.nanmax(relatedness_array) 
-  bins = np.linspace(0, maximum, number_of_relatedness_bins)
+  bins = np.linspace(0, maximum+1, number_of_relatedness_bins)
   x = np.digitize(relatedness_array, bins)
   x = x - 1
-  y = make_one_hot(x, number_of_relatedness_bins)
-  return y
+  x = make_one_hot(x, number_of_relatedness_bins)
+  return x
 
 def preprocess_distance_array(distance_array, number_of_distance_bins):
   maximum = np.nanmax(distance_array)
-  bins = np.linspace(0, maximum, number_of_distance_bins)
+  bins = np.linspace(0, maximum+1, number_of_distance_bins)
   x = np.digitize(distance_array, bins)
   x = x - 1
-  y = make_one_hot(x, number_of_distance_bins)
-  return y
+  x = make_one_hot(x, number_of_distance_bins)
+  return x
     
-def make_all_arrays(trees, list_of_languages, sample, substitution_matrix, states, base_frequencies, rate_per_branch_length_per_pair, number_of_simulations):  
+def make_all_arrays(trees, list_of_languages, sample, substitution_matrix, states, base_frequencies, rate_per_branch_length_per_pair, number_of_simulations, number_of_relatedness_bins=10, number_of_distance_bins=10):  
   input_array, output_array = make_input_and_output_arrays(trees, list_of_languages, sample, substitution_matrix, states, base_frequencies, rate_per_branch_length_per_pair, number_of_simulations)
   parent_dictionary = make_parent_dictionary(trees)
   relatedness_pairs_dictionary = make_relatedness_pairs_dictionary(list_of_languages, trees, parent_dictionary)
   distance_pairs_dictionary = make_distance_pairs_dictionary(list_of_languages)
   relatedness_array = make_relatedness_array(list_of_languages, sample, relatedness_pairs_dictionary)
   distance_array = make_distance_array(list_of_languages, sample, distance_pairs_dictionary)
-  number_of_relatedness_bins = 10
-  number_of_distance_bins = 10
   relatedness_array = preprocess_relatedness_array(relatedness_array, number_of_relatedness_bins)
   distance_array = preprocess_distance_array(distance_array, number_of_distance_bins)
   return input_array, output_array, relatedness_array, distance_array

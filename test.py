@@ -680,7 +680,30 @@ def test23():
   np.save('relatedness_array.npy', relatedness_array)
   np.save('distance_array.npy', distance_array)
 
-test23()
+def test24():
+  trees = make_trees() 
+  list_of_languages = get_languages_in_grambank() 
+  number_of_languages = len(list_of_languages) 
+  number_of_samples = 900
+  sample = np.random.choice(np.array(list_of_languages), number_of_samples, replace=False)
+  substitution_matrix = [[0.95, 0.05], [0.05, 0.95]]
+  states = ['0', '1']
+  base_frequencies = {'0': 1, '1': 0}
+  rate1 = 0.01
+  number_of_relatedness_bins = 10
+  number_of_distance_bins = 10
+  number_of_simulations = 1
+  input_array, output_array, relatedness_array, distance_array = make_all_arrays(trees, list_of_languages, sample, substitution_matrix, states, base_frequencies, rate_per_branch_length_per_pair=rate1, number_of_simulations=number_of_simulations, number_of_relatedness_bins=number_of_relatedness_bins, number_of_distance_bins=number_of_distance_bins)
+  np.save('input_array.npy', input_array)
+  np.save('output_array.npy', output_array)
+  np.save('relatedness_array.npy', relatedness_array)
+  np.save('distance_array.npy', distance_array)
+  na_array_1 = np.ones([1, number_of_samples, 1])
+  na_array_2 = np.ones([1, 1, number_of_languages]) 
+  model = Model(number_of_simulations, number_of_samples, number_of_languages, number_of_relatedness_bins, number_of_distance_bins) 
+  model.train(input_array, output_array, na_array_1, na_array_2, relatedness_array, distance_array, steps=200)
+
+test24()
 
 
 
