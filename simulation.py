@@ -350,8 +350,8 @@ def contact_simulation(trees, substitution_matrix, states, base_frequencies, rat
     donor_tree_index = nodes_to_tree_dictionary[donor]
     donee_tree_index = nodes_to_tree_dictionary[donee]
     donor_value = trees[donor_tree_index][donor]
-    if donor in donees:
-      print('matey')
+#     if donor in donees:
+#       print('matey')
     trees[donee_tree_index] = assign_feature(trees[donee_tree_index], donee, parent_value=None, substitution_matrix=substitution_matrix, states=states, base_frequencies=base_frequencies, to_exclude=donees, given_value=donor_value)
     if donee in donees:
       del donees[donee]  
@@ -363,7 +363,7 @@ def make_value_dictionary(trees, list_of_languages):
     tree = trees[i]
     for key in tree:      
       glottocode = find_glottocode(findNodeNameWithoutStructure(key))
-      print(glottocode)
+      # print(glottocode)
       if glottocode in list_of_languages:
         value_dictionary[glottocode] = float(tree[key])
   return value_dictionary

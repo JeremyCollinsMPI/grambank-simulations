@@ -10,7 +10,7 @@ class Model():
 
   learn_rate = 0.01
 
-  def __init__(self, number_of_simulations, number_of_samples, number_of_languages, number_of_relatedness_bins, number_of_distance_bins):
+  def __init__(self, number_of_samples, number_of_languages, number_of_relatedness_bins, number_of_distance_bins):
     self.sess = tf.Session()
     self.input = tf.placeholder(tf.float32, [None, 1, number_of_languages])  
     self.output = tf.placeholder(tf.float32, [None, number_of_samples, 1])
@@ -67,11 +67,12 @@ class Model():
       self.sess.run(self.clip_op_2)
       self.sess.run(self.clip_op_3)
 
-  def show_loss(self, input_array, output_array, na_array_1, na_array_2):
-    self.feed = {self.input: input_array, self.output: output_array, self.na_array_1: na_array_1, self.na_array_2: na_array_2}
-    loss = self.sess.run(tf.reduce_mean(tf.reduce_mean(self.loss, axis=2), axis=1), feed_dict=self.feed)
-    print(loss)
-    return loss
+  def show_loss(self, input_array, output_array, na_array_1, na_array_2, relatedness_array, distance_array):
+    self.feed = {self.input: input_array, self.output: output_array, self.na_array_1: na_array_1, 
+    self.na_array_2: na_array_2, self.relatedness_array: relatedness_array, self.distance_array: distance_array}
+    total_loss = self.sess.run(self.total_loss, feed_dict=self.feed)
+    print(total_loss)
+    return total_loss
 
   def show_intercept(self):
     intercept = self.sess.run(self.intercept)

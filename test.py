@@ -689,7 +689,7 @@ def test24():
   substitution_matrix = [[0.95, 0.05], [0.05, 0.95]]
   states = ['0', '1']
   base_frequencies = {'0': 1, '1': 0}
-  rate1 = 0.01
+  rate1 = 0.1
   number_of_relatedness_bins = 10
   number_of_distance_bins = 10
   number_of_simulations = 1
@@ -703,7 +703,48 @@ def test24():
   model = Model(number_of_simulations, number_of_samples, number_of_languages, number_of_relatedness_bins, number_of_distance_bins) 
   model.train(input_array, output_array, na_array_1, na_array_2, relatedness_array, distance_array, steps=200)
 
-test24()
+def test_two_models(borrowing_rate_1, borrowing_rate_2):
+  trees = make_trees()
+  list_of_languages = get_languages_in_grambank()  
+  number_of_samples = 900
+  number_of_languages = len(list_of_languages)
+  sample = np.random.choice(np.array(list_of_languages), number_of_samples, replace=False)
+  number_of_training_simulations = 3
+  number_of_test_simulations = 3
+  rate1 = borrowing_rate_1
+  rate2 = borrowing_rate_2
+  substitution_matrix = [[0.95, 0.05], [0.05, 0.95]]
+  states = ['0', '1']
+  base_frequencies = {'0': 1, '1': 0}
+  number_of_relatedness_bins = 10
+  number_of_distance_bins = 10
+  training_1_input, training_1_output, relatedness_array, distance_array = make_all_arrays(trees, list_of_languages, sample, substitution_matrix, states, base_frequencies, rate_per_branch_length_per_pair=rate1, number_of_simulations=number_of_training_simulations, number_of_relatedness_bins=number_of_relatedness_bins, number_of_distance_bins=number_of_distance_bins)
+  na_array_1 = np.ones([1, number_of_samples, 1])
+  na_array_2 = np.ones([1, 1, number_of_languages]) 
+  model = Model(number_of_samples, number_of_languages, number_of_relatedness_bins, number_of_distance_bins) 
+  model.train(training_1_input, training_1_output, na_array_1, na_array_2, relatedness_array, distance_array, steps=200)
+  test_1_input, test_1_output = make_input_and_output_arrays(trees, list_of_languages, sample, substitution_matrix, states, base_frequencies, rate_per_branch_length_per_pair=rate1, number_of_simulations=number_of_test_simulations)
+#   model.show_loss(test_1_input, test_1_output, na_array_1, na_array_2, relatedness_array, distance_array)
+  training_2_input, training_2_output = make_input_and_output_arrays(trees, list_of_languages, sample, substitution_matrix, states, base_frequencies, rate_per_branch_length_per_pair=rate2, number_of_simulations=number_of_training_simulations)
+  test_2_input, test_2_output = make_input_and_output_arrays(trees, list_of_languages, sample, substitution_matrix, states, base_frequencies, rate_per_branch_length_per_pair=rate2, number_of_simulations=number_of_test_simulations)
+  loss_1 = model.show_loss(test_2_input, test_2_output, na_array_1, na_array_2, relatedness_array, distance_array)
+  model.train(training_2_input, training_2_output, na_array_1, na_array_2, relatedness_array, distance_array, steps=200)
+  loss_2 = model.show_loss(test_2_input, test_2_output, na_array_1, na_array_2, relatedness_array, distance_array)
+  print('Loss 1: ', loss_1)
+  print('Loss 2: ', loss_2)
+
+
+#   print(np.shape(input_array))
+#   print(np.shape(output_array))
+
+
+
+def test25():
+  borrowing_rate_1 = 0.01
+  borrowing_rate_2 = 0.02
+  test_two_models(borrowing_rate_1, borrowing_rate_2)
+
+test25()
 
 
 
