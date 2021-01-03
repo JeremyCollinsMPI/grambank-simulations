@@ -1,6 +1,9 @@
 from CreateDataFrame import *
 from TreeFunctions import *
 from copy import deepcopy
+from simulation import *
+import os
+import json
 
 def get_languages_in_grambank():
   data = readData('data.txt')
@@ -8,46 +11,73 @@ def get_languages_in_grambank():
   languages = getUniqueLanguages(data)
   return languages
 
+def get_grambank_value_dictionary():
+  if 'grambank_value_dictionary.json' in os.listdir('.'):
+    return json.load(open('grambank_value_dictionary.json', 'r'))
+  df = readData('data.txt')
+  grambank_value_dictionary = createDictionary(df) 
+  json.dump(grambank_value_dictionary, open('grambank_value_dictionary.json', 'w'), indent=4)
+  return grambank_value_dictionary
 
+def further_preprocessing_of_grambank_value_dictionary(grambank_value_dictionary, feature_index):
+  '''
+  the value dictionary needs to have the structure:
+  
+  glottocode : value, which is a float.
+  it can have NaN I think at this point.  you need to change nans to zero in a later function
+  anyway when you make the na arrays.
+  
+  
+  
+  '''
 
+def make_input_and_output_arrays_for_grambank(value_dictionary, sample):
+  input_array = make_input_array(value_dictionary)
+  output_array = make_output_array(value_dictionary, sample)
+  input_array = np.array([input_array])
+  output_array = np.array([output_array])
+  return input_array, output_array   
 
+def make_na_array_1(value_dictionary):
+  result = []
+  sorted_keys = sorted(value_dictionary.keys())
+  for key in sorted_keys:
+    value = value_dictionary[key]
+    if value == None:
+      value = 0
+    else:
+      value = 1
+    result.append(value)
+  return np.array([result])
 
-def only_retain_included_languages(trees, list_of_languages):
-#   for i in range(len(trees)):
-  for i in range(10):
+def make_na_array_2(value_dictionary, sample):
+  result = []
+  for item in sample:
+    value = value_dictionary[key]
+    if value == None:
+      value = 0
+    else:
+      value = 1
+    result.append(value)
+  result = np.array(result)
+  result = np.reshape(result, (np.shape(result)[0], 1))
+  return result
 
-    print(i)
-    tree = trees[i]
-    tree = tree.strip('\n')
-    new_tree = createTree(tree)
-    tips = findTips(new_tree)
-    for tip in tips:
-      glottocode = find_glottocode(findNodeName(tip))
-      if not glottocode in list_of_languages:
-        print(new_tree)
-        print(tip)
-        try:
-          new_tree = dropNode(new_tree, tip)
-        except:
-          pass
-    trees[i] = new_tree
-    print(new_tree)
-  return trees
+def make_all_arrays_for_grambank(value_dictionary, trees, list_of_languages, sample, number_of_relatedness_bins=10, number_of_distance_bins=10):  
+  input_array, output_array = make_input_and_output_arrays_for_grambank(value_dictionary, sample)
+  na_array_1 = make_na_array_1(value_dictionary)
+  na_array_2 = make_na_array_2(value_dictionary, sample)
+  parent_dictionary = make_parent_dictionary(trees)
+  relatedness_pairs_dictionary = make_relatedness_pairs_dictionary(list_of_languages, trees, parent_dictionary)
+  distance_pairs_dictionary = make_distance_pairs_dictionary(list_of_languages)
+  relatedness_array = make_relatedness_array(list_of_languages, sample, relatedness_pairs_dictionary)
+  distance_array = make_distance_array(list_of_languages, sample, distance_pairs_dictionary)
+  relatedness_array = preprocess_relatedness_array(relatedness_array, number_of_relatedness_bins)
+  distance_array = preprocess_distance_array(distance_array, number_of_distance_bins)
+  return input_array, output_array, relatedness_array, distance_array, na_array_1, na_array_2
+
     
-    
-    
-    
-#     keys = deepcopy(list(new_tree.keys()))
-# #     print(keys)
-#     for key in keys:
-#       print(findNodeName(key))
-#       if not findNodeName(key) in list_of_languages:
-#         try:
-#           new_tree = dropNode(new_tree, key)
-# #           print('managed to drop ', key)
-#         except:
-#           print('problem: ', key)
-#           pass
-#     trees[i] = new_tree
-#     print(new_tree)
-#   return trees
+'''
+you need to make the na arrays at some point
+
+'''

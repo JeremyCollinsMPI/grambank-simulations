@@ -99,13 +99,13 @@ def createDictionary(dataframe):
       try:
         value = dict[language][feature]
         if value == '?':
-          value = np.nan
+          value = None
         else:
           value = int(value)
       except:
-        value = np.nan
+        value = None
       values.append(value)
-    dict[language]['values'] = np.array(values)
+    dict[language]['values'] = values
   return dict
 
 if __name__ == '__main__':

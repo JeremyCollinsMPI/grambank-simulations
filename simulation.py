@@ -372,13 +372,19 @@ def make_input_array(value_dictionary):
   result = []
   sorted_keys = sorted(value_dictionary.keys())
   for key in sorted_keys:
-    result.append(value_dictionary[key])
+    value = value_dictionary[key]
+    if value == None:
+      value = 0
+    result.append(value)
   return np.array([result])
 
 def make_output_array(value_dictionary, sample):
   result = []
   for item in sample:
-    result.append(value_dictionary[item])
+    value = value_dictionary[item]
+    if value == None:
+      value = 0
+    result.append(value)
   result = np.array(result)
   result = np.reshape(result, (np.shape(result)[0], 1))
   return result

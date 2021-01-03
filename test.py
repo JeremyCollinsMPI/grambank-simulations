@@ -207,98 +207,6 @@ def test8():
   print(np.shape(simulated_feature_array))
 
 def test9():
-  '''
-  will have to write a new function for reconstructing locations in the trees
-    
-  when you run the simulation, you have trees;
-  you are choosing branches of trees randomly, but also taking their branch length into account;
-  then you assign values vertically for any nodes which are not donees.
-  you take any donor nodes; you then look in a dictionary for that node and find its location.
-  you then need to find nearby nodes.  it would be best if there is another dictionary that you can use,
-  where you look up the node in that dictionary and it returns a list of nearby nodes, and you pick one randomly.
-  so you want to first make a dictionary with reconstructed locations.  you also want a dictionary with time depth for each node.
-  then you want to use those to make a dictionary of nearby contemporary nodes.
-  
-  you randomly select branches from the trees.  you also need to select a random time along that branch
-  you then use the parent's value, and you assign it to a neighbouring node that is younger than the time that you have selected
-  
-  so it would be good if the contemporary nodes dictionary also has the time depth 
-  
-  how do you select random branches?
-  you select the parent node, since that also has the branch length information.
-  
-  so it is simply selecting a non-terminal node [actually it could also be a terminal node?]
-  
-  you want to choose some donor nodes; you then find their donees;
-  so you're making a dictionary of donors as keys and donees as values. or a list of lists.
-  
-  you simulate values for any node which is not a donee.  then you have to go through donor nodes in order
-  of time depth.  
-  
-  so you want a list of lists: donor, donee, time depth.  then sorted by time depth.
-  
-  you could also better make it donor, time depth, donee.  since you are choosing the donor and time depth first, then appending
-  donee.
-  
-  call this list contact_events
-  
-  for contact_event in contact_events:
-    
-    you then assign the value of the contact_event[0] to contact_event[2]
-    
-    you could also use a dictionary here.  contact_event['donor'] and contact_event['donee']
-    
-    will do it that way.
-    
-    
-    you also need to continually update some descendant nodes after checking the contact_event.
-   
-    you do this with assign_feature for the donee node, and using given_value = the value that you are assigning.
-   
-    so you do this:
-    
-    donated_value = donor_tree[donor]
-    
-    assign_feature(   ... something like donee, 
-    
-    donee_tree, donee, None, substitution_matrix, states, base_frequencies, to_exclude=donees, given_value = donated_values
-    
-    assign_feature(tree, node, parent_value, substitution_matrix, states, base_frequencies, to_exclude=[], given_value=None
-  
-    so you also need a quick way of finding donor and donee trees
-    
-    
-    so you also want a way of specifying these in the contact_events list.
-    
-    
-    so each member of contact_events could have the keys:
-    
-    donor, donee, time_depth, donor_tree, donee_tree
-    
-    one way of generating this list would be to have a list of potential donors; you pick one randomly, 
-    taking branch length into account too.
-    
-    you need a tree mapping nodes onto the trees which they belong to.
-    
-    call it nodes_to_tree_dictionary.
-    so in fact you don't need to have donor_tree and donee_tree as keys in each contact_event.
-    you find donor_tree with nodes_to_tree_dictionary[donor] and donee_tree = nodes_to_tree_dictionary[donee]
-    
-    so you have to find the tree in trees which is the donee tree; 
-    
-    you can do something like
-    
-    donee_tree = nodes_to_tree_dictionary[donee]
-    donee_tree = assign_feature(donee_tree, node, None, substitution_matrix, states, base_frequencies, to_exclude=donees, given_value=donated_value)
-    
-    you also want to make a list called donees.  this can be done with make_donees(contact_events).
-  
-  
-  
-  '''
-
-
-
   trees = open('trees.txt').readlines()
   trees = make_trees()
   locations = get_locations(trees)
@@ -569,32 +477,6 @@ def test_two_models(borrowing_rate_1, borrowing_rate_2):
   input_array, output_array = make_input_and_output_arrays(trees, list_of_languages, sample, substitution_matrix, states, base_frequencies, rate1, number_of_simulations)
   print(np.shape(input_array))
   print(np.shape(output_array))
-#   locations = get_locations(trees)
-#   nodes_to_tree_dictionary = make_nodes_to_tree_dictionary(trees)
-#   reconstructed_locations_dictionary = make_reconstructed_locations_dictionary(trees, locations, nodes_to_tree_dictionary)
-#   time_depths_dictionary = make_time_depths_dictionary(trees)
-#   parent_dictionary = make_parent_dictionary(trees)
-#   contemporary_neighbour_dictionary = make_contemporary_neighbour_dictionary(trees, reconstructed_locations_dictionary, time_depths_dictionary, parent_dictionary)
-#   potential_donors = make_potential_donors(reconstructed_locations_dictionary, time_depths_dictionary, contemporary_neighbour_dictionary)
-#   trees = contact_simulation(trees, substitution_matrix, states, base_frequencies, rate1, locations, nodes_to_tree_dictionary, reconstructed_locations_dictionary, time_depths_dictionary, parent_dictionary, contemporary_neighbour_dictionary, potential_donors)  
-#   value_dictionary = make_value_dictionary(trees, list_of_languages)
-#   print(value_dictionary)
-#   input_array = make_input_array(value_dictionary)
-#   print(np.shape(input_array))
-#   output_array = make_output_array(value_dictionary, sample)
-#   print(np.shape(output_array))
-  
-
-
-
-#   for item in sample:
-#     print(value_dictionary[item])
-
-#   training_inputs = {}
-#   if not 'training_input_' + str(rate_1).replace('.', '_') + '.npy' in os.listdir('.'):
-#     training_inputs[str(rate_1)] = contact_simulation
-#     ''' etc. ''' 
-
 
 def test16():
   rate1 = 0.01
@@ -732,160 +614,63 @@ def test_two_models(borrowing_rate_1, borrowing_rate_2):
   loss_2 = model.show_loss(test_2_input, test_2_output, na_array_1, na_array_2, relatedness_array, distance_array)
   print('Loss 1: ', loss_1)
   print('Loss 2: ', loss_2)
-
-
-#   print(np.shape(input_array))
-#   print(np.shape(output_array))
-
-
-
 def test25():
   borrowing_rate_1 = 0.01
   borrowing_rate_2 = 0.02
   test_two_models(borrowing_rate_1, borrowing_rate_2)
 
-test25()
-
-
-
-
-'''
-  need a new pipeline.
-  the easiest would be to prepare the average of the closest relatives and the average of 
-  neighbours within 500 km.
-  you have a layer of values for closest relatives, a layer for neighbours, and the intercept.
-  
-  another way would be to prepare an array of genealogical relatedness for the samples,
-  and geographical distance.
+def test26():
+  '''
+  loading the grambank data
   
   
-  so the work flow should be;
-  you still produce the simulated feature array.
-  you have samples, which is an array of indeces.
-  you then want to make an array of shape (samples, languages)
-  this array is an array of genealogical distances of each member of the sample to each of the input languages.
-  
-  call this function 
-  make_genealogical_distances_array(trees, samples, 
-  
-  how would i design this workflow from scratch?
-  
-  you have the simulation, where you assign values.  then what?
-  
-  you have the list of tips that are in the simulation.
-  you sample from this list to make the sample of languages.
-  
-  you have a dictionary which is already prepared, which is the genealogical relationships between tips in the list of languages.
-  you also have a dictionary of distances.
-  
-  so you can query these dictionaries when making the genealogical distance and geographical distance arrays.
-  
-  you make an array using trees and the language list; this is the values for the languages for that simulation.
-  you make an array using trees and the sample list; this is the value for the sample.
-  you append these arrays to input and output respectively.
-  
-  you also make the genealogical distance array, which are only needed once and can be broadcast.
-  you have the language list and the sample list; for each language, for each member of the sample, you find
-  the genealogical distance.  you end up with an array of shape (languages, samples)
-  do the same for geographical distance.
-  
-  'unrelated' is one possible value for geographical distance.
-  
-  you need to change these arrays into one hot vectors next.  
-  so it is turned from (languages, samples) to (languages, samples, number of bins)
-  you can do all of this in numpy.
-  
-  then the model loads the input array of shape (None, 1, languages),
-
-
-  weights was previously of shape (1, samples, languages)
-  and you then multiplied element-wise by the input.  
+  '''
+  df = readData('data.txt')
+  features = getUniqueFeatures(df)
+  f = getMultistateFeatures(df)
+  x= getAllValues(df, 'zuni1245')
+  print(x)
+  x = createDataFrame(df)
+  print(x)
+  x = createDictionary(df)
+  print(x['zuni1245']['values'])
+  grambank_data = x
   
   
-  in the new method,
-  you have input of (None, 1, languages),
-  then you are trying to make a multiplier of shape (1, samples, languages)
-  you make this by using the relatedness array which is of shape (1, samples, languages, number of bins),
-  multiplied element-wise by relatedness-weights which are of shape (1,1,1,number of bins),
-  then you reduce sum along the last axis, making
-  (1, samples, languages).
-  the same applies to the geographical distances array.
+  '''
+  how do I want to inspect it?
+  you want to make the input and output arrays again;
+  also need the sample.
+  
+  '''
+  
+  feature_index = 0
+  print(features[feature_index])
 
+  trees = make_trees()
+  list_of_languages = get_languages_in_grambank()  
+  number_of_samples = 900
+  number_of_languages = len(list_of_languages)
+  sample = np.random.choice(np.array(list_of_languages), number_of_samples, replace=False)
+  number_of_relatedness_bins = 10
+  number_of_distance_bins = 10
   
-  you multiply this by the input to make
-  relatedness_values of shape (None, samples, languages)
-  geographical_distance_values of shape (None, samples, languages),
-  and the intercept of shape [1]
-
-  you have relateness probability a and distance probability b
-  
-  1 - (1-a)(1-b) is the probability of having a shared value between two languages,
-  if you think of a and b as the probability of having a shared value due to relatedness and due to contact respectively
-  
-  then 1 - that * intercept.
-  
-  
-  besides that, I would like the pipeline to make it easy to store training and test data, without having to write out the steps
-  make a function along the lines of 
-  test_two_models(borrowing_rate_1, borrowing_rate_2).
-  you could make this as a test function.
-
+def test27():
+  value_dictionary = get_grambank_value_dictionary()
   
   
-  
-'''
+  trees = make_trees()
+  list_of_languages = get_languages_in_grambank()  
+  number_of_samples = 900
+  number_of_languages = len(list_of_languages)
+  sample = np.random.choice(np.array(list_of_languages), number_of_samples, replace=False)
+  number_of_relatedness_bins = 10
+  number_of_distance_bins = 10
+
+  input_array, output_array, relatedness_array, distance_array, na_array_1, na_array_2 = make_all_arrays_for_grambank(value_dictionary, trees, list_of_languages, sample, number_of_relatedness_bins=10, number_of_distance_bins=10)
 
 
-
-#   contact_simulation_writing_to_file('simulated_feature_array_test_002.npy', trees, list_of_languages, substitution_matrix, states, base_frequencies, rate_per_branch_length_per_pair=rate2, number_of_simulations=number_of_simulations)
-#   array = np.load('simulated_feature_array_test_001.npy')
-#   print(np.sum(array))
-#   array = np.load('simulated_feature_array_test_002.npy')
-#   print(np.sum(array))
-#   reconstructed_locations_dictionary = make_reconstructed_locations_dictionary(trees, locations)
-#   time_depths_dictionary = make_time_depths_dictionary(trees)
-#   contemporary_neighbours_dictionary = make_contemporary_neighbour_dictionary(trees, reconstructed_locations_dictionary, time_depths_dictionary)
-#   
-#   
-#   
-#   
-# 
-# 
-# 
-#   dataFrame = assignIsoValues('language.csv')
-#   result = reconstructLocationsForAllTrees(trees, dataFrame, numberUpTo = 'all', limitToIsos = True)
-#   outputFile = open('reconstructedLocations.txt','w')
-#   for member in result:
-#     outputFile.write(member + '\t' + str(result[member]) + '\n')
-
-
-
-
-
-
-
-
-
-
-
-
-# def test8():
-#   '''
-#   making a pipeline for submitting a feature
-#   
-#   it is a function which takes a feature array (simulated or the real data), and returns the loss, given a setting of stability
-#   
-#   
-#   
-#   '''
-#   stability_value = 0.98
-#   test_data = produce_simulated_feature_array(trees, substitution_matrix, states, base_frequencies, number_of_simulations=10, list_of_languages=list_of_languages)
-#   test_input = make_input(test_data)
-#   test_output = make_output(test_data, sample)
-#   show_loss_for_stability_value(feature_array, stability_value)
-  
-
-
+test27()
 
 
 
