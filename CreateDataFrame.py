@@ -81,14 +81,17 @@ def createDictionary(dataframe):
     except:
       dict[index] = {}
     if not row['Parameter_ID'] in multistateFeatures:
-      dict[index][row['Parameter_ID']] = row['Value']
+      value = row['Value']
+      if value == '?':
+        value = None
+      dict[index][row['Parameter_ID']] = value
     else:
       value = row['Value']
       for member in ['1','2']:
         if value == member or value == '3':
           dict[index][row['Parameter_ID'] + '_' + member]  = '1'
         elif value == '?':
-          dict[index][row['Parameter_ID'] + '_' + member]  = '?'
+          dict[index][row['Parameter_ID'] + '_' + member]  = None
         else:
           dict[index][row['Parameter_ID'] + '_' + member]  = '0'
   features = getUniqueFeatures(dataframe)

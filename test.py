@@ -4,7 +4,7 @@ import json
 from preprocessing_for_grambank import *
 from model import *
 import os
-
+from pipelines import *
 
 np.random.seed(10)
 
@@ -656,9 +656,9 @@ def test26():
   number_of_distance_bins = 10
   
 def test27():
-  value_dictionary = get_grambank_value_dictionary()
-  
-  
+  grambank_value_dictionary = get_grambank_value_dictionary()
+  feature_name = 'GB131'
+  value_dictionary = further_preprocessing_of_grambank_value_dictionary(grambank_value_dictionary, feature_name)
   trees = make_trees()
   list_of_languages = get_languages_in_grambank()  
   number_of_samples = 900
@@ -668,9 +668,79 @@ def test27():
   number_of_distance_bins = 10
 
   input_array, output_array, relatedness_array, distance_array, na_array_1, na_array_2 = make_all_arrays_for_grambank(value_dictionary, trees, list_of_languages, sample, number_of_relatedness_bins=10, number_of_distance_bins=10)
+  '''temporarily not using the na arrays:'''  
+  na_array_1 = np.ones([1, number_of_samples, 1])
+  na_array_2 = np.ones([1, 1, number_of_languages]) 
+  model = Model(number_of_samples, number_of_languages, number_of_relatedness_bins, number_of_distance_bins) 
+  model.train(input_array, output_array, na_array_1, na_array_2, relatedness_array, distance_array, steps=200)
+  model.show_weights()
 
 
-test27()
+def test28():
+  '''
+  two goals:
+  
+  1. have a function which takes an input, output etc. array and finds the parameters which fit best
+  2. have a way of testing this with the simulated data to show the performance of this method
+  
+  will do the first goal in this test
+  
+  the function takes 
+  input_array
+  output_array
+  na_array_1
+  na_array_2
+  trees
+  list_of_languages
+  sample
+  states
+  number_of_relatedness_bins
+  number_of_distance_bins
+  number_of_training_simulations
+  number of steps
+  
+  it returns a dictionary with:
+  
+  'substitution_matrix'
+  'base_frequencies', 
+  'rate_per_branch_length_per_pair'
+  
+  also perhaps ideally later a confidence (not for that particular analysis, but in general).
+  '''
+  grambank_value_dictionary = get_grambank_value_dictionary()
+  feature_name = 'GB131'
+  value_dictionary = further_preprocessing_of_grambank_value_dictionary(grambank_value_dictionary, feature_name)
+  trees = make_trees()
+  list_of_languages = get_languages_in_grambank()  
+  states = ['0', '1']
+  number_of_samples = 900
+  number_of_languages = len(list_of_languages)
+  sample = np.random.choice(np.array(list_of_languages), number_of_samples, replace=False)
+  number_of_relatedness_bins = 10
+  number_of_distance_bins = 10
+  number_of_simulations = 3
+  number_of_steps = 120
+  input_array, output_array, relatedness_array, distance_array, na_array_1, na_array_2 = make_all_arrays_for_grambank(value_dictionary, trees, list_of_languages, sample, number_of_relatedness_bins=number_of_relatedness_bins, number_of_distance_bins=number_of_distance_bins) 
+  x = search_through_parameters_single_feature(input_array, output_array, relatedness_array, distance_array, na_array_1, na_array_2, trees, list_of_languages, sample, states, number_of_relatedness_bins=number_of_relatedness_bins, number_of_distance_bins=number_of_distance_bins, number_of_simulations=number_of_simulations, number_of_steps=number_of_steps)  
+
+def test29():
+  grambank_value_dictionary = get_grambank_value_dictionary()
+  feature_name = 'GB131'
+  value_dictionary = further_preprocessing_of_grambank_value_dictionary(grambank_value_dictionary, feature_name)
+  trees = make_trees()
+  list_of_languages = get_languages_in_grambank()  
+  states = ['0', '1']
+  number_of_samples = 900
+  number_of_languages = len(list_of_languages)
+  sample = np.random.choice(np.array(list_of_languages), number_of_samples, replace=False)
+  number_of_relatedness_bins = 10
+  number_of_distance_bins = 10
+  number_of_simulations = 3
+  number_of_steps = 120
+  input_array, output_array, relatedness_array, distance_array, na_array_1, na_array_2 = make_all_arrays_for_grambank(value_dictionary, trees, list_of_languages, sample, number_of_relatedness_bins=number_of_relatedness_bins, number_of_distance_bins=number_of_distance_bins) 
+  x = search_through_parameters_single_feature(input_array, output_array, relatedness_array, distance_array, na_array_1, na_array_2, trees, list_of_languages, sample, states, number_of_relatedness_bins=number_of_relatedness_bins, number_of_distance_bins=number_of_distance_bins, number_of_simulations=number_of_simulations, number_of_steps=number_of_steps)  
+
+test29()
 
 
 

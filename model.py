@@ -61,7 +61,7 @@ class Model():
     for i in range(steps):  
       print("After %d iterations:" % i)
       print(self.sess.run(self.total_loss, feed_dict=self.feed))
-      print(self.sess.run(self.distance_weights))
+      print(self.sess.run(self.relatedness_weights))
       self.sess.run(self.train_step, feed_dict = self.feed)
       self.sess.run(self.clip_op_1)
       self.sess.run(self.clip_op_2)
