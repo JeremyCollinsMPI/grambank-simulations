@@ -1,5 +1,6 @@
 from simulation import *
 from model import *
+from copy import deepcopy
 
 '''
   the function takes 
@@ -45,8 +46,8 @@ def create_initial_borrowing_event_rate():
   return 0.1
 
 def propose_new(input_array, output_array, na_array_1, na_array_2, relatedness_array, distance_array, trees, list_of_languages, sample, substitution_matrix, states, base_frequencies, rate_per_branch_length_per_pair, number_of_simulations, number_of_steps, loss, model, proposal_rate_dictionary):
-  new_substitution_matrix = substitution_matrix
-  new_base_frequencies = base_frequencies
+  new_substitution_matrix = deepcopy(substitution_matrix)
+  new_base_frequencies = deepcopy(base_frequencies)
   new_rate_per_branch_length_per_pair = rate_per_branch_length_per_pair 
   dice_roll = np.random.choice([0, 1, 2, 3], 1)[0]
   if dice_roll == 0:
@@ -108,8 +109,8 @@ def propose_new(input_array, output_array, na_array_1, na_array_2, relatedness_a
   print(new_loss)
   if new_loss < loss:
     print('accept')
-    substitution_matrix = new_substitution_matrix
-    base_frequencies = new_base_frequencies
+    substitution_matrix = deepcopy(new_substitution_matrix)
+    base_frequencies = deepcopy(new_base_frequencies)
     rate_per_branch_length_per_pair = new_rate_per_branch_length_per_pair
     loss = new_loss
     proposal_rate_dictionary[to_change] = proposal_rate_dictionary[to_change] + 0.01
