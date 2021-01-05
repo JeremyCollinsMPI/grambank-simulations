@@ -59,9 +59,9 @@ class Model():
     self.feed = {self.input: input_array, self.output: output_array, self.na_array_1: na_array_1, 
     self.na_array_2: na_array_2, self.relatedness_array: relatedness_array, self.distance_array: distance_array}
     for i in range(steps):  
-      print("After %d iterations:" % i)
-      print(self.sess.run(self.total_loss, feed_dict=self.feed))
-      print(self.sess.run(self.relatedness_weights))
+#       print("After %d iterations:" % i)
+#       print(self.sess.run(self.total_loss, feed_dict=self.feed))
+#       print(self.sess.run(self.relatedness_weights))
       self.sess.run(self.train_step, feed_dict = self.feed)
       self.sess.run(self.clip_op_1)
       self.sess.run(self.clip_op_2)
@@ -71,7 +71,7 @@ class Model():
     self.feed = {self.input: input_array, self.output: output_array, self.na_array_1: na_array_1, 
     self.na_array_2: na_array_2, self.relatedness_array: relatedness_array, self.distance_array: distance_array}
     total_loss = self.sess.run(self.total_loss, feed_dict=self.feed)
-    print(total_loss)
+#     print(total_loss)
     return total_loss
 
   def show_intercept(self):

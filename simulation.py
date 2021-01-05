@@ -9,6 +9,20 @@ import json
 
 dir = os.listdir('.')
 
+def timeit(method):
+  def timed(*args, **kw):
+    ts = time.time()
+    result = method(*args, **kw)
+    te = time.time()
+    if 'log_time' in kw:
+      name = kw.get('log_name', method.__name__.upper())
+      kw['log_time'][name] = int((te - ts))
+    else:
+      print('%r  %2.2f s' % \
+      (method.__name__, (te - ts) ))
+    return result
+  return timed 
+
 def find_parent(node, parent_dictionary):
   try:
     parent = parent_dictionary[node]
@@ -308,7 +322,10 @@ def make_contact_events(potential_donors, contemporary_neighbour_dictionary, tim
   return contact_events, donees
 
 def make_node_value(parent_value, branch_length, substitution_matrix, states):
-  matrix = fractional_matrix_power(np.array(substitution_matrix), branch_length)
+  if branch_length == 1:
+    matrix = np.array(substitution_matrix)
+  else:
+    matrix = fractional_matrix_power(np.array(substitution_matrix), branch_length)
   parent_value_index = states.index(parent_value)
   row = matrix[parent_value_index]
   node_value_index = np.random.choice(np.arange(0, len(states)), p = row)

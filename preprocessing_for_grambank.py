@@ -19,18 +19,17 @@ def get_grambank_value_dictionary():
   json.dump(grambank_value_dictionary, open('grambank_value_dictionary.json', 'w'), indent=4)
   return grambank_value_dictionary
 
-def further_preprocessing_of_grambank_value_dictionary(grambank_value_dictionary, feature_index):
-  '''
-  the value dictionary needs to have the structure:
+def further_preprocessing_of_grambank_value_dictionary(grambank_value_dictionary, feature_name):
+  value_dictionary = {}
+  for item in list(grambank_value_dictionary.items()):
+    glottocode = item[0] 
+    try:
+      value = item[1][feature_name]
+    except:
+      value = None
+    value_dictionary[glottocode] = value
+  return value_dictionary
   
-  glottocode : value, which is a float.
-  it can have NaN I think at this point.  you need to change nans to zero in a later function
-  anyway when you make the na arrays.
-  
-  
-  
-  '''
-
 def make_input_and_output_arrays_for_grambank(value_dictionary, sample):
   input_array = make_input_array(value_dictionary)
   output_array = make_output_array(value_dictionary, sample)
@@ -48,12 +47,12 @@ def make_na_array_1(value_dictionary):
     else:
       value = 1
     result.append(value)
-  return np.array([result])
+  return np.array([[result]])
 
 def make_na_array_2(value_dictionary, sample):
   result = []
   for item in sample:
-    value = value_dictionary[key]
+    value = value_dictionary[item]
     if value == None:
       value = 0
     else:
@@ -61,6 +60,12 @@ def make_na_array_2(value_dictionary, sample):
     result.append(value)
   result = np.array(result)
   result = np.reshape(result, (np.shape(result)[0], 1))
+  result = [result]
+  result = np.array(result)
+  result = np.array(result)
+  '''
+  should be of shape 1, samples, 1
+  '''
   return result
 
 def make_all_arrays_for_grambank(value_dictionary, trees, list_of_languages, sample, number_of_relatedness_bins=10, number_of_distance_bins=10):  

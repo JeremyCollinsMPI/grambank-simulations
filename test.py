@@ -723,6 +723,7 @@ def test28():
   input_array, output_array, relatedness_array, distance_array, na_array_1, na_array_2 = make_all_arrays_for_grambank(value_dictionary, trees, list_of_languages, sample, number_of_relatedness_bins=number_of_relatedness_bins, number_of_distance_bins=number_of_distance_bins) 
   x = search_through_parameters_single_feature(input_array, output_array, relatedness_array, distance_array, na_array_1, na_array_2, trees, list_of_languages, sample, states, number_of_relatedness_bins=number_of_relatedness_bins, number_of_distance_bins=number_of_distance_bins, number_of_simulations=number_of_simulations, number_of_steps=number_of_steps)  
 
+@timeit
 def test29():
   grambank_value_dictionary = get_grambank_value_dictionary()
   feature_name = 'GB131'
@@ -735,11 +736,11 @@ def test29():
   sample = np.random.choice(np.array(list_of_languages), number_of_samples, replace=False)
   number_of_relatedness_bins = 10
   number_of_distance_bins = 10
-  number_of_simulations = 3
+  number_of_simulations = 4
   number_of_steps = 120
   input_array, output_array, relatedness_array, distance_array, na_array_1, na_array_2 = make_all_arrays_for_grambank(value_dictionary, trees, list_of_languages, sample, number_of_relatedness_bins=number_of_relatedness_bins, number_of_distance_bins=number_of_distance_bins) 
-  x = search_through_parameters_single_feature(input_array, output_array, relatedness_array, distance_array, na_array_1, na_array_2, trees, list_of_languages, sample, states, number_of_relatedness_bins=number_of_relatedness_bins, number_of_distance_bins=number_of_distance_bins, number_of_simulations=number_of_simulations, number_of_steps=number_of_steps)  
-
+  result = search_through_parameters_single_feature(input_array, output_array, relatedness_array, distance_array, na_array_1, na_array_2, trees, list_of_languages, sample, states, number_of_relatedness_bins=number_of_relatedness_bins, number_of_distance_bins=number_of_distance_bins, number_of_simulations=number_of_simulations, number_of_steps=number_of_steps)  
+  print(result)
 test29()
 
 
