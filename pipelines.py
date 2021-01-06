@@ -114,9 +114,9 @@ def propose_new(input_array, output_array, na_array_1, na_array_2, relatedness_a
     base_frequencies = deepcopy(new_base_frequencies)
     rate_per_branch_length_per_pair = new_rate_per_branch_length_per_pair
     loss = new_loss
-    proposal_rate_dictionary[to_change] = proposal_rate_dictionary[to_change] / 1.5
-  else:
     proposal_rate_dictionary[to_change] = proposal_rate_dictionary[to_change] * 1.5
+  else:
+    proposal_rate_dictionary[to_change] = proposal_rate_dictionary[to_change] / 1.5
   
   return substitution_matrix, base_frequencies, rate_per_branch_length_per_pair, loss, proposal_rate_dictionary
 
