@@ -334,8 +334,29 @@ def make_node_value(parent_value, branch_length, substitution_matrix, states):
 def choose_root_value(base_frequencies):
   return np.random.choice(list(base_frequencies.keys()), p = list(base_frequencies.values()))
 
-def assign_feature(tree, node, parent_value, substitution_matrix, states, base_frequencies, to_exclude=[], given_value=None):
-  children = findChildren(node)
+def make_child_dictionary(trees):
+  if 'child_dictionary.json' in dir:
+    child_dictionary = json.load(open('child_dictionary.json', 'r'))
+    return child_dictionary
+  child_dictionary = {}
+  for i in range(len(trees)):
+    tree = trees[i]
+    for node in tree:
+      children = findChildren(node)
+      child_dictionary[node] = children
+  json.dump(child_dictionary, open('child_dictionary.json', 'w'), indent=4)
+  return child_dictionary
+  
+def find_children(node, child_dictionary):
+  try:
+    return child_dictionary[node]
+  except:
+    print(node)
+    print('this should not happen')
+    return None
+
+def assign_feature(tree, node, parent_value, substitution_matrix, states, base_frequencies, child_dictionary, to_exclude=[], given_value=None):
+  children = find_children(node, child_dictionary)
   if given_value == None:
     if parent_value == None:
       node_value = choose_root_value(base_frequencies)
@@ -349,17 +370,17 @@ def assign_feature(tree, node, parent_value, substitution_matrix, states, base_f
     node_value = given_value
   for child in children:
     if not child in to_exclude:
-      tree = assign_feature(tree, child, node_value, substitution_matrix, states, base_frequencies)
+      tree = assign_feature(tree, child, node_value, substitution_matrix, states, base_frequencies, child_dictionary)
   return tree
 
-def contact_simulation(trees, substitution_matrix, states, base_frequencies, rate_per_branch_length_per_pair, locations, nodes_to_tree_dictionary, reconstructed_locations_dictionary, time_depths_dictionary, parent_dictionary, contemporary_neighbour_dictionary, potential_donors):
+def contact_simulation(trees, substitution_matrix, states, base_frequencies, rate_per_branch_length_per_pair, locations, nodes_to_tree_dictionary, reconstructed_locations_dictionary, time_depths_dictionary, parent_dictionary, contemporary_neighbour_dictionary, potential_donors, child_dictionary):
   contact_events, donees = make_contact_events(potential_donors, contemporary_neighbour_dictionary, time_depths_dictionary, rate_per_branch_length_per_pair)
   json.dump(contact_events, open('contact_events.json', 'w'), indent=4)
   json.dump(donees, open('donees.json', 'w'), indent=4)
   for i in range(len(trees)):
     tree = trees[i]
     root = findRoot(tree)
-    trees[i] = assign_feature(tree, root, parent_value=None, substitution_matrix=substitution_matrix, states=states, base_frequencies=base_frequencies, to_exclude=donees, given_value=None)
+    trees[i] = assign_feature(tree, root, parent_value=None, substitution_matrix=substitution_matrix, states=states, base_frequencies=base_frequencies, child_dictionary=child_dictionary, to_exclude=donees, given_value=None)
   
   for contact_event in contact_events:
     donor = list(contact_event['donor'].keys())[0]
@@ -369,7 +390,7 @@ def contact_simulation(trees, substitution_matrix, states, base_frequencies, rat
     donor_value = trees[donor_tree_index][donor]
 #     if donor in donees:
 #       print('matey')
-    trees[donee_tree_index] = assign_feature(trees[donee_tree_index], donee, parent_value=None, substitution_matrix=substitution_matrix, states=states, base_frequencies=base_frequencies, to_exclude=donees, given_value=donor_value)
+    trees[donee_tree_index] = assign_feature(trees[donee_tree_index], donee, parent_value=None, substitution_matrix=substitution_matrix, states=states, base_frequencies=base_frequencies, child_dictionary=child_dictionary, to_exclude=donees, given_value=donor_value)
     if donee in donees:
       del donees[donee]  
   return trees
@@ -414,10 +435,11 @@ def make_input_and_output_arrays(trees, list_of_languages, sample, substitution_
   parent_dictionary = make_parent_dictionary(trees)
   contemporary_neighbour_dictionary = make_contemporary_neighbour_dictionary(trees, reconstructed_locations_dictionary, time_depths_dictionary, parent_dictionary)
   potential_donors = make_potential_donors(reconstructed_locations_dictionary, time_depths_dictionary, contemporary_neighbour_dictionary)
+  child_dictionary = make_child_dictionary(trees)
   input_array = []
   output_array = []
   for i in range(number_of_simulations):
-    trees = contact_simulation(trees, substitution_matrix, states, base_frequencies, rate_per_branch_length_per_pair, locations, nodes_to_tree_dictionary, reconstructed_locations_dictionary, time_depths_dictionary, parent_dictionary, contemporary_neighbour_dictionary, potential_donors)
+    trees = contact_simulation(trees, substitution_matrix, states, base_frequencies, rate_per_branch_length_per_pair, locations, nodes_to_tree_dictionary, reconstructed_locations_dictionary, time_depths_dictionary, parent_dictionary, contemporary_neighbour_dictionary, potential_donors, child_dictionary)
     value_dictionary = make_value_dictionary(trees, list_of_languages)
     to_append_to_input_array = make_input_array(value_dictionary)
     to_append_to_output_array = make_output_array(value_dictionary, sample)
