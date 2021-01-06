@@ -375,12 +375,10 @@ def assign_feature(tree, node, parent_value, substitution_matrix, states, base_f
   return tree
 
 def contact_simulation(trees, substitution_matrix, states, base_frequencies, rate_per_branch_length_per_pair, locations, nodes_to_tree_dictionary, reconstructed_locations_dictionary, time_depths_dictionary, parent_dictionary, contemporary_neighbour_dictionary, potential_donors, child_dictionary):
-  print('making contact events')
   contact_events, donees = make_contact_events(potential_donors, contemporary_neighbour_dictionary, time_depths_dictionary, rate_per_branch_length_per_pair)
   json.dump(contact_events, open('contact_events.json', 'w'), indent=4)
   json.dump(donees, open('donees.json', 'w'), indent=4)
   for i in range(len(trees)):
-    print(i)
     tree = trees[i]
     root = findRoot(tree)
     trees[i] = assign_feature(tree, root, parent_value=None, substitution_matrix=substitution_matrix, states=states, base_frequencies=base_frequencies, child_dictionary=child_dictionary, to_exclude=donees, given_value=None)
