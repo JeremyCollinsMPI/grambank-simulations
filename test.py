@@ -758,7 +758,31 @@ def test30():
   '''
   search_through_parameters_single_feature_accuracy_test()
   
-
+def test31():
+  '''
+  want to begin the pipeline of testing for dependency between two features
+  
+  simulation needs new functions;
+  
+  the idea is that you create the contact events;
+  you have the parameters for each feature;
+  
+  in one scenario, you simulate each feature independently but using the same contact events.
+  
+  in the other scenario, you simulate the first feature as normal;
+  the other feature is simulated with the following rules:
+  1. say that state A of feature 1 is linked to state B of feature 2.
+  2. the substitution matrix of feature 2 is 
+  
+  
+  the model this time is looking at the probability of a language having a particular value given it has
+  a particular value for the first feature, + some intercept for the particular value.  the model fits that probability,
+  then you calculate the loss.
+  
+  
+  
+  
+  '''
 
 test30()
 
