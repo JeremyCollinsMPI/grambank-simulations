@@ -746,7 +746,21 @@ def test29():
   result = search_through_parameters_single_feature(input_array, output_array, relatedness_array, distance_array, na_array_1, na_array_2, trees, list_of_languages, sample, states, number_of_relatedness_bins=number_of_relatedness_bins, number_of_distance_bins=number_of_distance_bins, number_of_simulations=number_of_simulations, number_of_steps=number_of_steps)  
   print(result)
 
-test29()
+
+def test30():
+  '''
+  now want to test with simulated data
+  
+  so make a function for generating random values for the substitution matrix, base frequencies and borrowability,
+  making the arrays, and searching through the parameters and comparing the results.s
+  
+
+  '''
+  search_through_parameters_single_feature_accuracy_test()
+  
+
+
+test30()
 
 
 
