@@ -6,6 +6,7 @@ from copy import deepcopy
 import multiprocessing
 import os
 import json
+import pandas as pd
 
 dir = os.listdir('.')
 
