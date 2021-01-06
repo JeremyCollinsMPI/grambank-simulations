@@ -1,4 +1,4 @@
-from LikelihoodFunction import *
+from scipy.linalg import fractional_matrix_power
 from TreeFunctions import *
 import numpy as np
 from general import *
