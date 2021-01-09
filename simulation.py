@@ -429,39 +429,34 @@ def make_value_dictionary(final_result_trees, list_of_languages):
         value_dictionary[glottocode] = [float(x) for x in values]
   return value_dictionary
 
-'''
-how do you make the input array?
-
-this needs to be decided when you are writing the new classifier.
-
-
-
-'''
-
-
-
-
-
 def make_input_array(value_dictionary):
   result = []
   sorted_keys = sorted(value_dictionary.keys())
   for key in sorted_keys:
-    value = value_dictionary[key]
-    if value == None:
-      value = 0
-    result.append(value)
+    values = value_dictionary[key]
+    values = [0 if x == None else x for x in values]
+    result.append(values)
   return np.array([result])
 
 def make_output_array(value_dictionary, sample):
   result = []
   for item in sample:
-    value = value_dictionary[item]
-    if value == None:
-      value = 0
-    result.append(value)
+    values = value_dictionary[item]
+    values = [0 if x == None else x for x in values]
+    result.append(values)
   result = np.array(result)
-  result = np.reshape(result, (np.shape(result)[0], 1))
+  shape = np.shape(result)
+  result = np.reshape(result, (shape[0], 1, shape[1]))
   return result
+
+
+
+
+
+
+
+
+
 
 def make_input_and_output_arrays(trees, list_of_languages, sample, substitution_matrix, states, base_frequencies, rate_per_branch_length_per_pair, borrowability, number_of_simulations):
   locations = get_locations(trees)

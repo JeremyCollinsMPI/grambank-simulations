@@ -884,7 +884,17 @@ def test32():
   list_of_languages = get_languages_in_grambank()  
   value_dictionary = make_value_dictionary(final_result_trees, list_of_languages) 
   print(value_dictionary)
-test32()
+
+def test33():
+  '''
+  now need to make input and output arrays for the new model
+  input is of shape [None, 1, number_of_languages, number_of_features]
+  output is of shape [None, number_of_samples, 1, number_of_features]
+  
+  
+  '''
+
+test33()
 
 
 

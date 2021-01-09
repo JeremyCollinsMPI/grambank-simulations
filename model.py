@@ -10,10 +10,6 @@ class Model():
 
   learn_rate = 0.01
 
-  '''
-  now the input and output arrays need number of features as well
-  '''
-
   def __init__(self, number_of_samples, number_of_languages, number_of_features, number_of_relatedness_bins, number_of_distance_bins):
     self.sess = tf.Session()
 
@@ -38,12 +34,6 @@ class Model():
     self.r_final = self.r_3
     self.d_final = self.d_3
     
-    '''
-    these are of shape [1, samples, languages, features]
-    borrowability and intercepts should be of shape [1, 1, 1, features] after reshaping
-    
-    '''
-    
     self.intercept = tf.get_variable(name='intercept', dtype = tf.float32, shape = [1, 1, 1, features],  initializer=tf.truncated_normal_initializer(mean=0.5, stddev=0.01))
     self.borrowability = tf.get_variable(name='intercept', dtype = tf.float32, shape = [1, 1, 1, features],  initializer=tf.truncated_normal_initializer(mean=0.5, stddev=0.01))
     
@@ -54,14 +44,6 @@ class Model():
     self.prediction_2 = (self.r_final * input) + ((1.0 - self.r_final) * intercept)
     self.prediction_2 = self.prediction_2 * (1.0 - self.d_final)
     
-    '''
-    both prediction arrays are of shape
-    
-    [none, samples, languages, features]
-    
-    now want to reduce multiply them; could do this by log and then summing
-    '''
-
     self.actual = self.output
     self.loss_1 = 1.0 - tf.abs(self.actual - self.prediction_1)
     self.loss_2 = 1.0 - tf.abs(self.actual - self.prediction_2)
@@ -100,8 +82,8 @@ class Model():
     self.feed = {self.input: input_array, self.output: output_array, self.na_array_1: na_array_1, 
     self.na_array_2: na_array_2, self.relatedness_array: relatedness_array, self.distance_array: distance_array}
     for i in range(steps):  
-#       print("After %d iterations:" % i)
-#       print(self.sess.run(self.total_loss, feed_dict=self.feed))
+      print("After %d iterations:" % i)
+      print(self.sess.run(self.total_loss, feed_dict=self.feed))
 #       print(self.sess.run(self.relatedness_weights))
       self.sess.run(self.train_step, feed_dict = self.feed)
       self.sess.run(self.clip_op_1)
