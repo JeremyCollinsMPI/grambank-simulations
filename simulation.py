@@ -449,16 +449,7 @@ def make_output_array(value_dictionary, sample):
   result = np.reshape(result, (shape[0], 1, shape[1]))
   return result
 
-
-
-
-
-
-
-
-
-
-def make_input_and_output_arrays(trees, list_of_languages, sample, substitution_matrix, states, base_frequencies, rate_per_branch_length_per_pair, borrowability, number_of_simulations):
+def make_input_and_output_arrays(trees, list_of_languages, sample, substitution_matrix_list, states_list, base_frequencies_list, rate_per_branch_length_per_pair, borrowability_list, number_of_simulations):
   locations = get_locations(trees)
   nodes_to_tree_dictionary = make_nodes_to_tree_dictionary(trees)
   reconstructed_locations_dictionary = make_reconstructed_locations_dictionary(trees, locations, nodes_to_tree_dictionary)
@@ -470,13 +461,18 @@ def make_input_and_output_arrays(trees, list_of_languages, sample, substitution_
   input_array = []
   output_array = []
   for i in range(number_of_simulations):
-    trees = contact_simulation(trees, substitution_matrix, states, base_frequencies, rate_per_branch_length_per_pair, borrowability, locations, nodes_to_tree_dictionary, reconstructed_locations_dictionary, time_depths_dictionary, parent_dictionary, contemporary_neighbour_dictionary, potential_donors, child_dictionary)
+    trees = contact_simulation(trees, substitution_matrix_list, states_list, base_frequencies_list, rate_per_branch_length_per_pair, borrowability_list, locations, nodes_to_tree_dictionary, reconstructed_locations_dictionary, time_depths_dictionary, parent_dictionary, contemporary_neighbour_dictionary, potential_donors, child_dictionary)
     value_dictionary = make_value_dictionary(trees, list_of_languages)
     to_append_to_input_array = make_input_array(value_dictionary)
     to_append_to_output_array = make_output_array(value_dictionary, sample)
     input_array.append(to_append_to_input_array)
     output_array.append(to_append_to_output_array)
   return input_array, output_array
+
+
+
+
+
 
 def make_relatedness_pairs_dictionary(list_of_languages, trees, parent_dictionary):
   f = 'relatedness_pairs_dictionary.json'
