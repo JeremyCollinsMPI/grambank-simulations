@@ -764,6 +764,33 @@ def random_test_3():
 def random_test_4():
   x = np.random.random(100000)
 
+@timeit
+def func_1(x, y, length):
+  for i in range(length):
+    a = x[i]
+    b = y[i]
+
+@timeit
+def func_2(x,y):
+  z = zip(x,y)
+  for item in z:
+    a = item[0]
+    b = item[1]  
+  
+
+def zip_test_1():
+  length = 10000000
+  x = rep(1, length)
+  y = rep(2, length)
+  func_1(x,y,length)
+
+
+def zip_test_2():
+  length = 10000000
+  x = rep(1, length)
+  y = rep(2, length)
+  func_2(x,y)
+
 
 def test30():
   '''
@@ -776,8 +803,9 @@ def test30():
   '''
   search_through_parameters_single_feature_accuracy_test()
   
-def test31():
-  '''
+
+'''
+  
   want to begin the pipeline of testing for dependency between two features
   
   simulation needs new functions;
@@ -813,10 +841,50 @@ def test31():
   
   that in itself is not difficult, but requires modifying function inputs carefully.
   ADD 'borrowability' as a variable immediately after rate per branch lenght per pair in all relevant functions.
-  '''
+'''
+  
 
-# test30()
-random_test_4()
+def test31():
+  '''
+  test new contact simulation
+  '''
+  trees = make_trees()
+  substitution_matrix_list = [ [[0.95,0.05],[0.05,0.95]], [[0.9,0.1],[0.1,0.9]] ]
+  states_list = [ ['0','1'], ['0', '1'] ]
+  base_frequencies_list = [ {'0': 1, '1': 0}, {'0': 0.8, '1': 0.2} ]
+  rate_per_branch_length_per_pair = 0.03
+  borrowability_list = [1, 1]
+  locations = get_locations(trees)
+  nodes_to_tree_dictionary = make_nodes_to_tree_dictionary(trees)
+  reconstructed_locations_dictionary = make_reconstructed_locations_dictionary(trees, locations, nodes_to_tree_dictionary)
+  time_depths_dictionary = make_time_depths_dictionary(trees)
+  parent_dictionary = make_parent_dictionary(trees)
+  contemporary_neighbour_dictionary = make_contemporary_neighbour_dictionary(trees, reconstructed_locations_dictionary, time_depths_dictionary, parent_dictionary)
+  potential_donors = make_potential_donors(reconstructed_locations_dictionary, time_depths_dictionary, contemporary_neighbour_dictionary)
+  child_dictionary = make_child_dictionary(trees)  
+  final_result_trees = contact_simulation(trees, substitution_matrix_list, states_list, base_frequencies_list, rate_per_branch_length_per_pair, borrowability_list, locations, nodes_to_tree_dictionary, reconstructed_locations_dictionary, time_depths_dictionary, parent_dictionary, contemporary_neighbour_dictionary, potential_donors, child_dictionary)
+  json.dump(final_result_trees, open('final_result_trees.json', 'w'), indent=4)
+
+def test32():
+  trees = make_trees()
+  substitution_matrix_list = [ [[0.95,0.05],[0.05,0.95]], [[0.9,0.1],[0.1,0.9]] ]
+  states_list = [ ['0','1'], ['0', '1'] ]
+  base_frequencies_list = [ {'0': 1, '1': 0}, {'0': 0.8, '1': 0.2} ]
+  rate_per_branch_length_per_pair = 0.03
+  borrowability_list = [1, 1]
+  locations = get_locations(trees)
+  nodes_to_tree_dictionary = make_nodes_to_tree_dictionary(trees)
+  reconstructed_locations_dictionary = make_reconstructed_locations_dictionary(trees, locations, nodes_to_tree_dictionary)
+  time_depths_dictionary = make_time_depths_dictionary(trees)
+  parent_dictionary = make_parent_dictionary(trees)
+  contemporary_neighbour_dictionary = make_contemporary_neighbour_dictionary(trees, reconstructed_locations_dictionary, time_depths_dictionary, parent_dictionary)
+  potential_donors = make_potential_donors(reconstructed_locations_dictionary, time_depths_dictionary, contemporary_neighbour_dictionary)
+  child_dictionary = make_child_dictionary(trees)  
+  final_result_trees = contact_simulation(trees, substitution_matrix_list, states_list, base_frequencies_list, rate_per_branch_length_per_pair, borrowability_list, locations, nodes_to_tree_dictionary, reconstructed_locations_dictionary, time_depths_dictionary, parent_dictionary, contemporary_neighbour_dictionary, potential_donors, child_dictionary)
+  list_of_languages = get_languages_in_grambank()  
+  value_dictionary = make_value_dictionary(final_result_trees, list_of_languages) 
+  print(value_dictionary)
+test32()
 
 
 

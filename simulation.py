@@ -356,6 +356,7 @@ def find_children(node, child_dictionary):
     print('this should not happen')
     return None
 
+
 def assign_feature(tree, node, parent_value, substitution_matrix, states, base_frequencies, child_dictionary, to_exclude=[], given_value=None):
   children = find_children(node, child_dictionary)
   if given_value == None:
@@ -374,44 +375,72 @@ def assign_feature(tree, node, parent_value, substitution_matrix, states, base_f
       tree = assign_feature(tree, child, node_value, substitution_matrix, states, base_frequencies, child_dictionary)
   return tree
 
-def contact_simulation(trees, substitution_matrix, states, base_frequencies, rate_per_branch_length_per_pair, borrowability, locations, nodes_to_tree_dictionary, reconstructed_locations_dictionary, time_depths_dictionary, parent_dictionary, contemporary_neighbour_dictionary, potential_donors, child_dictionary):
+def contact_simulation(trees, substitution_matrix_list, states_list, base_frequencies_list, rate_per_branch_length_per_pair, borrowability_list, locations, nodes_to_tree_dictionary, reconstructed_locations_dictionary, time_depths_dictionary, parent_dictionary, contemporary_neighbour_dictionary, potential_donors, child_dictionary):
   contact_events, donees = make_contact_events(potential_donors, contemporary_neighbour_dictionary, time_depths_dictionary, rate_per_branch_length_per_pair)
   json.dump(contact_events, open('contact_events.json', 'w'), indent=4)
   json.dump(donees, open('donees.json', 'w'), indent=4)
+  number_of_features = len(substitution_matrix_list)
+  final_result_trees = []
   for i in range(len(trees)):
-    tree = trees[i]
-    root = findRoot(tree)
-    trees[i] = assign_feature(tree, root, parent_value=None, substitution_matrix=substitution_matrix, states=states, base_frequencies=base_frequencies, child_dictionary=child_dictionary, to_exclude=donees, given_value=None)
-  
-  for contact_event in contact_events:
-    donor = list(contact_event['donor'].keys())[0]
-    donee = list(contact_event['donee'].keys())[0]
-    donor_tree_index = nodes_to_tree_dictionary[donor]
-    donee_tree_index = nodes_to_tree_dictionary[donee]
-    donor_value = trees[donor_tree_index][donor]
-    '''
-    NOW NEED TO USE THE BORROWABILITY PARAMETER
-    YOU DON'T NECESSARILY ASSIGN THE FEATURE VALUE AT THIS POINT
-    another approach: for the individual feature, you make a copy of contact events which is sampled
-    for that individual feature
-    '''
-#     if donor in donees:
-#       print('matey')
-    trees[donee_tree_index] = assign_feature(trees[donee_tree_index], donee, parent_value=None, substitution_matrix=substitution_matrix, states=states, base_frequencies=base_frequencies, child_dictionary=child_dictionary, to_exclude=donees, given_value=donor_value)
-    if donee in donees:
-      del donees[donee]  
-  return trees
+    final_result_trees.append({})
+  for j in range(number_of_features):
+    substitution_matrix = substitution_matrix_list[j]
+    states = states_list[j]
+    base_frequencies = base_frequencies_list[j]
+    borrowability = borrowability_list[j]
+    if borrowability == 1:
+      contact_events_sample = deepcopy(contact_events)
+      donees_sample = deepcopy(donees)
+    else:
+      contact_event_sample_probabilities = np.random.random(len(contact_events))
+      contact_events_sample_indices = np.where(contact_event_sample_probabilities < borrowability)
+      contact_events_sample = contact_events[contact_events_sample_indices]
+      donees_sample = donees[contact_events_sample_indices]
+    for i in range(len(trees)):
+      tree = trees[i]
+      root = findRoot(tree)
+      trees[i] = assign_feature(tree, root, parent_value=None, substitution_matrix=substitution_matrix, states=states, base_frequencies=base_frequencies, child_dictionary=child_dictionary, to_exclude=donees_sample, given_value=None)  
+    for contact_event in contact_events_sample:
+      donor = list(contact_event['donor'].keys())[0]
+      donee = list(contact_event['donee'].keys())[0]
+      donor_tree_index = nodes_to_tree_dictionary[donor]
+      donee_tree_index = nodes_to_tree_dictionary[donee]
+      donor_value = trees[donor_tree_index][donor]
+      trees[donee_tree_index] = assign_feature(trees[donee_tree_index], donee, parent_value=None, substitution_matrix=substitution_matrix, states=states, base_frequencies=base_frequencies, child_dictionary=child_dictionary, to_exclude=donees_sample, given_value=donor_value)
+      if donee in donees_sample:
+        del donees_sample[donee]  
+    for i in range(len(trees)):
+      tree = trees[i]
+      for node in tree:
+        value = tree[node]
+        if j == 0:
+          final_result_trees[i][node] = []
+        final_result_trees[i][node].append(value)  
+  return final_result_trees
 
-def make_value_dictionary(trees, list_of_languages):
+def make_value_dictionary(final_result_trees, list_of_languages):
   value_dictionary = {}
-  for i in range(len(trees)):
-    tree = trees[i]
-    for key in tree:      
+  for i in range(len(final_result_trees)):
+    tree = final_result_trees[i]
+    for key in tree:
       glottocode = find_glottocode(findNodeNameWithoutStructure(key))
-      # print(glottocode)
       if glottocode in list_of_languages:
-        value_dictionary[glottocode] = float(tree[key])
+        values = tree[key]
+        value_dictionary[glottocode] = [float(x) for x in values]
   return value_dictionary
+
+'''
+how do you make the input array?
+
+this needs to be decided when you are writing the new classifier.
+
+
+
+'''
+
+
+
+
 
 def make_input_array(value_dictionary):
   result = []
