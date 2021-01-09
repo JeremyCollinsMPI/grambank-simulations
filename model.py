@@ -10,50 +10,91 @@ class Model():
 
   learn_rate = 0.01
 
-  def __init__(self, number_of_samples, number_of_languages, number_of_relatedness_bins, number_of_distance_bins):
+  '''
+  now the input and output arrays need number of features as well
+  '''
+
+  def __init__(self, number_of_samples, number_of_languages, number_of_features, number_of_relatedness_bins, number_of_distance_bins):
     self.sess = tf.Session()
-    self.input = tf.placeholder(tf.float32, [None, 1, number_of_languages])  
-    self.output = tf.placeholder(tf.float32, [None, number_of_samples, 1])
-    self.relatedness_array = tf.placeholder(tf.float32, [1, number_of_samples, number_of_languages, number_of_relatedness_bins])
-    self.distance_array = tf.placeholder(tf.float32, [1, number_of_samples, number_of_languages, number_of_distance_bins])
-        
-    self.relatedness_weights = tf.get_variable(name='relatedness_weights', dtype=tf.float32, shape=[1, number_of_relatedness_bins], initializer=tf.truncated_normal_initializer(mean=0.5, stddev=0.01))
-    self.distance_weights = tf.get_variable(name='distance_weights', dtype=tf.float32, shape=[1, number_of_distance_bins], initializer=tf.truncated_normal_initializer(mean=0.5, stddev=0.01))
-    self.intercept = tf.get_variable(name='intercept', dtype = tf.float32, shape = [1],  initializer=tf.truncated_normal_initializer(mean=0.5, stddev=0.01))
- 
-    self.r_1 = tf.reshape(self.relatedness_weights, [1, 1, 1, number_of_relatedness_bins])
-    self.d_1 = tf.reshape(self.distance_weights, [1, 1, 1, number_of_distance_bins])
+
+    self.input = tf.placeholder(tf.float32, [None, 1, number_of_languages, number_of_features])  
+    self.output = tf.placeholder(tf.float32, [None, number_of_samples, 1, number_of_features])
     
-    self.r_2 = self.relatedness_array * self.r_1
-    self.d_2 = self.distance_array * self.d_1
+    self.relatedness_array = tf.placeholder(tf.float32, [1, number_of_samples, number_of_languages, 1, number_of_relatedness_bins])
+    self.distance_array = tf.placeholder(tf.float32, [1, number_of_samples, number_of_languages, 1, number_of_distance_bins])
+
+    self.relatedness_weights = tf.get_variable(name='relatedness_weights', dtype=tf.float32, shape=[number_of_features, number_of_relatedness_bins], initializer=tf.truncated_normal_initializer(mean=0.5, stddev=0.01))
+    self.distance_weights = tf.get_variable(name='distance_weights', dtype=tf.float32, shape=[number_of_features, number_of_distance_bins], initializer=tf.truncated_normal_initializer(mean=0.5, stddev=0.01))
     
-    self.r_3 = tf.reduce_sum(self.r_2, axis=3)
-    self.d_3 = tf.reduce_sum(self.d_2, axis=3)
+    self.r_1 = tf.reshape(self.relatedness_weights, [1, 1, 1, number_of_features, number_of_relatedness_bins])
+    self.d_1 = tf.reshape(self.distance_weights, [1, 1, 1, number_of_features, number_of_distance_bins])
+    
+    self.r_2 = self.r_1 * self.relatedness_array
+    self.d_2 = self.d_1 * self.distance_array
+    
+    self.r_3 = tf.reduce_sum(self.r_2, axis=4)
+    self.d_3 = tf.reduce_sum(self.d_2, axis=4)
     
     self.r_final = self.r_3
     self.d_final = self.d_3
     
-    self.relatedness_or_contact_prediction = (1.0 - ((1.0 - self.r_final) * (1.0 - self.d_final))) * self.input
-    self.intercept_prediction = (1.0 - self.r_final) * (1.0 - self.d_final) * self.intercept
-
-    self.prediction = self.relatedness_or_contact_prediction + self.intercept_prediction
-    self.actual = self.output
-    self.loss = tf.log(1.0 - tf.abs(self.actual - self.prediction))
-
-    self.na_array_1 = tf.placeholder(tf.float32, [1, number_of_samples, 1])
-    self.na_array_2 = tf.placeholder(tf.float32, [1, 1, number_of_languages])
+    '''
+    these are of shape [1, samples, languages, features]
+    borrowability and intercepts should be of shape [1, 1, 1, features] after reshaping
     
-    self.loss = self.loss * self.na_array_1
-    self.loss = self.loss * self.na_array_2
+    '''
+    
+    self.intercept = tf.get_variable(name='intercept', dtype = tf.float32, shape = [1, 1, 1, features],  initializer=tf.truncated_normal_initializer(mean=0.5, stddev=0.01))
+    self.borrowability = tf.get_variable(name='intercept', dtype = tf.float32, shape = [1, 1, 1, features],  initializer=tf.truncated_normal_initializer(mean=0.5, stddev=0.01))
+    
+    self.prediction_1 = (1.0 - ((1.0 - self.r_final) * (1.0 - self.borrowability))) * self.input
+    self.prediction_1 = self.prediction_1 + (((1.0 - self.r_final) * (1.0 - self.d_final)) * intercept)
+    self.prediction_1 = self.prediction_1 * self.d_final
+    
+    self.prediction_2 = (self.r_final * input) + ((1.0 - self.r_final) * intercept)
+    self.prediction_2 = self.prediction_2 * (1.0 - self.d_final)
+    
+    '''
+    both prediction arrays are of shape
+    
+    [none, samples, languages, features]
+    
+    now want to reduce multiply them; could do this by log and then summing
+    '''
+
+    self.actual = self.output
+    self.loss_1 = 1.0 - tf.abs(self.actual - self.prediction_1)
+    self.loss_2 = 1.0 - tf.abs(self.actual - self.prediction_2)
+    
+    
+    self.loss_1 = tf.log(self.loss_1)
+    self.loss_2 = tf.log(self.loss_2)
+  
+    self.na_array_1 = tf.placeholder(tf.float32, [1, number_of_samples, 1, number_of_features])
+    self.na_array_2 = tf.placeholder(tf.float32, [1, 1, number_of_languages, number_of_features])
+
+    self.loss_1 = self.loss_1 * self.na_array_1
+    self.loss_1 = self.loss_1 * self.na_array_2
+    self.loss_2 = self.loss_2 * self.na_array_1
+    self.loss_2 = self.loss_2 * self.na_array_2
+    
+    self.loss_1 = tf.reduce_sum(tf.log(self.loss_1), axis=3)
+    self.loss_2 = tf.reduce_sum(tf.log(self.loss_2), axis=3)
+    
+    self.numerical_stability_constant = tf.reduce_min(self.loss_1)
+    self.loss_1 = tf.exp(self.loss_1 + self.numerical_stability_constant)
+    self.loss_2 = tf.exp(self.loss_2 + self.numerical_stability_constant)
+    self.loss = self.loss_1 + self.loss_2
+    self.loss = tf.log(self.loss) - self.numerical_stability_constant
 
     self.total_loss = tf.reduce_mean(self.loss) * -1.0
-
 
   def train(self, input_array, output_array, na_array_1, na_array_2, relatedness_array, distance_array, steps=200):
     self.train_step = tf.train.AdamOptimizer(self.learn_rate).minimize(self.total_loss) 
     self.clip_op_1 = tf.assign(self.relatedness_weights, tf.clip_by_value(self.relatedness_weights, 0, 0.99))
     self.clip_op_2 = tf.assign(self.distance_weights, tf.clip_by_value(self.distance_weights, 0, 0.99))
-    self.clip_op_3 = tf.assign(self.intercept, tf.clip_by_value(self.intercept, 0.01, 0.99))   
+    self.clip_op_3 = tf.assign(self.intercept, tf.clip_by_value(self.intercept, 0.01, 0.99))
+    self.clip_op_4 = tf.assign(self.borrowability, tf.clip_by_value(self.borrowability, 0.01, 0.99))   
     init = tf.initialize_all_variables()
     self.sess.run(init)   
     self.feed = {self.input: input_array, self.output: output_array, self.na_array_1: na_array_1, 
@@ -66,6 +107,7 @@ class Model():
       self.sess.run(self.clip_op_1)
       self.sess.run(self.clip_op_2)
       self.sess.run(self.clip_op_3)
+      self.sess.run(self.clip_op_4)
 
   def show_loss(self, input_array, output_array, na_array_1, na_array_2, relatedness_array, distance_array):
     self.feed = {self.input: input_array, self.output: output_array, self.na_array_1: na_array_1, 
