@@ -374,7 +374,7 @@ def assign_feature(tree, node, parent_value, substitution_matrix, states, base_f
       tree = assign_feature(tree, child, node_value, substitution_matrix, states, base_frequencies, child_dictionary)
   return tree
 
-def contact_simulation(trees, substitution_matrix, states, base_frequencies, rate_per_branch_length_per_pair, locations, nodes_to_tree_dictionary, reconstructed_locations_dictionary, time_depths_dictionary, parent_dictionary, contemporary_neighbour_dictionary, potential_donors, child_dictionary):
+def contact_simulation(trees, substitution_matrix, states, base_frequencies, rate_per_branch_length_per_pair, borrowability, locations, nodes_to_tree_dictionary, reconstructed_locations_dictionary, time_depths_dictionary, parent_dictionary, contemporary_neighbour_dictionary, potential_donors, child_dictionary):
   contact_events, donees = make_contact_events(potential_donors, contemporary_neighbour_dictionary, time_depths_dictionary, rate_per_branch_length_per_pair)
   json.dump(contact_events, open('contact_events.json', 'w'), indent=4)
   json.dump(donees, open('donees.json', 'w'), indent=4)
@@ -389,6 +389,12 @@ def contact_simulation(trees, substitution_matrix, states, base_frequencies, rat
     donor_tree_index = nodes_to_tree_dictionary[donor]
     donee_tree_index = nodes_to_tree_dictionary[donee]
     donor_value = trees[donor_tree_index][donor]
+    '''
+    NOW NEED TO USE THE BORROWABILITY PARAMETER
+    YOU DON'T NECESSARILY ASSIGN THE FEATURE VALUE AT THIS POINT
+    another approach: for the individual feature, you make a copy of contact events which is sampled
+    for that individual feature
+    '''
 #     if donor in donees:
 #       print('matey')
     trees[donee_tree_index] = assign_feature(trees[donee_tree_index], donee, parent_value=None, substitution_matrix=substitution_matrix, states=states, base_frequencies=base_frequencies, child_dictionary=child_dictionary, to_exclude=donees, given_value=donor_value)
@@ -428,7 +434,7 @@ def make_output_array(value_dictionary, sample):
   result = np.reshape(result, (np.shape(result)[0], 1))
   return result
 
-def make_input_and_output_arrays(trees, list_of_languages, sample, substitution_matrix, states, base_frequencies, rate_per_branch_length_per_pair, number_of_simulations):
+def make_input_and_output_arrays(trees, list_of_languages, sample, substitution_matrix, states, base_frequencies, rate_per_branch_length_per_pair, borrowability, number_of_simulations):
   locations = get_locations(trees)
   nodes_to_tree_dictionary = make_nodes_to_tree_dictionary(trees)
   reconstructed_locations_dictionary = make_reconstructed_locations_dictionary(trees, locations, nodes_to_tree_dictionary)
@@ -440,7 +446,7 @@ def make_input_and_output_arrays(trees, list_of_languages, sample, substitution_
   input_array = []
   output_array = []
   for i in range(number_of_simulations):
-    trees = contact_simulation(trees, substitution_matrix, states, base_frequencies, rate_per_branch_length_per_pair, locations, nodes_to_tree_dictionary, reconstructed_locations_dictionary, time_depths_dictionary, parent_dictionary, contemporary_neighbour_dictionary, potential_donors, child_dictionary)
+    trees = contact_simulation(trees, substitution_matrix, states, base_frequencies, rate_per_branch_length_per_pair, borrowability, locations, nodes_to_tree_dictionary, reconstructed_locations_dictionary, time_depths_dictionary, parent_dictionary, contemporary_neighbour_dictionary, potential_donors, child_dictionary)
     value_dictionary = make_value_dictionary(trees, list_of_languages)
     to_append_to_input_array = make_input_array(value_dictionary)
     to_append_to_output_array = make_output_array(value_dictionary, sample)
@@ -555,8 +561,8 @@ def preprocess_distance_array(distance_array, number_of_distance_bins):
   x = make_one_hot(x, number_of_distance_bins)
   return x
     
-def make_all_arrays(trees, list_of_languages, sample, substitution_matrix, states, base_frequencies, rate_per_branch_length_per_pair, number_of_simulations, number_of_relatedness_bins=10, number_of_distance_bins=10):  
-  input_array, output_array = make_input_and_output_arrays(trees, list_of_languages, sample, substitution_matrix, states, base_frequencies, rate_per_branch_length_per_pair, number_of_simulations)
+def make_all_arrays(trees, list_of_languages, sample, substitution_matrix, states, base_frequencies, rate_per_branch_length_per_pair, borrowability, number_of_simulations, number_of_relatedness_bins=10, number_of_distance_bins=10):  
+  input_array, output_array = make_input_and_output_arrays(trees, list_of_languages, sample, substitution_matrix, states, base_frequencies, rate_per_branch_length_per_pair, borrowability, number_of_simulations)
   parent_dictionary = make_parent_dictionary(trees)
   relatedness_pairs_dictionary = make_relatedness_pairs_dictionary(list_of_languages, trees, parent_dictionary)
   distance_pairs_dictionary = make_distance_pairs_dictionary(list_of_languages)

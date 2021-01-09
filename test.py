@@ -746,6 +746,24 @@ def test29():
   result = search_through_parameters_single_feature(input_array, output_array, relatedness_array, distance_array, na_array_1, na_array_2, trees, list_of_languages, sample, states, number_of_relatedness_bins=number_of_relatedness_bins, number_of_distance_bins=number_of_distance_bins, number_of_simulations=number_of_simulations, number_of_steps=number_of_steps)  
   print(result)
 
+@timeit
+def random_test_1():
+  for i in range(100000):
+    x = np.random.choice([0,1],1)
+
+@timeit
+def random_test_2():
+  x = np.random.choice([0,1],100000)
+
+@timeit
+def random_test_3():
+  for i in range(100000):
+    x = np.random.random()
+
+@timeit
+def random_test_4():
+  x = np.random.random(100000)
+
 
 def test30():
   '''
@@ -772,19 +790,33 @@ def test31():
   in the other scenario, you simulate the first feature as normal;
   the other feature is simulated with the following rules:
   1. say that state A of feature 1 is linked to state B of feature 2.
-  2. the substitution matrix of feature 2 is 
+  2. the substitution matrix of feature 2 is as normal, except that for that language if 
+  feature 1 has state A then the transition probabilities for 
+  feature 2 change: the probability of transitioning to state B increases (e.g. to 0.95), and the probability
+  of transitioning away from state B decreases (e.g. to 0.05).
+  e.g. say that feature 1 has matrix 
+  [[0.9, 0.1], [0.1, 0.9]], and so does feature 2. say that state 1 of feature 1 and state 1 of feature 2
+  are linked.  then if the language has state 1, then the matrix for feature 2 becomes
+  [[0.05, 0.95], [0.05, 0.95]].
+  you simulate the two features together.
+  
+  where should i write this?  presumably again in simulation.py.  or could make a new file,
+  dependency_simulation.py.
+  
   
   
   the model this time is looking at the probability of a language having a particular value given it has
   a particular value for the first feature, + some intercept for the particular value.  the model fits that probability,
   then you calculate the loss.
   
+  need to first make simulation of contact event probability + borrowability as two separate things.
   
-  
-  
+  that in itself is not difficult, but requires modifying function inputs carefully.
+  ADD 'borrowability' as a variable immediately after rate per branch lenght per pair in all relevant functions.
   '''
 
-test30()
+# test30()
+random_test_4()
 
 
 
