@@ -469,11 +469,6 @@ def make_input_and_output_arrays(trees, list_of_languages, sample, substitution_
     output_array.append(to_append_to_output_array)
   return input_array, output_array
 
-
-
-
-
-
 def make_relatedness_pairs_dictionary(list_of_languages, trees, parent_dictionary):
   f = 'relatedness_pairs_dictionary.json'
   if f in dir:
