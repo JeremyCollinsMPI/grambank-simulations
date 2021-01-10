@@ -16,8 +16,11 @@ class Model():
     self.input = tf.placeholder(tf.float32, [None, 1, number_of_languages, number_of_features])  
     self.output = tf.placeholder(tf.float32, [None, number_of_samples, 1, number_of_features])
     
-    self.relatedness_array = tf.placeholder(tf.float32, [1, number_of_samples, number_of_languages, 1, number_of_relatedness_bins])
-    self.distance_array = tf.placeholder(tf.float32, [1, number_of_samples, number_of_languages, 1, number_of_distance_bins])
+    self.relatedness_array = tf.placeholder(tf.float32, [1, number_of_samples, number_of_languages, number_of_relatedness_bins])
+    self.distance_array = tf.placeholder(tf.float32, [1, number_of_samples, number_of_languages, number_of_distance_bins])
+
+    self.relatedness_array_reshaped = tf.reshape(self.relatedness_array, [1, number_of_samples, number_of_languages, 1, number_of_relatedness_bins])
+    self.distance_array_reshaped = tf.reshape(self.distance_array, [1, number_of_samples, number_of_languages, 1, number_of_distance_bins])
 
     self.relatedness_weights = tf.get_variable(name='relatedness_weights', dtype=tf.float32, shape=[number_of_features, number_of_relatedness_bins], initializer=tf.truncated_normal_initializer(mean=0.5, stddev=0.01))
     self.distance_weights = tf.get_variable(name='distance_weights', dtype=tf.float32, shape=[number_of_features, number_of_distance_bins], initializer=tf.truncated_normal_initializer(mean=0.5, stddev=0.01))
@@ -25,8 +28,8 @@ class Model():
     self.r_1 = tf.reshape(self.relatedness_weights, [1, 1, 1, number_of_features, number_of_relatedness_bins])
     self.d_1 = tf.reshape(self.distance_weights, [1, 1, 1, number_of_features, number_of_distance_bins])
     
-    self.r_2 = self.r_1 * self.relatedness_array
-    self.d_2 = self.d_1 * self.distance_array
+    self.r_2 = self.r_1 * self.relatedness_array_reshaped
+    self.d_2 = self.d_1 * self.distance_array_reshaped
     
     self.r_3 = tf.reduce_sum(self.r_2, axis=4)
     self.d_3 = tf.reduce_sum(self.d_2, axis=4)
@@ -34,20 +37,21 @@ class Model():
     self.r_final = self.r_3
     self.d_final = self.d_3
     
-    self.intercept = tf.get_variable(name='intercept', dtype = tf.float32, shape = [1, 1, 1, features],  initializer=tf.truncated_normal_initializer(mean=0.5, stddev=0.01))
-    self.borrowability = tf.get_variable(name='intercept', dtype = tf.float32, shape = [1, 1, 1, features],  initializer=tf.truncated_normal_initializer(mean=0.5, stddev=0.01))
+    self.intercept = tf.get_variable(name='intercept', dtype = tf.float32, shape = [1, 1, 1, number_of_features],  initializer=tf.truncated_normal_initializer(mean=0.5, stddev=0.01))
+    self.borrowability = tf.get_variable(name='borrowability', dtype = tf.float32, shape = [1, 1, 1, number_of_features],  initializer=tf.truncated_normal_initializer(mean=0.5, stddev=0.01))
     
     self.prediction_1 = (1.0 - ((1.0 - self.r_final) * (1.0 - self.borrowability))) * self.input
-    self.prediction_1 = self.prediction_1 + (((1.0 - self.r_final) * (1.0 - self.d_final)) * intercept)
+    self.prediction_1 = self.prediction_1 + (((1.0 - self.r_final) * (1.0 - self.borrowability)) * self.intercept)
     self.prediction_1 = self.prediction_1 * self.d_final
     
-    self.prediction_2 = (self.r_final * input) + ((1.0 - self.r_final) * intercept)
+    self.prediction_2 = (self.r_final * self.input) + ((1.0 - self.r_final) * self.intercept)
     self.prediction_2 = self.prediction_2 * (1.0 - self.d_final)
     
     self.actual = self.output
     self.loss_1 = 1.0 - tf.abs(self.actual - self.prediction_1)
     self.loss_2 = 1.0 - tf.abs(self.actual - self.prediction_2)
     
+
     
     self.loss_1 = tf.log(self.loss_1)
     self.loss_2 = tf.log(self.loss_2)
@@ -60,13 +64,25 @@ class Model():
     self.loss_2 = self.loss_2 * self.na_array_1
     self.loss_2 = self.loss_2 * self.na_array_2
     
-    self.loss_1 = tf.reduce_sum(tf.log(self.loss_1), axis=3)
-    self.loss_2 = tf.reduce_sum(tf.log(self.loss_2), axis=3)
+    self.loss_1 = tf.reduce_sum(self.loss_1, axis=3)
+    self.loss_2 = tf.reduce_sum(self.loss_2, axis=3)
+
     
-    self.numerical_stability_constant = tf.reduce_min(self.loss_1)
+   
+    
+#     self.numerical_stability_constant = tf.reduce_max(self.loss_1) * -1.0
+
+    self.numerical_stability_constant = 0
     self.loss_1 = tf.exp(self.loss_1 + self.numerical_stability_constant)
     self.loss_2 = tf.exp(self.loss_2 + self.numerical_stability_constant)
+
+    self.moose_1 = self.loss_1
+    self.moose_2 = self.loss_2 
+
     self.loss = self.loss_1 + self.loss_2
+    
+    self.moose = self.loss
+    
     self.loss = tf.log(self.loss) - self.numerical_stability_constant
 
     self.total_loss = tf.reduce_mean(self.loss) * -1.0
@@ -83,6 +99,15 @@ class Model():
     self.na_array_2: na_array_2, self.relatedness_array: relatedness_array, self.distance_array: distance_array}
     for i in range(steps):  
       print("After %d iterations:" % i)
+      print(self.sess.run(tf.reduce_min(self.moose_1), feed_dict=self.feed))
+      print(self.sess.run(tf.reduce_min(self.moose_2), feed_dict=self.feed))
+
+      print(self.sess.run(tf.reduce_max(self.moose_1), feed_dict=self.feed))
+      print(self.sess.run(tf.reduce_max(self.moose_2), feed_dict=self.feed))
+
+
+#       print(self.sess.run(self.loss, feed_dict=self.feed))
+ 
       print(self.sess.run(self.total_loss, feed_dict=self.feed))
 #       print(self.sess.run(self.relatedness_weights))
       self.sess.run(self.train_step, feed_dict = self.feed)
