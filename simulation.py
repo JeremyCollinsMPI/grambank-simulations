@@ -449,6 +449,7 @@ def make_output_array(value_dictionary, sample):
   result = np.reshape(result, (shape[0], 1, shape[1]))
   return result
 
+@timeit
 def make_input_and_output_arrays(trees, list_of_languages, sample, substitution_matrix_list, states_list, base_frequencies_list, rate_per_branch_length_per_pair, borrowability_list, number_of_simulations):
   locations = get_locations(trees)
   nodes_to_tree_dictionary = make_nodes_to_tree_dictionary(trees)

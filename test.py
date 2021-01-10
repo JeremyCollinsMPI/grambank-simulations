@@ -893,6 +893,37 @@ def test33():
   
   
   '''
+  trees = make_trees()
+  substitution_matrix_list = [ [[0.95,0.05],[0.05,0.95]], [[0.9,0.1],[0.1,0.9]] ]
+  states_list = [ ['0','1'], ['0', '1'] ]
+  base_frequencies_list = [ {'0': 1, '1': 0}, {'0': 0.8, '1': 0.2} ]
+  
+  
+  substitution_matrix_list = rep([[0.95,0.05],[0.05,0.95]], 10)
+  states_list = rep(['0','1'], 10)
+  base_frequencies_list = rep({'0': 0.9, '1': 0.1}, 10)
+  borrowability_list = rep(1, 10)
+  rate_per_branch_length_per_pair = 0.03
+  
+  locations = get_locations(trees)
+  nodes_to_tree_dictionary = make_nodes_to_tree_dictionary(trees)
+  reconstructed_locations_dictionary = make_reconstructed_locations_dictionary(trees, locations, nodes_to_tree_dictionary)
+  time_depths_dictionary = make_time_depths_dictionary(trees)
+  parent_dictionary = make_parent_dictionary(trees)
+  contemporary_neighbour_dictionary = make_contemporary_neighbour_dictionary(trees, reconstructed_locations_dictionary, time_depths_dictionary, parent_dictionary)
+  potential_donors = make_potential_donors(reconstructed_locations_dictionary, time_depths_dictionary, contemporary_neighbour_dictionary)
+  child_dictionary = make_child_dictionary(trees)  
+  final_result_trees = contact_simulation(trees, substitution_matrix_list, states_list, base_frequencies_list, rate_per_branch_length_per_pair, borrowability_list, locations, nodes_to_tree_dictionary, reconstructed_locations_dictionary, time_depths_dictionary, parent_dictionary, contemporary_neighbour_dictionary, potential_donors, child_dictionary)
+  list_of_languages = get_languages_in_grambank()  
+  value_dictionary = make_value_dictionary(final_result_trees, list_of_languages) 
+  number_of_samples = 900
+  number_of_languages = len(list_of_languages)
+  sample = np.random.choice(np.array(list_of_languages), number_of_samples, replace=False)
+  print(value_dictionary)
+  number_of_simulations = 1
+  input_array, output_array = make_input_and_output_arrays(trees, list_of_languages, sample, substitution_matrix_list, states_list, base_frequencies_list, rate_per_branch_length_per_pair, borrowability_list, number_of_simulations)
+  print(np.shape(input_array))
+  print(np.shape(output_array))
 
 test33()
 
