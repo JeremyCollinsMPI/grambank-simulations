@@ -449,7 +449,7 @@ def make_output_array(value_dictionary, sample):
   result = np.reshape(result, (shape[0], 1, shape[1]))
   return result
 
-@timeit
+
 def make_input_and_output_arrays(trees, list_of_languages, sample, substitution_matrix_list, states_list, base_frequencies_list, rate_per_branch_length_per_pair, borrowability_list, number_of_simulations):
   locations = get_locations(trees)
   nodes_to_tree_dictionary = make_nodes_to_tree_dictionary(trees)
@@ -577,8 +577,8 @@ def preprocess_distance_array(distance_array, number_of_distance_bins):
   x = make_one_hot(x, number_of_distance_bins)
   return x
     
-def make_all_arrays(trees, list_of_languages, sample, substitution_matrix, states, base_frequencies, rate_per_branch_length_per_pair, borrowability, number_of_simulations, number_of_relatedness_bins=10, number_of_distance_bins=10):  
-  input_array, output_array = make_input_and_output_arrays(trees, list_of_languages, sample, substitution_matrix, states, base_frequencies, rate_per_branch_length_per_pair, borrowability, number_of_simulations)
+def make_all_arrays(trees, list_of_languages, sample, substitution_matrix_list, states_list, base_frequencies_list, rate_per_branch_length_per_pair, borrowability_list, number_of_simulations, number_of_relatedness_bins=10, number_of_distance_bins=10):  
+  input_array, output_array = make_input_and_output_arrays(trees, list_of_languages, sample, substitution_matrix_list, states_list, base_frequencies_list, rate_per_branch_length_per_pair, borrowability_list, number_of_simulations)
   parent_dictionary = make_parent_dictionary(trees)
   relatedness_pairs_dictionary = make_relatedness_pairs_dictionary(list_of_languages, trees, parent_dictionary)
   distance_pairs_dictionary = make_distance_pairs_dictionary(list_of_languages)
