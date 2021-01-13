@@ -38,21 +38,23 @@ class Model():
     self.d_final = self.d_3
     
     self.intercept = tf.get_variable(name='intercept', dtype = tf.float32, shape = [1, 1, 1, number_of_features],  initializer=tf.truncated_normal_initializer(mean=0.5, stddev=0.01))
-    self.borrowability = tf.get_variable(name='borrowability', dtype = tf.float32, shape = [1, 1, 1, number_of_features],  initializer=tf.truncated_normal_initializer(mean=0.5, stddev=0.01))
+#     self.borrowability = tf.get_variable(name='borrowability', dtype = tf.float32, shape = [1, 1, 1, number_of_features],  initializer=tf.truncated_normal_initializer(mean=0.5, stddev=0.01))
+
+    self.borrowability = 0.5
     
     self.prediction_1 = (1.0 - ((1.0 - self.r_final) * (1.0 - self.borrowability))) * self.input
     self.prediction_1 = self.prediction_1 + (((1.0 - self.r_final) * (1.0 - self.borrowability)) * self.intercept)
-    self.prediction_1 = self.prediction_1 * self.d_final
-    
     self.prediction_2 = (self.r_final * self.input) + ((1.0 - self.r_final) * self.intercept)
-    self.prediction_2 = self.prediction_2 * (1.0 - self.d_final)
-    
+
     self.actual = self.output
     self.loss_1 = 1.0 - tf.abs(self.actual - self.prediction_1)
     self.loss_2 = 1.0 - tf.abs(self.actual - self.prediction_2)
-    
 
+    self.loss_1 = self.loss_1 * self.d_final
+    self.loss_2 = self.loss_2 * (1.0 - self.d_final)
     
+    self.check_1 = self.loss_1 + self.loss_2
+  
     self.loss_1 = tf.log(self.loss_1)
     self.loss_2 = tf.log(self.loss_2)
   
@@ -81,6 +83,8 @@ class Model():
 
     self.loss = self.loss_1 + self.loss_2
     
+    
+    
     self.moose = self.loss
     
     self.loss = tf.log(self.loss) - self.numerical_stability_constant
@@ -89,32 +93,34 @@ class Model():
 
   def train(self, input_array, output_array, na_array_1, na_array_2, relatedness_array, distance_array, steps=200):
     self.train_step = tf.train.AdamOptimizer(self.learn_rate).minimize(self.total_loss) 
-    self.clip_op_1 = tf.assign(self.relatedness_weights, tf.clip_by_value(self.relatedness_weights, 0, 0.99))
-    self.clip_op_2 = tf.assign(self.distance_weights, tf.clip_by_value(self.distance_weights, 0, 0.99))
+    self.clip_op_1 = tf.assign(self.relatedness_weights, tf.clip_by_value(self.relatedness_weights, 0, 0.999))
+    self.clip_op_2 = tf.assign(self.distance_weights, tf.clip_by_value(self.distance_weights, 0.001, 0.999))
     self.clip_op_3 = tf.assign(self.intercept, tf.clip_by_value(self.intercept, 0.01, 0.99))
-    self.clip_op_4 = tf.assign(self.borrowability, tf.clip_by_value(self.borrowability, 0.01, 0.99))   
+#     self.clip_op_4 = tf.assign(self.borrowability, tf.clip_by_value(self.borrowability, 0.01, 0.99))   
     init = tf.initialize_all_variables()
     self.sess.run(init)   
     self.feed = {self.input: input_array, self.output: output_array, self.na_array_1: na_array_1, 
     self.na_array_2: na_array_2, self.relatedness_array: relatedness_array, self.distance_array: distance_array}
     for i in range(steps):  
       print("After %d iterations:" % i)
-      print(self.sess.run(tf.reduce_min(self.moose_1), feed_dict=self.feed))
-      print(self.sess.run(tf.reduce_min(self.moose_2), feed_dict=self.feed))
-
-      print(self.sess.run(tf.reduce_max(self.moose_1), feed_dict=self.feed))
-      print(self.sess.run(tf.reduce_max(self.moose_2), feed_dict=self.feed))
-
-
+#       print(self.sess.run(tf.reduce_max(self.moose_1), feed_dict=self.feed))
+#       print(self.sess.run(tf.reduce_max(self.moose_2), feed_dict=self.feed))
+# 
+#       print(self.sess.run(tf.reduce_min(self.moose), feed_dict=self.feed))
+#       print(self.sess.run(tf.reduce_max(self.moose), feed_dict=self.feed))
+#       
 #       print(self.sess.run(self.loss, feed_dict=self.feed))
- 
+#  
       print(self.sess.run(self.total_loss, feed_dict=self.feed))
+#       print(self.sess.run(tf.reduce_min(self.check_1), feed_dict=self.feed))
+#       print(self.sess.run(tf.reduce_max(self.check_1), feed_dict=self.feed))
+
 #       print(self.sess.run(self.relatedness_weights))
       self.sess.run(self.train_step, feed_dict = self.feed)
       self.sess.run(self.clip_op_1)
       self.sess.run(self.clip_op_2)
       self.sess.run(self.clip_op_3)
-      self.sess.run(self.clip_op_4)
+#       self.sess.run(self.clip_op_4)
 
   def show_loss(self, input_array, output_array, na_array_1, na_array_2, relatedness_array, distance_array):
     self.feed = {self.input: input_array, self.output: output_array, self.na_array_1: na_array_1, 
@@ -134,6 +140,5 @@ class Model():
     distance_weights = self.sess.run(self.distance_weights)
     print('Distance Weights: ', distance_weights)
     return relatedness_weights, distance_weights
-
 
 

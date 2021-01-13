@@ -924,8 +924,54 @@ def test33():
   input_array, output_array = make_input_and_output_arrays(trees, list_of_languages, sample, substitution_matrix_list, states_list, base_frequencies_list, rate_per_branch_length_per_pair, borrowability_list, number_of_simulations)
   print(np.shape(input_array))
   print(np.shape(output_array))
+  
+def test34():
+  '''
+  need to test that the new classifier is working
+  then want to make a new pipeline which takes several features.
+  
+  '''
+  trees = make_trees()
+  substitution_matrix_list = [ [[0.95,0.05],[0.05,0.95]]]
+  states_list = [ ['0','1']]
+  base_frequencies_list = [ {'0': 1, '1': 0}]
+  borrowability_list = [1]
+  rate_per_branch_length_per_pair = 0.03
+  
+  locations = get_locations(trees)
+  nodes_to_tree_dictionary = make_nodes_to_tree_dictionary(trees)
+  reconstructed_locations_dictionary = make_reconstructed_locations_dictionary(trees, locations, nodes_to_tree_dictionary)
+  time_depths_dictionary = make_time_depths_dictionary(trees)
+  parent_dictionary = make_parent_dictionary(trees)
+  contemporary_neighbour_dictionary = make_contemporary_neighbour_dictionary(trees, reconstructed_locations_dictionary, time_depths_dictionary, parent_dictionary)
+  potential_donors = make_potential_donors(reconstructed_locations_dictionary, time_depths_dictionary, contemporary_neighbour_dictionary)
+  child_dictionary = make_child_dictionary(trees)  
+  list_of_languages = get_languages_in_grambank()  
+  number_of_samples = 900
+  number_of_languages = len(list_of_languages)
+  sample = np.random.choice(np.array(list_of_languages), number_of_samples, replace=False)
+  number_of_simulations = 1
 
-test33()
+  number_of_relatedness_bins = 10
+  number_of_distance_bins = 10
+  number_of_features = 1
+  
+  input_array, output_array, relatedness_array, distance_array = make_all_arrays(trees, list_of_languages, sample, substitution_matrix_list, states_list, base_frequencies_list, rate_per_branch_length_per_pair, borrowability_list, number_of_simulations, number_of_relatedness_bins=10, number_of_distance_bins=10)  
+  na_array_1 = np.ones([1, number_of_samples, 1, number_of_features])
+  na_array_2 = np.ones([1, 1, number_of_languages, number_of_features])
+
+  print(np.shape(input_array))
+  print(np.shape(output_array))
+  print(np.shape(relatedness_array))
+  print(np.shape(distance_array))
+
+
+  model = Model(number_of_samples, number_of_languages, number_of_features, number_of_relatedness_bins, number_of_distance_bins)
+
+  model.train(input_array, output_array, na_array_1, na_array_2, relatedness_array, distance_array, steps=200)
+
+
+test34()
 
 
 
