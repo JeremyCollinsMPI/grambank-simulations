@@ -40,7 +40,7 @@ class Model():
     self.intercept = tf.get_variable(name='intercept', dtype = tf.float32, shape = [1, 1, 1, number_of_features],  initializer=tf.truncated_normal_initializer(mean=0.5, stddev=0.01))
 #     self.borrowability = tf.get_variable(name='borrowability', dtype = tf.float32, shape = [1, 1, 1, number_of_features],  initializer=tf.truncated_normal_initializer(mean=0.5, stddev=0.01))
 
-    self.borrowability = 0.5
+    self.borrowability = 0.01
     
     self.prediction_1 = (1.0 - ((1.0 - self.r_final) * (1.0 - self.borrowability))) * self.input
     self.prediction_1 = self.prediction_1 + (((1.0 - self.r_final) * (1.0 - self.borrowability)) * self.intercept)

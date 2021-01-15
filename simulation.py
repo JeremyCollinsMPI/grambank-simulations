@@ -394,8 +394,22 @@ def contact_simulation(trees, substitution_matrix_list, states_list, base_freque
     else:
       contact_event_sample_probabilities = np.random.random(len(contact_events))
       contact_events_sample_indices = np.where(contact_event_sample_probabilities < borrowability)
-      contact_events_sample = contact_events[contact_events_sample_indices]
-      donees_sample = donees[contact_events_sample_indices]
+      contact_events_sample = deepcopy(contact_events)
+      contact_events_sample = np.take(contact_events_sample, contact_events_sample_indices)[0]
+      
+      donees_sample = {}
+      donors_sample = {}
+#       print(len(contact_events_sample))
+#       print(len(contact_events))
+#       print('****')
+      for contact_event in contact_events_sample:
+#         print(contact_event)
+        donors_sample.update(contact_event['donor'])
+        donee = list(contact_event['donee'].keys())[0]
+        if not donee in donors_sample:
+          donees_sample.update(contact_event['donee'])
+    print('****')
+    print(donees == donees_sample)
     for i in range(len(trees)):
       tree = trees[i]
       root = findRoot(tree)

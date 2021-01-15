@@ -6,7 +6,7 @@ from model import *
 import os
 from pipelines import *
 
-np.random.seed(10)
+np.random.seed(12)
 
 def timeit(method):
   def timed(*args, **kw):
@@ -935,8 +935,8 @@ def test34():
   substitution_matrix_list = [ [[0.95,0.05],[0.05,0.95]]]
   states_list = [ ['0','1']]
   base_frequencies_list = [ {'0': 1, '1': 0}]
-  borrowability_list = [1]
-  rate_per_branch_length_per_pair = 0.03
+  borrowability_list = [1.01]
+  rate_per_branch_length_per_pair = 0.1
   
   locations = get_locations(trees)
   nodes_to_tree_dictionary = make_nodes_to_tree_dictionary(trees)
@@ -950,7 +950,7 @@ def test34():
   number_of_samples = 900
   number_of_languages = len(list_of_languages)
   sample = np.random.choice(np.array(list_of_languages), number_of_samples, replace=False)
-  number_of_simulations = 1
+  number_of_simulations = 3
 
   number_of_relatedness_bins = 10
   number_of_distance_bins = 10
@@ -968,9 +968,9 @@ def test34():
 
   model = Model(number_of_samples, number_of_languages, number_of_features, number_of_relatedness_bins, number_of_distance_bins)
 
-  model.train(input_array, output_array, na_array_1, na_array_2, relatedness_array, distance_array, steps=200)
-
-
+  model.train(input_array, output_array, na_array_1, na_array_2, relatedness_array, distance_array, steps=60)
+  print(model.sess.run(model.distance_weights))
+  print(model.sess.run(model.intercept))
 test34()
 
 
