@@ -46,7 +46,7 @@ def create_initial_base_frequencies(states):
 def create_initial_borrowing_event_rate():
   return 0.1
 
-def propose_new(input_array, output_array, na_array_1, na_array_2, relatedness_array, distance_array, trees, list_of_languages, sample, substitution_matrix, states, base_frequencies, rate_per_branch_length_per_pair, number_of_simulations, number_of_steps, loss, model, proposal_rate_dictionary):
+def propose_new_single_feature(input_array, output_array, na_array_1, na_array_2, relatedness_array, distance_array, trees, list_of_languages, sample, substitution_matrix, states, base_frequencies, rate_per_branch_length_per_pair, number_of_simulations, number_of_steps, loss, model, proposal_rate_dictionary):
   new_substitution_matrix = deepcopy(substitution_matrix)
   new_base_frequencies = deepcopy(base_frequencies)
   new_rate_per_branch_length_per_pair = rate_per_branch_length_per_pair 
@@ -102,8 +102,7 @@ def propose_new(input_array, output_array, na_array_1, na_array_2, relatedness_a
     if dice_roll_2 == 1:
       new_rate_per_branch_length_per_pair = new_rate_per_branch_length_per_pair - jump
     new_rate_per_branch_length_per_pair = max(0, new_rate_per_branch_length_per_pair)
-
-  training_input, training_output = make_input_and_output_arrays(trees, list_of_languages, sample, new_substitution_matrix, states, new_base_frequencies, new_rate_per_branch_length_per_pair, number_of_simulations)  
+  training_input, training_output = make_input_and_output_arrays(trees, list_of_languages, sample, [new_substitution_matrix], [states], [new_base_frequencies], [new_rate_per_branch_length_per_pair], [1], number_of_simulations)  
   model.train(training_input, training_output, na_array_1, na_array_2, relatedness_array, distance_array, steps=number_of_steps)
   new_loss = model.show_loss(input_array, output_array, na_array_1, na_array_2, relatedness_array, distance_array)
   print(loss)
@@ -128,14 +127,15 @@ def search_through_parameters_single_feature(input_array, output_array, relatedn
   rate_per_branch_length_per_pair = create_initial_borrowing_event_rate() 
   number_of_samples = len(sample)
   number_of_languages = len(list_of_languages)
+  number_of_features = 1
   model = Model(number_of_samples, number_of_languages, number_of_relatedness_bins, number_of_distance_bins) 
   '''temporarily not using the na arrays:'''  
-  na_array_1 = np.ones([1, number_of_samples, 1])
-  na_array_2 = np.ones([1, 1, number_of_languages]) 
+  na_array_1 = np.ones([1, number_of_samples, 1, number_of_features])
+  na_array_2 = np.ones([1, 1, number_of_languages, number_of_features])
   loss = 1000
   proposal_rate_dictionary = {SUBSTITUTION_MATRIX_0_TO_1: 0.1, SUBSTITUTION_MATRIX_1_TO_0: 0.1, BASE_FREQUENCIES: 0.1, RATE_PER_BRANCH_LENGTH_PER_PAIR: 0.1}
   for i in range(100):
-    substitution_matrix, base_frequencies, rate_per_branch_length_per_pair, loss, proposal_rate_dictionary = propose_new(input_array, output_array, na_array_1, na_array_2, relatedness_array, distance_array, trees, list_of_languages, sample, substitution_matrix, states, base_frequencies, rate_per_branch_length_per_pair, number_of_simulations, number_of_steps, loss, model, proposal_rate_dictionary)
+    substitution_matrix, base_frequencies, rate_per_branch_length_per_pair, loss, proposal_rate_dictionary = propose_new_single_feature(input_array, output_array, na_array_1, na_array_2, relatedness_array, distance_array, trees, list_of_languages, sample, substitution_matrix, states, base_frequencies, rate_per_branch_length_per_pair, number_of_simulations, number_of_steps, loss, model, proposal_rate_dictionary)
     result = {'substitution_matrix': substitution_matrix, 'base_frequencies': base_frequencies, 'rate_per_branch_length_per_pair': rate_per_branch_length_per_pair}
     print(result) 
     print(proposal_rate_dictionary)
