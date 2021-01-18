@@ -971,7 +971,31 @@ def test34():
   model.train(input_array, output_array, na_array_1, na_array_2, relatedness_array, distance_array, steps=60)
   print(model.sess.run(model.distance_weights))
   print(model.sess.run(model.intercept))
-test34()
+
+
+def test35():
+  grambank_value_dictionary = get_grambank_value_dictionary()
+  feature_name = 'GB131'
+  value_dictionary = further_preprocessing_of_grambank_value_dictionary(grambank_value_dictionary, feature_name)
+  trees = make_trees()
+  list_of_languages = get_languages_in_grambank()  
+  states = ['0', '1']
+  number_of_samples = 900
+  number_of_languages = len(list_of_languages)
+  sample = np.random.choice(np.array(list_of_languages), number_of_samples, replace=False)
+  number_of_relatedness_bins = 10
+  number_of_distance_bins = 10
+  number_of_simulations = 4
+  number_of_steps = 120
+  input_array, output_array, relatedness_array, distance_array, na_array_1, na_array_2 = make_all_arrays_for_grambank(value_dictionary, trees, list_of_languages, sample, number_of_relatedness_bins=number_of_relatedness_bins, number_of_distance_bins=number_of_distance_bins) 
+  result = search_through_parameters_single_feature(input_array, output_array, relatedness_array, distance_array, na_array_1, na_array_2, trees, list_of_languages, sample, states, number_of_relatedness_bins=number_of_relatedness_bins, number_of_distance_bins=number_of_distance_bins, number_of_simulations=number_of_simulations, number_of_steps=number_of_steps)  
+  print(result)
+
+def test36():
+  search_through_parameters_single_feature_accuracy_test()
+
+
+test36()
 
 
 

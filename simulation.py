@@ -408,8 +408,8 @@ def contact_simulation(trees, substitution_matrix_list, states_list, base_freque
         donee = list(contact_event['donee'].keys())[0]
         if not donee in donors_sample:
           donees_sample.update(contact_event['donee'])
-    print('****')
-    print(donees == donees_sample)
+#     print('****')
+#     print(donees == donees_sample)
     for i in range(len(trees)):
       tree = trees[i]
       root = findRoot(tree)
