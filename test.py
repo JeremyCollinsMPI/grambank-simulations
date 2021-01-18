@@ -994,8 +994,10 @@ def test35():
 def test36():
   search_through_parameters_single_feature_accuracy_test()
 
+def test37():
+ search_through_parameters_single_feature_sanity_check()
 
-test36()
+test37()
 
 
 

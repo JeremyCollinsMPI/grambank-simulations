@@ -81,7 +81,7 @@ def make_all_arrays_for_grambank(value_dictionary, trees, list_of_languages, sam
   distance_array = preprocess_distance_array(distance_array, number_of_distance_bins)
   return input_array, output_array, relatedness_array, distance_array, na_array_1, na_array_2
 
-    
+
 '''
 you need to make the na arrays at some point
 
