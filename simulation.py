@@ -304,7 +304,7 @@ def make_contact_events(potential_donors, contemporary_neighbour_dictionary, tim
     event_time = np.random.random()
     event_time = branch_length * event_time
     event_time = event_time + beginning_time_depth   
-    probability = rate_per_branch_length_per_pair * branch_length
+    probability = 1 - ((1 - rate_per_branch_length_per_pair) ** branch_length)
     sample = np.random.random(number_of_neighbours)
     sample = np.where(sample < probability)[0]
     if len(sample) > 0:    
@@ -381,8 +381,10 @@ def contact_simulation(trees, substitution_matrix_list, states_list, base_freque
   json.dump(donees, open('donees.json', 'w'), indent=4)
   number_of_features = len(substitution_matrix_list)
   final_result_trees = []
+  print('doing trees')
   for i in range(len(trees)):
     final_result_trees.append({})
+  print('making contact events')
   for j in range(number_of_features):
     substitution_matrix = substitution_matrix_list[j]
     states = states_list[j]
@@ -414,6 +416,8 @@ def contact_simulation(trees, substitution_matrix_list, states_list, base_freque
       tree = trees[i]
       root = findRoot(tree)
       trees[i] = assign_feature(tree, root, parent_value=None, substitution_matrix=substitution_matrix, states=states, base_frequencies=base_frequencies, child_dictionary=child_dictionary, to_exclude=donees_sample, given_value=None)  
+    print('processing contact events')
+    print('going through contact events')
     for contact_event in contact_events_sample:
       donor = list(contact_event['donor'].keys())[0]
       donee = list(contact_event['donee'].keys())[0]
@@ -423,6 +427,7 @@ def contact_simulation(trees, substitution_matrix_list, states_list, base_freque
       trees[donee_tree_index] = assign_feature(trees[donee_tree_index], donee, parent_value=None, substitution_matrix=substitution_matrix, states=states, base_frequencies=base_frequencies, child_dictionary=child_dictionary, to_exclude=donees_sample, given_value=donor_value)
       if donee in donees_sample:
         del donees_sample[donee]  
+    print('going through trees')
     for i in range(len(trees)):
       tree = trees[i]
       for node in tree:
@@ -465,6 +470,7 @@ def make_output_array(value_dictionary, sample):
 
 
 def make_input_and_output_arrays(trees, list_of_languages, sample, substitution_matrix_list, states_list, base_frequencies_list, rate_per_branch_length_per_pair, borrowability_list, number_of_simulations):
+  print('loading dictionaries')
   locations = get_locations(trees)
   nodes_to_tree_dictionary = make_nodes_to_tree_dictionary(trees)
   reconstructed_locations_dictionary = make_reconstructed_locations_dictionary(trees, locations, nodes_to_tree_dictionary)
