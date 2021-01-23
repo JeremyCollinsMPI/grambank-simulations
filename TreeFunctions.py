@@ -358,13 +358,12 @@ def node_not_in_list_and_descendants_not_in_list(node, list_of_languages):
 def retain_only_nodes_that_are_in_list(tree, list_of_languages):
   nodes = list(tree.keys())
   for node in nodes:
-    print(node)
     if not node in tree:
       continue
     if node_not_in_list_and_descendants_not_in_list(node, list_of_languages):
       print('removing')
       tree = drop_node_and_descendants(tree, node)
-  tree = get_rid_of_singleton_branches(tree)
+#   tree = get_rid_of_singleton_branches(tree)
   return tree
 
 def make_reduced_trees(trees, list_of_languages):

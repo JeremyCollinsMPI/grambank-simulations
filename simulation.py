@@ -43,8 +43,8 @@ def make_trees():
     trees[i] = tree
   return trees
 
-def make_nodes_to_tree_dictionary(trees):
-  if 'nodes_to_tree_dictionary.json' in dir:
+def make_nodes_to_tree_dictionary(trees, remake=False):
+  if 'nodes_to_tree_dictionary.json' in dir and not remake:
     return json.load(open('nodes_to_tree_dictionary.json', 'r'))
   nodes_to_tree_dictionary = {}
   for i in range(len(trees)):
@@ -55,17 +55,20 @@ def make_nodes_to_tree_dictionary(trees):
   json.dump(nodes_to_tree_dictionary, open('nodes_to_tree_dictionary.json', 'w'), indent=4)
   return nodes_to_tree_dictionary
 
-def get_locations(trees):
-  if 'locations.json' in dir:
+def get_locations(trees, remake=False):
+  if 'locations.json' in dir and not remake:
     return json.load(open('locations.json', 'r'))  
   df = pd.read_csv('Languages.csv', index_col='id')
   df2 = pd.read_csv('languages_and_dialects_geo.csv', index_col='glottocode')
   locations = {}
   for tree in trees:
     for key in tree.keys():
+      print(key)
       glottocode = find_glottocode(key)
+      print(glottocode)
       nodename = prepare_node_name(key)
       if glottocode in df.index:
+        print('here1')
         lat = df['latitude'][glottocode]
         long = df['longitude'][glottocode]
         if not lat == None and not long == None:
@@ -76,6 +79,9 @@ def get_locations(trees):
           long = df2['longitude'][glottocode]
           if not np.isnan(lat) and not np.isnan(long): 
             locations[nodename] = {'lat': lat, 'long': long}
+        else:
+          print('FUCK')
+          print(glottocode)
   json.dump(locations, open('locations.json', 'w'), indent=4)
   return locations
 
@@ -127,8 +133,8 @@ def reconstruct_locations_for_all_nodes(tree, reconstructed_locations_dictionary
         if not node_done:
           done = False
            
-def make_reconstructed_locations_dictionary(trees, locations, nodes_to_tree_dictionary):
-  if 'reconstructed_locations_dictionary.json' in dir:
+def make_reconstructed_locations_dictionary(trees, locations, nodes_to_tree_dictionary, remake=False):
+  if 'reconstructed_locations_dictionary.json' in dir and not remake:
     return json.load(open('reconstructed_locations_dictionary.json', 'r'))  
   reconstructed_locations_dictionary = {}
   nodes_to_check = []
@@ -156,19 +162,21 @@ def add_node_to_time_depths_dictionary(node, time_depths_dictionary, current_tim
     add_node_to_time_depths_dictionary(child, time_depths_dictionary, new_time_depth)
   return time_depths_dictionary
   
-def make_time_depths_dictionary(trees):
-  if 'time_depths_dictionary.json' in dir:
+def make_time_depths_dictionary(trees, remake=False):
+  if 'time_depths_dictionary.json' in dir and not remake:
     return json.load(open('time_depths_dictionary.json', 'r'))
   time_depths_dictionary = {}
   for tree in trees:
+    if tree == {}:
+      continue
     root = findRoot(tree)
     root_time_depth = 0
     time_depths_dictionary = add_node_to_time_depths_dictionary(root, time_depths_dictionary, root_time_depth)
   json.dump(time_depths_dictionary, open('time_depths_dictionary.json', 'w'), indent=4)
   return time_depths_dictionary
 
-def make_parent_dictionary(trees):
-  if 'parent_dictionary.json' in dir:
+def make_parent_dictionary(trees, remake=False):
+  if 'parent_dictionary.json' in dir and not remake:
     return json.load(open('parent_dictionary.json', 'r'))
   parent_dictionary = {}
   for tree in trees:
@@ -253,8 +261,8 @@ def find_contemporary_neighbours(node_A, trees, reconstructed_locations_dictiona
             contemporary_neighbours.append({node_B: time_depth})
   return contemporary_neighbours
 
-def make_contemporary_neighbour_dictionary(trees, reconstructed_locations_dictionary, time_depths_dictionary, parent_dictionary):
-  if 'contemporary_neighbour_dictionary.json' in dir:
+def make_contemporary_neighbour_dictionary(trees, reconstructed_locations_dictionary, time_depths_dictionary, parent_dictionary, remake=False):
+  if 'contemporary_neighbour_dictionary.json' in dir and not remake:
     return json.load(open('contemporary_neighbour_dictionary.json', 'r'))
   contemporary_neighbour_dictionary = {}
   for i in range(len(trees)):
@@ -265,8 +273,8 @@ def make_contemporary_neighbour_dictionary(trees, reconstructed_locations_dictio
   json.dump(contemporary_neighbour_dictionary, open('contemporary_neighbour_dictionary.json', 'w'), indent=4)
   return contemporary_neighbour_dictionary
 
-def make_potential_donors(reconstructed_locations_dictionary, time_depths_dictionary, contemporary_neighbour_dictionary):
-  if 'potential_donors.json' in dir:
+def make_potential_donors(reconstructed_locations_dictionary, time_depths_dictionary, contemporary_neighbour_dictionary, remake=False):
+  if 'potential_donors.json' in dir and not remake:
     return json.load(open('potential_donors.json', 'r')) 
   potential_donors = {'node_names': [], 'time_depths': []}
   node_names = []
@@ -335,8 +343,8 @@ def make_node_value(parent_value, branch_length, substitution_matrix, states):
 def choose_root_value(base_frequencies):
   return np.random.choice(list(base_frequencies.keys()), p = list(base_frequencies.values()))
 
-def make_child_dictionary(trees):
-  if 'child_dictionary.json' in dir:
+def make_child_dictionary(trees, remake=False):
+  if 'child_dictionary.json' in dir and not remake:
     child_dictionary = json.load(open('child_dictionary.json', 'r'))
     return child_dictionary
   child_dictionary = {}
@@ -377,8 +385,6 @@ def assign_feature(tree, node, parent_value, substitution_matrix, states, base_f
 
 def contact_simulation(trees, substitution_matrix_list, states_list, base_frequencies_list, rate_per_branch_length_per_pair, borrowability_list, locations, nodes_to_tree_dictionary, reconstructed_locations_dictionary, time_depths_dictionary, parent_dictionary, contemporary_neighbour_dictionary, potential_donors, child_dictionary):
   contact_events, donees = make_contact_events(potential_donors, contemporary_neighbour_dictionary, time_depths_dictionary, rate_per_branch_length_per_pair)
-  json.dump(contact_events, open('contact_events.json', 'w'), indent=4)
-  json.dump(donees, open('donees.json', 'w'), indent=4)
   number_of_features = len(substitution_matrix_list)
   final_result_trees = []
   print('doing trees')
