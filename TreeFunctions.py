@@ -1,3 +1,5 @@
+from copy import deepcopy
+
 UNASSIGNED = 'Unassigned'
 DO_NOT_DO = 'Do not do'
 
@@ -275,95 +277,102 @@ def change_names_of_node_and_ancestors(tree, node, new_name):
   for ancestor in ancestors:
     new_ancestor_name = ancestor.replace(node, new_name)
     tree[new_ancestor_name] = tree.pop(ancestor)
+#     print(new_ancestor_name)
+#     print('&&&')
   return tree
 
 def set_branch_length(node, branch_length):
-  current_branch_length = findBranchLength(node, string=True)
-  print(current_branch_length)
-  return node.replace(':' + str(current_branch_length), ':' + str(branch_length))
+  branchLength = ''
+  to_add_at_the_end = ''
+#   print('SETTING BRANCH LENGTH')
+#   print(node)
+  while not node == '':
+#     print(node)
+    if node[(len(node)-1)] == ';':
+      to_add_at_the_end = ';'
+    node = node[0:(len(node)-1)]
+    if node[len(node)-1] == ':':
+      node = node + str(branch_length) + to_add_at_the_end
+      return node
+  return None      
 
+def make_node_into_parent(node, children):
+  to_add_on_the_end = ''
+  if node[len(node)-1] == ';':
+    to_add_on_the_end = ';'
+  branch_length = findBranchLength(node, string=True)
+  node_name_without_structure = findNodeNameWithoutStructure(node)
+  if len(children) == 0:
+    return node_name_without_structure + ':' + branch_length + to_add_on_the_end
+  to_return = '(' + ','.join(children) + ')' + node_name_without_structure + ':' + branch_length + to_add_on_the_end
+  return to_return 
 
 def get_rid_of_singleton_branches(tree):
-  '''
-  for every node;
-  if it only has one child, then the child needs to be deleted
-  then the node itself has to be changed so that it is the same as that child, but with its own name.
-  the branch length needs to be changed to the branch length plus the branch length of the child
-  then you need to refresh the nodes maybe.
-  
-  
-  '''
+  if tree == {}:
+    return tree
   nodes = list(tree.keys())
   nodes_to_check = nodes
-  finished = False
+  finished = False  
   while not finished:
     node = nodes_to_check.pop()
     children = findChildren(node)
     if len(children) == 1:
       child = children[0]
       child_branch_length = findBranchLength(child)
+      grandchildren = findChildren(child)
       del tree[child]
       branch_length = findBranchLength(node)
-      new_name = set_branch_length(node, branch_length + child_branch_length)
-      change_names_of_node_and_ancestors(tree, node, new_name)
+      new_node = make_node_into_parent(node, grandchildren)
+      new_node = set_branch_length(new_node, branch_length + child_branch_length)
+      change_names_of_node_and_ancestors(tree, node, new_node)
       nodes_to_check = list(tree.keys())
     if len(nodes_to_check) == 0:
       finished = True
   return tree
-# 
-# def drop_node_and_descendants(tree, node):
-#   '''
-#   needs to be able handle cases where the node is not in the tree
-#   
-#   you are removing the keys from the tree;
-#   
-#   but you are also updating the names of the parent and ancestors;
-#   
-#   and also getting rid of empty branches and updating branch lengths
-#   
-#   
-#   '''
-#   
-#   descendants = findDescendantNodes(node)
-#   node_and_descendants = descendants + [node]
-#   for item in node_and_descendants:
-#     del tree[item]
-#   new_name = ...
-#   tree = change_names_of_node_and_ancestors(tree, node, new_name)
-#   return tree
-#   
-# 
-# def node_not_in_list_and_descendants_not_in_list(node, list_of_languages):
-# 
-# 
-# def retain_only_nodes_that_are_in_list(tree, list_of_languages):
-#   '''
-#   need to check every node of the tree
-#   either it is in the list, or one of its descendants is in the list
-#   if a node is not in the list and its descendants are not in the list;
-#   then drop the node and its descendants.
-#   
-#   drop_node_and_descendants function needs to be able handle cases where the node is not in the tree
-#   
-#   '''
-#   nodes = tree.keys()
-#   for node in nodes:
-#     if node_not_in_list_and_descendants_not_in_list(node, list_of_languages):
-#       tree = drop_node_and_descendants(tree, node)
-#   tree = get_rid_of_singleton_branches(tree)
-#   return tree
-# 
-# 
-# 
-# def make_reduced_trees(trees, list_of_languages):
-#   '''
-#   
-#   '''
-#   for i in range(len(trees)):
-#     tree = trees[i]
-#     tree = retain_only_nodes_that_are_in_list(tree, list_of_languages)
-#     trees[i] = tree
-#   return trees
+  
+def drop_node_and_descendants(tree, node):
+  if not node in tree:
+    return tree
+  descendants = findDescendantNodes(node)
+  node_and_descendants = descendants + [node]
+  for item in node_and_descendants:
+    del tree[item]
+  if tree == {}:
+    return tree
+  parent = findParent(tree, node)
+  children = findChildren(parent)
+  children = [x for x in children if not x == node]
+  new_parent = make_node_into_parent(parent, children)
+  tree = change_names_of_node_and_ancestors(tree, parent, new_parent)
+  return tree
+
+def node_not_in_list_and_descendants_not_in_list(node, list_of_languages):
+  descendants = findDescendantNodes(node)
+  node_and_descendants = descendants + [node]
+  for item in node_and_descendants:
+    glottocode = find_glottocode(item)
+    if glottocode in list_of_languages:
+      return False
+  return True
+
+def retain_only_nodes_that_are_in_list(tree, list_of_languages):
+  nodes = list(tree.keys())
+  for node in nodes:
+    print(node)
+    if not node in tree:
+      continue
+    if node_not_in_list_and_descendants_not_in_list(node, list_of_languages):
+      print('removing')
+      tree = drop_node_and_descendants(tree, node)
+  tree = get_rid_of_singleton_branches(tree)
+  return tree
+
+def make_reduced_trees(trees, list_of_languages):
+  for i in range(len(trees)):
+    tree = trees[i]
+    tree = retain_only_nodes_that_are_in_list(tree, list_of_languages)
+    trees[i] = tree
+  return trees
 
 
 
