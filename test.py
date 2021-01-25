@@ -1131,14 +1131,18 @@ things that you might want change:
   locations = get_locations(trees, remake=True)
   nodes_to_tree_dictionary = make_nodes_to_tree_dictionary(trees, remake=True)
   reconstructed_locations_dictionary = make_reconstructed_locations_dictionary(trees, locations, nodes_to_tree_dictionary, remake=True)
-#   time_depths_dictionary = make_time_depths_dictionary(trees)
-#   parent_dictionary = make_parent_dictionary(trees)
-#   contemporary_neighbour_dictionary = make_contemporary_neighbour_dictionary(trees, reconstructed_locations_dictionary, time_depths_dictionary, parent_dictionary)
-#   potential_donors = make_potential_donors(reconstructed_locations_dictionary, time_depths_dictionary, contemporary_neighbour_dictionary)
-#   child_dictionary = make_child_dictionary(trees)
+  time_depths_dictionary = make_time_depths_dictionary(trees, remake=True)
+  parent_dictionary = make_parent_dictionary(trees, remake=True)
+  contemporary_neighbour_dictionary = make_contemporary_neighbour_dictionary(trees, reconstructed_locations_dictionary, time_depths_dictionary, parent_dictionary, remake=True)
+  potential_donors = make_potential_donors(reconstructed_locations_dictionary, time_depths_dictionary, contemporary_neighbour_dictionary, remake=True)
+  child_dictionary = make_child_dictionary(trees, remake=True)
+
+def test49():
+ search_through_parameters_single_feature_sanity_check_reduced()
+  
 
 
-test48()
+test49()
 
 
 

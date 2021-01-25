@@ -50,8 +50,7 @@ def propose_new_single_feature(input_array, output_array, na_array_1, na_array_2
   new_substitution_matrix = deepcopy(substitution_matrix)
   new_base_frequencies = deepcopy(base_frequencies)
   new_rate_per_branch_length_per_pair = rate_per_branch_length_per_pair 
-#   dice_roll = np.random.choice([0, 1, 2, 3], 1)[0]
-  dice_roll = 3
+  dice_roll = np.random.choice([0, 1, 2, 3], 1)[0]
   if dice_roll == 0:
     to_change = SUBSTITUTION_MATRIX_0_TO_1
     jump = proposal_rate_dictionary[to_change]
@@ -104,7 +103,7 @@ def propose_new_single_feature(input_array, output_array, na_array_1, na_array_2
       new_rate_per_branch_length_per_pair = new_rate_per_branch_length_per_pair - jump
     new_rate_per_branch_length_per_pair = max(0, new_rate_per_branch_length_per_pair)
     print(new_rate_per_branch_length_per_pair)
-  training_input, training_output = make_input_and_output_arrays(trees, list_of_languages, sample, [new_substitution_matrix], [states], [new_base_frequencies], new_rate_per_branch_length_per_pair, [1], number_of_simulations)  
+  training_input, training_output = make_input_and_output_arrays(trees, list_of_languages, sample, [new_substitution_matrix], [states], [new_base_frequencies], new_rate_per_branch_length_per_pair, [1], number_of_simulations)    
   model.train(training_input, training_output, na_array_1, na_array_2, relatedness_array, distance_array, steps=number_of_steps)
   new_loss = model.show_loss(input_array, output_array, na_array_1, na_array_2, relatedness_array, distance_array)
   print(loss)
@@ -122,7 +121,7 @@ def propose_new_single_feature(input_array, output_array, na_array_1, na_array_2
   return substitution_matrix, base_frequencies, rate_per_branch_length_per_pair, loss, proposal_rate_dictionary
 
 def refresh_single_feature(input_array, output_array, na_array_1, na_array_2, relatedness_array, distance_array, trees, list_of_languages, sample, substitution_matrix, states, base_frequencies, rate_per_branch_length_per_pair, number_of_simulations, number_of_steps, loss, model, proposal_rate_dictionary):
-  training_input, training_output = make_input_and_output_arrays(trees, list_of_languages, sample, [new_substitution_matrix], [states], [new_base_frequencies], new_rate_per_branch_length_per_pair, [1], number_of_simulations)  
+  training_input, training_output = make_input_and_output_arrays(trees, list_of_languages, sample, [substitution_matrix], [states], [base_frequencies], rate_per_branch_length_per_pair, [1], number_of_simulations)  
   model.train(training_input, training_output, na_array_1, na_array_2, relatedness_array, distance_array, steps=number_of_steps)
   loss = model.show_loss(input_array, output_array, na_array_1, na_array_2, relatedness_array, distance_array)
   return substitution_matrix, base_frequencies, rate_per_branch_length_per_pair, loss, proposal_rate_dictionary
@@ -145,8 +144,13 @@ def search_through_parameters_single_feature(input_array, output_array, relatedn
     result = {'substitution_matrix': substitution_matrix, 'base_frequencies': base_frequencies, 'rate_per_branch_length_per_pair': rate_per_branch_length_per_pair}
     print(result) 
     print(proposal_rate_dictionary)
-    if i % 10 == 0:
-      substitution_matrix, base_frequencies, rate_per_branch_length_per_pair, loss, proposal_rate_dictionary = refresh_single_feature(input_array, output_array, na_array_1, na_array_2, relatedness_array, distance_array, trees, list_of_languages, sample, substitution_matrix, states, base_frequencies, rate_per_branch_length_per_pair, number_of_simulations, number_of_steps, loss, model, proposal_rate_dictionary)      
+    if i % 10 == 0 and not i == 0:
+      print(loss)
+      refresh_number_of_simulations = 10
+      substitution_matrix, base_frequencies, rate_per_branch_length_per_pair, loss, proposal_rate_dictionary = refresh_single_feature(input_array, output_array, na_array_1, na_array_2, relatedness_array, distance_array, trees, list_of_languages, sample, substitution_matrix, states, base_frequencies, rate_per_branch_length_per_pair, refresh_number_of_simulations, number_of_steps, loss, model, proposal_rate_dictionary)      
+      print('Refreshed loss: ', loss)
+      proposal_rate_dictionary = {SUBSTITUTION_MATRIX_0_TO_1: 0.1, SUBSTITUTION_MATRIX_1_TO_0: 0.1, BASE_FREQUENCIES: 0.1, RATE_PER_BRANCH_LENGTH_PER_PAIR: 0.1}
+      
   return result
 
 
@@ -194,8 +198,26 @@ def search_through_parameters_single_feature_accuracy_test():
   print(result)
   truth = {'substitution_matrix': substitution_matrix, 'base_frequencies': base_frequencies, 'rate_per_branch_length_per_pair': rate_per_branch_length_per_pair}
   print(truth)
-  
 
+def in_trees(item, trees):
+  for tree in trees:
+    for key in tree:
+#       print(tree)
+#       print(key)
+      
+      glottocode = find_glottocode(key)
+      
+      if item == glottocode:
+        return True
+  return False      
+
+def make_reduced_list_of_languages(list_of_languages, trees):
+  result = []
+  for item in list_of_languages:
+    if in_trees(item, trees):
+      result.append(item)
+  return result
+        
 def search_through_parameters_single_feature_sanity_check():
   trees = make_trees()
   list_of_languages = get_languages_in_grambank()  
@@ -222,6 +244,43 @@ def search_through_parameters_single_feature_sanity_check():
   truth = {'substitution_matrix': substitution_matrix, 'base_frequencies': base_frequencies, 'rate_per_branch_length_per_pair': rate_per_branch_length_per_pair}
   print(truth)
 
+def search_through_parameters_single_feature_sanity_check_reduced():
+  trees = make_trees()
+  trees = trees[0:40]
+  list_of_languages = get_languages_in_grambank()
+  trees = make_reduced_trees(trees, list_of_languages, remake=True)
+  json.dump(trees, open('test.json','w'), indent=4)
+  list_of_languages = make_reduced_list_of_languages(list_of_languages, trees)
+  locations = get_locations(trees, remake=True)
+  nodes_to_tree_dictionary = make_nodes_to_tree_dictionary(trees, remake=True)
+  reconstructed_locations_dictionary = make_reconstructed_locations_dictionary(trees, locations, nodes_to_tree_dictionary, remake=True)
+  time_depths_dictionary = make_time_depths_dictionary(trees, remake=True)
+  parent_dictionary = make_parent_dictionary(trees, remake=True)
+  contemporary_neighbour_dictionary = make_contemporary_neighbour_dictionary(trees, reconstructed_locations_dictionary, time_depths_dictionary, parent_dictionary, remake=True)
+  potential_donors = make_potential_donors(reconstructed_locations_dictionary, time_depths_dictionary, contemporary_neighbour_dictionary, remake=True)
+  child_dictionary = make_child_dictionary(trees, remake=True)  
+  states = ['0', '1']
+  number_of_samples = len(list_of_languages)
+  number_of_languages = len(list_of_languages)
+  sample = np.random.choice(np.array(list_of_languages), number_of_samples, replace=False)
+  number_of_relatedness_bins = 10
+  number_of_distance_bins = 10
+  number_of_simulations = 3
+  number_of_steps = 60
+  substitution_matrix = [[0.95, 0.05], [0.05, 0.95]]
+  base_frequencies = {'0': 1, '1': 0}
+  rate_per_branch_length_per_pair = 0.03
+  base_frequencies_list = [base_frequencies]
+  states_list = [states]
+  borrowability_list = [1.0]
+  substitution_matrix_list = [substitution_matrix]  
+  test_input, test_output, relatedness_array, distance_array = make_all_arrays(trees, list_of_languages, sample, substitution_matrix_list, states_list, base_frequencies_list, rate_per_branch_length_per_pair, borrowability_list, number_of_simulations, number_of_relatedness_bins=10, number_of_distance_bins=10) 
+  na_array_1 = np.ones([1, number_of_samples, 1])
+  na_array_2 = np.ones([1, 1, number_of_languages]) 
+  result = search_through_parameters_single_feature(test_input, test_output, relatedness_array, distance_array, na_array_1, na_array_2, trees, list_of_languages, sample, states, number_of_relatedness_bins=number_of_relatedness_bins, number_of_distance_bins=number_of_distance_bins, number_of_simulations=number_of_simulations, number_of_steps=number_of_steps)  
+  print(result)
+  truth = {'substitution_matrix': substitution_matrix, 'base_frequencies': base_frequencies, 'rate_per_branch_length_per_pair': rate_per_branch_length_per_pair}
+  print(truth)
 
 
 '''
@@ -246,6 +305,17 @@ you have a function for make_all_arrays_relatedness_test(), which makes the inpu
 
 for grambank you similarly need a function make_all_arrays_for_grambank_relatedness_test.
 that function currently takes a value dictionary.  
+
+pipelines that you need:
+focus first on testing whether two families are related.
+
+1. equivalent of make all arrays, where you can specify that two families are related
+2. pipeline which takes an input and output array and the two families, and tests two hypotheses, one that they are related and one that they are not
+3. a pipeline for choosing two families and simulating random data for one of those hypotheses, and testing whether pipeline 2 can get it right.
+
+
+
+
 
 
 '''

@@ -362,6 +362,7 @@ def find_children(node, child_dictionary):
   except:
     print(node)
     print('this should not happen')
+    print('1')
     return None
 
 
@@ -420,6 +421,8 @@ def contact_simulation(trees, substitution_matrix_list, states_list, base_freque
 #     print(donees == donees_sample)
     for i in range(len(trees)):
       tree = trees[i]
+      if tree == {}:
+        continue
       root = findRoot(tree)
       trees[i] = assign_feature(tree, root, parent_value=None, substitution_matrix=substitution_matrix, states=states, base_frequencies=base_frequencies, child_dictionary=child_dictionary, to_exclude=donees_sample, given_value=None)  
     print('processing contact events')
@@ -436,6 +439,8 @@ def contact_simulation(trees, substitution_matrix_list, states_list, base_freque
     print('going through trees')
     for i in range(len(trees)):
       tree = trees[i]
+      if tree == {}:
+        continue
       for node in tree:
         value = tree[node]
         if j == 0:
@@ -465,6 +470,8 @@ def make_input_array(value_dictionary):
 
 def make_output_array(value_dictionary, sample):
   result = []
+  print(value_dictionary)
+  print(sample)
   for item in sample:
     values = value_dictionary[item]
     values = [0 if x == None else x for x in values]
@@ -473,7 +480,6 @@ def make_output_array(value_dictionary, sample):
   shape = np.shape(result)
   result = np.reshape(result, (shape[0], 1, shape[1]))
   return result
-
 
 def make_input_and_output_arrays(trees, list_of_languages, sample, substitution_matrix_list, states_list, base_frequencies_list, rate_per_branch_length_per_pair, borrowability_list, number_of_simulations):
   print('loading dictionaries')

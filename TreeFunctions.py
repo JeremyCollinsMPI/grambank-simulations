@@ -1,4 +1,6 @@
 from copy import deepcopy
+import os
+import json
 
 UNASSIGNED = 'Unassigned'
 DO_NOT_DO = 'Do not do'
@@ -366,11 +368,14 @@ def retain_only_nodes_that_are_in_list(tree, list_of_languages):
 #   tree = get_rid_of_singleton_branches(tree)
   return tree
 
-def make_reduced_trees(trees, list_of_languages):
+def make_reduced_trees(trees, list_of_languages, remake=False):
+  if 'reduced_trees.json' in os.listdir('.') and not remake:
+    return json.load(open('reduced_trees.json', 'r'))
   for i in range(len(trees)):
     tree = trees[i]
     tree = retain_only_nodes_that_are_in_list(tree, list_of_languages)
     trees[i] = tree
+  json.dump(trees, open('reduced_trees.json', 'w'), indent=4)
   return trees
 
 

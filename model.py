@@ -143,14 +143,15 @@ class Model():
 
     self.total_loss = tf.reduce_mean(self.loss) * -1.0
 
-  def train(self, input_array, output_array, na_array_1, na_array_2, relatedness_array, distance_array, steps=200):
+  def train(self, input_array, output_array, na_array_1, na_array_2, relatedness_array, distance_array, steps=200, initialise=True):
     self.train_step = tf.train.AdamOptimizer(self.learn_rate).minimize(self.total_loss) 
     self.clip_op_1 = tf.assign(self.relatedness_weights, tf.clip_by_value(self.relatedness_weights, 0, 0.999))
     self.clip_op_2 = tf.assign(self.distance_weights, tf.clip_by_value(self.distance_weights, 0.001, 0.999))
     self.clip_op_3 = tf.assign(self.intercept, tf.clip_by_value(self.intercept, 0.01, 0.99))
 #     self.clip_op_4 = tf.assign(self.borrowability, tf.clip_by_value(self.borrowability, 0.01, 0.99))   
-    init = tf.initialize_all_variables()
-    self.sess.run(init)   
+    if initialise:
+      init = tf.initialize_all_variables()
+      self.sess.run(init)   
     self.feed = {self.input: input_array, self.output: output_array, self.na_array_1: na_array_1, 
     self.na_array_2: na_array_2, self.relatedness_array: relatedness_array, self.distance_array: distance_array}
     for i in range(steps):  
