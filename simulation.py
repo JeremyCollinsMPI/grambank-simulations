@@ -470,8 +470,6 @@ def make_input_array(value_dictionary):
 
 def make_output_array(value_dictionary, sample):
   result = []
-  print(value_dictionary)
-  print(sample)
   for item in sample:
     values = value_dictionary[item]
     values = [0 if x == None else x for x in values]
@@ -502,9 +500,9 @@ def make_input_and_output_arrays(trees, list_of_languages, sample, substitution_
     output_array.append(to_append_to_output_array)
   return input_array, output_array
 
-def make_relatedness_pairs_dictionary(list_of_languages, trees, parent_dictionary):
+def make_relatedness_pairs_dictionary(list_of_languages, trees, parent_dictionary, remake=False):
   f = 'relatedness_pairs_dictionary.json'
-  if f in dir:
+  if f in dir and not remake:
     return json.load(open(f, 'r'))
   relatedness_pairs_dictionary = {}
   for item_1 in list_of_languages:
@@ -538,9 +536,9 @@ def find_distance(language_1, language_2, df1, df2):
     lat_2 = df2['latitude'][language_2]
   return haversine(long_1, lat_1, long_2, lat_2)
 
-def make_distance_pairs_dictionary(list_of_languages):
+def make_distance_pairs_dictionary(list_of_languages, remake=False):
   f = 'distance_pairs_dictionary.json'
-  if f in dir:
+  if f in dir and not remake:
     return json.load(open(f, 'r'))
   df1 = pd.read_csv('languages.txt', index_col='ID')
   df2 = pd.read_csv('languages_and_dialects_geo.csv', index_col='glottocode') 

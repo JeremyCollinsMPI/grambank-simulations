@@ -202,11 +202,7 @@ def search_through_parameters_single_feature_accuracy_test():
 def in_trees(item, trees):
   for tree in trees:
     for key in tree:
-#       print(tree)
-#       print(key)
-      
-      glottocode = find_glottocode(key)
-      
+      glottocode = find_glottocode(key)      
       if item == glottocode:
         return True
   return False      
@@ -246,10 +242,8 @@ def search_through_parameters_single_feature_sanity_check():
 
 def search_through_parameters_single_feature_sanity_check_reduced():
   trees = make_trees()
-  trees = trees[0:40]
   list_of_languages = get_languages_in_grambank()
-  trees = make_reduced_trees(trees, list_of_languages, remake=True)
-  json.dump(trees, open('test.json','w'), indent=4)
+  trees = make_reduced_trees(trees, list_of_languages, remake=False)
   list_of_languages = make_reduced_list_of_languages(list_of_languages, trees)
   locations = get_locations(trees, remake=True)
   nodes_to_tree_dictionary = make_nodes_to_tree_dictionary(trees, remake=True)
@@ -265,7 +259,10 @@ def search_through_parameters_single_feature_sanity_check_reduced():
   sample = np.random.choice(np.array(list_of_languages), number_of_samples, replace=False)
   number_of_relatedness_bins = 10
   number_of_distance_bins = 10
-  number_of_simulations = 3
+  number_of_simulations = 5
+  '''
+  maybe increase the number of simulations here
+  '''
   number_of_steps = 60
   substitution_matrix = [[0.95, 0.05], [0.05, 0.95]]
   base_frequencies = {'0': 1, '1': 0}
