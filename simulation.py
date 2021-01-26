@@ -10,6 +10,19 @@ import pandas as pd
 
 dir = os.listdir('.')
 
+TREES = 'trees'
+LIST_OF_LANGUAGES = 'list_of_languages'
+LOCATIONS = 'locations'
+NODES_TO_TREE_DICTIONARY = 'nodes_to_tree_dictionary'
+RECONSTRUCTED_LOCATIONS_DICTIONARY = 'reconstructed_locations_dictionary'
+PARENT_DICTIONARY = 'parent_dictionary'
+CONTEMPORARY_NEIGHBOUR_DICTIONARY = 'contemporary_neighbour_dictionary'
+POTENTIAL_DONORS = 'potential_donors'
+CHILD_DICTIONARY = 'child_dictionary'
+TIME_DEPTHS_DICTIONARY = 'time_depths_dictionary'
+
+
+
 def timeit(method):
   def timed(*args, **kw):
     ts = time.time()
@@ -479,16 +492,29 @@ def make_output_array(value_dictionary, sample):
   result = np.reshape(result, (shape[0], 1, shape[1]))
   return result
 
-def make_input_and_output_arrays(trees, list_of_languages, sample, substitution_matrix_list, states_list, base_frequencies_list, rate_per_branch_length_per_pair, borrowability_list, number_of_simulations):
-  print('loading dictionaries')
-  locations = get_locations(trees)
-  nodes_to_tree_dictionary = make_nodes_to_tree_dictionary(trees)
-  reconstructed_locations_dictionary = make_reconstructed_locations_dictionary(trees, locations, nodes_to_tree_dictionary)
-  time_depths_dictionary = make_time_depths_dictionary(trees)
-  parent_dictionary = make_parent_dictionary(trees)
-  contemporary_neighbour_dictionary = make_contemporary_neighbour_dictionary(trees, reconstructed_locations_dictionary, time_depths_dictionary, parent_dictionary)
-  potential_donors = make_potential_donors(reconstructed_locations_dictionary, time_depths_dictionary, contemporary_neighbour_dictionary)
-  child_dictionary = make_child_dictionary(trees)
+def make_input_and_output_arrays(trees, list_of_languages, sample, substitution_matrix_list, states_list, base_frequencies_list, rate_per_branch_length_per_pair, borrowability_list, number_of_simulations, context):
+  try:
+    locations = context[LOCATIONS]
+    nodes_to_tree_dictionary = context[NODES_TO_TREE_DICTIONARY]
+    reconstructed_locations_dictionary = context[RECONSTRUCTED_LOCATIONS_DICTIONARY]
+    time_depths_dictionary = context[TIME_DEPTHS_DICTIONARY]
+    parent_dictionary = context[PARENT_DICTIONARY]
+    contemporary_neighbour_dictionary = context[CONTEMPORARY_NEIGHBOUR_DICTIONARY]
+    potential_donors = context[POTENTIAL_DONORS]
+    child_dictionary = context[CHILD_DICTIONARY]
+  except Exception as e:
+    print(repr(e))
+    print('loading dictionaries')
+    locations = get_locations(trees)
+    nodes_to_tree_dictionary = make_nodes_to_tree_dictionary(trees)
+    reconstructed_locations_dictionary = make_reconstructed_locations_dictionary(trees, locations, nodes_to_tree_dictionary)
+    time_depths_dictionary = make_time_depths_dictionary(trees)
+    parent_dictionary = make_parent_dictionary(trees)
+    contemporary_neighbour_dictionary = make_contemporary_neighbour_dictionary(trees, reconstructed_locations_dictionary, time_depths_dictionary, parent_dictionary)
+    potential_donors = make_potential_donors(reconstructed_locations_dictionary, time_depths_dictionary, contemporary_neighbour_dictionary)
+    child_dictionary = make_child_dictionary(trees)
+    
+
   input_array = []
   output_array = []
   for i in range(number_of_simulations):
@@ -607,9 +633,11 @@ def preprocess_distance_array(distance_array, number_of_distance_bins):
   x = make_one_hot(x, number_of_distance_bins)
   return x
     
-def make_all_arrays(trees, list_of_languages, sample, substitution_matrix_list, states_list, base_frequencies_list, rate_per_branch_length_per_pair, borrowability_list, number_of_simulations, number_of_relatedness_bins=10, number_of_distance_bins=10):  
-  input_array, output_array = make_input_and_output_arrays(trees, list_of_languages, sample, substitution_matrix_list, states_list, base_frequencies_list, rate_per_branch_length_per_pair, borrowability_list, number_of_simulations)
-  parent_dictionary = make_parent_dictionary(trees)
+def make_all_arrays(trees, list_of_languages, sample, substitution_matrix_list, states_list, base_frequencies_list, rate_per_branch_length_per_pair, borrowability_list, number_of_simulations, context, number_of_relatedness_bins=10, number_of_distance_bins=10):  
+  print('making input and output arrays')
+  input_array, output_array = make_input_and_output_arrays(trees, list_of_languages, sample, substitution_matrix_list, states_list, base_frequencies_list, rate_per_branch_length_per_pair, borrowability_list, number_of_simulations, context)
+  print('making other arrays')
+  parent_dictionary = context[PARENT_DICTIONARY]
   relatedness_pairs_dictionary = make_relatedness_pairs_dictionary(list_of_languages, trees, parent_dictionary)
   distance_pairs_dictionary = make_distance_pairs_dictionary(list_of_languages)
   relatedness_array = make_relatedness_array(list_of_languages, sample, relatedness_pairs_dictionary)

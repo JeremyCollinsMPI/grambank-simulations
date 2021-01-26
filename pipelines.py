@@ -46,7 +46,7 @@ def create_initial_base_frequencies(states):
 def create_initial_borrowing_event_rate():
   return 0.1
 
-def propose_new_single_feature(input_array, output_array, na_array_1, na_array_2, relatedness_array, distance_array, trees, list_of_languages, sample, substitution_matrix, states, base_frequencies, rate_per_branch_length_per_pair, number_of_simulations, number_of_steps, loss, model, proposal_rate_dictionary):
+def propose_new_single_feature(input_array, output_array, na_array_1, na_array_2, relatedness_array, distance_array, trees, list_of_languages, sample, substitution_matrix, states, context, base_frequencies, rate_per_branch_length_per_pair, number_of_simulations, number_of_steps, loss, model, proposal_rate_dictionary):
   new_substitution_matrix = deepcopy(substitution_matrix)
   new_base_frequencies = deepcopy(base_frequencies)
   new_rate_per_branch_length_per_pair = rate_per_branch_length_per_pair 
@@ -103,7 +103,8 @@ def propose_new_single_feature(input_array, output_array, na_array_1, na_array_2
       new_rate_per_branch_length_per_pair = new_rate_per_branch_length_per_pair - jump
     new_rate_per_branch_length_per_pair = max(0, new_rate_per_branch_length_per_pair)
     print(new_rate_per_branch_length_per_pair)
-  training_input, training_output = make_input_and_output_arrays(trees, list_of_languages, sample, [new_substitution_matrix], [states], [new_base_frequencies], new_rate_per_branch_length_per_pair, [1], number_of_simulations)    
+  training_input, training_output = make_input_and_output_arrays(trees, list_of_languages, sample, [new_substitution_matrix], [states], [new_base_frequencies], new_rate_per_branch_length_per_pair, [1], number_of_simulations, context)    
+  print('training model')
   model.train(training_input, training_output, na_array_1, na_array_2, relatedness_array, distance_array, steps=number_of_steps)
   new_loss = model.show_loss(input_array, output_array, na_array_1, na_array_2, relatedness_array, distance_array)
   print(loss)
@@ -126,7 +127,7 @@ def refresh_single_feature(input_array, output_array, na_array_1, na_array_2, re
   loss = model.show_loss(input_array, output_array, na_array_1, na_array_2, relatedness_array, distance_array)
   return substitution_matrix, base_frequencies, rate_per_branch_length_per_pair, loss, proposal_rate_dictionary
 
-def search_through_parameters_single_feature(input_array, output_array, relatedness_array, distance_array, na_array_1, na_array_2, trees, list_of_languages, sample, states, number_of_relatedness_bins, number_of_distance_bins, number_of_simulations, number_of_steps):
+def search_through_parameters_single_feature(input_array, output_array, relatedness_array, distance_array, na_array_1, na_array_2, trees, list_of_languages, sample, states, context, number_of_relatedness_bins, number_of_distance_bins, number_of_simulations, number_of_steps):
   substitution_matrix = create_initial_substitution_matrix(states)
   base_frequencies = create_initial_base_frequencies(states)
   rate_per_branch_length_per_pair = create_initial_borrowing_event_rate() 
@@ -140,7 +141,7 @@ def search_through_parameters_single_feature(input_array, output_array, relatedn
   loss = 1000
   proposal_rate_dictionary = {SUBSTITUTION_MATRIX_0_TO_1: 0.1, SUBSTITUTION_MATRIX_1_TO_0: 0.1, BASE_FREQUENCIES: 0.1, RATE_PER_BRANCH_LENGTH_PER_PAIR: 0.1}
   for i in range(100):
-    substitution_matrix, base_frequencies, rate_per_branch_length_per_pair, loss, proposal_rate_dictionary = propose_new_single_feature(input_array, output_array, na_array_1, na_array_2, relatedness_array, distance_array, trees, list_of_languages, sample, substitution_matrix, states, base_frequencies, rate_per_branch_length_per_pair, number_of_simulations, number_of_steps, loss, model, proposal_rate_dictionary)
+    substitution_matrix, base_frequencies, rate_per_branch_length_per_pair, loss, proposal_rate_dictionary = propose_new_single_feature(input_array, output_array, na_array_1, na_array_2, relatedness_array, distance_array, trees, list_of_languages, sample, substitution_matrix, states, context, base_frequencies, rate_per_branch_length_per_pair, number_of_simulations, number_of_steps, loss, model, proposal_rate_dictionary)
     result = {'substitution_matrix': substitution_matrix, 'base_frequencies': base_frequencies, 'rate_per_branch_length_per_pair': rate_per_branch_length_per_pair}
     print(result) 
     print(proposal_rate_dictionary)
@@ -243,16 +244,30 @@ def search_through_parameters_single_feature_sanity_check():
 def search_through_parameters_single_feature_sanity_check_reduced():
   trees = make_trees()
   list_of_languages = get_languages_in_grambank()
-  trees = make_reduced_trees(trees, list_of_languages, remake=False)
+  remake = False
+  trees = make_reduced_trees(trees, list_of_languages, remake=remake)
   list_of_languages = make_reduced_list_of_languages(list_of_languages, trees)
-  locations = get_locations(trees, remake=True)
-  nodes_to_tree_dictionary = make_nodes_to_tree_dictionary(trees, remake=True)
-  reconstructed_locations_dictionary = make_reconstructed_locations_dictionary(trees, locations, nodes_to_tree_dictionary, remake=True)
-  time_depths_dictionary = make_time_depths_dictionary(trees, remake=True)
-  parent_dictionary = make_parent_dictionary(trees, remake=True)
-  contemporary_neighbour_dictionary = make_contemporary_neighbour_dictionary(trees, reconstructed_locations_dictionary, time_depths_dictionary, parent_dictionary, remake=True)
-  potential_donors = make_potential_donors(reconstructed_locations_dictionary, time_depths_dictionary, contemporary_neighbour_dictionary, remake=True)
-  child_dictionary = make_child_dictionary(trees, remake=True)  
+  locations = get_locations(trees, remake=remake)
+  nodes_to_tree_dictionary = make_nodes_to_tree_dictionary(trees, remake=remake)
+  reconstructed_locations_dictionary = make_reconstructed_locations_dictionary(trees, locations, nodes_to_tree_dictionary, remake=remake)
+  time_depths_dictionary = make_time_depths_dictionary(trees, remake=remake)
+  parent_dictionary = make_parent_dictionary(trees, remake=remake)
+  contemporary_neighbour_dictionary = make_contemporary_neighbour_dictionary(trees, reconstructed_locations_dictionary, time_depths_dictionary, parent_dictionary, remake=remake)
+  potential_donors = make_potential_donors(reconstructed_locations_dictionary, time_depths_dictionary, contemporary_neighbour_dictionary, remake=remake)
+  child_dictionary = make_child_dictionary(trees, remake=remake)  
+
+  context = {}
+  context[TREES] = trees
+  context[LIST_OF_LANGUAGES] = list_of_languages
+  context[LOCATIONS] = locations
+  context[NODES_TO_TREE_DICTIONARY] = nodes_to_tree_dictionary
+  context[RECONSTRUCTED_LOCATIONS_DICTIONARY] = reconstructed_locations_dictionary
+  context[PARENT_DICTIONARY] = parent_dictionary
+  context[CONTEMPORARY_NEIGHBOUR_DICTIONARY] = contemporary_neighbour_dictionary
+  context[POTENTIAL_DONORS] = potential_donors
+  context[CHILD_DICTIONARY] = child_dictionary
+  context[TIME_DEPTHS_DICTIONARY] = time_depths_dictionary
+  
   states = ['0', '1']
   number_of_samples = len(list_of_languages)
   number_of_languages = len(list_of_languages)
@@ -271,10 +286,10 @@ def search_through_parameters_single_feature_sanity_check_reduced():
   states_list = [states]
   borrowability_list = [1.0]
   substitution_matrix_list = [substitution_matrix]  
-  test_input, test_output, relatedness_array, distance_array = make_all_arrays(trees, list_of_languages, sample, substitution_matrix_list, states_list, base_frequencies_list, rate_per_branch_length_per_pair, borrowability_list, number_of_simulations, number_of_relatedness_bins=10, number_of_distance_bins=10) 
+  test_input, test_output, relatedness_array, distance_array = make_all_arrays(trees, list_of_languages, sample, substitution_matrix_list, states_list, base_frequencies_list, rate_per_branch_length_per_pair, borrowability_list, number_of_simulations, context, number_of_relatedness_bins=10, number_of_distance_bins=10) 
   na_array_1 = np.ones([1, number_of_samples, 1])
   na_array_2 = np.ones([1, 1, number_of_languages]) 
-  result = search_through_parameters_single_feature(test_input, test_output, relatedness_array, distance_array, na_array_1, na_array_2, trees, list_of_languages, sample, states, number_of_relatedness_bins=number_of_relatedness_bins, number_of_distance_bins=number_of_distance_bins, number_of_simulations=number_of_simulations, number_of_steps=number_of_steps)  
+  result = search_through_parameters_single_feature(test_input, test_output, relatedness_array, distance_array, na_array_1, na_array_2, trees, list_of_languages, sample, states, context, number_of_relatedness_bins=number_of_relatedness_bins, number_of_distance_bins=number_of_distance_bins, number_of_simulations=number_of_simulations, number_of_steps=number_of_steps)  
   print(result)
   truth = {'substitution_matrix': substitution_matrix, 'base_frequencies': base_frequencies, 'rate_per_branch_length_per_pair': rate_per_branch_length_per_pair}
   print(truth)
