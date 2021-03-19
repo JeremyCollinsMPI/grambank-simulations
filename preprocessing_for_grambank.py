@@ -5,10 +5,14 @@ from simulation import *
 import os
 import json
 
-def get_languages_in_grambank():
+def get_languages_in_grambank(remake=True):
+  if not remake:
+    if 'languages_in_grambank.json' in os.listdir('.'):
+      return json.load(open('languages_in_grambank.json', 'r'))
   data = readData('data.txt')
   # dict = createDictionary(df)
   languages = getUniqueLanguages(data)
+  json.dump(languages, open('languages_in_grambank.json', 'w', encoding='utf-8'), ensure_ascii=False)
   return languages
 
 def get_grambank_value_dictionary():

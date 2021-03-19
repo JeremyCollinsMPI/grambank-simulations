@@ -1140,9 +1140,118 @@ things that you might want change:
 def test49():
  search_through_parameters_single_feature_sanity_check_reduced()
   
+def test50():
+  x = np.array([1,2,3,0])
+  print(np.maximum(x, 1))
+
+def test51():
+  trees = make_trees()
+  list_of_languages = get_languages_in_grambank()
+  remake = False
+  trees = make_reduced_trees(trees, list_of_languages, remake=remake)
+  list_of_languages = make_reduced_list_of_languages(list_of_languages, trees)
+  locations = get_locations(trees, remake=remake)
+  nodes_to_tree_dictionary = make_nodes_to_tree_dictionary(trees, remake=remake)
+  reconstructed_locations_dictionary = make_reconstructed_locations_dictionary(trees, locations, nodes_to_tree_dictionary, remake=remake)
+  time_depths_dictionary = make_time_depths_dictionary(trees, remake=remake)
+  parent_dictionary = make_parent_dictionary(trees, remake=remake)
+  contemporary_neighbour_dictionary = make_contemporary_neighbour_dictionary(trees, reconstructed_locations_dictionary, time_depths_dictionary, parent_dictionary, remake=remake)
+  potential_donors = make_potential_donors(reconstructed_locations_dictionary, time_depths_dictionary, contemporary_neighbour_dictionary, remake=remake)
+  child_dictionary = make_child_dictionary(trees, remake=remake)  
+  context = {}
+  context[TREES] = trees
+  context[LIST_OF_LANGUAGES] = list_of_languages
+  context[LOCATIONS] = locations
+  context[NODES_TO_TREE_DICTIONARY] = nodes_to_tree_dictionary
+  context[RECONSTRUCTED_LOCATIONS_DICTIONARY] = reconstructed_locations_dictionary
+  context[PARENT_DICTIONARY] = parent_dictionary
+  context[CONTEMPORARY_NEIGHBOUR_DICTIONARY] = contemporary_neighbour_dictionary
+  context[POTENTIAL_DONORS] = potential_donors
+  context[CHILD_DICTIONARY] = child_dictionary
+  context[TIME_DEPTHS_DICTIONARY] = time_depths_dictionary
+  states = ['0', '1']
+  number_of_samples = 400
+  number_of_languages = len(list_of_languages)
+  sample = np.random.choice(np.array(list_of_languages), number_of_samples, replace=False)
+  number_of_relatedness_bins = 10
+  number_of_distance_bins = 10
+  number_of_simulations = 1
+  number_of_steps = 150
+  substitution_matrix = [[0.95, 0.05], [0.05, 0.95]]
+  base_frequencies = {'0': 1, '1': 0}
+  rate_per_branch_length_per_pair = 0.03
+  base_frequencies_list = [base_frequencies]
+  states_list = [states]
+  borrowability_list = [1.0]
+  substitution_matrix_list = [substitution_matrix]  
+  test_input, test_output, relatedness_array, distance_array = make_all_arrays(trees, list_of_languages, sample, substitution_matrix_list, states_list, base_frequencies_list, rate_per_branch_length_per_pair, borrowability_list, number_of_simulations, context, number_of_relatedness_bins=10, number_of_distance_bins=10) 
+  na_array_1 = np.ones([1, number_of_samples, 1])
+  na_array_2 = np.ones([1, 1, number_of_languages]) 
+
+def test52():
+  trees = make_trees()
+  print('1')
+  list_of_languages = get_languages_in_grambank()
+  print('2')
+  remake = False
+  trees = make_reduced_trees(trees, list_of_languages, remake=remake)
+  print('3')
+  list_of_languages = make_reduced_list_of_languages(list_of_languages, trees, remake=remake)
+  print('4')
+  locations = get_locations(trees, remake=remake)
+  nodes_to_tree_dictionary = make_nodes_to_tree_dictionary(trees, remake=remake)
+  reconstructed_locations_dictionary = make_reconstructed_locations_dictionary(trees, locations, nodes_to_tree_dictionary, remake=remake)
+  time_depths_dictionary = make_time_depths_dictionary(trees, remake=remake)
+  parent_dictionary = make_parent_dictionary(trees, remake=remake)
+  contemporary_neighbour_dictionary = make_contemporary_neighbour_dictionary(trees, reconstructed_locations_dictionary, time_depths_dictionary, parent_dictionary, remake=remake)
+  potential_donors = make_potential_donors(reconstructed_locations_dictionary, time_depths_dictionary, contemporary_neighbour_dictionary, remake=remake)
+  child_dictionary = make_child_dictionary(trees, remake=remake)  
+  print('5')
+  context = {}
+  context[TREES] = trees
+  context[LIST_OF_LANGUAGES] = list_of_languages
+  context[LOCATIONS] = locations
+  context[NODES_TO_TREE_DICTIONARY] = nodes_to_tree_dictionary
+  context[RECONSTRUCTED_LOCATIONS_DICTIONARY] = reconstructed_locations_dictionary
+  context[PARENT_DICTIONARY] = parent_dictionary
+  context[CONTEMPORARY_NEIGHBOUR_DICTIONARY] = contemporary_neighbour_dictionary
+  context[POTENTIAL_DONORS] = potential_donors
+  context[CHILD_DICTIONARY] = child_dictionary
+  context[TIME_DEPTHS_DICTIONARY] = time_depths_dictionary
+  states = ['0', '1']
+  number_of_samples = 400
+  number_of_languages = len(list_of_languages)
+  sample = np.random.choice(np.array(list_of_languages), number_of_samples, replace=False)
+  number_of_relatedness_bins = 10
+  number_of_distance_bins = 10
+  number_of_simulations = 1
+  number_of_steps = 150
+  substitution_matrix = [[0.95, 0.05], [0.05, 0.95]]
+  base_frequencies = {'0': 1, '1': 0}
+  rate_per_branch_length_per_pair = 0.03
+  base_frequencies_list = [base_frequencies]
+  states_list = [states]
+  borrowability_list = [1.0]
+  substitution_matrix_list = [substitution_matrix]  
+  input_array, output_array, relatedness_array, distance_array = make_all_arrays(trees, list_of_languages, sample, substitution_matrix_list, states_list, base_frequencies_list, rate_per_branch_length_per_pair, borrowability_list, number_of_simulations, context, number_of_relatedness_bins=10, number_of_distance_bins=10) 
+  na_array_1 = np.ones([1, number_of_samples, 1])
+  na_array_2 = np.ones([1, 1, number_of_languages]) 
+  substitution_matrix = create_initial_substitution_matrix(states)
+  base_frequencies = create_initial_base_frequencies(states)
+  rate_per_branch_length_per_pair = create_initial_borrowing_event_rate() 
+  number_of_samples = len(sample)
+  number_of_languages = len(list_of_languages)
+  number_of_features = 1
+  '''temporarily not using the na arrays:'''  
+  na_array_1 = np.ones([1, number_of_samples, 1, number_of_features])
+  na_array_2 = np.ones([1, 1, number_of_languages, number_of_features])
+  loss = 1000
+  proposal_rate_dictionary = {SUBSTITUTION_MATRIX_0_TO_1: 0.1, SUBSTITUTION_MATRIX_1_TO_0: 0.1, BASE_FREQUENCIES: 0.1, RATE_PER_BRANCH_LENGTH_PER_PAIR: 0.1}
+  context['real_summary_statistics'] = make_summary_statistics(input_array, output_array, na_array_1, na_array_2, relatedness_array, distance_array)
+  print(context['real_summary_statistics'])
 
 
-test49()
+test52()
 
 
 

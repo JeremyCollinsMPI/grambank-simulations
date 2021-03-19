@@ -25,6 +25,38 @@ def create_initial_borrowing_event_rate():
   return 0.1
 
 def make_summary_statistics(input_array, output_array, na_array_1, na_array_2, relatedness_array, distance_array):
+  
+  for i in range(len(output_array)):
+    for j in range(len(input_array)):
+      relatedness = relatedness_array[i][j]
+      distance = distance_array[i][j]
+      input_value = input_array[j]
+      output_value = output_array[i]
+      if na_array_1[j] == 1 and na_array_2[i] == 1:
+        if input_value == 0:
+          relatedness_total_zero = relatedness_total_zero + relatedness_array
+          distance_total_zero = distance_total_zero + distance
+          if output_value == 0:
+            relatedness_same_zero = relatedness_same_zero + relatedness
+            distance_same_zero = distance_same_zero + distance
+        if input_value == 1:
+          relatedness_total_one = relatedness_total_one + relatedness_array
+          distance_total_one = distance_total_one + distance
+          if output_value == 1:
+            relatedness_same_one = relatedness_same_one + relatedness
+            distance_same_one = distance_same_one + distance
+
+  relatedness_total_zero = np.maximum(relatedness_total_zero, 1)
+  relatedness_total_one = np.maximum(relatedness_total_one, 1)
+  distance_total_zero = np.maximum(distance_total_zero, 1)
+  distance_total_one = np.maximum(distance_total_one, 1)
+  
+  summary_statistics[RELATEDNESS_PROB_SAME_ZERO] = relatedness_same_zero / relatedness_total_zero
+  summary_statistics[RELATEDNESS_PROB_SAME_ONE] = relatedness_same_one / relatedness_total_one
+  summary_statistics[CONTACT_PROB_SAME_ZERO] = distance_same_zero / distance_total_zero
+  summary_statistics[CONTACT_PROB_SAME_ONE] = distance_same_one / distance_total_one  
+
+
   '''
   you have each pair of languages;
   you have the relatedness and the distance;
@@ -53,7 +85,40 @@ def make_summary_statistics(input_array, output_array, na_array_1, na_array_2, r
   PROPORTION_OF_ZEROS = 'proportion of zeros'
   
 
+
+  something like
+  
+  for i in range(len(input_array))
+  
+  you check every element;
+  you see the relatedness, and then update the RELATEDNESS_PROB_SAME_ZERO and RELATEDNESS_PROB_SAME_ONES
+  do the same with contact.  etc.
+  
+  
+
+      
+      
+      
+  relatedness_total_zero = 
+  
+  relatedness_same_zero = 
+  
+  
+  
   '''
+  
+  
+  
+  
+  
+  
+  
+  RELATEDNESS_PROB_SAME_ZERO = 'relatedness bins probability of second language having 0 if first language has 0' 
+  RELATEDNESS_PROB_SAME_ONE = 'relatedness bins probability of second language having 1 if first language has 1' 
+  CONTACT_PROB_SAME_ZERO = 'contact bins probability of second language having 0 if first language has 0' 
+  CONTACT_PROB_SAME_ONE = 'contact bins probability of second language having 1 if first language has 1' 
+  PROPORTION_OF_ZEROS = 'proportion of zeros'
+
   
   return 'matey'
   
@@ -137,11 +202,15 @@ def in_trees(item, trees):
         return True
   return False  
 
-def make_reduced_list_of_languages(list_of_languages, trees):
+def make_reduced_list_of_languages(list_of_languages, trees, remake=True):
+  if not remake:
+    if 'reduced_list_of_languages.json' in os.listdir('.'):
+      return json.load(open('reduced_list_of_languages.json', 'r'))
   result = []
   for item in list_of_languages:
     if in_trees(item, trees):
       result.append(item)
+  json.dump(result, open('reduced_list_of_languages.json', 'w', encoding='utf-8'), indent=4, ensure_ascii=False)
   return result
 
 def search_through_parameters_single_feature_sanity_check_reduced():
@@ -149,7 +218,7 @@ def search_through_parameters_single_feature_sanity_check_reduced():
   list_of_languages = get_languages_in_grambank()
   remake = False
   trees = make_reduced_trees(trees, list_of_languages, remake=remake)
-  list_of_languages = make_reduced_list_of_languages(list_of_languages, trees)
+  list_of_languages = make_reduced_list_of_languages(list_of_languages, trees, remake=remake)
   locations = get_locations(trees, remake=remake)
   nodes_to_tree_dictionary = make_nodes_to_tree_dictionary(trees, remake=remake)
   reconstructed_locations_dictionary = make_reconstructed_locations_dictionary(trees, locations, nodes_to_tree_dictionary, remake=remake)
