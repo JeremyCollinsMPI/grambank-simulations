@@ -1242,9 +1242,27 @@ def test52():
   number_of_samples = len(sample)
   number_of_languages = len(list_of_languages)
   number_of_features = 1
-  '''temporarily not using the na arrays:'''  
+  
+  
+  '''
+  
+  ???? what is the correct shape for the na arrays?
+  '''
+  
+  
+  
+  '''temporarily not using the na arrays:
+  
+  also these two seem to be the wrong way round
+  
+  
+  '''  
   na_array_1 = np.ones([1, number_of_samples, 1, number_of_features])
   na_array_2 = np.ones([1, 1, number_of_languages, number_of_features])
+
+
+
+
   loss = 1000
   proposal_rate_dictionary = {SUBSTITUTION_MATRIX_0_TO_1: 0.1, SUBSTITUTION_MATRIX_1_TO_0: 0.1, BASE_FREQUENCIES: 0.1, RATE_PER_BRANCH_LENGTH_PER_PAIR: 0.1}
   context['real_summary_statistics'] = make_summary_statistics(input_array, output_array, na_array_1, na_array_2, relatedness_array, distance_array)

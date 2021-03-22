@@ -25,6 +25,46 @@ def create_initial_borrowing_event_rate():
   return 0.1
 
 def make_summary_statistics(input_array, output_array, na_array_1, na_array_2, relatedness_array, distance_array):
+  print('*****')
+  print(np.shape(na_array_1))
+  print(np.shape(na_array_2))
+  print(np.shape(input_array))
+  print(np.shape(output_array))
+  print(np.shape(relatedness_array))
+  print(np.shape(distance_array))
+  
+  
+  '''
+  shapes of arrays:
+  (1, 400, 1, 1)
+(1, 1, 1673, 1)
+(1, 1, 1673, 1)
+(1, 400, 1, 1)
+(1, 400, 1673, 10)
+(1, 400, 1673, 10)
+
+to find relatedness of language i in the sample and j in the total list, 
+it would be relatedness_array[0][i][j]
+
+the summary statistics here were assuming that there was only one dataset.
+if e.g. you simulate multiple ones, then you want to total it for each one.
+
+
+  '''
+
+  '''
+  first define relatedness_total_zero etc. here - TO DO
+  '''
+
+  for dataset_number in range(np.shape(output_array)[0]):
+    for i in range(np.shape(output_array)[1]):
+      for j in range(np.shape(input_array)[1]):
+        relatedness = relatedness_array[0][i][j]
+        distance = distance_array[0][i][j]
+        input_value = input_array[dataset_number][j][0][0]
+        output_value = output_array[dataset_number][0][i][0]
+        if na_array_1[dataset_number][]
+        
   
   for i in range(len(output_array)):
     for j in range(len(input_array)):
@@ -181,7 +221,11 @@ def search_through_parameters_single_feature(input_array, output_array, relatedn
   number_of_samples = len(sample)
   number_of_languages = len(list_of_languages)
   number_of_features = 1
-  '''temporarily not using the na arrays:'''  
+  '''temporarily not using the na arrays:
+  
+  also these seem to be the wrong way round
+  
+  '''  
   na_array_1 = np.ones([1, number_of_samples, 1, number_of_features])
   na_array_2 = np.ones([1, 1, number_of_languages, number_of_features])
   loss = 1000
