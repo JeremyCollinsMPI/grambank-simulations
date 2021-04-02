@@ -25,142 +25,58 @@ def create_initial_borrowing_event_rate():
   return 0.1
 
 def make_summary_statistics(input_array, output_array, na_array_1, na_array_2, relatedness_array, distance_array):
-  print('*****')
-  print(np.shape(na_array_1))
-  print(np.shape(na_array_2))
-  print(np.shape(input_array))
-  print(np.shape(output_array))
-  print(np.shape(relatedness_array))
-  print(np.shape(distance_array))
-  
-  
-  '''
-  shapes of arrays:
-  (1, 400, 1, 1)
-(1, 1, 1673, 1)
-(1, 1, 1673, 1)
-(1, 400, 1, 1)
-(1, 400, 1673, 10)
-(1, 400, 1673, 10)
-
-to find relatedness of language i in the sample and j in the total list, 
-it would be relatedness_array[0][i][j]
-
-the summary statistics here were assuming that there was only one dataset.
-if e.g. you simulate multiple ones, then you want to total it for each one.
-
-
-  '''
-
-  '''
-  first define relatedness_total_zero etc. here - TO DO
-  '''
-
+  relatedness_total_zero = np.zeros([np.shape(relatedness_array)[3]])
+  relatedness_total_one = np.zeros([np.shape(relatedness_array)[3]])
+  relatedness_same_zero = np.zeros(np.shape(relatedness_total_zero))
+  relatedness_same_one = np.zeros(np.shape(relatedness_total_one))
+  distance_total_zero = np.zeros([np.shape(distance_array)[3]])
+  distance_total_one = np.zeros([np.shape(distance_array)[3]])
+  distance_same_zero = np.zeros(np.shape(distance_total_zero))
+  distance_same_one = np.zeros(np.shape(distance_total_one))
   for dataset_number in range(np.shape(output_array)[0]):
     for i in range(np.shape(output_array)[1]):
-      for j in range(np.shape(input_array)[1]):
+      for j in range(np.shape(input_array)[2]):
         relatedness = relatedness_array[0][i][j]
         distance = distance_array[0][i][j]
-        input_value = input_array[dataset_number][j][0][0]
-        output_value = output_array[dataset_number][0][i][0]
-        if na_array_1[dataset_number][]
-        
-  
-  for i in range(len(output_array)):
-    for j in range(len(input_array)):
-      relatedness = relatedness_array[i][j]
-      distance = distance_array[i][j]
-      input_value = input_array[j]
-      output_value = output_array[i]
-      if na_array_1[j] == 1 and na_array_2[i] == 1:
-        if input_value == 0:
-          relatedness_total_zero = relatedness_total_zero + relatedness_array
-          distance_total_zero = distance_total_zero + distance
-          if output_value == 0:
-            relatedness_same_zero = relatedness_same_zero + relatedness
-            distance_same_zero = distance_same_zero + distance
-        if input_value == 1:
-          relatedness_total_one = relatedness_total_one + relatedness_array
-          distance_total_one = distance_total_one + distance
-          if output_value == 1:
-            relatedness_same_one = relatedness_same_one + relatedness
-            distance_same_one = distance_same_one + distance
-
+        input_value = input_array[dataset_number][0][j][0]
+        output_value = output_array[dataset_number][i][0][0]
+        if na_array_1[dataset_number][0][j][0] == 1 and na_array_2[dataset_number][i][0][0] == 1:
+          if input_value == 0:
+            relatedness_total_zero = relatedness_total_zero + relatedness
+            distance_total_zero = distance_total_zero + distance
+            if output_value == 0:
+              relatedness_same_zero = relatedness_same_zero + relatedness
+              distance_same_zero = distance_same_zero + distance
+          if input_value == 1:
+            relatedness_total_one = relatedness_total_one + relatedness
+            distance_total_one = distance_total_one + distance
+            if output_value == 1:
+              relatedness_same_one = relatedness_same_one + relatedness
+              distance_same_one = distance_same_one + distance
+  number_of_values = 0
+  number_of_zeros = 0
+  for dataset_number in range(np.shape(output_array)[0]):
+    for j in range(np.shape(input_array)[2]):
+      number_of_values = number_of_values + 1
+      if input_array[dataset_number][0][j][0] == 0:
+        number_of_zeros = number_of_zeros + 1
   relatedness_total_zero = np.maximum(relatedness_total_zero, 1)
   relatedness_total_one = np.maximum(relatedness_total_one, 1)
   distance_total_zero = np.maximum(distance_total_zero, 1)
   distance_total_one = np.maximum(distance_total_one, 1)
-  
+  summary_statistics = {}
   summary_statistics[RELATEDNESS_PROB_SAME_ZERO] = relatedness_same_zero / relatedness_total_zero
   summary_statistics[RELATEDNESS_PROB_SAME_ONE] = relatedness_same_one / relatedness_total_one
   summary_statistics[CONTACT_PROB_SAME_ZERO] = distance_same_zero / distance_total_zero
   summary_statistics[CONTACT_PROB_SAME_ONE] = distance_same_one / distance_total_one  
+  summary_statistics[PROPORTION_OF_ZEROS] = number_of_zeros / number_of_values
+  return summary_statistics
 
-
-  '''
-  you have each pair of languages;
-  you have the relatedness and the distance;
-  
-  so you can calculate the probability of two languages with a particular relatedness bin having the same value
-  it is actually two numbers:
-  the probability of the second language having 0 if the first language has 0;
-  and the probability of the second language having 1 if the first language has 1;
-  
-  similarly for contact bin.
-  
-  you also may want a summary statistic for the proportion of 0s in the dataset.  
-  
-  how do you want to structure the summary statistics?
-  
-  i will write the other functions first to make that clear
-  
-  but you will basically have
-  
-  summary_statistics as a dictionary, with keys
-  'relatedness bins probability of second language having 0 if first language has 0' RELATEDNESS_PROB_SAME_ZERO
-  'relatedness bins probability of second language having 1 if first language has 1' RELATEDNESS_PROB_SAME_ONE
-  'contact bins probability of second language having 0 if first language has 0' CONTACT_PROB_SAME_ZERO
-  'contact bins probability of second language having 1 if first language has 1' CONTACT_PROB_SAME_ONE
-  
-  PROPORTION_OF_ZEROS = 'proportion of zeros'
-  
-
-
-  something like
-  
-  for i in range(len(input_array))
-  
-  you check every element;
-  you see the relatedness, and then update the RELATEDNESS_PROB_SAME_ZERO and RELATEDNESS_PROB_SAME_ONES
-  do the same with contact.  etc.
-  
-  
-
-      
-      
-      
-  relatedness_total_zero = 
-  
-  relatedness_same_zero = 
-  
-  
-  
-  '''
-  
-  
-  
-  
-  
-  
-  
-  RELATEDNESS_PROB_SAME_ZERO = 'relatedness bins probability of second language having 0 if first language has 0' 
-  RELATEDNESS_PROB_SAME_ONE = 'relatedness bins probability of second language having 1 if first language has 1' 
-  CONTACT_PROB_SAME_ZERO = 'contact bins probability of second language having 0 if first language has 0' 
-  CONTACT_PROB_SAME_ONE = 'contact bins probability of second language having 1 if first language has 1' 
-  PROPORTION_OF_ZEROS = 'proportion of zeros'
-
-  
-  return 'matey'
+def find_loss(training_summary_statistics, real_summary_statistics):
+  total = 0
+  for x in [RELATEDNESS_PROB_SAME_ZERO, RELATEDNESS_PROB_SAME_ONE, CONTACT_PROB_SAME_ZERO, CONTACT_PROB_SAME_ONE PROPORTION_OF_ZEROS]:
+    total = total + np.sum(abs(training_summary_statistics[x] - real_summary_statistics[x]))
+  return total
   
 def update_parameters(parameter_context, training_summary_statistics, real_summary_statistics):
   '''
@@ -178,8 +94,7 @@ def update_parameters(parameter_context, training_summary_statistics, real_summa
   '''
   return parameter_context
 
-def find_loss(training_summary_statistics, real_summary_statistics):
-  return 0
+
 
 def propose_new_single_feature(input_array, output_array, na_array_1, na_array_2, relatedness_array, distance_array, trees, list_of_languages, sample, parameter_context, states, context, number_of_simulations):
 
