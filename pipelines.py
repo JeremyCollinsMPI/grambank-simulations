@@ -9,12 +9,14 @@ BASE_FREQUENCIES = 'base_frequencies'
 RATE_PER_BRANCH_LENGTH_PER_PAIR = 'rate_per_branch_length_per_pair'
 RELATEDNESS_PROB_SAME_ZERO = 'relatedness bins probability of second language having 0 if first language has 0' 
 RELATEDNESS_PROB_SAME_ONE = 'relatedness bins probability of second language having 1 if first language has 1' 
+RELATEDNESS_SAME_ZERO_ERROR = 'relatedness bins number of languages not having same value if first languages has 0'
+RELATEDNESS_SAME_ONE_ERROR = 'relatedness bins number of languages not having same value if first languages has 1'
 CONTACT_PROB_SAME_ZERO = 'contact bins probability of second language having 0 if first language has 0' 
 CONTACT_PROB_SAME_ONE = 'contact bins probability of second language having 1 if first language has 1' 
 PROPORTION_OF_ZEROS = 'proportion of zeros'
 
 def create_initial_substitution_matrix(states):
-  substitution_matrix = [[0.95, 0.05], [0.05, 0.95]]
+  substitution_matrix = [[0.95, 0.05], [0.1, 0.9]]
   return substitution_matrix
   
 def create_initial_base_frequencies(states):
@@ -22,9 +24,14 @@ def create_initial_base_frequencies(states):
   return base_frequencies
 
 def create_initial_borrowing_event_rate():
-  return 0.1
+  return 0.03
 
 def make_summary_statistics(input_array, output_array, na_array_1, na_array_2, relatedness_array, distance_array):
+  '''
+  changing it to use the number of languages that are incorrectly accounted for
+  '''
+
+
   relatedness_total_zero = np.zeros([np.shape(relatedness_array)[3]])
   relatedness_total_one = np.zeros([np.shape(relatedness_array)[3]])
   relatedness_same_zero = np.zeros(np.shape(relatedness_total_zero))
@@ -65,19 +72,74 @@ def make_summary_statistics(input_array, output_array, na_array_1, na_array_2, r
   distance_total_zero = np.maximum(distance_total_zero, 1)
   distance_total_one = np.maximum(distance_total_one, 1)
   summary_statistics = {}
-  summary_statistics[RELATEDNESS_PROB_SAME_ZERO] = relatedness_same_zero / relatedness_total_zero
-  summary_statistics[RELATEDNESS_PROB_SAME_ONE] = relatedness_same_one / relatedness_total_one
+#   summary_statistics[RELATEDNESS_PROB_SAME_ZERO] = relatedness_same_zero / relatedness_total_zero
+#   summary_statistics[RELATEDNESS_PROB_SAME_ONE] = relatedness_same_one / relatedness_total_one
   summary_statistics[CONTACT_PROB_SAME_ZERO] = distance_same_zero / distance_total_zero
   summary_statistics[CONTACT_PROB_SAME_ONE] = distance_same_one / distance_total_one  
   summary_statistics[PROPORTION_OF_ZEROS] = number_of_zeros / number_of_values
+  summary_statistics[RELATEDNESS_SAME_ZERO_ERROR] = (relatedness_total_zero - relatedness_same_zero) / np.shape(output_array)[0]
+  summary_statistics[RELATEDNESS_SAME_ONE_ERROR] = (relatedness_total_one - relatedness_same_one) / np.shape(output_array)[0]
+  print('Number of simulations: ', np.shape(output_array)[0])
   return summary_statistics
 
 def find_loss(training_summary_statistics, real_summary_statistics):
   total = 0
-  for x in [RELATEDNESS_PROB_SAME_ZERO, RELATEDNESS_PROB_SAME_ONE, CONTACT_PROB_SAME_ZERO, CONTACT_PROB_SAME_ONE PROPORTION_OF_ZEROS]:
+  for x in [RELATEDNESS_SAME_ZERO_ERROR, RELATEDNESS_SAME_ONE_ERROR, CONTACT_PROB_SAME_ZERO, CONTACT_PROB_SAME_ONE, PROPORTION_OF_ZEROS]:
     total = total + np.sum(abs(training_summary_statistics[x] - real_summary_statistics[x]))
+#   print('Loss: ')
   return total
-  
+
+def update_substitution_matrix(parameter_context, training_summary_statistics, real_summary_statistics):
+  '''
+  if the training one - real one is greater than zero, then adjust stability doen
+  '''
+  adjustment = 0.01
+  print('Training zero: ', training_summary_statistics[RELATEDNESS_SAME_ZERO_ERROR])
+  print('Real zero: ', real_summary_statistics[RELATEDNESS_SAME_ZERO_ERROR])
+  print('Training one: ', training_summary_statistics[RELATEDNESS_SAME_ONE_ERROR])
+  print('Real one: ', real_summary_statistics[RELATEDNESS_SAME_ONE_ERROR])
+  error = training_summary_statistics[RELATEDNESS_SAME_ZERO_ERROR] - real_summary_statistics[RELATEDNESS_SAME_ZERO_ERROR]
+  print('Previous matrix: ', parameter_context['substitution_matrix'])
+  if np.sum(error) < 0:
+    parameter_context['substitution_matrix'][0][0] = parameter_context['substitution_matrix'][0][0] - adjustment
+    parameter_context['substitution_matrix'][0][1] = parameter_context['substitution_matrix'][0][1] + adjustment
+  if np.sum(error) > 0:
+    parameter_context['substitution_matrix'][0][0] = parameter_context['substitution_matrix'][0][0] + adjustment
+    parameter_context['substitution_matrix'][0][1] = parameter_context['substitution_matrix'][0][1] - adjustment
+  error = training_summary_statistics[RELATEDNESS_SAME_ONE_ERROR] - real_summary_statistics[RELATEDNESS_SAME_ONE_ERROR]
+  if np.sum(error) > 0:
+    parameter_context['substitution_matrix'][1][1] = parameter_context['substitution_matrix'][1][1] - adjustment
+    parameter_context['substitution_matrix'][1][0] = parameter_context['substitution_matrix'][1][0] + adjustment
+  if np.sum(error) < 0:
+    parameter_context['substitution_matrix'][1][1] = parameter_context['substitution_matrix'][1][1] + adjustment
+    parameter_context['substitution_matrix'][1][0] = parameter_context['substitution_matrix'][1][0] - adjustment
+  print('New matrix: ', parameter_context['substitution_matrix'])
+  return parameter_context
+
+def update_base_frequencies(parameter_context, training_summary_statistics, real_summary_statistics):
+  print('Training proportion: ', training_summary_statistics[PROPORTION_OF_ZEROS])
+  print('Real proportion: ', real_summary_statistics[PROPORTION_OF_ZEROS])
+  print('Base frequencies: ', parameter_context[BASE_FREQUENCIES])
+  adjustment = 0.01
+  error = training_summary_statistics[PROPORTION_OF_ZEROS] - real_summary_statistics[PROPORTION_OF_ZEROS]
+  if error > 0:
+    parameter_context[BASE_FREQUENCIES]['0'] = parameter_context[BASE_FREQUENCIES]['0'] - adjustment
+    parameter_context[BASE_FREQUENCIES]['1'] = parameter_context[BASE_FREQUENCIES]['1'] - adjustment
+  elif error > 0:
+    parameter_context[BASE_FREQUENCIES]['0'] = parameter_context[BASE_FREQUENCIES]['0'] + adjustment
+    parameter_context[BASE_FREQUENCIES]['1'] = parameter_context[BASE_FREQUENCIES]['1'] - adjustment
+  print('New base frequencies: ', parameter_context[BASE_FREQUENCIES])
+  return parameter_context
+
+def update_rate_per_branch_length_per_pair(parameter_context, training_summary_statistics, real_summary_statistics):
+  adjustment = 0.001
+  error = training_summary_statistics[CONTACT_PROB_SAME_ZERO] - real_summary_statistics[CONTACT_PROB_SAME_ZERO]
+  error = error + training_summary_statistics[CONTACT_PROB_SAME_ONE] - real_summary_statistics[CONTACT_PROB_SAME_ONE]
+  if np.sum(error) > 0:
+    parameter_context['rate_per_branch_length_per_pair'] = parameter_context['rate_per_branch_length_per_pair'] + adjustment
+  if np.sum(error) < 0:
+    parameter_context['rate_per_branch_length_per_pair'] = parameter_context['rate_per_branch_length_per_pair'] - adjustment
+
 def update_parameters(parameter_context, training_summary_statistics, real_summary_statistics):
   '''
   so you are adjusting parameters in the direction worked out by comparing the summary statistics
@@ -92,32 +154,12 @@ def update_parameters(parameter_context, training_summary_statistics, real_summa
   
   
   '''
+  parameter_context = update_substitution_matrix(parameter_context, training_summary_statistics, real_summary_statistics)
+#   parameter_context = update_base_frequencies(parameter_context, training_summary_statistics, real_summary_statistics)
+#   parameter_context = update_rate_per_branch_length_per_pair(parameter_context, training_summary_statistics, real_summary_statistics)
   return parameter_context
 
-
-
 def propose_new_single_feature(input_array, output_array, na_array_1, na_array_2, relatedness_array, distance_array, trees, list_of_languages, sample, parameter_context, states, context, number_of_simulations):
-
-
-
-
-
-  '''
-  new way of doing this
-  
-  you produce data using the parameters given
-  
-  you produce summary statistics for that data
-  
-  you compare it with the real data
-  
-  then update the parameters
-  
-  {'substitution_matrix', 'new
-  
-  
-  '''
-
   new_substitution_matrix = deepcopy(parameter_context['substitution_matrix'])
   new_base_frequencies = deepcopy(parameter_context['base_frequencies'])
   new_rate_per_branch_length_per_pair = parameter_context['rate_per_branch_length_per_pair']
@@ -128,7 +170,6 @@ def propose_new_single_feature(input_array, output_array, na_array_1, na_array_2
   parameter_context = update_parameters(parameter_context, training_summary_statistics, real_summary_statistics)
   return parameter_context, loss
 
-
 def search_through_parameters_single_feature(input_array, output_array, relatedness_array, distance_array, na_array_1, na_array_2, trees, list_of_languages, sample, states, context, number_of_relatedness_bins, number_of_distance_bins, number_of_simulations):
   substitution_matrix = create_initial_substitution_matrix(states)
   base_frequencies = create_initial_base_frequencies(states)
@@ -136,18 +177,13 @@ def search_through_parameters_single_feature(input_array, output_array, relatedn
   number_of_samples = len(sample)
   number_of_languages = len(list_of_languages)
   number_of_features = 1
-  '''temporarily not using the na arrays:
-  
-  also these seem to be the wrong way round
-  
-  '''  
-  na_array_1 = np.ones([1, number_of_samples, 1, number_of_features])
-  na_array_2 = np.ones([1, 1, number_of_languages, number_of_features])
+  na_array_1 = np.ones([number_of_simulations, 1, number_of_languages, 1]) 
+  na_array_2 = np.ones([number_of_simulations, number_of_samples, 1, 1])
   loss = 1000
   proposal_rate_dictionary = {SUBSTITUTION_MATRIX_0_TO_1: 0.1, SUBSTITUTION_MATRIX_1_TO_0: 0.1, BASE_FREQUENCIES: 0.1, RATE_PER_BRANCH_LENGTH_PER_PAIR: 0.1}
   context['real_summary_statistics'] = make_summary_statistics(input_array, output_array, na_array_1, na_array_2, relatedness_array, distance_array)
   parameter_context = {'substitution_matrix': substitution_matrix, 'rate_per_branch_length_per_pair': rate_per_branch_length_per_pair, 'base_frequencies': base_frequencies}
-  for i in range(1):
+  for i in range(100):
     context['step'] = i
     parameter_context, loss = propose_new_single_feature(input_array, output_array, na_array_1, na_array_2, relatedness_array, distance_array, trees, list_of_languages, sample, parameter_context, states, context, number_of_simulations)
   result = parameter_context
@@ -198,12 +234,13 @@ def search_through_parameters_single_feature_sanity_check_reduced():
   context[CHILD_DICTIONARY] = child_dictionary
   context[TIME_DEPTHS_DICTIONARY] = time_depths_dictionary
   states = ['0', '1']
+#   number_of_samples = len(list_of_languages)
   number_of_samples = 400
   number_of_languages = len(list_of_languages)
   sample = np.random.choice(np.array(list_of_languages), number_of_samples, replace=False)
   number_of_relatedness_bins = 10
   number_of_distance_bins = 10
-  number_of_simulations = 1
+  number_of_simulations = 10
   number_of_steps = 150
   substitution_matrix = [[0.95, 0.05], [0.05, 0.95]]
   base_frequencies = {'0': 1, '1': 0}
@@ -212,14 +249,69 @@ def search_through_parameters_single_feature_sanity_check_reduced():
   states_list = [states]
   borrowability_list = [1.0]
   substitution_matrix_list = [substitution_matrix]  
-  test_input, test_output, relatedness_array, distance_array = make_all_arrays(trees, list_of_languages, sample, substitution_matrix_list, states_list, base_frequencies_list, rate_per_branch_length_per_pair, borrowability_list, number_of_simulations, context, number_of_relatedness_bins=10, number_of_distance_bins=10) 
-  na_array_1 = np.ones([1, number_of_samples, 1])
-  na_array_2 = np.ones([1, 1, number_of_languages]) 
+  test_input, test_output, relatedness_array, distance_array = make_all_arrays(trees, list_of_languages, sample, substitution_matrix_list, states_list, base_frequencies_list, rate_per_branch_length_per_pair, borrowability_list, 1, context, number_of_relatedness_bins=10, number_of_distance_bins=10) 
+  na_array_1 = np.ones([1, 1, number_of_languages, 1]) 
+  na_array_2 = np.ones([1, number_of_samples, 1, 1])
   result = search_through_parameters_single_feature(test_input, test_output, relatedness_array, distance_array, na_array_1, na_array_2, trees, list_of_languages, sample, states, context, number_of_relatedness_bins=number_of_relatedness_bins, number_of_distance_bins=number_of_distance_bins, number_of_simulations=number_of_simulations)  
   print(result)
   truth = {'substitution_matrix': substitution_matrix, 'base_frequencies': base_frequencies, 'rate_per_branch_length_per_pair': rate_per_branch_length_per_pair}
   print(truth)
 
+def main_simulation_test():
+  '''
+  you want to ask given a particular set of val
+  '''
+  test_substitution_matrices = []
+  test_substitution_matrices.append([[0.95, 0.05], [0.05, 0.95]]) 
+  test_rates_per_branch_length_per_pair = [0.03]
+  test_base_frequencies = [{'0': 0.0, '1': 1.0}]
+  runs = 1
+  trees = make_trees()
+  list_of_languages = get_languages_in_grambank()
+  remake = False
+  trees = make_reduced_trees(trees, list_of_languages, remake=remake)
+  list_of_languages = make_reduced_list_of_languages(list_of_languages, trees, remake=remake)
+  locations = get_locations(trees, remake=remake)
+  nodes_to_tree_dictionary = make_nodes_to_tree_dictionary(trees, remake=remake)
+  reconstructed_locations_dictionary = make_reconstructed_locations_dictionary(trees, locations, nodes_to_tree_dictionary, remake=remake)
+  time_depths_dictionary = make_time_depths_dictionary(trees, remake=remake)
+  parent_dictionary = make_parent_dictionary(trees, remake=remake)
+  contemporary_neighbour_dictionary = make_contemporary_neighbour_dictionary(trees, reconstructed_locations_dictionary, time_depths_dictionary, parent_dictionary, remake=remake)
+  potential_donors = make_potential_donors(reconstructed_locations_dictionary, time_depths_dictionary, contemporary_neighbour_dictionary, remake=remake)
+  child_dictionary = make_child_dictionary(trees, remake=remake)  
+  context = {}
+  context[TREES] = trees
+  context[LIST_OF_LANGUAGES] = list_of_languages
+  context[LOCATIONS] = locations
+  context[NODES_TO_TREE_DICTIONARY] = nodes_to_tree_dictionary
+  context[RECONSTRUCTED_LOCATIONS_DICTIONARY] = reconstructed_locations_dictionary
+  context[PARENT_DICTIONARY] = parent_dictionary
+  context[CONTEMPORARY_NEIGHBOUR_DICTIONARY] = contemporary_neighbour_dictionary
+  context[POTENTIAL_DONORS] = potential_donors
+  context[CHILD_DICTIONARY] = child_dictionary
+  context[TIME_DEPTHS_DICTIONARY] = time_depths_dictionary
+  states = ['0', '1']
+#   number_of_samples = len(list_of_languages)
+  number_of_samples = 400
+  number_of_languages = len(list_of_languages)
+  number_of_distance_bins = 10
+  number_of_simulations = 10
+  number_of_steps = 150
+  for i in range(runs):
+    substitution_matrix = np.random.choice(test_substitution_matrices, 0)[0]
+    rate_per_branch_length_per_pair = np.random.choice(test_rates_per_branch_length_per_pair, 0)[0]
+    base_frequencies = np.random.choice(test_base_frequencies, 0)[0]
+    sample = np.random.choice(np.array(list_of_languages), number_of_samples, replace=False)
+    test_input, test_output, relatedness_array, distance_array = make_all_arrays(trees, list_of_languages, sample, substitution_matrix_list, states_list, base_frequencies_list, rate_per_branch_length_per_pair, borrowability_list, 1, context, number_of_relatedness_bins=10, number_of_distance_bins=10) 
+    na_array_1 = np.ones([1, 1, number_of_languages, 1]) 
+    na_array_2 = np.ones([1, number_of_samples, 1, 1])
+
+    result = search_through_parameters_single_feature(test_input, test_output, relatedness_array, distance_array, na_array_1, na_array_2, trees, list_of_languages, sample, states, context, number_of_relatedness_bins, number_of_distance_bins, number_of_simulations):
+    print(result)
+  '''
+  then want to aggregate the results in some way
+  
+  '''
 
 
 
