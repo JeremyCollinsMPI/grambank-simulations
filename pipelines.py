@@ -298,15 +298,16 @@ def main_simulation_test():
   number_of_simulations = 10
   number_of_steps = 150
   for i in range(runs):
-    substitution_matrix = np.random.choice(test_substitution_matrices, 0)[0]
-    rate_per_branch_length_per_pair = np.random.choice(test_rates_per_branch_length_per_pair, 0)[0]
-    base_frequencies = np.random.choice(test_base_frequencies, 0)[0]
+    random_index = np.random.choice(range(len(test_substitution_matrices)), 1)[0]
+    substitution_matrix = test_substitution_matrices[random_index]
+    rate_per_branch_length_per_pair = test_rates_per_branch_length_per_pair[random_index]
+    base_frequencies = test_base_frequencies[random_index]
     sample = np.random.choice(np.array(list_of_languages), number_of_samples, replace=False)
     test_input, test_output, relatedness_array, distance_array = make_all_arrays(trees, list_of_languages, sample, substitution_matrix_list, states_list, base_frequencies_list, rate_per_branch_length_per_pair, borrowability_list, 1, context, number_of_relatedness_bins=10, number_of_distance_bins=10) 
     na_array_1 = np.ones([1, 1, number_of_languages, 1]) 
     na_array_2 = np.ones([1, number_of_samples, 1, 1])
 
-    result = search_through_parameters_single_feature(test_input, test_output, relatedness_array, distance_array, na_array_1, na_array_2, trees, list_of_languages, sample, states, context, number_of_relatedness_bins, number_of_distance_bins, number_of_simulations):
+    result = search_through_parameters_single_feature(test_input, test_output, relatedness_array, distance_array, na_array_1, na_array_2, trees, list_of_languages, sample, states, context, number_of_relatedness_bins, number_of_distance_bins, number_of_simulations)
     print(result)
   '''
   then want to aggregate the results in some way
