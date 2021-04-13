@@ -94,11 +94,12 @@ def update_substitution_matrix(parameter_context, training_summary_statistics, r
   if the training one - real one is greater than zero, then adjust stability doen
   '''
   adjustment = 0.01
+  use_up_to_index_number = 4
   print('Training zero: ', training_summary_statistics[RELATEDNESS_SAME_ZERO_ERROR])
   print('Real zero: ', real_summary_statistics[RELATEDNESS_SAME_ZERO_ERROR])
   print('Training one: ', training_summary_statistics[RELATEDNESS_SAME_ONE_ERROR])
   print('Real one: ', real_summary_statistics[RELATEDNESS_SAME_ONE_ERROR])
-  error = training_summary_statistics[RELATEDNESS_SAME_ZERO_ERROR] - real_summary_statistics[RELATEDNESS_SAME_ZERO_ERROR]
+  error = training_summary_statistics[RELATEDNESS_SAME_ZERO_ERROR][use_up_to_index_number] - real_summary_statistics[RELATEDNESS_SAME_ZERO_ERROR][use_up_to_index_number]
   print('Previous matrix: ', parameter_context['substitution_matrix'])
   if np.sum(error) < 0:
     parameter_context['substitution_matrix'][0][0] = parameter_context['substitution_matrix'][0][0] - adjustment
@@ -106,11 +107,11 @@ def update_substitution_matrix(parameter_context, training_summary_statistics, r
   if np.sum(error) > 0:
     parameter_context['substitution_matrix'][0][0] = parameter_context['substitution_matrix'][0][0] + adjustment
     parameter_context['substitution_matrix'][0][1] = parameter_context['substitution_matrix'][0][1] - adjustment
-  error = training_summary_statistics[RELATEDNESS_SAME_ONE_ERROR] - real_summary_statistics[RELATEDNESS_SAME_ONE_ERROR]
-  if np.sum(error) > 0:
+  error = training_summary_statistics[RELATEDNESS_SAME_ONE_ERROR][use_up_to_index_number] - real_summary_statistics[RELATEDNESS_SAME_ONE_ERROR][use_up_to_index_number]
+  if np.sum(error) < 0:
     parameter_context['substitution_matrix'][1][1] = parameter_context['substitution_matrix'][1][1] - adjustment
     parameter_context['substitution_matrix'][1][0] = parameter_context['substitution_matrix'][1][0] + adjustment
-  if np.sum(error) < 0:
+  if np.sum(error) > 0:
     parameter_context['substitution_matrix'][1][1] = parameter_context['substitution_matrix'][1][1] + adjustment
     parameter_context['substitution_matrix'][1][0] = parameter_context['substitution_matrix'][1][0] - adjustment
   print('New matrix: ', parameter_context['substitution_matrix'])
@@ -294,14 +295,20 @@ def main_simulation_test():
 #   number_of_samples = len(list_of_languages)
   number_of_samples = 400
   number_of_languages = len(list_of_languages)
+  number_of_relatedness_bins = 10  
   number_of_distance_bins = 10
   number_of_simulations = 10
   number_of_steps = 150
+  results = []
   for i in range(runs):
     random_index = np.random.choice(range(len(test_substitution_matrices)), 1)[0]
     substitution_matrix = test_substitution_matrices[random_index]
     rate_per_branch_length_per_pair = test_rates_per_branch_length_per_pair[random_index]
     base_frequencies = test_base_frequencies[random_index]
+    substitution_matrix_list = [substitution_matrix]
+    base_frequencies_list = [base_frequencies]
+    states_list = [states]
+    borrowability_list = [1.0]
     sample = np.random.choice(np.array(list_of_languages), number_of_samples, replace=False)
     test_input, test_output, relatedness_array, distance_array = make_all_arrays(trees, list_of_languages, sample, substitution_matrix_list, states_list, base_frequencies_list, rate_per_branch_length_per_pair, borrowability_list, 1, context, number_of_relatedness_bins=10, number_of_distance_bins=10) 
     na_array_1 = np.ones([1, 1, number_of_languages, 1]) 
@@ -309,9 +316,12 @@ def main_simulation_test():
 
     result = search_through_parameters_single_feature(test_input, test_output, relatedness_array, distance_array, na_array_1, na_array_2, trees, list_of_languages, sample, states, context, number_of_relatedness_bins, number_of_distance_bins, number_of_simulations)
     print(result)
+    results.append({'estimated parameters': deepcopy(result), 'true parameters': {'substitution matrix': deepcopy(substitution_matrix), 'base_frequencies': deepcopy(base_frequences), RATE_PER_BRANCH_LENGTH_PER_PAIR: rate_per_branch_length_per_pair}})
+  show_score
   '''
   then want to aggregate the results in some way
-  
+  how do you want to show the result?
+  just append the results.
   '''
 
 
