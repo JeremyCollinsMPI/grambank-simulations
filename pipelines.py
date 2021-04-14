@@ -16,7 +16,7 @@ CONTACT_PROB_SAME_ONE = 'contact bins probability of second language having 1 if
 PROPORTION_OF_ZEROS = 'proportion of zeros'
 
 def create_initial_substitution_matrix(states):
-  substitution_matrix = [[0.95, 0.05], [0.1, 0.9]]
+  substitution_matrix = [[0.7, 0.3], [0.3, 0.7]]
   return substitution_matrix
   
 def create_initial_base_frequencies(states):
@@ -99,7 +99,8 @@ def update_substitution_matrix(parameter_context, training_summary_statistics, r
   print('Real zero: ', real_summary_statistics[RELATEDNESS_SAME_ZERO_ERROR])
   print('Training one: ', training_summary_statistics[RELATEDNESS_SAME_ONE_ERROR])
   print('Real one: ', real_summary_statistics[RELATEDNESS_SAME_ONE_ERROR])
-  error = training_summary_statistics[RELATEDNESS_SAME_ZERO_ERROR][use_up_to_index_number] - real_summary_statistics[RELATEDNESS_SAME_ZERO_ERROR][use_up_to_index_number]
+  error = training_summary_statistics[RELATEDNESS_SAME_ZERO_ERROR][0:use_up_to_index_number] - real_summary_statistics[RELATEDNESS_SAME_ZERO_ERROR][0:use_up_to_index_number]
+  print('Zero error: ', error)
   print('Previous matrix: ', parameter_context['substitution_matrix'])
   if np.sum(error) < 0:
     parameter_context['substitution_matrix'][0][0] = parameter_context['substitution_matrix'][0][0] - adjustment
@@ -107,7 +108,8 @@ def update_substitution_matrix(parameter_context, training_summary_statistics, r
   if np.sum(error) > 0:
     parameter_context['substitution_matrix'][0][0] = parameter_context['substitution_matrix'][0][0] + adjustment
     parameter_context['substitution_matrix'][0][1] = parameter_context['substitution_matrix'][0][1] - adjustment
-  error = training_summary_statistics[RELATEDNESS_SAME_ONE_ERROR][use_up_to_index_number] - real_summary_statistics[RELATEDNESS_SAME_ONE_ERROR][use_up_to_index_number]
+  error = training_summary_statistics[RELATEDNESS_SAME_ONE_ERROR][0:use_up_to_index_number] - real_summary_statistics[RELATEDNESS_SAME_ONE_ERROR][0:use_up_to_index_number]
+  print('One error: ', )
   if np.sum(error) < 0:
     parameter_context['substitution_matrix'][1][1] = parameter_context['substitution_matrix'][1][1] - adjustment
     parameter_context['substitution_matrix'][1][0] = parameter_context['substitution_matrix'][1][0] + adjustment
@@ -317,7 +319,7 @@ def main_simulation_test():
     result = search_through_parameters_single_feature(test_input, test_output, relatedness_array, distance_array, na_array_1, na_array_2, trees, list_of_languages, sample, states, context, number_of_relatedness_bins, number_of_distance_bins, number_of_simulations)
     print(result)
     results.append({'estimated parameters': deepcopy(result), 'true parameters': {'substitution matrix': deepcopy(substitution_matrix), 'base_frequencies': deepcopy(base_frequences), RATE_PER_BRANCH_LENGTH_PER_PAIR: rate_per_branch_length_per_pair}})
-  show_score
+  
   '''
   then want to aggregate the results in some way
   how do you want to show the result?

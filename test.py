@@ -1255,9 +1255,9 @@ def test53():
   search_through_parameters_single_feature_sanity_check_reduced()
 
 def test54():
-  simulated_test()
+  main_simulation_test()
 
-test53()
+test54()
 
 
 
