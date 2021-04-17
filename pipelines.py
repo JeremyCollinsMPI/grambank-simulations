@@ -89,52 +89,93 @@ def find_loss(training_summary_statistics, real_summary_statistics):
 #   print('Loss: ')
   return total
 
-def update_substitution_matrix(parameter_context, training_summary_statistics, real_summary_statistics):
-  '''
-  if the training one - real one is greater than zero, then adjust stability doen
-  '''
-  adjustment = 0.01
+def make_scheduler():
+  scheduler = {'substitution_matrix_0_to_1': 
+  {'adjustment': 0.1,
+  'last_direction': None
+  }, 'substitution_matrix_1_to_0':
+  {'adjustment': 0.1,
+  'last_direction': None
+  }, 'base_frequencies':
+  {'adjustment': 0.1,
+  'last_direction': None
+  }, 'rate_per_branch_length_per_pair':
+  { 'adjustment': 0.1,
+  'last_direction': None
+  }  
+  }
+  return scheduler
+
+def update_substitution_matrix(parameter_context, training_summary_statistics, real_summary_statistics, scheduler):
   use_up_to_index_number = 4
   print('Training zero: ', training_summary_statistics[RELATEDNESS_SAME_ZERO_ERROR])
   print('Real zero: ', real_summary_statistics[RELATEDNESS_SAME_ZERO_ERROR])
   print('Training one: ', training_summary_statistics[RELATEDNESS_SAME_ONE_ERROR])
   print('Real one: ', real_summary_statistics[RELATEDNESS_SAME_ONE_ERROR])
   error = training_summary_statistics[RELATEDNESS_SAME_ZERO_ERROR][0:use_up_to_index_number] - real_summary_statistics[RELATEDNESS_SAME_ZERO_ERROR][0:use_up_to_index_number]
-  print('Zero error: ', error)
+  print('Zero error: ', np.sum(error))
   print('Previous matrix: ', parameter_context['substitution_matrix'])
+  adjustment = scheduler['substitution_matrix_0_to_1']['adjustment']
   if np.sum(error) < 0:
     parameter_context['substitution_matrix'][0][0] = parameter_context['substitution_matrix'][0][0] - adjustment
-    parameter_context['substitution_matrix'][0][1] = parameter_context['substitution_matrix'][0][1] + adjustment
+    parameter_context['substitution_matrix'][0][0] = min(0.99, max(0.01, parameter_context['substitution_matrix'][0][0]))
+    parameter_context['substitution_matrix'][0][1] = 1 - parameter_context['substitution_matrix'][0][0]
+    current_direction = 'DOWN'
   if np.sum(error) > 0:
     parameter_context['substitution_matrix'][0][0] = parameter_context['substitution_matrix'][0][0] + adjustment
-    parameter_context['substitution_matrix'][0][1] = parameter_context['substitution_matrix'][0][1] - adjustment
+    parameter_context['substitution_matrix'][0][0] = min(0.99, max(0.01, parameter_context['substitution_matrix'][0][0]))
+    parameter_context['substitution_matrix'][0][1] = 1 - parameter_context['substitution_matrix'][0][0]
+    current_direction = 'UP'
+  if scheduler['substitution_matrix_0_to_1']['last_direction'] == None:
+    pass
+  elif not current_direction == scheduler['substitution_matrix_0_to_1']['last_direction']:
+    scheduler['substitution_matrix_0_to_1']['adjustment'] = max(0.01, scheduler['substitution_matrix_0_to_1']['adjustment'] - 0.02)
+  scheduler['substitution_matrix_0_to_1']['last_direction'] = current_direction
   error = training_summary_statistics[RELATEDNESS_SAME_ONE_ERROR][0:use_up_to_index_number] - real_summary_statistics[RELATEDNESS_SAME_ONE_ERROR][0:use_up_to_index_number]
-  print('One error: ', )
+  print('One error: ', np.sum(error))
+  adjustment = scheduler['substitution_matrix_1_to_0']['adjustment']
   if np.sum(error) < 0:
     parameter_context['substitution_matrix'][1][1] = parameter_context['substitution_matrix'][1][1] - adjustment
-    parameter_context['substitution_matrix'][1][0] = parameter_context['substitution_matrix'][1][0] + adjustment
+    parameter_context['substitution_matrix'][1][1] = min(0.99, max(0.01, parameter_context['substitution_matrix'][1][1]))
+    parameter_context['substitution_matrix'][1][0] = 1 - parameter_context['substitution_matrix'][1][1]
+    current_direction = 'DOWN'
   if np.sum(error) > 0:
     parameter_context['substitution_matrix'][1][1] = parameter_context['substitution_matrix'][1][1] + adjustment
-    parameter_context['substitution_matrix'][1][0] = parameter_context['substitution_matrix'][1][0] - adjustment
+    parameter_context['substitution_matrix'][1][1] = min(0.99, max(0.01, parameter_context['substitution_matrix'][1][1]))
+    parameter_context['substitution_matrix'][1][0] = 1 - parameter_context['substitution_matrix'][1][1]
+    current_direction = 'UP'
+  if scheduler['substitution_matrix_1_to_0']['last_direction'] == None:
+    pass
+  elif not current_direction == scheduler['substitution_matrix_1_to_0']['last_direction']:
+    scheduler['substitution_matrix_1_to_0']['adjustment'] = max(0.01, scheduler['substitution_matrix_1_to_0']['adjustment'] - 0.02)
+  scheduler['substitution_matrix_1_to_0']['last_direction'] = current_direction
   print('New matrix: ', parameter_context['substitution_matrix'])
-  return parameter_context
+  print('Scheduelr: ', scheduler)
+  return parameter_context, scheduler
 
 def update_base_frequencies(parameter_context, training_summary_statistics, real_summary_statistics):
   print('Training proportion: ', training_summary_statistics[PROPORTION_OF_ZEROS])
   print('Real proportion: ', real_summary_statistics[PROPORTION_OF_ZEROS])
   print('Base frequencies: ', parameter_context[BASE_FREQUENCIES])
-  adjustment = 0.01
+  adjustment = scheduler['base_frequencies']['adjustment']
   error = training_summary_statistics[PROPORTION_OF_ZEROS] - real_summary_statistics[PROPORTION_OF_ZEROS]
   if error > 0:
     parameter_context[BASE_FREQUENCIES]['0'] = parameter_context[BASE_FREQUENCIES]['0'] - adjustment
     parameter_context[BASE_FREQUENCIES]['1'] = parameter_context[BASE_FREQUENCIES]['1'] - adjustment
+    current_direction = 'DOWN'
   elif error > 0:
     parameter_context[BASE_FREQUENCIES]['0'] = parameter_context[BASE_FREQUENCIES]['0'] + adjustment
     parameter_context[BASE_FREQUENCIES]['1'] = parameter_context[BASE_FREQUENCIES]['1'] - adjustment
+    current_direction = 'UP'
   print('New base frequencies: ', parameter_context[BASE_FREQUENCIES])
-  return parameter_context
+  if scheduler['base_frequencies']['last_direction'] == None:
+    pass
+  elif not scheduler['base_frequencies']['last_direction'] == current_direction:
+    scheduler['base_frequencies']['adjustment'] = max(0.01, scheduler['base_frequencies']['adjustment'] - 0.02)
+  scheduler['base_frequencies']['last_direction'] = current_direction
+  return parameter_context, scheduler
 
-def update_rate_per_branch_length_per_pair(parameter_context, training_summary_statistics, real_summary_statistics):
+def update_rate_per_branch_length_per_pair(parameter_context, training_summary_statistics, real_summary_statistics, scheduler):
   adjustment = 0.001
   error = training_summary_statistics[CONTACT_PROB_SAME_ZERO] - real_summary_statistics[CONTACT_PROB_SAME_ZERO]
   error = error + training_summary_statistics[CONTACT_PROB_SAME_ONE] - real_summary_statistics[CONTACT_PROB_SAME_ONE]
@@ -142,8 +183,9 @@ def update_rate_per_branch_length_per_pair(parameter_context, training_summary_s
     parameter_context['rate_per_branch_length_per_pair'] = parameter_context['rate_per_branch_length_per_pair'] + adjustment
   if np.sum(error) < 0:
     parameter_context['rate_per_branch_length_per_pair'] = parameter_context['rate_per_branch_length_per_pair'] - adjustment
+  return parameter_context, scheduler
 
-def update_parameters(parameter_context, training_summary_statistics, real_summary_statistics):
+def update_parameters(parameter_context, training_summary_statistics, real_summary_statistics, scheduler):
   '''
   so you are adjusting parameters in the direction worked out by comparing the summary statistics
   
@@ -157,12 +199,12 @@ def update_parameters(parameter_context, training_summary_statistics, real_summa
   
   
   '''
-  parameter_context = update_substitution_matrix(parameter_context, training_summary_statistics, real_summary_statistics)
-#   parameter_context = update_base_frequencies(parameter_context, training_summary_statistics, real_summary_statistics)
-#   parameter_context = update_rate_per_branch_length_per_pair(parameter_context, training_summary_statistics, real_summary_statistics)
-  return parameter_context
+  parameter_context, scheduler = update_substitution_matrix(parameter_context, training_summary_statistics, real_summary_statistics, scheduler)
+#   parameter_context, scheduler = update_base_frequencies(parameter_context, training_summary_statistics, real_summary_statistics, scheduler)
+#   parameter_context, scheduler = update_rate_per_branch_length_per_pair(parameter_context, training_summary_statistics, real_summary_statistics)
+  return parameter_context, scheduler
 
-def propose_new_single_feature(input_array, output_array, na_array_1, na_array_2, relatedness_array, distance_array, trees, list_of_languages, sample, parameter_context, states, context, number_of_simulations):
+def propose_new_single_feature(input_array, output_array, na_array_1, na_array_2, relatedness_array, distance_array, trees, list_of_languages, sample, parameter_context, states, context, number_of_simulations, scheduler):
   new_substitution_matrix = deepcopy(parameter_context['substitution_matrix'])
   new_base_frequencies = deepcopy(parameter_context['base_frequencies'])
   new_rate_per_branch_length_per_pair = parameter_context['rate_per_branch_length_per_pair']
@@ -170,7 +212,7 @@ def propose_new_single_feature(input_array, output_array, na_array_1, na_array_2
   training_summary_statistics = make_summary_statistics(training_input, training_output, na_array_1, na_array_2, relatedness_array, distance_array)
   real_summary_statistics = context['real_summary_statistics']
   loss = find_loss(training_summary_statistics, real_summary_statistics)
-  parameter_context = update_parameters(parameter_context, training_summary_statistics, real_summary_statistics)
+  parameter_context, scheduler = update_parameters(parameter_context, training_summary_statistics, real_summary_statistics, scheduler)
   return parameter_context, loss
 
 def search_through_parameters_single_feature(input_array, output_array, relatedness_array, distance_array, na_array_1, na_array_2, trees, list_of_languages, sample, states, context, number_of_relatedness_bins, number_of_distance_bins, number_of_simulations):
@@ -186,9 +228,10 @@ def search_through_parameters_single_feature(input_array, output_array, relatedn
   proposal_rate_dictionary = {SUBSTITUTION_MATRIX_0_TO_1: 0.1, SUBSTITUTION_MATRIX_1_TO_0: 0.1, BASE_FREQUENCIES: 0.1, RATE_PER_BRANCH_LENGTH_PER_PAIR: 0.1}
   context['real_summary_statistics'] = make_summary_statistics(input_array, output_array, na_array_1, na_array_2, relatedness_array, distance_array)
   parameter_context = {'substitution_matrix': substitution_matrix, 'rate_per_branch_length_per_pair': rate_per_branch_length_per_pair, 'base_frequencies': base_frequencies}
+  scheduler = make_scheduler()
   for i in range(100):
     context['step'] = i
-    parameter_context, loss = propose_new_single_feature(input_array, output_array, na_array_1, na_array_2, relatedness_array, distance_array, trees, list_of_languages, sample, parameter_context, states, context, number_of_simulations)
+    parameter_context, loss = propose_new_single_feature(input_array, output_array, na_array_1, na_array_2, relatedness_array, distance_array, trees, list_of_languages, sample, parameter_context, states, context, number_of_simulations, scheduler)
   result = parameter_context
   return result
 
