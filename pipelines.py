@@ -107,7 +107,7 @@ def make_scheduler():
   return scheduler
 
 def update_substitution_matrix(parameter_context, training_summary_statistics, real_summary_statistics, scheduler):
-  use_up_to_index_number = 4
+  use_up_to_index_number = 2
   print('Training zero: ', training_summary_statistics[RELATEDNESS_SAME_ZERO_ERROR])
   print('Real zero: ', real_summary_statistics[RELATEDNESS_SAME_ZERO_ERROR])
   print('Training one: ', training_summary_statistics[RELATEDNESS_SAME_ONE_ERROR])
@@ -383,6 +383,81 @@ def main_simulation_test():
   '''
 
 
+def real_single_feature_evaluation(feature_id):
+  '''
+  load data for a feature in grambank and find the parameters that fit it best
+  '''
+  trees = make_trees()
+  list_of_languages = get_languages_in_grambank()
+  remake = False
+  trees = make_reduced_trees(trees, list_of_languages, remake=remake)
+  list_of_languages = make_reduced_list_of_languages(list_of_languages, trees, remake=remake)
+  locations = get_locations(trees, remake=remake)
+  nodes_to_tree_dictionary = make_nodes_to_tree_dictionary(trees, remake=remake)
+  reconstructed_locations_dictionary = make_reconstructed_locations_dictionary(trees, locations, nodes_to_tree_dictionary, remake=remake)
+  time_depths_dictionary = make_time_depths_dictionary(trees, remake=remake)
+  parent_dictionary = make_parent_dictionary(trees, remake=remake)
+  contemporary_neighbour_dictionary = make_contemporary_neighbour_dictionary(trees, reconstructed_locations_dictionary, time_depths_dictionary, parent_dictionary, remake=remake)
+  potential_donors = make_potential_donors(reconstructed_locations_dictionary, time_depths_dictionary, contemporary_neighbour_dictionary, remake=remake)
+  child_dictionary = make_child_dictionary(trees, remake=remake)  
+  context = {}
+  context[TREES] = trees
+  context[LIST_OF_LANGUAGES] = list_of_languages
+  context[LOCATIONS] = locations
+  context[NODES_TO_TREE_DICTIONARY] = nodes_to_tree_dictionary
+  context[RECONSTRUCTED_LOCATIONS_DICTIONARY] = reconstructed_locations_dictionary
+  context[PARENT_DICTIONARY] = parent_dictionary
+  context[CONTEMPORARY_NEIGHBOUR_DICTIONARY] = contemporary_neighbour_dictionary
+  context[POTENTIAL_DONORS] = potential_donors
+  context[CHILD_DICTIONARY] = child_dictionary
+  context[TIME_DEPTHS_DICTIONARY] = time_depths_dictionary
+  states = ['0', '1']
+#   number_of_samples = len(list_of_languages)
+  number_of_samples = 400
+  number_of_languages = len(list_of_languages)
+  number_of_relatedness_bins = 10  
+  number_of_distance_bins = 10
+  number_of_simulations = 10
+  number_of_steps = 150
+
+
+
+ 
+ 
+ 
+ 
+  test_substitution_matrices = []
+  test_substitution_matrices.append([[0.95, 0.05], [0.05, 0.95]]) 
+  test_rates_per_branch_length_per_pair = [0.03]
+  test_base_frequencies = [{'0': 0.0, '1': 1.0}]
+  runs = 1
+
+
+
+
+  for i in range(runs):
+    random_index = np.random.choice(range(len(test_substitution_matrices)), 1)[0]
+    substitution_matrix = test_substitution_matrices[random_index]
+    rate_per_branch_length_per_pair = test_rates_per_branch_length_per_pair[random_index]
+    base_frequencies = test_base_frequencies[random_index]
+    substitution_matrix_list = [substitution_matrix]
+    base_frequencies_list = [base_frequencies]
+    states_list = [states]
+    borrowability_list = [1.0]
+    sample = np.random.choice(np.array(list_of_languages), number_of_samples, replace=False)
+    test_input, test_output, relatedness_array, distance_array = make_all_arrays(trees, list_of_languages, sample, substitution_matrix_list, states_list, base_frequencies_list, rate_per_branch_length_per_pair, borrowability_list, 1, context, number_of_relatedness_bins=10, number_of_distance_bins=10) 
+    na_array_1 = np.ones([1, 1, number_of_languages, 1]) 
+    na_array_2 = np.ones([1, number_of_samples, 1, 1])
+
+    result = search_through_parameters_single_feature(test_input, test_output, relatedness_array, distance_array, na_array_1, na_array_2, trees, list_of_languages, sample, states, context, number_of_relatedness_bins, number_of_distance_bins, number_of_simulations)
+    print(result)
+    results.append({'estimated parameters': deepcopy(result), 'true parameters': {'substitution matrix': deepcopy(substitution_matrix), 'base_frequencies': deepcopy(base_frequences), RATE_PER_BRANCH_LENGTH_PER_PAIR: rate_per_branch_length_per_pair}})
+  
+  '''
+  then want to aggregate the results in some way
+  how do you want to show the result?
+  just append the results.
+  '''
 
 
 
