@@ -150,10 +150,10 @@ def update_substitution_matrix(parameter_context, training_summary_statistics, r
     scheduler['substitution_matrix_1_to_0']['adjustment'] = max(0.01, scheduler['substitution_matrix_1_to_0']['adjustment'] - 0.02)
   scheduler['substitution_matrix_1_to_0']['last_direction'] = current_direction
   print('New matrix: ', parameter_context['substitution_matrix'])
-  print('Scheduelr: ', scheduler)
+  print('Scheduler: ', scheduler)
   return parameter_context, scheduler
 
-def update_base_frequencies(parameter_context, training_summary_statistics, real_summary_statistics):
+def update_base_frequencies(parameter_context, training_summary_statistics, real_summary_statistics, scheduler):
   print('Training proportion: ', training_summary_statistics[PROPORTION_OF_ZEROS])
   print('Real proportion: ', real_summary_statistics[PROPORTION_OF_ZEROS])
   print('Base frequencies: ', parameter_context[BASE_FREQUENCIES])
@@ -161,11 +161,13 @@ def update_base_frequencies(parameter_context, training_summary_statistics, real
   error = training_summary_statistics[PROPORTION_OF_ZEROS] - real_summary_statistics[PROPORTION_OF_ZEROS]
   if error > 0:
     parameter_context[BASE_FREQUENCIES]['0'] = parameter_context[BASE_FREQUENCIES]['0'] - adjustment
-    parameter_context[BASE_FREQUENCIES]['1'] = parameter_context[BASE_FREQUENCIES]['1'] - adjustment
+    parameter_context[BASE_FREQUENCIES]['0'] = min(0.99, max(0.01, parameter_context[BASE_FREQUENCIES]['0']))
+    parameter_context[BASE_FREQUENCIES]['1'] = 1 - parameter_context[BASE_FREQUENCIES]['0']
     current_direction = 'DOWN'
   elif error > 0:
     parameter_context[BASE_FREQUENCIES]['0'] = parameter_context[BASE_FREQUENCIES]['0'] + adjustment
-    parameter_context[BASE_FREQUENCIES]['1'] = parameter_context[BASE_FREQUENCIES]['1'] - adjustment
+    parameter_context[BASE_FREQUENCIES]['0'] = min(0.99, max(0.01, parameter_context[BASE_FREQUENCIES]['0']))
+    parameter_context[BASE_FREQUENCIES]['1'] = 1 - parameter_context[BASE_FREQUENCIES]['0']
     current_direction = 'UP'
   print('New base frequencies: ', parameter_context[BASE_FREQUENCIES])
   if scheduler['base_frequencies']['last_direction'] == None:
@@ -173,16 +175,27 @@ def update_base_frequencies(parameter_context, training_summary_statistics, real
   elif not scheduler['base_frequencies']['last_direction'] == current_direction:
     scheduler['base_frequencies']['adjustment'] = max(0.01, scheduler['base_frequencies']['adjustment'] - 0.02)
   scheduler['base_frequencies']['last_direction'] = current_direction
+  print('Scheduler: ', scheduler)
   return parameter_context, scheduler
 
 def update_rate_per_branch_length_per_pair(parameter_context, training_summary_statistics, real_summary_statistics, scheduler):
-  adjustment = 0.001
+  adjustment = scheduler['rate_per_branch_length_per_pair']['adjustment']
   error = training_summary_statistics[CONTACT_PROB_SAME_ZERO] - real_summary_statistics[CONTACT_PROB_SAME_ZERO]
   error = error + training_summary_statistics[CONTACT_PROB_SAME_ONE] - real_summary_statistics[CONTACT_PROB_SAME_ONE]
   if np.sum(error) > 0:
     parameter_context['rate_per_branch_length_per_pair'] = parameter_context['rate_per_branch_length_per_pair'] + adjustment
+    parameter_context['rate_per_branch_length_per_pair'] = max(0, min(0.99, parameter_context['rate_per_branch_length_per_pair']))
+    current_direction = 'UP'
   if np.sum(error) < 0:
     parameter_context['rate_per_branch_length_per_pair'] = parameter_context['rate_per_branch_length_per_pair'] - adjustment
+    parameter_context['rate_per_branch_length_per_pair'] = max(0, min(0.99, parameter_context['rate_per_branch_length_per_pair']))
+    current_direction = 'DOWN'
+  if scheduler['rate_per_branch_length_per_pair']['last_direction'] == None:
+    pass
+  elif not scheduler['rate_per_branch_length_per_pair']['last_direction'] == current_direction:
+    scheduler['rate_per_branch_length_per_pair']['adjustment']
+  print('Rate per branch length per pair: ', parameter_context['rate_per_branch_length_per_pair'])
+  print('Scheduler: ', scheduler)
   return parameter_context, scheduler
 
 def update_parameters(parameter_context, training_summary_statistics, real_summary_statistics, scheduler):
@@ -200,7 +213,7 @@ def update_parameters(parameter_context, training_summary_statistics, real_summa
   
   '''
   parameter_context, scheduler = update_substitution_matrix(parameter_context, training_summary_statistics, real_summary_statistics, scheduler)
-#   parameter_context, scheduler = update_base_frequencies(parameter_context, training_summary_statistics, real_summary_statistics, scheduler)
+  parameter_context, scheduler = update_base_frequencies(parameter_context, training_summary_statistics, real_summary_statistics, scheduler)
 #   parameter_context, scheduler = update_rate_per_branch_length_per_pair(parameter_context, training_summary_statistics, real_summary_statistics)
   return parameter_context, scheduler
 
