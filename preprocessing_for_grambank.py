@@ -18,6 +18,7 @@ def get_languages_in_grambank(remake=True):
 def get_grambank_value_dictionary():
   if 'grambank_value_dictionary.json' in os.listdir('.'):
     return json.load(open('grambank_value_dictionary.json', 'r'))
+  print('Making grambank value dictionary')
   df = readData('data.txt')
   grambank_value_dictionary = createDictionary(df) 
   json.dump(grambank_value_dictionary, open('grambank_value_dictionary.json', 'w'), indent=4)
@@ -28,10 +29,10 @@ def further_preprocessing_of_grambank_value_dictionary(grambank_value_dictionary
   for item in list(grambank_value_dictionary.items()):
     glottocode = item[0] 
     try:
-      value = item[1][feature_name]
+      value = float(item[1][feature_name])
     except:
       value = None
-    value_dictionary[glottocode] = value
+    value_dictionary[glottocode] = [value]
   return value_dictionary
   
 def make_input_and_output_arrays_for_grambank(value_dictionary, sample):
