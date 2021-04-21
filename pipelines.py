@@ -164,7 +164,7 @@ def update_base_frequencies(parameter_context, training_summary_statistics, real
     parameter_context[BASE_FREQUENCIES]['0'] = min(0.99, max(0.01, parameter_context[BASE_FREQUENCIES]['0']))
     parameter_context[BASE_FREQUENCIES]['1'] = 1 - parameter_context[BASE_FREQUENCIES]['0']
     current_direction = 'DOWN'
-  elif error > 0:
+  elif error < 0:
     parameter_context[BASE_FREQUENCIES]['0'] = parameter_context[BASE_FREQUENCIES]['0'] + adjustment
     parameter_context[BASE_FREQUENCIES]['0'] = min(0.99, max(0.01, parameter_context[BASE_FREQUENCIES]['0']))
     parameter_context[BASE_FREQUENCIES]['1'] = 1 - parameter_context[BASE_FREQUENCIES]['0']
@@ -419,45 +419,25 @@ def real_single_feature_evaluation(feature_id):
   number_of_distance_bins = 10
   number_of_simulations = 10
   number_of_steps = 150
+  grambank_value_dictionary = get_grambank_value_dictionary()
+  feature_name = 'GB131'
+  value_dictionary = further_preprocessing_of_grambank_value_dictionary(grambank_value_dictionary, feature_name)
+  sample = np.random.choice(np.array(list_of_languages), number_of_samples, replace=False)
 
+  print(value_dictionary)
 
-
- 
- 
- 
- 
-  test_substitution_matrices = []
-  test_substitution_matrices.append([[0.95, 0.05], [0.05, 0.95]]) 
-  test_rates_per_branch_length_per_pair = [0.03]
-  test_base_frequencies = [{'0': 0.0, '1': 1.0}]
-  runs = 1
-
-
-
-
-  for i in range(runs):
-    random_index = np.random.choice(range(len(test_substitution_matrices)), 1)[0]
-    substitution_matrix = test_substitution_matrices[random_index]
-    rate_per_branch_length_per_pair = test_rates_per_branch_length_per_pair[random_index]
-    base_frequencies = test_base_frequencies[random_index]
-    substitution_matrix_list = [substitution_matrix]
-    base_frequencies_list = [base_frequencies]
-    states_list = [states]
-    borrowability_list = [1.0]
-    sample = np.random.choice(np.array(list_of_languages), number_of_samples, replace=False)
-    test_input, test_output, relatedness_array, distance_array = make_all_arrays(trees, list_of_languages, sample, substitution_matrix_list, states_list, base_frequencies_list, rate_per_branch_length_per_pair, borrowability_list, 1, context, number_of_relatedness_bins=10, number_of_distance_bins=10) 
-    na_array_1 = np.ones([1, 1, number_of_languages, 1]) 
-    na_array_2 = np.ones([1, number_of_samples, 1, 1])
-
-    result = search_through_parameters_single_feature(test_input, test_output, relatedness_array, distance_array, na_array_1, na_array_2, trees, list_of_languages, sample, states, context, number_of_relatedness_bins, number_of_distance_bins, number_of_simulations)
-    print(result)
-    results.append({'estimated parameters': deepcopy(result), 'true parameters': {'substitution matrix': deepcopy(substitution_matrix), 'base_frequencies': deepcopy(base_frequences), RATE_PER_BRANCH_LENGTH_PER_PAIR: rate_per_branch_length_per_pair}})
-  
   '''
-  then want to aggregate the results in some way
-  how do you want to show the result?
-  just append the results.
+  check that next part is working
   '''
+  input_array, output_array, relatedness_array, distance_array, na_array_1, na_array_2 = make_all_arrays_for_grambank(value_dictionary, trees, list_of_languages, sample, number_of_relatedness_bins=number_of_relatedness_bins, number_of_distance_bins=number_of_distance_bins)
+  print(input_array)  
+
+  na_array_1 = np.ones([1, 1, number_of_languages, 1]) 
+  na_array_2 = np.ones([1, number_of_samples, 1, 1])
+
+  result = search_through_parameters_single_feature(input_array, output_array, relatedness_array, distance_array, na_array_1, na_array_2, trees, list_of_languages, sample, states, context, number_of_relatedness_bins, number_of_distance_bins, number_of_simulations)
+  print(result)
+
 
 
 

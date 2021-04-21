@@ -1257,7 +1257,11 @@ def test53():
 def test54():
   main_simulation_test()
 
-test54()
+def test55():
+  feature_id = 'GB020'
+  real_single_feature_evaluation(feature_id)
+
+test55()
 
 
 
