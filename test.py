@@ -2,7 +2,6 @@ from TreeFunctions import *
 from simulation import *
 import json
 from preprocessing_for_grambank import *
-from model import *
 import os
 from pipelines import *
 
@@ -1261,7 +1260,7 @@ def test55():
   feature_id = 'GB020'
   real_single_feature_evaluation(feature_id)
 
-test55()
+test54()
 
 
 

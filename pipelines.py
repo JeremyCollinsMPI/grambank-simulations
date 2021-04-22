@@ -1,5 +1,4 @@
 from simulation import *
-# from model import *
 from copy import deepcopy
 from preprocessing_for_grambank import *
 
@@ -242,7 +241,7 @@ def search_through_parameters_single_feature(input_array, output_array, relatedn
   context['real_summary_statistics'] = make_summary_statistics(input_array, output_array, na_array_1, na_array_2, relatedness_array, distance_array)
   parameter_context = {'substitution_matrix': substitution_matrix, 'rate_per_branch_length_per_pair': rate_per_branch_length_per_pair, 'base_frequencies': base_frequencies}
   scheduler = make_scheduler()
-  for i in range(100):
+  for i in range(2):
     context['step'] = i
     parameter_context, loss = propose_new_single_feature(input_array, output_array, na_array_1, na_array_2, relatedness_array, distance_array, trees, list_of_languages, sample, parameter_context, states, context, number_of_simulations, scheduler)
   result = parameter_context
@@ -375,7 +374,7 @@ def main_simulation_test():
     result = search_through_parameters_single_feature(test_input, test_output, relatedness_array, distance_array, na_array_1, na_array_2, trees, list_of_languages, sample, states, context, number_of_relatedness_bins, number_of_distance_bins, number_of_simulations)
     print(result)
     results.append({'estimated parameters': deepcopy(result), 'true parameters': {'substitution matrix': deepcopy(substitution_matrix), 'base_frequencies': deepcopy(base_frequences), RATE_PER_BRANCH_LENGTH_PER_PAIR: rate_per_branch_length_per_pair}})
-  
+  json.dump(results, open('main_simulation_test_results.json'))
   '''
   then want to aggregate the results in some way
   how do you want to show the result?
