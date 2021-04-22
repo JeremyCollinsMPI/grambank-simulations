@@ -373,7 +373,7 @@ def main_simulation_test():
 
     result = search_through_parameters_single_feature(test_input, test_output, relatedness_array, distance_array, na_array_1, na_array_2, trees, list_of_languages, sample, states, context, number_of_relatedness_bins, number_of_distance_bins, number_of_simulations)
     print(result)
-    results.append({'estimated parameters': deepcopy(result), 'true parameters': {'substitution matrix': deepcopy(substitution_matrix), 'base_frequencies': deepcopy(base_frequences), RATE_PER_BRANCH_LENGTH_PER_PAIR: rate_per_branch_length_per_pair}})
+    results.append({'estimated parameters': deepcopy(result), 'true parameters': {'substitution matrix': deepcopy(substitution_matrix), 'base_frequencies': deepcopy(base_frequencies), RATE_PER_BRANCH_LENGTH_PER_PAIR: rate_per_branch_length_per_pair}})
   json.dump(results, open('main_simulation_test_results.json', 'w'))
   '''
   then want to aggregate the results in some way
