@@ -419,7 +419,7 @@ def real_single_feature_evaluation(feature_id):
   number_of_simulations = 10
   number_of_steps = 150
   grambank_value_dictionary = get_grambank_value_dictionary()
-  feature_name = 'GB131'
+  feature_name = feature_id
   value_dictionary = further_preprocessing_of_grambank_value_dictionary(grambank_value_dictionary, feature_name)
   sample = np.random.choice(np.array(list_of_languages), number_of_samples, replace=False)
 
