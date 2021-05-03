@@ -12,6 +12,7 @@ RELATEDNESS_SAME_ZERO_ERROR = 'relatedness bins number of languages not having s
 RELATEDNESS_SAME_ONE_ERROR = 'relatedness bins number of languages not having same value if first languages has 1'
 CONTACT_PROB_SAME_ZERO = 'contact bins probability of second language having 0 if first language has 0' 
 CONTACT_PROB_SAME_ONE = 'contact bins probability of second language having 1 if first language has 1' 
+CONTACT_SAME_ERROR = 'contact bins number of languages not having same value'
 PROPORTION_OF_ZEROS = 'proportion of zeros'
 
 def create_initial_substitution_matrix(states):
@@ -73,17 +74,18 @@ def make_summary_statistics(input_array, output_array, na_array_1, na_array_2, r
   summary_statistics = {}
 #   summary_statistics[RELATEDNESS_PROB_SAME_ZERO] = relatedness_same_zero / relatedness_total_zero
 #   summary_statistics[RELATEDNESS_PROB_SAME_ONE] = relatedness_same_one / relatedness_total_one
-  summary_statistics[CONTACT_PROB_SAME_ZERO] = distance_same_zero / distance_total_zero
-  summary_statistics[CONTACT_PROB_SAME_ONE] = distance_same_one / distance_total_one  
+#   summary_statistics[CONTACT_PROB_SAME_ZERO] = distance_same_zero / distance_total_zero
+#   summary_statistics[CONTACT_PROB_SAME_ONE] = distance_same_one / distance_total_one  
   summary_statistics[PROPORTION_OF_ZEROS] = number_of_zeros / number_of_values
   summary_statistics[RELATEDNESS_SAME_ZERO_ERROR] = (relatedness_total_zero - relatedness_same_zero) / np.shape(output_array)[0]
   summary_statistics[RELATEDNESS_SAME_ONE_ERROR] = (relatedness_total_one - relatedness_same_one) / np.shape(output_array)[0]
+  summary_statistics[CONTACT_SAME_ERROR] = (distance_total_zero - distance_same_zero + distance_total_one - distance_same_one) / np.shape(output_array)[0]
   print('Number of simulations: ', np.shape(output_array)[0])
   return summary_statistics
 
 def find_loss(training_summary_statistics, real_summary_statistics):
   total = 0
-  for x in [RELATEDNESS_SAME_ZERO_ERROR, RELATEDNESS_SAME_ONE_ERROR, CONTACT_PROB_SAME_ZERO, CONTACT_PROB_SAME_ONE, PROPORTION_OF_ZEROS]:
+  for x in [RELATEDNESS_SAME_ZERO_ERROR, RELATEDNESS_SAME_ONE_ERROR, CONTACT_SAME_ERROR, PROPORTION_OF_ZEROS]:
     total = total + np.sum(abs(training_summary_statistics[x] - real_summary_statistics[x]))
 #   print('Loss: ')
   return total
@@ -160,12 +162,12 @@ def update_base_frequencies(parameter_context, training_summary_statistics, real
   error = training_summary_statistics[PROPORTION_OF_ZEROS] - real_summary_statistics[PROPORTION_OF_ZEROS]
   if error > 0:
     parameter_context[BASE_FREQUENCIES]['0'] = parameter_context[BASE_FREQUENCIES]['0'] - adjustment
-    parameter_context[BASE_FREQUENCIES]['0'] = min(0.99, max(0.01, parameter_context[BASE_FREQUENCIES]['0']))
+    parameter_context[BASE_FREQUENCIES]['0'] = min(1, max(0, parameter_context[BASE_FREQUENCIES]['0']))
     parameter_context[BASE_FREQUENCIES]['1'] = 1 - parameter_context[BASE_FREQUENCIES]['0']
     current_direction = 'DOWN'
   elif error < 0:
     parameter_context[BASE_FREQUENCIES]['0'] = parameter_context[BASE_FREQUENCIES]['0'] + adjustment
-    parameter_context[BASE_FREQUENCIES]['0'] = min(0.99, max(0.01, parameter_context[BASE_FREQUENCIES]['0']))
+    parameter_context[BASE_FREQUENCIES]['0'] = min(1, max(0, parameter_context[BASE_FREQUENCIES]['0']))
     parameter_context[BASE_FREQUENCIES]['1'] = 1 - parameter_context[BASE_FREQUENCIES]['0']
     current_direction = 'UP'
   print('New base frequencies: ', parameter_context[BASE_FREQUENCIES])
@@ -178,9 +180,11 @@ def update_base_frequencies(parameter_context, training_summary_statistics, real
   return parameter_context, scheduler
 
 def update_rate_per_branch_length_per_pair(parameter_context, training_summary_statistics, real_summary_statistics, scheduler):
+  use_up_to_index_number = 2
   adjustment = scheduler['rate_per_branch_length_per_pair']['adjustment']
-  error = training_summary_statistics[CONTACT_PROB_SAME_ZERO] - real_summary_statistics[CONTACT_PROB_SAME_ZERO]
-  error = error + training_summary_statistics[CONTACT_PROB_SAME_ONE] - real_summary_statistics[CONTACT_PROB_SAME_ONE]
+  error = training_summary_statistics[CONTACT_SAME_ERROR][0:use_up_to_index_number] - real_summary_statistics[CONTACT_SAME_ERROR][0:use_up_to_index_number]
+  print('RATE PER BRANCH LENGTH CONTACT')
+  print('error', error)
   if np.sum(error) > 0:
     parameter_context['rate_per_branch_length_per_pair'] = parameter_context['rate_per_branch_length_per_pair'] + adjustment
     parameter_context['rate_per_branch_length_per_pair'] = max(0, min(0.99, parameter_context['rate_per_branch_length_per_pair']))
@@ -189,12 +193,14 @@ def update_rate_per_branch_length_per_pair(parameter_context, training_summary_s
     parameter_context['rate_per_branch_length_per_pair'] = parameter_context['rate_per_branch_length_per_pair'] - adjustment
     parameter_context['rate_per_branch_length_per_pair'] = max(0, min(0.99, parameter_context['rate_per_branch_length_per_pair']))
     current_direction = 'DOWN'
+  print(current_direction)
   if scheduler['rate_per_branch_length_per_pair']['last_direction'] == None:
     pass
   elif not scheduler['rate_per_branch_length_per_pair']['last_direction'] == current_direction:
-    scheduler['rate_per_branch_length_per_pair']['adjustment']
+    scheduler['rate_per_branch_length_per_pair']['adjustment'] = max(0, scheduler['rate_per_branch_length_per_pair']['adjustment'] - 0.01)
   print('Rate per branch length per pair: ', parameter_context['rate_per_branch_length_per_pair'])
   print('Scheduler: ', scheduler)
+  scheduler['rate_per_branch_length_per_pair']['last_direction'] == current_direction
   return parameter_context, scheduler
 
 def update_parameters(parameter_context, training_summary_statistics, real_summary_statistics, scheduler):
@@ -213,7 +219,7 @@ def update_parameters(parameter_context, training_summary_statistics, real_summa
   '''
   parameter_context, scheduler = update_substitution_matrix(parameter_context, training_summary_statistics, real_summary_statistics, scheduler)
   parameter_context, scheduler = update_base_frequencies(parameter_context, training_summary_statistics, real_summary_statistics, scheduler)
-#   parameter_context, scheduler = update_rate_per_branch_length_per_pair(parameter_context, training_summary_statistics, real_summary_statistics)
+  parameter_context, scheduler = update_rate_per_branch_length_per_pair(parameter_context, training_summary_statistics, real_summary_statistics, scheduler)
   return parameter_context, scheduler
 
 def propose_new_single_feature(input_array, output_array, na_array_1, na_array_2, relatedness_array, distance_array, trees, list_of_languages, sample, parameter_context, states, context, number_of_simulations, scheduler):
@@ -241,7 +247,7 @@ def search_through_parameters_single_feature(input_array, output_array, relatedn
   context['real_summary_statistics'] = make_summary_statistics(input_array, output_array, na_array_1, na_array_2, relatedness_array, distance_array)
   parameter_context = {'substitution_matrix': substitution_matrix, 'rate_per_branch_length_per_pair': rate_per_branch_length_per_pair, 'base_frequencies': base_frequencies}
   scheduler = make_scheduler()
-  for i in range(3):
+  for i in range(20):
     context['step'] = i
     parameter_context, loss = propose_new_single_feature(input_array, output_array, na_array_1, na_array_2, relatedness_array, distance_array, trees, list_of_languages, sample, parameter_context, states, context, number_of_simulations, scheduler)
   result = parameter_context
@@ -321,7 +327,7 @@ def main_simulation_test():
   '''
   test_substitution_matrices = []
   test_substitution_matrices.append([[0.95, 0.05], [0.05, 0.95]]) 
-  test_rates_per_branch_length_per_pair = [0.03]
+  test_rates_per_branch_length_per_pair = [0.08]
   test_base_frequencies = [{'0': 0.0, '1': 1.0}]
   runs = 1
   trees = make_trees()
