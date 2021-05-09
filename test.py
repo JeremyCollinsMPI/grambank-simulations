@@ -1258,7 +1258,8 @@ def test54():
 
 def test55():
   feature_id = 'GB020'
-  real_single_feature_evaluation(feature_id)
+  result = real_single_feature_evaluation(feature_id)
+  json.dump(result, open(feature_id + '_parameters.json', 'w'), indent=4)
 
 test54()
 
