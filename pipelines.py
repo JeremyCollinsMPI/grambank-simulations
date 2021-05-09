@@ -247,7 +247,7 @@ def search_through_parameters_single_feature(input_array, output_array, relatedn
   context['real_summary_statistics'] = make_summary_statistics(input_array, output_array, na_array_1, na_array_2, relatedness_array, distance_array)
   parameter_context = {'substitution_matrix': substitution_matrix, 'rate_per_branch_length_per_pair': rate_per_branch_length_per_pair, 'base_frequencies': base_frequencies}
   scheduler = make_scheduler()
-  for i in range(20):
+  for i in range(100):
     context['step'] = i
     parameter_context, loss = propose_new_single_feature(input_array, output_array, na_array_1, na_array_2, relatedness_array, distance_array, trees, list_of_languages, sample, parameter_context, states, context, number_of_simulations, scheduler)
   result = parameter_context
