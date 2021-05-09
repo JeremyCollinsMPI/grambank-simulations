@@ -101,7 +101,7 @@ def make_scheduler():
   {'adjustment': 0.1,
   'last_direction': None
   }, 'rate_per_branch_length_per_pair':
-  { 'adjustment': 0.1,
+  { 'adjustment': 0.03,
   'last_direction': None
   }  
   }
