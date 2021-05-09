@@ -200,7 +200,7 @@ def update_rate_per_branch_length_per_pair(parameter_context, training_summary_s
     scheduler['rate_per_branch_length_per_pair']['adjustment'] = max(0, scheduler['rate_per_branch_length_per_pair']['adjustment'] - 0.01)
   print('Rate per branch length per pair: ', parameter_context['rate_per_branch_length_per_pair'])
   print('Scheduler: ', scheduler)
-  scheduler['rate_per_branch_length_per_pair']['last_direction'] == current_direction
+  scheduler['rate_per_branch_length_per_pair']['last_direction'] = current_direction
   return parameter_context, scheduler
 
 def update_parameters(parameter_context, training_summary_statistics, real_summary_statistics, scheduler):
