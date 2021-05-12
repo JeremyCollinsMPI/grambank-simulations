@@ -1,1 +1,1 @@
-python test.py > a.txt
+python -u test.py > a.txt
