@@ -16,11 +16,11 @@ CONTACT_SAME_ERROR = 'contact bins number of languages not having same value'
 PROPORTION_OF_ZEROS = 'proportion of zeros'
 
 def create_initial_substitution_matrix(states):
-  substitution_matrix = [[0.7, 0.3], [0.3, 0.7]]
+  substitution_matrix = [[0.95, 0.05], [0.05, 0.95]]
   return substitution_matrix
   
 def create_initial_base_frequencies(states):
-  base_frequencies = {'0': 1, '1': 0}
+  base_frequencies = {'0': 0, '1': 1}
   return base_frequencies
 
 def create_initial_borrowing_event_rate():
@@ -197,7 +197,7 @@ def update_rate_per_branch_length_per_pair(parameter_context, training_summary_s
   if scheduler['rate_per_branch_length_per_pair']['last_direction'] == None:
     pass
   elif not scheduler['rate_per_branch_length_per_pair']['last_direction'] == current_direction:
-    scheduler['rate_per_branch_length_per_pair']['adjustment'] = max(0, scheduler['rate_per_branch_length_per_pair']['adjustment'] - 0.01)
+    scheduler['rate_per_branch_length_per_pair']['adjustment'] = max(0.01, scheduler['rate_per_branch_length_per_pair']['adjustment'] - 0.01)
   print('Rate per branch length per pair: ', parameter_context['rate_per_branch_length_per_pair'])
   print('Scheduler: ', scheduler)
   scheduler['rate_per_branch_length_per_pair']['last_direction'] = current_direction
