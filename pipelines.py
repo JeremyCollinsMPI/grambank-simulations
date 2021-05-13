@@ -217,8 +217,8 @@ def update_parameters(parameter_context, training_summary_statistics, real_summa
   
   
   '''
-#   parameter_context, scheduler = update_substitution_matrix(parameter_context, training_summary_statistics, real_summary_statistics, scheduler)
-#   parameter_context, scheduler = update_base_frequencies(parameter_context, training_summary_statistics, real_summary_statistics, scheduler)
+  parameter_context, scheduler = update_substitution_matrix(parameter_context, training_summary_statistics, real_summary_statistics, scheduler)
+  parameter_context, scheduler = update_base_frequencies(parameter_context, training_summary_statistics, real_summary_statistics, scheduler)
   parameter_context, scheduler = update_rate_per_branch_length_per_pair(parameter_context, training_summary_statistics, real_summary_statistics, scheduler)
   return parameter_context, scheduler
 
