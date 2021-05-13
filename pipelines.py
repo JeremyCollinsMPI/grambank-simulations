@@ -180,7 +180,7 @@ def update_base_frequencies(parameter_context, training_summary_statistics, real
   return parameter_context, scheduler
 
 def update_rate_per_branch_length_per_pair(parameter_context, training_summary_statistics, real_summary_statistics, scheduler):
-  use_up_to_index_number = 2
+  use_up_to_index_number = 1
   adjustment = scheduler['rate_per_branch_length_per_pair']['adjustment']
   error = training_summary_statistics[CONTACT_SAME_ERROR][0:use_up_to_index_number] - real_summary_statistics[CONTACT_SAME_ERROR][0:use_up_to_index_number]
   print('RATE PER BRANCH LENGTH CONTACT')
