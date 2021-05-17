@@ -81,9 +81,11 @@ def make_summary_statistics(input_array, output_array, na_array_1, na_array_2, r
   redoing relatedness same zero error as mean negative log likelihood
   so that is just equal to ((np.log(0.9) * relatedness_same_zero) + (np.log(0.1) * (relatedness_total_zero - relatedness_same_zero))) / np.shape(output_array)[0]
   
+  
+  THIS PART STILL NOT CORRECT.  NEEDS TO BE MEAN.  CORRECTED BUT NEED TO CHECK 
   '''
-  summary_statistics[RELATEDNESS_SAME_ZERO_ERROR] = ((np.log(0.9) * relatedness_same_zero) + (np.log(0.1) * (relatedness_total_zero - relatedness_same_zero))) / np.shape(output_array)[0]
-  summary_statistics[RELATEDNESS_SAME_ONE_ERROR] = ((np.log(0.9) * relatedness_same_one) + (np.log(0.1) * (relatedness_total_one - relatedness_same_one))) / np.shape(output_array)[0]
+  summary_statistics[RELATEDNESS_SAME_ZERO_ERROR] = -1 * ((np.log(0.9) * relatedness_same_zero) + (np.log(0.1) * (relatedness_total_zero - relatedness_same_zero))) / (np.shape(output_array)[0] * relatedness_total_zero)
+  summary_statistics[RELATEDNESS_SAME_ONE_ERROR] = -1 * ((np.log(0.9) * relatedness_same_one) + (np.log(0.1) * (relatedness_total_one - relatedness_same_one))) / (np.shape(output_array)[0] * relatedness_total_one)
   summary_statistics[CONTACT_SAME_ERROR] = (distance_total_zero - distance_same_zero + distance_total_one - distance_same_one) / np.shape(output_array)[0]
   print('Number of simulations: ', np.shape(output_array)[0])
   return summary_statistics
