@@ -77,8 +77,13 @@ def make_summary_statistics(input_array, output_array, na_array_1, na_array_2, r
 #   summary_statistics[CONTACT_PROB_SAME_ZERO] = distance_same_zero / distance_total_zero
 #   summary_statistics[CONTACT_PROB_SAME_ONE] = distance_same_one / distance_total_one  
   summary_statistics[PROPORTION_OF_ZEROS] = number_of_zeros / number_of_values
-  summary_statistics[RELATEDNESS_SAME_ZERO_ERROR] = (relatedness_total_zero - relatedness_same_zero) / np.shape(output_array)[0]
-  summary_statistics[RELATEDNESS_SAME_ONE_ERROR] = (relatedness_total_one - relatedness_same_one) / np.shape(output_array)[0]
+  '''
+  redoing relatedness same zero error as mean negative log likelihood
+  so that is just equal to ((np.log(0.9) * relatedness_same_zero) + (np.log(0.1) * (relatedness_total_zero - relatedness_same_zero))) / np.shape(output_array)[0]
+  
+  '''
+  summary_statistics[RELATEDNESS_SAME_ZERO_ERROR] = ((np.log(0.9) * relatedness_same_zero) + (np.log(0.1) * (relatedness_total_zero - relatedness_same_zero))) / np.shape(output_array)[0]
+  summary_statistics[RELATEDNESS_SAME_ONE_ERROR] = ((np.log(0.9) * relatedness_same_one) + (np.log(0.1) * (relatedness_total_one - relatedness_same_one))) / np.shape(output_array)[0]
   summary_statistics[CONTACT_SAME_ERROR] = (distance_total_zero - distance_same_zero + distance_total_one - distance_same_one) / np.shape(output_array)[0]
   print('Number of simulations: ', np.shape(output_array)[0])
   return summary_statistics
@@ -108,6 +113,17 @@ def make_scheduler():
   return scheduler
 
 def update_substitution_matrix(parameter_context, training_summary_statistics, real_summary_statistics, scheduler):
+  '''
+  going to rethink error here in terms of negative mean log likelihood
+  
+  for every zero in language1, if language2 is also zero, then 0.9, else 0.1.
+  then take the log.  then take the mean.
+  
+  '''
+  
+  
+  
+  
   use_up_to_index_number = 2
   print('Training zero: ', training_summary_statistics[RELATEDNESS_SAME_ZERO_ERROR])
   print('Real zero: ', real_summary_statistics[RELATEDNESS_SAME_ZERO_ERROR])
@@ -116,6 +132,17 @@ def update_substitution_matrix(parameter_context, training_summary_statistics, r
   error = training_summary_statistics[RELATEDNESS_SAME_ZERO_ERROR][0:use_up_to_index_number] - real_summary_statistics[RELATEDNESS_SAME_ZERO_ERROR][0:use_up_to_index_number]
   print('Zero error: ', np.sum(error))
   print('Previous matrix: ', parameter_context['substitution_matrix'])
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   adjustment = scheduler['substitution_matrix_0_to_1']['adjustment']
   if np.sum(error) < 0:
     parameter_context['substitution_matrix'][0][0] = parameter_context['substitution_matrix'][0][0] - adjustment
