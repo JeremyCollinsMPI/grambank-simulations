@@ -83,7 +83,10 @@ def make_summary_statistics(input_array, output_array, na_array_1, na_array_2, r
   
   
   THIS PART STILL NOT CORRECT.  NEEDS TO BE MEAN.  CORRECTED BUT NEED TO CHECK 
+  correcting this part again
   '''
+#   relatedness_same_zero = 
+  
   summary_statistics[RELATEDNESS_SAME_ZERO_ERROR] = -1 * ((np.log(0.9) * relatedness_same_zero) + (np.log(0.1) * (relatedness_total_zero - relatedness_same_zero))) / (np.shape(output_array)[0] * relatedness_total_zero)
   summary_statistics[RELATEDNESS_SAME_ONE_ERROR] = -1 * ((np.log(0.9) * relatedness_same_one) + (np.log(0.1) * (relatedness_total_one - relatedness_same_one))) / (np.shape(output_array)[0] * relatedness_total_one)
   summary_statistics[CONTACT_SAME_ERROR] = (distance_total_zero - distance_same_zero + distance_total_one - distance_same_one) / np.shape(output_array)[0]
@@ -211,6 +214,10 @@ def update_base_frequencies(parameter_context, training_summary_statistics, real
 def update_rate_per_branch_length_per_pair(parameter_context, training_summary_statistics, real_summary_statistics, scheduler):
   use_up_to_index_number = 1
   adjustment = scheduler['rate_per_branch_length_per_pair']['adjustment']
+  print('training;')
+  print(training_summary_statistics[CONTACT_SAME_ERROR])
+  print('real:')
+  print(real_summary_statistics[CONTACT_SAME_ERROR])
   error = training_summary_statistics[CONTACT_SAME_ERROR][0:use_up_to_index_number] - real_summary_statistics[CONTACT_SAME_ERROR][0:use_up_to_index_number]
   print('RATE PER BRANCH LENGTH CONTACT')
   print('error', error)
@@ -246,9 +253,12 @@ def update_parameters(parameter_context, training_summary_statistics, real_summa
   
   
   '''
-  parameter_context, scheduler = update_substitution_matrix(parameter_context, training_summary_statistics, real_summary_statistics, scheduler)
-  parameter_context, scheduler = update_base_frequencies(parameter_context, training_summary_statistics, real_summary_statistics, scheduler)
-  parameter_context, scheduler = update_rate_per_branch_length_per_pair(parameter_context, training_summary_statistics, real_summary_statistics, scheduler)
+  if parameter_context['to update'] == 'substitution matrix':
+    parameter_context, scheduler = update_substitution_matrix(parameter_context, training_summary_statistics, real_summary_statistics, scheduler)
+  elif parameter_context['to update'] == 'rate per branch length per pair':
+    parameter_context, scheduler = update_rate_per_branch_length_per_pair(parameter_context, training_summary_statistics, real_summary_statistics, scheduler)
+  elif parameter_context['to update'] == 'base frequencies':
+    parameter_context, scheduler = update_base_frequencies(parameter_context, training_summary_statistics, real_summary_statistics, scheduler)
   return parameter_context, scheduler
 
 def propose_new_single_feature(input_array, output_array, na_array_1, na_array_2, relatedness_array, distance_array, trees, list_of_languages, sample, parameter_context, states, context, number_of_simulations, scheduler):
@@ -275,10 +285,13 @@ def search_through_parameters_single_feature(input_array, output_array, relatedn
   proposal_rate_dictionary = {SUBSTITUTION_MATRIX_0_TO_1: 0.1, SUBSTITUTION_MATRIX_1_TO_0: 0.1, BASE_FREQUENCIES: 0.1, RATE_PER_BRANCH_LENGTH_PER_PAIR: 0.1}
   context['real_summary_statistics'] = make_summary_statistics(input_array, output_array, na_array_1, na_array_2, relatedness_array, distance_array)
   parameter_context = {'substitution_matrix': substitution_matrix, 'rate_per_branch_length_per_pair': rate_per_branch_length_per_pair, 'base_frequencies': base_frequencies}
-  scheduler = make_scheduler()
-  for i in range(100):
-    context['step'] = i
-    parameter_context, loss = propose_new_single_feature(input_array, output_array, na_array_1, na_array_2, relatedness_array, distance_array, trees, list_of_languages, sample, parameter_context, states, context, number_of_simulations, scheduler)
+  for i in range(10):
+    scheduler = make_scheduler()
+    for to_update in ['substitution matrix', 'rate per branch length per pair', 'base frequencies']:
+      for j in range(10):
+        context['step'] = i
+        parameter_context['to update'] = to_update
+        parameter_context, loss = propose_new_single_feature(input_array, output_array, na_array_1, na_array_2, relatedness_array, distance_array, trees, list_of_languages, sample, parameter_context, states, context, number_of_simulations, scheduler)
   result = parameter_context
   return result
 
@@ -389,7 +402,7 @@ def main_simulation_test():
   number_of_languages = len(list_of_languages)
   number_of_relatedness_bins = 10  
   number_of_distance_bins = 10
-  number_of_simulations = 10
+  number_of_simulations = 1
   number_of_steps = 150
   results = []
   for i in range(runs):
